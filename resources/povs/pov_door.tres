@@ -1,9 +1,12 @@
 [gd_resource type="Resource" script_class="Pov" format=3 uid="uid://dn0eop153jc5w"]
 
 [ext_resource type="Script" uid="uid://deej6yes3fmnc" path="res://scripts/element_resource.gd" id="1_43jdj"]
+[ext_resource type="Script" uid="uid://dqj183h8d13hn" path="res://scripts/item_resource.gd" id="2_1s01m"]
 [ext_resource type="Texture2D" uid="uid://dhvu2n53qbinv" path="res://assets/images/pov/door_pov.png" id="2_312ce"]
 [ext_resource type="Script" uid="uid://bti0kbjeofp0r" path="res://scripts/pov_resource.gd" id="2_645gb"]
 [ext_resource type="Resource" uid="uid://c24pna6wo1kr3" path="res://resources/prompts/prompt_chain_door.tres" id="2_unjxi"]
+[ext_resource type="Resource" uid="uid://h4eyvfylfhp6" path="res://resources/povs/pov_test_2.tres" id="3_1s01m"]
+[ext_resource type="Resource" uid="uid://cqpw454xu78in" path="res://resources/items/test_key.tres" id="3_bolgw"]
 
 [sub_resource type="Resource" id="Resource_unjxi"]
 script = ExtResource("1_43jdj")
@@ -12,7 +15,10 @@ hitbox_left = 0.165
 hitbox_top = 0.165
 hitbox_right = 0.83
 hitbox_bottom = 0.814
+pov = ExtResource("3_1s01m")
 prompt_chain = ExtResource("2_unjxi")
+necessary_items = Array[ExtResource("2_1s01m")]([ExtResource("3_bolgw")])
+global_variables = Array[String](["door_unlocked"])
 metadata/_custom_type_script = "uid://deej6yes3fmnc"
 
 [resource]

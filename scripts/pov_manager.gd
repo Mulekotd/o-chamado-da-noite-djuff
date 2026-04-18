@@ -88,7 +88,7 @@ func _on_gui_input(event: InputEvent) -> void:
 	
 	var e := _get_element_in_pos(mouse_relative)
 	if e:
-		if e.pov:
+		if e.pov and InvestigationVars.check_inventory(e.necessary_items) and InvestigationVars.check_global_conditions(e.global_variables):
 			change_pov(get_pov_index(e.pov))
 		else:
 			element_clicked.emit(e)

@@ -17,6 +17,10 @@ script = ExtResource("1_5igef")
 text = "You unlocked the door."
 condition_number = 0
 end_chain = true
+items_to_take = Array[ExtResource("2_q14nv")]([ExtResource("3_yy3ic")])
+vars_to_change = Dictionary[String, int]({
+"door_unlocked": 1
+})
 metadata/_custom_type_script = "uid://cmgunroik01aj"
 
 [sub_resource type="Resource" id="Resource_sr66a"]

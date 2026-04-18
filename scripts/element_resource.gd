@@ -7,3 +7,5 @@ class_name Element extends Resource
 @export_range(0,1,0.001) var hitbox_bottom
 @export var pov: Pov
 @export var prompt_chain: PromptChain
+@export var necessary_items: Array[Item]
+@export var global_variables: Array[String]

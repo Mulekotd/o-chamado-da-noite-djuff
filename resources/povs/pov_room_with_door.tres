@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://deej6yes3fmnc" path="res://scripts/element_resource.gd" id="1_c5ihj"]
 [ext_resource type="Resource" uid="uid://dn0eop153jc5w" path="res://resources/povs/pov_door.tres" id="2_1tjny"]
+[ext_resource type="Script" uid="uid://dqj183h8d13hn" path="res://scripts/item_resource.gd" id="2_lin3y"]
 [ext_resource type="Texture2D" uid="uid://c5nbj6g2ve8h" path="res://assets/images/pov/room_with_door_pov.jpg" id="3_lin3y"]
 [ext_resource type="Script" uid="uid://bti0kbjeofp0r" path="res://scripts/pov_resource.gd" id="4_sgwqq"]
 

@@ -22,6 +22,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if stand_by and !prompt_qeue.is_empty():
 		display_prompt()
+	#print(InvestigationVars.vars["door_unlocked"])
 
 func _process(delta: float) -> void:
 	if ((Input.is_action_just_pressed("ui_accept") or (Input.is_action_just_pressed("ui_mouse_pressed") and is_mouse_inside))) and prompt_qeue.size()>0:
@@ -100,12 +101,15 @@ func next_prompt(cond: int, can_end_chain: bool = true) -> void:
 	var previous_prompt : Prompt = prompt_qeue.pop_front()
 	if can_end_chain and previous_prompt.end_chain:
 		skip_chain_id = previous_prompt.chain_id
+		
+	for v in previous_prompt.vars_to_change.keys():
+		InvestigationVars.vars[v] = previous_prompt.vars_to_change[v]
 
 	if (prompt_qeue.size()): # if there is a next prompt
 		if (prompt_qeue[0].condition_number == cond or\
 		prompt_qeue[0].condition_number == -1) and\
-		_check_global_conditions(prompt_qeue[0]) and\
-		_check_inventory(prompt_qeue[0]) and\
+		InvestigationVars.check_global_conditions(prompt_qeue[0].global_conditions) and\
+		InvestigationVars.check_inventory(prompt_qeue[0].necessary_items) and\
 		prompt_qeue[0].chain_id != skip_chain_id:
 			main_text.clear()
 			clear_buttons()
@@ -116,18 +120,6 @@ func next_prompt(cond: int, can_end_chain: bool = true) -> void:
 		clear_box()
 		skip_chain_id = -1
 		stand_by = true
-
-func _check_global_conditions(prompt: Prompt) -> bool:
-	for v in prompt.global_conditions:
-		if InvestigationVars.vars[v] == 0:
-			return false
-	return true
-
-func _check_inventory(prompt: Prompt) -> bool:
-	for i in prompt.necessary_items:
-		if i not in InvestigationVars.inventory:
-			return false
-	return true
 
 func _on_mouse_entered() -> void:
 	is_mouse_inside = true
