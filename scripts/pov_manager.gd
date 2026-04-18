@@ -44,7 +44,7 @@ func _configure_arrow(arrow: TextureRect, arrow_texture: Texture2D, target_pov: 
 		arrow.gui_input.disconnect(connection.callable)
 
 	if target_pov:
-		var target_index := get_pov_index(target_pov)
+		var target_index := get_pov_index(target_pov.name)
 		arrow.texture = arrow_texture
 		arrow.visible = true
 		arrow.mouse_filter = Control.MOUSE_FILTER_STOP
@@ -63,10 +63,11 @@ func _on_arrow_gui_input(event: InputEvent, index: int) -> void:
 		change_pov(index)
 
 ## returns the first index of the pov direction in the pov_level that has this pov as it's mains pov
-func get_pov_index(pov: Pov) -> int:
+func get_pov_index(name: String) -> int:
 	for i in pov_level.povs.size():
-		if pov_level.povs[i].pov == pov:
-			return i
+		if pov_level.povs[i].pov.name == name:
+			if InvestigationVars.check_global_conditions(pov_level.povs[i].global_conditions):
+				return i
 	return -1
 
 ## gets the element is the relative position [0, 1]. returns null if none found
@@ -89,6 +90,6 @@ func _on_gui_input(event: InputEvent) -> void:
 	var e := _get_element_in_pos(mouse_relative)
 	if e:
 		if e.pov and InvestigationVars.check_inventory(e.necessary_items) and InvestigationVars.check_global_conditions(e.global_variables):
-			change_pov(get_pov_index(e.pov))
+			change_pov(get_pov_index(e.pov.name))
 		else:
 			element_clicked.emit(e)

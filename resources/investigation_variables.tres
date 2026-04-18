@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="InvestigationVars" format=3 uid="uid://dsunxdvpfyax7"]
+
+[ext_resource type="Script" uid="uid://dqj183h8d13hn" path="res://scripts/item_resource.gd" id="1_2u1gg"]
+[ext_resource type="Resource" uid="uid://cqpw454xu78in" path="res://resources/items/test_key.tres" id="2_x4l25"]
+[ext_resource type="Script" uid="uid://47pf0lrk86x5" path="res://scripts/investigation_variables.gd" id="3_nj77k"]
+
+[resource]
+script = ExtResource("3_nj77k")
+vars = Dictionary[String, int]({
+"door_unlocked": 1,
+"test_var": 1
+})
+metadata/_custom_type_script = "uid://47pf0lrk86x5"

@@ -8,4 +8,4 @@ class_name Element extends Resource
 @export var pov: Pov
 @export var prompt_chain: PromptChain
 @export var necessary_items: Array[Item]
-@export var global_variables: Array[String]
+@export var global_variables: Dictionary[String, int]

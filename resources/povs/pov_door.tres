@@ -18,7 +18,9 @@ hitbox_bottom = 0.814
 pov = ExtResource("3_1s01m")
 prompt_chain = ExtResource("2_unjxi")
 necessary_items = Array[ExtResource("2_1s01m")]([ExtResource("3_bolgw")])
-global_variables = Array[String](["door_unlocked"])
+global_variables = Dictionary[String, int]({
+"door_unlocked": 1
+})
 metadata/_custom_type_script = "uid://deej6yes3fmnc"
 
 [resource]

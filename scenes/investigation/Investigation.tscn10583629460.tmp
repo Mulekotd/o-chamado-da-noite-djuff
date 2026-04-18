@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://chs5heeu26nd3"]
+
+[ext_resource type="Script" uid="uid://1100rxsitcfq" path="res://scripts/investigation.gd" id="1_eyd3o"]
+[ext_resource type="PackedScene" uid="uid://dtd12y2eekoi1" path="res://scenes/investigation/TextBox.tscn" id="1_kspld"]
+[ext_resource type="Texture2D" uid="uid://dg1nq4yoy3kes" path="res://assets/images/interface/investigation_hud_overlay.png" id="2_838ch"]
+[ext_resource type="PackedScene" uid="uid://bqse5lw2xwni0" path="res://scenes/investigation/PovManager.tscn" id="4_sf3q1"]
+
+[node name="Investigation" type="Control" unique_id=1591324732]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_eyd3o")
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1512307908]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="TextBox" parent="." unique_id=1436468660 instance=ExtResource("1_kspld")]
+layout_mode = 1
+anchor_left = 0.23600002
+anchor_top = 0.643
+anchor_right = 0.96400005
+anchor_bottom = 0.9620001
+offset_left = 0.19998169
+offset_top = 0.19998169
+offset_right = -0.2000122
+offset_bottom = -0.20007324
+wants_to_advance = null
+write_time_min = null
+write_time_max = null
+write_time_comma = null
+write_time_dot = null
+
+[node name="PovManager" parent="." unique_id=1895825167 instance=ExtResource("4_sf3q1")]
+layout_mode = 1
+anchor_left = 0.022000002
+anchor_top = 0.032
+anchor_right = 0.915
+anchor_bottom = 0.592
+offset_left = 0.3999977
+offset_top = -0.20000076
+offset_right = 0.0
+offset_bottom = -0.2000122
+arrow_hitbox = null
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=554177332]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_838ch")
+expand_mode = 2

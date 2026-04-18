@@ -102,8 +102,7 @@ func next_prompt(cond: int, can_end_chain: bool = true) -> void:
 	if can_end_chain and previous_prompt.end_chain:
 		skip_chain_id = previous_prompt.chain_id
 		
-	for v in previous_prompt.vars_to_change.keys():
-		InvestigationVars.vars[v] = previous_prompt.vars_to_change[v]
+	InvestigationVars.update_variables(previous_prompt.vars_to_change)
 
 	if (prompt_qeue.size()): # if there is a next prompt
 		if (prompt_qeue[0].condition_number == cond or\
