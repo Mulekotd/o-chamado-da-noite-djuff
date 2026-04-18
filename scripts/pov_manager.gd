@@ -1,7 +1,5 @@
 class_name PovManager extends Control
 
-## ALWAYS ATTACH THIS SCRIPT, DON'T USE STANDALONE
-
 @onready var view: TextureRect = $View
 @onready var left_arrow: TextureRect = $LeftFlowContainer/LeftArrow
 @onready var top_arrow: TextureRect = $TopFlowContainer/TopArrow

@@ -1,7 +1,5 @@
 class_name TextBox extends Control
 
-## ALWAYS ATTACH THIS SCRIPT, DON'T USE STANDALONE
-
 @onready var main_text: RichTextLabel = $ColorRect/Text/MainText
 @onready var options_container: HFlowContainer = $ColorRect/Text/OptionsContainer
 
@@ -13,8 +11,10 @@ var chain_number : int = 0
 ## if a prompt has this chain_id, it will be skipped
 var skip_chain_id : int = -1
 @export var wants_to_advance : bool = false # advance to next prompt
-@export var write_time_min : float = 0.01
+@export var write_time_min : float = 0.04
 @export var write_time_max : float = 0.05
+@export var write_time_comma : float = 0.5
+@export var write_time_dot : float = 0.75
 
 func _ready() -> void:
 	clear_box()
@@ -51,6 +51,8 @@ func append_prompt_chain(prompt_chain: PromptChain) -> void:
 		p.chain_id = chain_number
 		prompt_qeue.append(p)
 	chain_number += 1
+	if stand_by and !prompt_qeue.is_empty():
+		display_prompt()
 
 func display_prompt() -> void:
 	is_writing = true
@@ -65,8 +67,14 @@ func display_prompt() -> void:
 			wants_to_advance = false
 			break
 		main_text.append_text(c)
-		var delay := lerpf(write_time_min, write_time_max, randf())
-		await get_tree().create_timer(delay).timeout
+		match c:
+			",": 
+				await get_tree().create_timer(write_time_comma).timeout
+			".": 
+				await get_tree().create_timer(write_time_dot).timeout
+			_:
+				var delay := lerpf(write_time_min, write_time_max, randf())
+				await get_tree().create_timer(delay).timeout
 	is_writing = false
 	
 	var i = 0
@@ -83,30 +91,44 @@ func display_prompt() -> void:
 				options_container.get_node(name).connect("button_down", next_prompt.bind(i))
 		i += 1
 
-func next_prompt(cond: int) -> void:
+func next_prompt(cond: int, can_end_chain: bool = true) -> void:
 	# TODO transition to scene if has one
-	prompt_qeue.pop_front()
+	if prompt_qeue.is_empty():
+		clear_box()
+		skip_chain_id = -1
+		stand_by = true
+		return
+
+	var previous_prompt : Prompt = prompt_qeue.pop_front()
+	if can_end_chain and previous_prompt.end_chain:
+		skip_chain_id = previous_prompt.chain_id
+
 	if (prompt_qeue.size()): # if there is a next prompt
 		if (prompt_qeue[0].condition_number == cond or\
 		prompt_qeue[0].condition_number == -1) and\
-		check_global_conditions(prompt_qeue[0]) and\
+		_check_global_conditions(prompt_qeue[0]) and\
+		_check_inventory(prompt_qeue[0]) and\
 		prompt_qeue[0].chain_id != skip_chain_id:
 			main_text.clear()
 			clear_buttons()
 			display_prompt()
-			if prompt_qeue[0].end_chain:
-				skip_chain_id = prompt_qeue[0].chain_id
 		else:
 			print("skipped ", prompt_qeue[0].resource_name, "of chain_id ", skip_chain_id)
-			next_prompt(cond)
+			next_prompt(cond, false)
 	else: 
 		clear_box()
 		skip_chain_id = -1
 		stand_by = true
 
-func check_global_conditions(prompt: Prompt) -> bool:
+func _check_global_conditions(prompt: Prompt) -> bool:
 	for v in prompt.global_conditions:
 		if InvestigationVars.vars[v] == 0:
+			return false
+	return true
+
+func _check_inventory(prompt: Prompt) -> bool:
+	for i in prompt.necessary_items:
+		if i not in InvestigationVars.inventory:
 			return false
 	return true
 
