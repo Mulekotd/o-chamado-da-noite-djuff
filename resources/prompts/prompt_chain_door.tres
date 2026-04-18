@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="PromptChain" format=3 uid="uid://c24pna6wo1kr3"]
+
+[ext_resource type="Script" uid="uid://cmgunroik01aj" path="res://scripts/prompt_resource.gd" id="1_5igef"]
+[ext_resource type="Script" uid="uid://dqj183h8d13hn" path="res://scripts/item_resource.gd" id="2_q14nv"]
+[ext_resource type="Resource" uid="uid://cqpw454xu78in" path="res://resources/items/test_key.tres" id="3_yy3ic"]
+[ext_resource type="Script" uid="uid://djxtkg1leixh" path="res://scripts/prompt_chain_resource.gd" id="4_q14nv"]
+
+[sub_resource type="Resource" id="Resource_kod7l"]
+script = ExtResource("1_5igef")
+text = "Try to use the key to unlock the door?"
+necessary_items = Array[ExtResource("2_q14nv")]([ExtResource("3_yy3ic")])
+options = Array[String](["Yes", "No"])
+metadata/_custom_type_script = "uid://cmgunroik01aj"
+
+[sub_resource type="Resource" id="Resource_e2dq3"]
+script = ExtResource("1_5igef")
+text = "You unlocked the door."
+condition_number = 0
+end_chain = true
+metadata/_custom_type_script = "uid://cmgunroik01aj"
+
+[sub_resource type="Resource" id="Resource_sr66a"]
+script = ExtResource("1_5igef")
+text = "The door is locked still."
+condition_number = 1
+end_chain = true
+metadata/_custom_type_script = "uid://cmgunroik01aj"
+
+[sub_resource type="Resource" id="Resource_8kqjn"]
+script = ExtResource("1_5igef")
+text = "The door is locked and you dont have a key."
+end_chain = true
+metadata/_custom_type_script = "uid://cmgunroik01aj"
+
+[resource]
+script = ExtResource("4_q14nv")
+prompts = Array[ExtResource("1_5igef")]([SubResource("Resource_kod7l"), SubResource("Resource_e2dq3"), SubResource("Resource_sr66a"), SubResource("Resource_8kqjn")])
+metadata/_custom_type_script = "uid://djxtkg1leixh"

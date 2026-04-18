@@ -1,4 +1,6 @@
-extends Control
+class_name TextBox extends Control
+
+## ALWAYS ATTACH THIS SCRIPT, DON'T USE STANDALONE
 
 @onready var main_text: RichTextLabel = $ColorRect/Text/MainText
 @onready var options_container: HFlowContainer = $ColorRect/Text/OptionsContainer
@@ -7,15 +9,15 @@ var prompt_qeue : Array[Prompt]
 var stand_by : bool = true
 var is_writing : bool = false
 var is_mouse_inside : bool = false
+var chain_number : int = 0
+## if a prompt has this chain_id, it will be skipped
+var skip_chain_id : int = -1
 @export var wants_to_advance : bool = false # advance to next prompt
 @export var write_time_min : float = 0.01
 @export var write_time_max : float = 0.05
 
 func _ready() -> void:
 	clear_box()
-	#append_prompt(preload("uid://bbh3r1vylqulj"))
-	#append_prompt_chain(preload("uid://cgyg4xbvptlf6"))
-	append_prompt_chain(preload("uid://koiihvgqo2pg"))
 
 func _physics_process(delta: float) -> void:
 	if stand_by and !prompt_qeue.is_empty():
@@ -39,13 +41,16 @@ func clear_box() -> void:
 	main_text.clear()
 	main_text.append_text("...")
 	clear_buttons()
+	chain_number = 0
 
 func append_prompt(prompt: Prompt) -> void:
 	prompt_qeue.append(prompt)
 	
 func append_prompt_chain(prompt_chain: PromptChain) -> void:
 	for p in prompt_chain.prompts:
+		p.chain_id = chain_number
 		prompt_qeue.append(p)
+	chain_number += 1
 
 func display_prompt() -> void:
 	is_writing = true
@@ -73,29 +78,35 @@ func display_prompt() -> void:
 		options_container.add_child(b)
 		if options_container.get_node(name):
 			b.button_down
-			options_container.get_node(name).connect("button_down", next_prompt.bind(i))
+			# avoid connecting multiple times error '-'
+			if !options_container.get_node(name).is_connected("button_down", next_prompt.bind(i)):
+				options_container.get_node(name).connect("button_down", next_prompt.bind(i))
 		i += 1
 
 func next_prompt(cond: int) -> void:
 	# TODO transition to scene if has one
 	prompt_qeue.pop_front()
 	if (prompt_qeue.size()): # if there is a next prompt
-		if (prompt_qeue[0].condition_number != cond and\
-			prompt_qeue[0].condition_number != -1) or\
-			!check_global_conditions(prompt_qeue[0]):
-			# TODO inventory check
-			next_prompt(cond)
-		else:
+		if (prompt_qeue[0].condition_number == cond or\
+		prompt_qeue[0].condition_number == -1) and\
+		check_global_conditions(prompt_qeue[0]) and\
+		prompt_qeue[0].chain_id != skip_chain_id:
 			main_text.clear()
 			clear_buttons()
 			display_prompt()
+			if prompt_qeue[0].end_chain:
+				skip_chain_id = prompt_qeue[0].chain_id
+		else:
+			print("skipped ", prompt_qeue[0].resource_name, "of chain_id ", skip_chain_id)
+			next_prompt(cond)
 	else: 
 		clear_box()
+		skip_chain_id = -1
 		stand_by = true
 
 func check_global_conditions(prompt: Prompt) -> bool:
 	for v in prompt.global_conditions:
-		if InvestigationVars.vars[v] == false:
+		if InvestigationVars.vars[v] == 0:
 			return false
 	return true
 

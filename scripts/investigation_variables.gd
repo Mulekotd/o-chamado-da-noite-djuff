@@ -1,7 +1,8 @@
 class_name InvestigationVars extends Resource
 
-static var vars : Dictionary[String, bool] = {
-	"test_var": true,
+## vars are int for utility, use 0 and 1 if you want boolean behaviour
+static var vars : Dictionary[String, int] = {
+	"test_var": 1,
 }
 
 static var inventory : Array[Item] = [

@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="Pov" format=3 uid="uid://dn0eop153jc5w"]
+
+[ext_resource type="Script" uid="uid://deej6yes3fmnc" path="res://scripts/element_resource.gd" id="1_43jdj"]
+[ext_resource type="Texture2D" uid="uid://dhvu2n53qbinv" path="res://assets/images/pov/door_pov.png" id="2_312ce"]
+[ext_resource type="Script" uid="uid://bti0kbjeofp0r" path="res://scripts/pov_resource.gd" id="2_645gb"]
+[ext_resource type="Resource" uid="uid://c24pna6wo1kr3" path="res://resources/prompts/prompt_chain_door.tres" id="2_unjxi"]
+
+[sub_resource type="Resource" id="Resource_unjxi"]
+script = ExtResource("1_43jdj")
+name = "lock"
+hitbox_left = 0.165
+hitbox_top = 0.165
+hitbox_right = 0.83
+hitbox_bottom = 0.814
+prompt_chain = ExtResource("2_unjxi")
+metadata/_custom_type_script = "uid://deej6yes3fmnc"
+
+[resource]
+script = ExtResource("2_645gb")
+name = "door"
+description = "a door. if you click the handle/lock, it gives a prompt and checks if you have a key"
+image = ExtResource("2_312ce")
+elements = Array[ExtResource("1_43jdj")]([SubResource("Resource_unjxi")])
+metadata/_custom_type_script = "uid://bti0kbjeofp0r"

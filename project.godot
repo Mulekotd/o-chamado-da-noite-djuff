@@ -18,6 +18,10 @@ config/features=PackedStringArray("4.6", "GL Compatibility")
 
 DialogueManager="*uid://c3rodes2l3gxb"
 
+[debug]
+
+gdscript/warnings/untyped_declaration=1
+
 [dialogue_manager]
 
 runtime/balloon_path="res://ui/ballons/balloon.tscn"
@@ -31,6 +35,10 @@ window/stretch/mode="viewport"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
+
+[gui]
+
+theme/default_font_multichannel_signed_distance_field=true
 
 [input]
 

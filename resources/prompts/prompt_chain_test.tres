@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="PromptChain" format=3 uid="uid://cgyg4xbvptlf6"]
 
 [ext_resource type="Script" uid="uid://cmgunroik01aj" path="res://scripts/prompt_resource.gd" id="1_468ep"]
-[ext_resource type="Script" uid="uid://djxtkg1leixh" path="res://scripts/prompt_chain.gd" id="2_w4jbt"]
+[ext_resource type="Script" uid="uid://djxtkg1leixh" path="res://scripts/prompt_chain_resource.gd" id="2_w4jbt"]
 [ext_resource type="Script" uid="uid://dqj183h8d13hn" path="res://scripts/item_resource.gd" id="2_ynk2w"]
 
 [sub_resource type="Resource" id="Resource_w4jbt"]
@@ -14,6 +14,7 @@ metadata/_custom_type_script = "uid://cmgunroik01aj"
 script = ExtResource("1_468ep")
 text = "Fuck you then."
 condition_number = 1
+end_chain = true
 metadata/_custom_type_script = "uid://cmgunroik01aj"
 
 [sub_resource type="Resource" id="Resource_37mj7"]
@@ -27,7 +28,7 @@ metadata/_custom_type_script = "uid://cmgunroik01aj"
 script = ExtResource("1_468ep")
 text = "Fuck yeah you are, and you should get out."
 condition_number = 0
-options = Array[String](["..."])
+end_chain = true
 metadata/_custom_type_script = "uid://cmgunroik01aj"
 
 [sub_resource type="Resource" id="Resource_rcjqt"]
@@ -41,18 +42,21 @@ metadata/_custom_type_script = "uid://cmgunroik01aj"
 script = ExtResource("1_468ep")
 text = "Leave."
 condition_number = 0
+end_chain = true
 metadata/_custom_type_script = "uid://cmgunroik01aj"
 
 [sub_resource type="Resource" id="Resource_mcqcc"]
 script = ExtResource("1_468ep")
 text = "Thank you, hehe. You're in Ohio fam."
 condition_number = 1
+end_chain = true
 metadata/_custom_type_script = "uid://cmgunroik01aj"
 
 [sub_resource type="Resource" id="Resource_qlrbc"]
 script = ExtResource("1_468ep")
 text = "I don't have time for that. Scram."
 condition_number = 2
+end_chain = true
 metadata/_custom_type_script = "uid://cmgunroik01aj"
 
 [resource]

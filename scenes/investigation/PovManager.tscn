@@ -8,11 +8,10 @@
 
 [node name="PovManager" type="Control" unique_id=1895825167]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -101.625
-offset_bottom = -282.955
+anchor_right = 0.873
+anchor_bottom = 0.528
+offset_right = -0.025024414
+offset_bottom = 0.24502563
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_m80ka")

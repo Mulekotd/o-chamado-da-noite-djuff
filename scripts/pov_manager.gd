@@ -1,4 +1,6 @@
-extends Control
+class_name PovManager extends Control
+
+## ALWAYS ATTACH THIS SCRIPT, DON'T USE STANDALONE
 
 @onready var view: TextureRect = $View
 @onready var left_arrow: TextureRect = $LeftFlowContainer/LeftArrow
@@ -11,9 +13,11 @@ const LEFT_ARROW = preload("uid://b513u1882j8ph")
 const RIGHT_ARROW = preload("uid://dlf5uc3tlxr2j")
 const TOP_ARROW = preload("uid://dtdkxktq3g8yr")
 
+signal element_clicked(element: Element)
+
 @export var pov_level : PovLevel
 var pov_index : int
-var current_pov
+var current_pov : Pov
 @export var arrow_hitbox : float = 16
 
 func _ready() -> void:
@@ -53,7 +57,9 @@ func _configure_arrow(arrow: TextureRect, arrow_texture: Texture2D, target_pov: 
 		arrow.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 func _on_arrow_gui_input(event: InputEvent, index: int) -> void:
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+	if event is InputEventMouseButton and\
+	event.button_index == MOUSE_BUTTON_LEFT and\
+	event.pressed:
 		change_pov(index)
 
 ## returns the first index of the pov direction in the pov_level that has this pov as it's mains pov
@@ -63,9 +69,26 @@ func get_pov_index(pov: Pov) -> int:
 			return i
 	return -1
 
+## gets the element is the relative position [0, 1]. returns null if none found
+func _get_element_in_pos(pos: Vector2) -> Element:
+	for e in current_pov.elements:
+		if (pos.x >= e.hitbox_left and\
+			pos.x <= e.hitbox_right and\
+			pos.y >= e.hitbox_top and\
+			pos.y <= e.hitbox_bottom):
+			return e
+	return null
+
 func _on_gui_input(event: InputEvent) -> void:
 	if !Input.is_action_just_pressed("ui_mouse_pressed"):
 		return
-	print(get_local_mouse_position())
-	#if get_local_mouse_position().x < arrow_hitbox and current_pov.arrow_povs["left"]:
-	#	change_pov(current_pov.arrow_povs["left"])
+		
+	var mouse_pos := get_local_mouse_position()
+	var mouse_relative := Vector2(mouse_pos.x/size.x, mouse_pos.y/size.y)
+	
+	var e := _get_element_in_pos(mouse_relative)
+	if e:
+		if e.pov:
+			change_pov(get_pov_index(e.pov))
+		else:
+			element_clicked.emit(e)
