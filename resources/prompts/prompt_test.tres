@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Prompt" format=3 uid="uid://bbh3r1vylqulj"]
+
+[ext_resource type="Script" uid="uid://dqj183h8d13hn" path="res://scripts/item_resource.gd" id="1_b3to2"]
+[ext_resource type="Script" uid="uid://cmgunroik01aj" path="res://scripts/prompt_resource.gd" id="1_xmtvf"]
+
+[resource]
+script = ExtResource("1_xmtvf")
+text = "Esse eh um prompt de teste"
+metadata/_custom_type_script = "uid://cmgunroik01aj"
