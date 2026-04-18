@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dnoms4opqgf4v" path="res://utils/prompt_chain_maker/items_widget.tscn" id="1_eg3ew"]
 [ext_resource type="PackedScene" uid="uid://bj378ngyim0ll" path="res://utils/prompt_chain_maker/conditions_widget.tscn" id="2_52qs4"]
+[ext_resource type="PackedScene" uid="uid://b6aeholp6xcm3" path="res://utils/prompt_chain_maker/options_widget.tscn" id="3_vn5r7"]
 
 [node name="PromptWidget" type="MarginContainer" unique_id=151020374]
 custom_minimum_size = Vector2(0, 80)
@@ -15,23 +16,142 @@ grow_horizontal = 2
 layout_mode = 2
 color = Color(0.04755766, 0.047557645, 0.047557645, 1)
 
-[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1553310710]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=571101295]
 layout_mode = 2
-theme_override_constants/separation = 16
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
 
-[node name="Text" type="TextEdit" parent="HBoxContainer" unique_id=1609192753]
-custom_minimum_size = Vector2(200, 0)
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=1553310710]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="TextContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=691582231]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/TextContainer" unique_id=1131979070]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Texto"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="Text" type="TextEdit" parent="MarginContainer/HBoxContainer/TextContainer" unique_id=1609192753]
+custom_minimum_size = Vector2(200, 100)
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
-placeholder_text = "Text Text Text TeXTXTXawdaw
-daw
-wwd
-aw
-da"
+placeholder_text = "Texto"
 wrap_mode = 1
 
-[node name="ItemsWidget" parent="HBoxContainer" unique_id=589692923 instance=ExtResource("1_eg3ew")]
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/HBoxContainer" unique_id=689460388]
+layout_mode = 2
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+columns = 4
+
+[node name="ConditionsContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/GridContainer" unique_id=701184403]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/GridContainer/ConditionsContainer" unique_id=1612863587]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Condicoes"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="ConditionsWidget" parent="MarginContainer/HBoxContainer/GridContainer/ConditionsContainer" unique_id=1813019862 instance=ExtResource("2_52qs4")]
 layout_mode = 2
 
-[node name="ConditionsWidget" parent="HBoxContainer" unique_id=1813019862 instance=ExtResource("2_52qs4")]
+[node name="NecessaryItemsContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/GridContainer" unique_id=866713110]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/GridContainer/NecessaryItemsContainer" unique_id=2010168285]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Itens necessarios"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="NecessaryItemsWidget" parent="MarginContainer/HBoxContainer/GridContainer/NecessaryItemsContainer" unique_id=589692923 instance=ExtResource("1_eg3ew")]
+layout_mode = 2
+
+[node name="OptionsContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/GridContainer" unique_id=300089472]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/GridContainer/OptionsContainer" unique_id=1972144797]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Opcoes"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="OptionsWidget" parent="MarginContainer/HBoxContainer/GridContainer/OptionsContainer" unique_id=1903776342 instance=ExtResource("3_vn5r7")]
+layout_mode = 2
+
+[node name="VarsToChangeContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/GridContainer" unique_id=429128829]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/GridContainer/VarsToChangeContainer" unique_id=2022840578]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Vars para mudar"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="ConditionsWidget" parent="MarginContainer/HBoxContainer/GridContainer/VarsToChangeContainer" unique_id=2009519092 instance=ExtResource("2_52qs4")]
+layout_mode = 2
+
+[node name="ConditionNumberContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/GridContainer" unique_id=263075385]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/GridContainer/ConditionNumberContainer" unique_id=1355031731]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Numero de condicao"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="NumeroDeCondicaoWidget" type="TextEdit" parent="MarginContainer/HBoxContainer/GridContainer/ConditionNumberContainer" unique_id=502194860]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "-1"
+placeholder_text = "-1"
+scroll_fit_content_height = true
+scroll_fit_content_width = true
+
+[node name="GiveItemsContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/GridContainer" unique_id=1826676483]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/GridContainer/GiveItemsContainer" unique_id=1520669969]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Itens para dar"
+horizontal_alignment = 1
+
+[node name="GiveItemsWidget" parent="MarginContainer/HBoxContainer/GridContainer/GiveItemsContainer" unique_id=1978747484 instance=ExtResource("1_eg3ew")]
+layout_mode = 2
+
+[node name="TakeItemsContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/GridContainer" unique_id=450291044]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/GridContainer/TakeItemsContainer" unique_id=159580589]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Itens para remover"
+horizontal_alignment = 1
+
+[node name="TakeItemsWidget" parent="MarginContainer/HBoxContainer/GridContainer/TakeItemsContainer" unique_id=98264587 instance=ExtResource("1_eg3ew")]
 layout_mode = 2

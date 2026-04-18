@@ -7,9 +7,6 @@ extends VBoxContainer
 
 var items : Array[Item]
 
-func _physics_process(delta: float) -> void:
-	print(items)
-
 func _add_item(item: Item) -> void:
 	items.append(item)
 	item_list.add_item(item.name, item.image)
@@ -31,6 +28,6 @@ func _on_remover_pressed() -> void:
 
 
 func _on_file_dialog_file_selected(path: String) -> void:
-	var item : Item = load(path)
-	if item:
+	var item := load(path)
+	if item is Item:
 		_add_item(item)

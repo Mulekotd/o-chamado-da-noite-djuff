@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://yakp1hcldxl0"]
+
+[node name="Title" type="TextEdit" unique_id=1078598894]
+offset_right = 8.0
+offset_bottom = 28.0
+theme_override_font_sizes/font_size = 12
+placeholder_text = "Texto da opcao"
+wrap_mode = 1
+scroll_fit_content_height = true

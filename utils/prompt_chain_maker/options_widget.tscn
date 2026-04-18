@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://b6aeholp6xcm3"]
+
+[ext_resource type="Script" uid="uid://v26857g6c76s" path="res://utils/prompt_chain_maker/options_widget.gd" id="1_febti"]
+
+[node name="OptionsWidget" type="VBoxContainer" unique_id=1903776342]
+script = ExtResource("1_febti")
+
+[node name="Adicionar" type="Button" parent="." unique_id=1343124917]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Adicionar opcao"
+
+[node name="Remover" type="Button" parent="." unique_id=709429137]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Remover opcao"
+
+[connection signal="pressed" from="Adicionar" to="." method="_on_adicionar_pressed"]
+[connection signal="pressed" from="Remover" to="." method="_on_remover_pressed"]

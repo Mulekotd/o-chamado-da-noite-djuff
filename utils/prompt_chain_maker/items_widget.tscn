@@ -7,13 +7,6 @@ offset_right = 175.0
 offset_bottom = 247.0
 script = ExtResource("1_cq4xv")
 
-[node name="ItemList" type="ItemList" parent="." unique_id=1559399127]
-layout_mode = 2
-theme_override_font_sizes/font_size = 12
-auto_width = true
-auto_height = true
-fixed_icon_size = Vector2i(32, 32)
-
 [node name="Adicionar" type="Button" parent="." unique_id=959578989]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
@@ -23,6 +16,13 @@ text = "Adicionar Item"
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 text = "Remover Item"
+
+[node name="ItemList" type="ItemList" parent="." unique_id=1559399127]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+auto_width = true
+auto_height = true
+fixed_icon_size = Vector2i(32, 32)
 
 [node name="FileDialog" type="FileDialog" parent="." unique_id=1941378509]
 oversampling_override = 1.0

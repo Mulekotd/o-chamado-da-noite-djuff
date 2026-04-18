@@ -10,7 +10,7 @@ class_name InvestigationVars extends Resource
 	preload("uid://cqpw454xu78in"),
 ]
 
-static var file := load("uid://5dau1ofk7t2p")
+static var file := load("res://resources/investigation_variables.tres")
 
 static func check_global_conditions(conditions: Dictionary[String, int]) -> bool:
 	for k in conditions.keys():
