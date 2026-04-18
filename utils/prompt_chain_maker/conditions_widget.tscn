@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://bj378ngyim0ll"]
+
+[ext_resource type="Script" uid="uid://bjungrsxayivw" path="res://utils/prompt_chain_maker/conditions_widget.gd" id="1_4qmvq"]
+
+[node name="ConditionsWidget" type="VBoxContainer" unique_id=1813019862]
+script = ExtResource("1_4qmvq")
+
+[node name="Adicionar" type="Button" parent="." unique_id=312678487]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Adicionar condicao"
+
+[node name="Remover" type="Button" parent="." unique_id=386768956]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Remover condicao"
+
+[connection signal="pressed" from="Adicionar" to="." method="_on_adicionar_pressed"]
+[connection signal="pressed" from="Remover" to="." method="_on_remover_pressed"]

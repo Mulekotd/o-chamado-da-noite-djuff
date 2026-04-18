@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://ckhy52qfjwd46"]
+
+[node name="ConditionWidget" type="HSplitContainer" unique_id=1846960913]
+
+[node name="Title" type="TextEdit" parent="." unique_id=1225852710]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+placeholder_text = "Chave"
+scroll_fit_content_height = true
+scroll_fit_content_width = true
+
+[node name="Value" type="TextEdit" parent="." unique_id=793001974]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+placeholder_text = "Valor"
+scroll_fit_content_height = true
+scroll_fit_content_width = true

@@ -1,8 +1,6 @@
 [gd_scene format=3 uid="uid://dnoms4opqgf4v"]
 
-[ext_resource type="Texture2D" uid="uid://ban6ktyfkm8sd" path="res://assets/images/items/key.png" id="1_5gxiu"]
 [ext_resource type="Script" uid="uid://b0jgk7ota8jr" path="res://utils/prompt_chain_maker/items_widget.gd" id="1_cq4xv"]
-[ext_resource type="Texture2D" uid="uid://dlf5uc3tlxr2j" path="res://assets/images/interface/right_arrow.png" id="2_xjdw2"]
 
 [node name="ItemsWidget" type="VBoxContainer" unique_id=1978747484]
 offset_right = 175.0
@@ -14,26 +12,17 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 12
 auto_width = true
 auto_height = true
-item_count = 4
 fixed_icon_size = Vector2i(32, 32)
-item_0/text = "Chave"
-item_0/icon = ExtResource("1_5gxiu")
-item_1/text = "Outra Chave"
-item_1/icon = ExtResource("1_5gxiu")
-item_2/text = "Mais Uma chave"
-item_2/icon = ExtResource("1_5gxiu")
-item_3/text = "seta pra dieita"
-item_3/icon = ExtResource("2_xjdw2")
 
 [node name="Adicionar" type="Button" parent="." unique_id=959578989]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
-text = "Adicionar"
+text = "Adicionar Item"
 
 [node name="Remover" type="Button" parent="." unique_id=1091474739]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
-text = "Remover"
+text = "Remover Item"
 
 [node name="FileDialog" type="FileDialog" parent="." unique_id=1941378509]
 oversampling_override = 1.0

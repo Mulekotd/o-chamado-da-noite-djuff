@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cjh18gp04aw2o"]
 
 [ext_resource type="PackedScene" uid="uid://dnoms4opqgf4v" path="res://utils/prompt_chain_maker/items_widget.tscn" id="1_eg3ew"]
+[ext_resource type="PackedScene" uid="uid://bj378ngyim0ll" path="res://utils/prompt_chain_maker/conditions_widget.tscn" id="2_52qs4"]
 
 [node name="PromptWidget" type="MarginContainer" unique_id=151020374]
 custom_minimum_size = Vector2(0, 80)
@@ -30,4 +31,7 @@ da"
 wrap_mode = 1
 
 [node name="ItemsWidget" parent="HBoxContainer" unique_id=589692923 instance=ExtResource("1_eg3ew")]
+layout_mode = 2
+
+[node name="ConditionsWidget" parent="HBoxContainer" unique_id=1813019862 instance=ExtResource("2_52qs4")]
 layout_mode = 2
