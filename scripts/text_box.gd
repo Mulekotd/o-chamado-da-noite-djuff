@@ -84,7 +84,6 @@ func next_prompt(cond: int) -> void:
 			prompt_qeue[0].condition_number != -1) or\
 			!check_global_conditions(prompt_qeue[0]):
 			# TODO inventory check
-			# TODO global condition check
 			next_prompt(cond)
 		else:
 			main_text.clear()

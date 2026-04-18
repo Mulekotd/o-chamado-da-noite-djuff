@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="PovLevel" format=3 uid="uid://862rcp5si1ve"]
+
+[ext_resource type="Script" uid="uid://ffh4hevhqls8" path="res://scripts/pov_directions.gd" id="1_r3mxf"]
+[ext_resource type="Resource" path="res://resources/povs/pov_test_2.tres" id="2_8nqmo"]
+[ext_resource type="Script" uid="uid://cjbfq0iyvv1rr" path="res://scripts/pov_level_resource.gd" id="2_gsb8y"]
+[ext_resource type="Resource" path="res://resources/povs/pov_test.tres" id="2_r3mxf"]
+
+[sub_resource type="Resource" id="Resource_1t4vl"]
+script = ExtResource("1_r3mxf")
+pov = ExtResource("2_r3mxf")
+left = ExtResource("2_8nqmo")
+metadata/_custom_type_script = "uid://ffh4hevhqls8"
+
+[sub_resource type="Resource" id="Resource_cp1km"]
+script = ExtResource("1_r3mxf")
+pov = ExtResource("2_8nqmo")
+right = ExtResource("2_r3mxf")
+metadata/_custom_type_script = "uid://ffh4hevhqls8"
+
+[resource]
+script = ExtResource("2_gsb8y")
+povs = Array[ExtResource("1_r3mxf")]([SubResource("Resource_1t4vl"), SubResource("Resource_cp1km")])
+metadata/_custom_type_script = "uid://cjbfq0iyvv1rr"

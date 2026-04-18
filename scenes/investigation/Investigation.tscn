@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://chs5heeu26nd3"]
+
+[ext_resource type="PackedScene" uid="uid://dtd12y2eekoi1" path="res://scenes/investigation/text_box.tscn" id="1_kspld"]
+[ext_resource type="Texture2D" uid="uid://dg1nq4yoy3kes" path="res://assets/images/interface/investigation_hud_overlay.png" id="2_838ch"]
+
+[node name="Investigation" type="Control" unique_id=1591324732]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="TextBox" parent="." unique_id=1436468660 instance=ExtResource("1_kspld")]
+layout_mode = 1
+anchor_right = 0.768
+anchor_bottom = 0.36
+offset_left = 176.0
+offset_top = 373.0
+offset_right = 176.0
+offset_bottom = 372.8
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=554177332]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_838ch")
+expand_mode = 2
