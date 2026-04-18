@@ -1,4 +1,4 @@
-extends VBoxContainer
+class_name _ItemsWidget extends VBoxContainer
 
 @onready var item_list: ItemList = $ItemList
 @onready var adicionar: Button = $Adicionar
@@ -7,7 +7,11 @@ extends VBoxContainer
 
 var items : Array[Item]
 
-func _add_item(item: Item) -> void:
+func add_items(items: Array[Item]) -> void:
+	for i in items:
+		add_item(i)
+
+func add_item(item: Item) -> void:
 	items.append(item)
 	item_list.add_item(item.name, item.image)
 
@@ -26,8 +30,7 @@ func _on_remover_pressed() -> void:
 	for i in item_list.get_selected_items():
 		item_list.remove_item(i)
 
-
 func _on_file_dialog_file_selected(path: String) -> void:
 	var item := load(path)
 	if item is Item:
-		_add_item(item)
+		add_item(item)

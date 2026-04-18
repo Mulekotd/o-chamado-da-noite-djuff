@@ -1,8 +1,15 @@
 [gd_scene format=3 uid="uid://cjh18gp04aw2o"]
 
 [ext_resource type="PackedScene" uid="uid://dnoms4opqgf4v" path="res://utils/prompt_chain_maker/items_widget.tscn" id="1_eg3ew"]
+[ext_resource type="Script" uid="uid://bnwttvuex0jaa" path="res://utils/prompt_chain_maker/prompt_widget.gd" id="1_hnjur"]
 [ext_resource type="PackedScene" uid="uid://bj378ngyim0ll" path="res://utils/prompt_chain_maker/conditions_widget.tscn" id="2_52qs4"]
 [ext_resource type="PackedScene" uid="uid://b6aeholp6xcm3" path="res://utils/prompt_chain_maker/options_widget.tscn" id="3_vn5r7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hnjur"]
+bg_color = Color(0.24880221, 0, 0.002517846, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_534rm"]
+bg_color = Color(0.70518076, 6.858632e-07, 0.035928737, 1)
 
 [node name="PromptWidget" type="MarginContainer" unique_id=151020374]
 custom_minimum_size = Vector2(0, 80)
@@ -11,6 +18,8 @@ anchor_right = 1.0
 anchor_bottom = 0.133
 offset_bottom = -56.800003
 grow_horizontal = 2
+size_flags_horizontal = 3
+script = ExtResource("1_hnjur")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=99060808]
 layout_mode = 2
@@ -39,7 +48,7 @@ text = "Texto"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="Text" type="TextEdit" parent="MarginContainer/HBoxContainer/TextContainer" unique_id=1609192753]
+[node name="TextWidget" type="TextEdit" parent="MarginContainer/HBoxContainer/TextContainer" unique_id=1609192753]
 custom_minimum_size = Vector2(200, 100)
 layout_mode = 2
 theme_override_font_sizes/font_size = 14
@@ -48,12 +57,14 @@ wrap_mode = 1
 
 [node name="GridContainer" type="GridContainer" parent="MarginContainer/HBoxContainer" unique_id=689460388]
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/h_separation = 16
 theme_override_constants/v_separation = 16
 columns = 4
 
 [node name="ConditionsContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/GridContainer" unique_id=701184403]
 layout_mode = 2
+size_flags_horizontal = 3
 alignment = 1
 
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer/GridContainer/ConditionsContainer" unique_id=1612863587]
@@ -69,6 +80,7 @@ layout_mode = 2
 
 [node name="NecessaryItemsContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/GridContainer" unique_id=866713110]
 layout_mode = 2
+size_flags_horizontal = 3
 alignment = 1
 
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer/GridContainer/NecessaryItemsContainer" unique_id=2010168285]
@@ -84,6 +96,7 @@ layout_mode = 2
 
 [node name="OptionsContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/GridContainer" unique_id=300089472]
 layout_mode = 2
+size_flags_horizontal = 3
 alignment = 1
 
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer/GridContainer/OptionsContainer" unique_id=1972144797]
@@ -99,6 +112,7 @@ layout_mode = 2
 
 [node name="VarsToChangeContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/GridContainer" unique_id=429128829]
 layout_mode = 2
+size_flags_horizontal = 3
 alignment = 1
 
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer/GridContainer/VarsToChangeContainer" unique_id=2022840578]
@@ -109,11 +123,12 @@ text = "Vars para mudar"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="ConditionsWidget" parent="MarginContainer/HBoxContainer/GridContainer/VarsToChangeContainer" unique_id=2009519092 instance=ExtResource("2_52qs4")]
+[node name="ChangeVarsWidget" parent="MarginContainer/HBoxContainer/GridContainer/VarsToChangeContainer" unique_id=2009519092 instance=ExtResource("2_52qs4")]
 layout_mode = 2
 
 [node name="ConditionNumberContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/GridContainer" unique_id=263075385]
 layout_mode = 2
+size_flags_horizontal = 3
 alignment = 1
 
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer/GridContainer/ConditionNumberContainer" unique_id=1355031731]
@@ -124,7 +139,7 @@ text = "Numero de condicao"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="NumeroDeCondicaoWidget" type="TextEdit" parent="MarginContainer/HBoxContainer/GridContainer/ConditionNumberContainer" unique_id=502194860]
+[node name="ConditionNumberWidget" type="TextEdit" parent="MarginContainer/HBoxContainer/GridContainer/ConditionNumberContainer" unique_id=502194860]
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 text = "-1"
@@ -134,6 +149,7 @@ scroll_fit_content_width = true
 
 [node name="GiveItemsContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/GridContainer" unique_id=1826676483]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer/GridContainer/GiveItemsContainer" unique_id=1520669969]
 layout_mode = 2
@@ -146,6 +162,7 @@ layout_mode = 2
 
 [node name="TakeItemsContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/GridContainer" unique_id=450291044]
 layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer/GridContainer/TakeItemsContainer" unique_id=159580589]
 layout_mode = 2
@@ -155,3 +172,24 @@ horizontal_alignment = 1
 
 [node name="TakeItemsWidget" parent="MarginContainer/HBoxContainer/GridContainer/TakeItemsContainer" unique_id=98264587 instance=ExtResource("1_eg3ew")]
 layout_mode = 2
+
+[node name="EndChainContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/GridContainer" unique_id=107193213]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="EndChainWidget" type="CheckBox" parent="MarginContainer/HBoxContainer/GridContainer/EndChainContainer" unique_id=80609606]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Should end chain"
+
+[node name="RemoveButton" type="Button" parent="." unique_id=1550368705]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_hnjur")
+theme_override_styles/hover = SubResource("StyleBoxFlat_534rm")
+text = "Remover"
+
+[connection signal="pressed" from="RemoveButton" to="." method="_on_remove_button_pressed"]

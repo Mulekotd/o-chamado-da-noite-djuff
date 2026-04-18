@@ -1,13 +1,14 @@
 [gd_scene format=3 uid="uid://sde7emoawly0"]
 
 [ext_resource type="Script" uid="uid://bncnglat1o1x0" path="res://utils/prompt_chain_maker/prompt_chain_maker.gd" id="1_5ju4m"]
-[ext_resource type="PackedScene" uid="uid://cjh18gp04aw2o" path="res://utils/prompt_chain_maker/prompt_widget.tscn" id="2_c8x1e"]
 
 [node name="PromptChainMaker" type="Control" unique_id=750523266]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -1.0
+offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_5ju4m")
@@ -21,7 +22,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="VScrollBar" type="ScrollContainer" parent="." unique_id=635603823]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=741396627]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -29,11 +30,45 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VScrollBar" unique_id=270195687]
+[node name="BotoesContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1468384855]
 layout_mode = 2
 
-[node name="PromptWidget" parent="VScrollBar/VBoxContainer" unique_id=273340504 instance=ExtResource("2_c8x1e")]
+[node name="SaveButton" type="Button" parent="VBoxContainer/BotoesContainer" unique_id=86008004]
 layout_mode = 2
+text = "Salvar"
 
-[node name="PromptWidget2" parent="VScrollBar/VBoxContainer" unique_id=151020374 instance=ExtResource("2_c8x1e")]
+[node name="LoadButton" type="Button" parent="VBoxContainer/BotoesContainer" unique_id=752094578]
 layout_mode = 2
+text = "Carregar"
+
+[node name="VScrollBar" type="ScrollContainer" parent="VBoxContainer" unique_id=635603823]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="PromptsContainer" type="VBoxContainer" parent="VBoxContainer/VScrollBar" unique_id=270195687]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AddButton" type="Button" parent="VBoxContainer" unique_id=1853169381]
+layout_mode = 2
+text = "Adicionar prompt"
+
+[node name="LoadFileDialog" type="FileDialog" parent="." unique_id=1193832913]
+oversampling_override = 1.0
+title = "Open a File"
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.tres")
+use_native_dialog = true
+
+[node name="SaveFileDialog" type="FileDialog" parent="." unique_id=1978579770]
+oversampling_override = 1.0
+access = 2
+filters = PackedStringArray("*.tres")
+use_native_dialog = true
+
+[connection signal="pressed" from="VBoxContainer/BotoesContainer/SaveButton" to="." method="_on_save_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/BotoesContainer/LoadButton" to="." method="_on_load_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/AddButton" to="." method="_on_add_button_pressed"]
+[connection signal="file_selected" from="LoadFileDialog" to="." method="_on_load_file_dialog_file_selected"]
+[connection signal="file_selected" from="SaveFileDialog" to="." method="_on_save_file_dialog_file_selected"]

@@ -11,6 +11,7 @@ columns = 2
 [node name="Title" type="TextEdit" parent="." unique_id=1225852710]
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 12
 placeholder_text = "Chave"
 wrap_mode = 1
@@ -18,7 +19,7 @@ autowrap_mode = 1
 scroll_fit_content_height = true
 
 [node name="Value" type="TextEdit" parent="." unique_id=793001974]
-custom_minimum_size = Vector2(32, 0)
+custom_minimum_size = Vector2(48, 0)
 layout_mode = 2
 theme_override_font_sizes/font_size = 12
 placeholder_text = "Valor"

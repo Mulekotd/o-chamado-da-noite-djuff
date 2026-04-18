@@ -2,11 +2,24 @@
 
 [ext_resource type="Script" uid="uid://bti0kbjeofp0r" path="res://scripts/pov_resource.gd" id="1_kmjrt"]
 [ext_resource type="Script" uid="uid://deej6yes3fmnc" path="res://scripts/element_resource.gd" id="2_626s1"]
+[ext_resource type="Script" uid="uid://dqj183h8d13hn" path="res://scripts/item_resource.gd" id="2_sqe1l"]
+[ext_resource type="Resource" uid="uid://b1npo8kdia2xd" path="res://resources/prompts/prompt_chain_maker_test.tres" id="3_f86jk"]
 [ext_resource type="Texture2D" uid="uid://gmk3i0ngwmv6" path="res://assets/images/pov/pov_test.png" id="4_f86jk"]
+
+[sub_resource type="Resource" id="Resource_f86jk"]
+script = ExtResource("2_626s1")
+name = "guy"
+hitbox_left = 0.092
+hitbox_top = 0.144
+hitbox_right = 0.83
+hitbox_bottom = 0.837
+prompt_chain = ExtResource("3_f86jk")
+metadata/_custom_type_script = "uid://deej6yes3fmnc"
 
 [resource]
 script = ExtResource("1_kmjrt")
 name = "main"
 description = "man sitting"
 image = ExtResource("4_f86jk")
+elements = Array[ExtResource("2_626s1")]([SubResource("Resource_f86jk")])
 metadata/_custom_type_script = "uid://bti0kbjeofp0r"

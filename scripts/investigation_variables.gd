@@ -14,7 +14,7 @@ static var file := load("res://resources/investigation_variables.tres")
 
 static func check_global_conditions(conditions: Dictionary[String, int]) -> bool:
 	for k in conditions.keys():
-		if file.vars[k] != conditions[k]:
+		if file.vars.get_or_add(k, 0) != conditions[k]:
 			return false
 	return true
 
@@ -25,6 +25,7 @@ static func check_inventory(items: Array[Item]) -> bool:
 	return true
 
 static func update_variables(vars: Dictionary[String, int]) -> void:
+	print(vars)
 	for k in vars.keys():
 		file.vars[k] = vars[k]
 	ResourceSaver.save(file)
