@@ -24,9 +24,7 @@ func _physics_process(delta: float) -> void:
 		display_prompt()
 
 func _process(delta: float) -> void:
-	if (Input.is_action_just_pressed("ui_accept") or\
-		(Input.is_action_just_pressed("ui_mouse_pressed")) and is_mouse_inside) and\
-		prompt_qeue.size()>0:
+	if ((Input.is_action_just_pressed("ui_accept") or (Input.is_action_just_pressed("ui_mouse_pressed") and is_mouse_inside))) and prompt_qeue.size()>0:
 		if prompt_qeue[0].options.size() == 0 and !is_writing:
 			next_prompt(-1)
 		else:
@@ -113,7 +111,6 @@ func next_prompt(cond: int, can_end_chain: bool = true) -> void:
 			clear_buttons()
 			display_prompt()
 		else:
-			print("skipped ", prompt_qeue[0].resource_name, "of chain_id ", skip_chain_id)
 			next_prompt(cond, false)
 	else: 
 		clear_box()

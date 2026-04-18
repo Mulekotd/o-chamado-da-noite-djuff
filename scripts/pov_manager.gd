@@ -16,6 +16,7 @@ signal element_clicked(element: Element)
 @export var pov_level : PovLevel
 var pov_index : int
 var current_pov : Pov
+var enabled : bool = true
 @export var arrow_hitbox : float = 16
 
 func _ready() -> void:
@@ -57,7 +58,8 @@ func _configure_arrow(arrow: TextureRect, arrow_texture: Texture2D, target_pov: 
 func _on_arrow_gui_input(event: InputEvent, index: int) -> void:
 	if event is InputEventMouseButton and\
 	event.button_index == MOUSE_BUTTON_LEFT and\
-	event.pressed:
+	event.pressed and\
+	enabled:
 		change_pov(index)
 
 ## returns the first index of the pov direction in the pov_level that has this pov as it's mains pov
@@ -78,7 +80,7 @@ func _get_element_in_pos(pos: Vector2) -> Element:
 	return null
 
 func _on_gui_input(event: InputEvent) -> void:
-	if !Input.is_action_just_pressed("ui_mouse_pressed"):
+	if !Input.is_action_just_pressed("ui_mouse_pressed") or !enabled:
 		return
 		
 	var mouse_pos := get_local_mouse_position()
