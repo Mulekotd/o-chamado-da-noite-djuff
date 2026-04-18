@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://cjh18gp04aw2o"]
+
+[ext_resource type="PackedScene" uid="uid://dnoms4opqgf4v" path="res://utils/prompt_chain_maker/items_widget.tscn" id="1_eg3ew"]
+
+[node name="PromptWidget" type="MarginContainer" unique_id=151020374]
+custom_minimum_size = Vector2(0, 80)
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.133
+offset_bottom = -56.800003
+grow_horizontal = 2
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=99060808]
+layout_mode = 2
+color = Color(0.04755766, 0.047557645, 0.047557645, 1)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1553310710]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Text" type="TextEdit" parent="HBoxContainer" unique_id=1609192753]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+placeholder_text = "Text Text Text TeXTXTXawdaw
+daw
+wwd
+aw
+da"
+wrap_mode = 1
+
+[node name="ItemsWidget" parent="HBoxContainer" unique_id=589692923 instance=ExtResource("1_eg3ew")]
+layout_mode = 2
