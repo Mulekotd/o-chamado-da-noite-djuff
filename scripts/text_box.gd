@@ -13,18 +13,18 @@ var is_mouse_inside : bool = false
 
 func _ready() -> void:
 	clear_box()
-	append_prompt(preload("uid://bbh3r1vylqulj"))
-	append_prompt_chain(preload("uid://cgyg4xbvptlf6"))
+	#append_prompt(preload("uid://bbh3r1vylqulj"))
+	#append_prompt_chain(preload("uid://cgyg4xbvptlf6"))
+	append_prompt_chain(preload("uid://koiihvgqo2pg"))
 
 func _physics_process(delta: float) -> void:
 	if stand_by and !prompt_qeue.is_empty():
-		next_prompt(-1)
+		display_prompt()
 
 func _process(delta: float) -> void:
-	print(is_mouse_inside)
 	if (Input.is_action_just_pressed("ui_accept") or\
 		(Input.is_action_just_pressed("ui_mouse_pressed")) and is_mouse_inside) and\
-		!stand_by:
+		prompt_qeue.size()>0:
 		if prompt_qeue[0].options.size() == 0 and !is_writing:
 			next_prompt(-1)
 		else:
@@ -49,6 +49,8 @@ func append_prompt_chain(prompt_chain: PromptChain) -> void:
 
 func display_prompt() -> void:
 	is_writing = true
+	stand_by = false
+	main_text.clear()
 	var current_prompt := prompt_qeue[0]
 	for c in prompt_qeue[0].text:
 		if current_prompt != prompt_qeue[0]:
@@ -70,7 +72,6 @@ func display_prompt() -> void:
 		b.name = name
 		options_container.add_child(b)
 		if options_container.get_node(name):
-			print("ACHOU O BOTAO")
 			b.button_down
 			options_container.get_node(name).connect("button_down", next_prompt.bind(i))
 		i += 1
@@ -79,15 +80,13 @@ func next_prompt(cond: int) -> void:
 	# TODO transition to scene if has one
 	prompt_qeue.pop_front()
 	if (prompt_qeue.size()): # if there is a next prompt
-		print("TEXTO")
 		if (prompt_qeue[0].condition_number != cond and\
-			prompt_qeue[0].condition_number != -1):
+			prompt_qeue[0].condition_number != -1) or\
+			!check_global_conditions(prompt_qeue[0]):
 			# TODO inventory check
 			# TODO global condition check
 			next_prompt(cond)
 		else:
-			stand_by = false
-			print("PROXIMO")
 			main_text.clear()
 			clear_buttons()
 			display_prompt()
@@ -95,6 +94,11 @@ func next_prompt(cond: int) -> void:
 		clear_box()
 		stand_by = true
 
+func check_global_conditions(prompt: Prompt) -> bool:
+	for v in prompt.global_conditions:
+		if InvestigationVars.vars[v] == false:
+			return false
+	return true
 
 func _on_mouse_entered() -> void:
 	is_mouse_inside = true
