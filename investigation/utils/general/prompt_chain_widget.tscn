@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://d3dyiv04e6brb"]
+
+[ext_resource type="Script" uid="uid://b3kolf0jkls77" path="res://investigation/utils/general/prompt_chain_widget.gd" id="1_brr2x"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_brr2x"]
+bg_color = Color(0.15847227, 0.15847233, 0.15847221, 1)
+
+[node name="PromptChainWidget" type="MarginContainer" unique_id=1195115200]
+offset_right = 343.0
+offset_bottom = 17.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_brr2x")
+metadata/_edit_use_anchors_ = true
+
+[node name="LoadFileDialog" type="FileDialog" parent="." unique_id=1193663734]
+oversampling_override = 1.0
+title = "Open a File"
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.tres")
+use_native_dialog = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=2050359857]
+layout_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="NameLabel" type="Label" parent="HBoxContainer" unique_id=849846362]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+
+[node name="EditButton" type="Button" parent="HBoxContainer" unique_id=355551648]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_brr2x")
+text = "Editar/Criar"
+
+[connection signal="pressed" from="HBoxContainer/EditButton" to="." method="_on_edit_button_pressed"]

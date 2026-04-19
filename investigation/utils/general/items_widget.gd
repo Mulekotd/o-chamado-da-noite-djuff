@@ -7,17 +7,17 @@ class_name _ItemsWidget extends VBoxContainer
 
 var items : Array[Item]
 
-func add_items(items: Array[Item]) -> void:
-	for i in items:
+func add_items(new_items: Array[Item]) -> void:
+	for i in new_items:
 		add_item(i)
 
 func add_item(item: Item) -> void:
 	items.append(item)
 	item_list.add_item(item.name, item.image)
 
-func _remove_item_by_name(name: String) -> void:
+func _remove_item_by_name(item_name: String) -> void:
 	for i in items.size():
-		if items[i].name == name:
+		if items[i].name == item_name:
 			items.pop_at(i)
 			return
 

@@ -16,7 +16,7 @@ func parse_conditions() -> Dictionary[String, int]:
 	return dict
 
 func add_conditions(conds: Dictionary[String, int]) -> void:
-	for k in conds.keys():
+	for k : String in conds.keys():
 		add_condition(k, conds[k])
 
 func add_condition(title: String, value: int) -> void:

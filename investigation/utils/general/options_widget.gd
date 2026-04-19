@@ -14,11 +14,11 @@ func add_options(options: Array[String]) -> void:
 	for o in options:
 		add_option(o)
 
-func add_option(name: String) -> void:
-	var o := OPTION_WIDGET.instantiate()
-	o.text = name
-	o.add_to_group("option_widget")
-	add_child(o)
+func add_option(option: String) -> void:
+	var ow := OPTION_WIDGET.instantiate()
+	ow.text = option
+	ow.add_to_group("option_widget")
+	add_child(ow)
 
 func _on_add_pressed() -> void:
 	add_option("")

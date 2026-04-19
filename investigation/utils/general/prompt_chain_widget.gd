@@ -1,0 +1,23 @@
+class_name _PromptChainWidget extends Control
+
+@onready var load_file_dialog: FileDialog = $LoadFileDialog
+@onready var name_label: Label = $HBoxContainer/NameLabel
+@onready var edit_button: Button = $HBoxContainer/EditButton
+const PROMPT_CHAIN_MAKER = preload("uid://sde7emoawly0")
+
+var prompt_chain : PromptChain
+
+func load_prompt_chain(p_chain: PromptChain) -> void:
+	prompt_chain = p_chain
+	name_label.text = prompt_chain.name
+
+func _on_edit_button_pressed() -> void:
+	var pcm := PROMPT_CHAIN_MAKER.instantiate()
+	# get parent util
+	var p : Control = get_tree().get_first_node_in_group("util_parent_control")
+	if (p == null):
+		p = self
+	p.add_child(pcm)
+	if prompt_chain:
+		pcm.load_prompt_chain(prompt_chain)
+	pcm.closed.connect(load_prompt_chain)

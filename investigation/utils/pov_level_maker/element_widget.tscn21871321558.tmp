@@ -13,7 +13,7 @@ corner_radius_top_right = 16
 corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
-[node name="ElementWidget" type="Control" unique_id=264122867 groups=["util_parent_control"]]
+[node name="ElementWidget" type="Control" unique_id=264122867]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -136,5 +136,4 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
-[connection signal="pressed" from="ScrollContainer/Panel/MarginContainer/VBoxContainer/HeaderContainer/CloseButton" to="." method="_on_close_button_pressed"]
 [connection signal="gui_input" from="ScrollContainer/Panel/MarginContainer/VBoxContainer/HitboxPreviewWidget" to="." method="_on_hitbox_preview_widget_gui_input"]

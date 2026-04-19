@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://4vvofk8yf8tk"]
 
-[ext_resource type="Script" uid="uid://bapgckgfpb43g" path="res://investigation/utils/pov_level_maker/hitbox_adjustment_container.gd" id="1_xrsnw"]
+[ext_resource type="Script" uid="uid://bapgckgfpb43g" path="res://investigation/utils/pov_level_maker/adjust_hitbox_widget.gd" id="1_xrsnw"]
 [ext_resource type="Texture2D" uid="uid://dhvu2n53qbinv" path="res://investigation/povs/door/door_pov.png" id="2_xrsnw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4idgp"]
@@ -66,20 +66,12 @@ stretch_mode = 4
 
 [node name="HitboxRect" type="ColorRect" parent="Panel/MarginContainer/VBoxContainer/HitboxContainer/PovImageRect" unique_id=734160307]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.27600002
-anchor_top = 0.43800002
-anchor_right = 0.411
-anchor_bottom = 0.873
-offset_left = -0.38401794
-offset_top = -0.14256287
-offset_right = -0.22399902
-offset_bottom = -0.028656006
+offset_right = 0.16001892
+offset_bottom = 0.11390686
 size_flags_horizontal = 4
 size_flags_vertical = 4
 mouse_filter = 2
 color = Color(0.827451, 0, 0.21176471, 0.7176471)
-metadata/_edit_use_anchors_ = true
 
 [connection signal="pressed" from="Panel/MarginContainer/VBoxContainer/HeaderContainer/CloseButton" to="." method="_on_close_button_pressed"]
 [connection signal="gui_input" from="Panel/MarginContainer/VBoxContainer/HitboxContainer/PovImageRect" to="." method="_on_pov_image_rect_gui_input"]

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dnoms4opqgf4v"]
 
-[ext_resource type="Script" uid="uid://b0jgk7ota8jr" path="res://utils/prompt_chain_maker/items_widget.gd" id="1_cq4xv"]
+[ext_resource type="Script" uid="uid://b0jgk7ota8jr" path="res://investigation/utils/general/items_widget.gd" id="1_cq4xv"]
 
 [node name="ItemsWidget" type="VBoxContainer" unique_id=1978747484]
 offset_right = 175.0

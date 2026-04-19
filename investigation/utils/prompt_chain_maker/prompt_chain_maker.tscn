@@ -58,6 +58,12 @@ text = "Salvar"
 layout_mode = 2
 text = "Carregar"
 
+[node name="CloseButton" type="Button" parent="VBoxContainer/Container" unique_id=1945446031]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+text = "Fechar"
+
 [node name="VScrollBar" type="ScrollContainer" parent="VBoxContainer" unique_id=635603823]
 layout_mode = 2
 size_flags_vertical = 3
@@ -86,6 +92,7 @@ use_native_dialog = true
 
 [connection signal="pressed" from="VBoxContainer/Container/ButtonContainer/SaveButton" to="." method="_on_save_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Container/ButtonContainer/LoadButton" to="." method="_on_load_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Container/CloseButton" to="." method="_on_close_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/AddButton" to="." method="_on_add_button_pressed"]
 [connection signal="file_selected" from="LoadFileDialog" to="." method="_on_load_file_dialog_file_selected"]
 [connection signal="file_selected" from="SaveFileDialog" to="." method="_on_save_file_dialog_file_selected"]

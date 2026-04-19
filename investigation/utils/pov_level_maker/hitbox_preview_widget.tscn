@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://c7ijmdu431cqc"]
+
+[ext_resource type="Script" uid="uid://bu34svmbi1slo" path="res://investigation/utils/pov_level_maker/hitbox_preview_widget.gd" id="1_ejp4n"]
+[ext_resource type="Texture2D" uid="uid://dwj11t2nw18l2" path="res://investigation/povs/no_image_pov.png" id="2_ejp4n"]
+
+[node name="HitboxPreviewWidget" type="MarginContainer" unique_id=250389957]
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+script = ExtResource("1_ejp4n")
+
+[node name="PovImageRect" type="TextureRect" parent="." unique_id=299452201]
+layout_mode = 2
+size_flags_vertical = 8
+texture = ExtResource("2_ejp4n")
+expand_mode = 5
+stretch_mode = 4
+
+[node name="HitboxRect" type="ColorRect" parent="PovImageRect" unique_id=385940256]
+layout_mode = 1
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+color = Color(0.827451, 0, 0.21176471, 0.7176471)

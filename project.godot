@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="O CHAMADO DA NOITE"
-run/main_scene="uid://sde7emoawly0"
+run/main_scene="uid://bc2hdvncpbval"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 
 [autoload]
@@ -39,6 +39,10 @@ movie_writer/movie_file="C:/Users/pirat/Videos/Captures/djuff_video_capture.avi"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
+
+[global_group]
+
+util_parent_control="Node that will be the parent of \"standalone\" util widgets, generally the ones supposed to take the entire screen"
 
 [gui]
 

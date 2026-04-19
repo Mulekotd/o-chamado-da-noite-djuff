@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bj378ngyim0ll"]
 
-[ext_resource type="Script" uid="uid://bjungrsxayivw" path="res://utils/prompt_chain_maker/conditions_widget.gd" id="1_4qmvq"]
+[ext_resource type="Script" uid="uid://bjungrsxayivw" path="res://investigation/utils/general/conditions_widget.gd" id="1_4qmvq"]
 
 [node name="ConditionsWidget" type="VBoxContainer" unique_id=1813019862]
 size_flags_horizontal = 3

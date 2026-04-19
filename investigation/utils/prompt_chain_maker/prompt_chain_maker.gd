@@ -6,9 +6,6 @@ const PROMPT_WIDGET = preload("uid://cjh18gp04aw2o")
 @onready var prompts_container: VBoxContainer = $VBoxContainer/VScrollBar/PromptsContainer
 @onready var name_line_edit: LineEdit = $VBoxContainer/Container/HBoxContainer/NameLineEdit
 
-func _ready() -> void:
-	pass
-
 func load_prompt_chain(p_chain: PromptChain) -> void:
 	clear_prompt_chain()
 	name_line_edit.clear()
@@ -17,12 +14,16 @@ func load_prompt_chain(p_chain: PromptChain) -> void:
 		add_prompt(p)
 
 func save_prompt_chain(path: String) -> void:
+	var p_chain := parse_prompt_chain()
+	ResourceSaver.save(p_chain, path)
+
+func parse_prompt_chain() -> PromptChain:
 	var p_chain := PromptChain.new()
 	p_chain.name = name_line_edit.text
 	for w in prompts_container.get_children():
 		if w.is_in_group("prompt_widget"):
 			p_chain.prompts.append(w.parse_prompt())
-	ResourceSaver.save(p_chain, path)
+	return p_chain
 
 func add_prompt(p: Prompt) -> void:
 	var w : _PromptWidget = PROMPT_WIDGET.instantiate()
@@ -65,3 +66,9 @@ func _on_save_file_dialog_file_selected(path: String) -> void:
 
 func _on_add_button_pressed() -> void:
 	add_prompt(Prompt.new())
+
+signal closed(p_chain: PromptChain)
+func _on_close_button_pressed() -> void:
+	closed.emit(parse_prompt_chain())
+	await get_tree().process_frame
+	queue_free()

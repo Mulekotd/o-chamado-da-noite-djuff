@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://cjh18gp04aw2o"]
 
-[ext_resource type="PackedScene" uid="uid://dnoms4opqgf4v" path="res://utils/prompt_chain_maker/items_widget.tscn" id="1_eg3ew"]
-[ext_resource type="Script" uid="uid://bnwttvuex0jaa" path="res://utils/prompt_chain_maker/prompt_widget.gd" id="1_hnjur"]
-[ext_resource type="PackedScene" uid="uid://bj378ngyim0ll" path="res://utils/prompt_chain_maker/conditions_widget.tscn" id="2_52qs4"]
-[ext_resource type="PackedScene" uid="uid://b6aeholp6xcm3" path="res://utils/prompt_chain_maker/options_widget.tscn" id="3_vn5r7"]
-[ext_resource type="Texture2D" uid="uid://cm8l3y3l3dioj" path="res://assets/images/interface/bottom_arrow.png" id="5_wjclg"]
-[ext_resource type="Texture2D" uid="uid://dtdkxktq3g8yr" path="res://assets/images/interface/top_arrow.png" id="6_lfw2h"]
+[ext_resource type="PackedScene" uid="uid://dnoms4opqgf4v" path="res://investigation/utils/general/items_widget.tscn" id="1_eg3ew"]
+[ext_resource type="Script" uid="uid://bnwttvuex0jaa" path="res://investigation/utils/prompt_chain_maker/prompt_widget.gd" id="1_hnjur"]
+[ext_resource type="PackedScene" uid="uid://bj378ngyim0ll" path="res://investigation/utils/general/conditions_widget.tscn" id="2_52qs4"]
+[ext_resource type="PackedScene" uid="uid://b6aeholp6xcm3" path="res://investigation/utils/general/options_widget.tscn" id="3_vn5r7"]
+[ext_resource type="Texture2D" uid="uid://cm8l3y3l3dioj" path="res://investigation/interface/images/bottom_arrow.png" id="5_wjclg"]
+[ext_resource type="Texture2D" uid="uid://dtdkxktq3g8yr" path="res://investigation/interface/images/top_arrow.png" id="6_lfw2h"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hnjur"]
 bg_color = Color(0.22, 0.22, 0.22, 1)
