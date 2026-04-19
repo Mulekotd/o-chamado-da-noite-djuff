@@ -2,6 +2,8 @@ class_name _ElementsWidget extends VBoxContainer
 
 @onready var element_list: ItemList = $ElementList
 
+@export var pov_image : Texture2D
+
 const ELEMENT_WIDGET = preload("uid://bc2hdvncpbval")
 
 var elements : Array[Element]
@@ -39,11 +41,14 @@ func _on_remove_pressed() -> void:
 func _on_element_list_item_selected(index: int) -> void:
 	selected_index = index
 
+signal opened_element
 func _on_element_list_item_activated(index: int) -> void:
+	opened_element.emit()
 	var ew : _ElementWidget = ELEMENT_WIDGET.instantiate()
 	var p : Control = get_tree().get_first_node_in_group("util_parent_control")
 	if (p == null):
 		p = self
 	p.add_child(ew)
+	ew.pov_image = pov_image
 	ew.load_element(elements[index])
 	ew.closed.connect(update_element.bind(index))

@@ -182,4 +182,5 @@ use_native_dialog = true
 
 [connection signal="pressed" from="ScrollContainer/Panel/MarginContainer/VBoxContainer/HeaderContainer/CloseButton" to="." method="_on_close_button_pressed"]
 [connection signal="gui_input" from="ScrollContainer/Panel/MarginContainer/VBoxContainer/PovImageRect" to="." method="_on_pov_image_rect_gui_input"]
+[connection signal="opened_element" from="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/ElementsContainer/ElementsWidget" to="." method="_on_elements_widget_opened_element"]
 [connection signal="file_selected" from="ImageLoadFileDialog" to="." method="_on_image_load_file_dialog_file_selected"]

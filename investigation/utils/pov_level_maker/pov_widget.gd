@@ -46,3 +46,6 @@ func _on_pov_image_rect_gui_input(event: InputEvent) -> void:
 	if !Input.is_action_just_pressed("ui_mouse_pressed"):
 		return
 	image_load_file_dialog.popup()
+
+func _on_elements_widget_opened_element() -> void:
+	elements_widget.pov_image = pov_image_rect.texture

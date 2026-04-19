@@ -9,7 +9,7 @@ class_name _ElementWidget extends Control
 @onready var hitbox_preview_widget: _HitboxPreviewWidget = $ScrollContainer/Panel/MarginContainer/VBoxContainer/HitboxPreviewWidget
 
 @export var pov_level : PovLevel
-@export var pov : Pov
+@export var pov_image : Texture2D
 
 var hitbox : Dictionary[String, float] = {
 	"left" : 0.5,
@@ -45,9 +45,9 @@ func update_hitbox(hitbox_values : Dictionary[String, float]) -> void:
 	hitbox_preview_widget.load_hitbox_preview(get_pov_img(), hitbox)
 
 func get_pov_img() -> Texture2D:
-	if pov: 
-		return pov.image
-	return NO_IMAGE_POV 
+	if pov_image:
+		return pov_image
+	return NO_IMAGE_POV
 
 func _on_hitbox_preview_widget_gui_input(_event: InputEvent) -> void:
 	if !Input.is_action_just_pressed("ui_mouse_pressed"):
