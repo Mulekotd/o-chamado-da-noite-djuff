@@ -4,19 +4,27 @@
 [ext_resource type="Script" uid="uid://bnwttvuex0jaa" path="res://utils/prompt_chain_maker/prompt_widget.gd" id="1_hnjur"]
 [ext_resource type="PackedScene" uid="uid://bj378ngyim0ll" path="res://utils/prompt_chain_maker/conditions_widget.tscn" id="2_52qs4"]
 [ext_resource type="PackedScene" uid="uid://b6aeholp6xcm3" path="res://utils/prompt_chain_maker/options_widget.tscn" id="3_vn5r7"]
+[ext_resource type="Texture2D" uid="uid://cm8l3y3l3dioj" path="res://assets/images/interface/bottom_arrow.png" id="5_wjclg"]
+[ext_resource type="Texture2D" uid="uid://dtdkxktq3g8yr" path="res://assets/images/interface/top_arrow.png" id="6_lfw2h"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hnjur"]
-bg_color = Color(0.24880221, 0, 0.002517846, 1)
+bg_color = Color(0.22, 0.22, 0.22, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_534rm"]
+bg_color = Color(0.4661808, 0.46618086, 0.46618068, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wjclg"]
+bg_color = Color(0.24880221, 0, 0.002517846, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lfw2h"]
 bg_color = Color(0.70518076, 6.858632e-07, 0.035928737, 1)
 
 [node name="PromptWidget" type="MarginContainer" unique_id=151020374]
 custom_minimum_size = Vector2(0, 80)
 anchors_preset = -1
 anchor_right = 1.0
-anchor_bottom = 0.133
-offset_bottom = -56.800003
+anchor_bottom = 0.33
+offset_bottom = -175.00002
 grow_horizontal = 2
 size_flags_horizontal = 3
 script = ExtResource("1_hnjur")
@@ -183,13 +191,39 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 12
 text = "Should end chain"
 
-[node name="RemoveButton" type="Button" parent="." unique_id=1550368705]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1715678283]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+alignment = 2
+
+[node name="MoveDownButton" type="Button" parent="HBoxContainer" unique_id=158408410]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxFlat_hnjur")
 theme_override_styles/hover = SubResource("StyleBoxFlat_534rm")
+icon = ExtResource("5_wjclg")
+
+[node name="MoveUpButton" type="Button" parent="HBoxContainer" unique_id=1630432198]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_hnjur")
+theme_override_styles/hover = SubResource("StyleBoxFlat_534rm")
+icon = ExtResource("6_lfw2h")
+
+[node name="RemoveButton" type="Button" parent="HBoxContainer" unique_id=1550368705]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxFlat_wjclg")
+theme_override_styles/hover = SubResource("StyleBoxFlat_lfw2h")
 text = "Remover"
 
-[connection signal="pressed" from="RemoveButton" to="." method="_on_remove_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/MoveDownButton" to="." method="_on_move_down_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/MoveUpButton" to="." method="_on_move_up_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/RemoveButton" to="." method="_on_remove_button_pressed"]

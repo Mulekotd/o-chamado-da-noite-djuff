@@ -1,6 +1,9 @@
 class_name _PromptWidget extends MarginContainer
 ## USE ATTACHED
 
+signal move_up_requested(widget: _PromptWidget)
+signal move_down_requested(widget: _PromptWidget)
+
 @onready var text_widget: TextEdit = $MarginContainer/HBoxContainer/TextContainer/TextWidget
 @onready var conditions_widget: _ConditionsWidget = $MarginContainer/HBoxContainer/GridContainer/ConditionsContainer/ConditionsWidget
 @onready var necessary_items_widget: _ItemsWidget = $MarginContainer/HBoxContainer/GridContainer/NecessaryItemsContainer/NecessaryItemsWidget
@@ -10,6 +13,8 @@ class_name _PromptWidget extends MarginContainer
 @onready var give_items_widget: _ItemsWidget = $MarginContainer/HBoxContainer/GridContainer/GiveItemsContainer/GiveItemsWidget
 @onready var take_items_widget: _ItemsWidget = $MarginContainer/HBoxContainer/GridContainer/TakeItemsContainer/TakeItemsWidget
 @onready var change_vars_widget: _ConditionsWidget = $MarginContainer/HBoxContainer/GridContainer/VarsToChangeContainer/ChangeVarsWidget
+
+var id : int
 
 func parse_prompt() -> Prompt:
 	var p := Prompt.new()
@@ -38,3 +43,9 @@ func load_prompt(p: Prompt) -> void:
 
 func _on_remove_button_pressed() -> void:
 	queue_free()
+
+func _on_move_up_button_pressed() -> void:
+	move_up_requested.emit(self)
+
+func _on_move_down_button_pressed() -> void:
+	move_down_requested.emit(self)

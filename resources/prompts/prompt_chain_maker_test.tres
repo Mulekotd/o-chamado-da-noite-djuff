@@ -1,38 +1,46 @@
-[gd_resource type="Resource" script_class="PromptChain" format=3 uid="uid://qneiruwev7xp"]
+[gd_resource type="Resource" script_class="PromptChain" format=3 uid="uid://cadx04w28tx8c"]
 
-[ext_resource type="Script" uid="uid://cmgunroik01aj" path="res://scripts/prompt_resource.gd" id="1_cfk2v"]
-[ext_resource type="Script" uid="uid://dqj183h8d13hn" path="res://scripts/item_resource.gd" id="2_vhr0w"]
-[ext_resource type="Resource" uid="uid://cqpw454xu78in" path="res://resources/items/test_key.tres" id="3_s5e06"]
-[ext_resource type="Script" uid="uid://djxtkg1leixh" path="res://scripts/prompt_chain_resource.gd" id="4_tf4sa"]
+[ext_resource type="Script" uid="uid://cmgunroik01aj" path="res://scripts/prompt_resource.gd" id="1"]
+[ext_resource type="Script" uid="uid://dqj183h8d13hn" path="res://scripts/item_resource.gd" id="2"]
+[ext_resource type="Resource" uid="uid://cqpw454xu78in" path="res://resources/items/test_key.tres" id="3"]
+[ext_resource type="Script" uid="uid://djxtkg1leixh" path="res://scripts/prompt_chain_resource.gd" id="4"]
 
 [sub_resource type="Resource" id="Resource_cfk2v"]
-script = ExtResource("1_cfk2v")
-text = "Estou criando isso com o criador de prompts"
-
-[sub_resource type="Resource" id="Resource_vhr0w"]
-script = ExtResource("1_cfk2v")
-text = "Isso sao apenas textos simples..."
-
-[sub_resource type="Resource" id="Resource_s5e06"]
-script = ExtResource("1_cfk2v")
-text = "Agora uma pergunta, voce tem a chave? Se mentir pra mim vou te achar mentiroso para sempre."
+script = ExtResource("1")
+text = "Pessoas honestas como eu e voce sao raridade hoje em dia."
 global_conditions = Dictionary[String, int]({
 "mentiroso": 0
+})
+end_chain = true
+
+[sub_resource type="Resource" id="Resource_vhr0w"]
+script = ExtResource("1")
+text = "Eu nao falo com mentiroso."
+global_conditions = Dictionary[String, int]({
+"mentiroso": 1
+})
+end_chain = true
+
+[sub_resource type="Resource" id="Resource_s5e06"]
+script = ExtResource("1")
+text = "Agora uma pergunta, voce tem a chave? Se mentir pra mim vou te achar mentiroso para sempre."
+global_conditions = Dictionary[String, int]({
+"mentiroso": -1
 })
 options = Array[String](["Sim", "Nao", "Blergh"])
 
 [sub_resource type="Resource" id="Resource_tf4sa"]
-script = ExtResource("1_cfk2v")
+script = ExtResource("1")
 text = "Voce realmente tem a chave... Voce nao eh mentiroso!"
 condition_number = 0
-necessary_items = Array[ExtResource("2_vhr0w")]([ExtResource("3_s5e06")])
+necessary_items = Array[ExtResource("2")]([ExtResource("3")])
 end_chain = true
 vars_to_change = Dictionary[String, int]({
 "mentiroso": 0
 })
 
 [sub_resource type="Resource" id="Resource_1afxe"]
-script = ExtResource("1_cfk2v")
+script = ExtResource("1")
 text = "Voce nao tem chave nenhuma, mentiroso."
 condition_number = 0
 end_chain = true
@@ -41,17 +49,17 @@ vars_to_change = Dictionary[String, int]({
 })
 
 [sub_resource type="Resource" id="Resource_vcx3r"]
-script = ExtResource("1_cfk2v")
+script = ExtResource("1")
 text = "Quem voce quer enganar? Essa chave eh enorme, seu mentiroso."
 condition_number = 1
-necessary_items = Array[ExtResource("2_vhr0w")]([ExtResource("3_s5e06")])
+necessary_items = Array[ExtResource("2")]([ExtResource("3")])
 end_chain = true
 vars_to_change = Dictionary[String, int]({
 "mentiroso": 1
 })
 
 [sub_resource type="Resource" id="Resource_c418j"]
-script = ExtResource("1_cfk2v")
+script = ExtResource("1")
 text = "Caramba, nao sei nem o que dizer. Pelo menos mentiroso voce nao eh, ne."
 condition_number = 1
 end_chain = true
@@ -60,11 +68,11 @@ vars_to_change = Dictionary[String, int]({
 })
 
 [sub_resource type="Resource" id="Resource_mv5g7"]
-script = ExtResource("1_cfk2v")
+script = ExtResource("1")
 text = "Que?"
 condition_number = 2
 end_chain = true
 
 [resource]
-script = ExtResource("4_tf4sa")
-prompts = Array[ExtResource("1_cfk2v")]([SubResource("Resource_cfk2v"), SubResource("Resource_vhr0w"), SubResource("Resource_s5e06"), SubResource("Resource_tf4sa"), SubResource("Resource_1afxe"), SubResource("Resource_vcx3r"), SubResource("Resource_c418j"), SubResource("Resource_mv5g7")])
+script = ExtResource("4")
+prompts = Array[ExtResource("1")]([SubResource("Resource_cfk2v"), SubResource("Resource_vhr0w"), SubResource("Resource_s5e06"), SubResource("Resource_tf4sa"), SubResource("Resource_1afxe"), SubResource("Resource_vcx3r"), SubResource("Resource_c418j"), SubResource("Resource_mv5g7")])

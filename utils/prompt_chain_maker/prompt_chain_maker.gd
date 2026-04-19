@@ -23,8 +23,21 @@ func save_prompt_chain(path: String) -> void:
 func add_prompt(p: Prompt) -> void:
 	var w : _PromptWidget = PROMPT_WIDGET.instantiate()
 	w.add_to_group("prompt_widget")
+	w.move_up_requested.connect(_on_prompt_widget_move_up_requested)
+	w.move_down_requested.connect(_on_prompt_widget_move_down_requested)
 	prompts_container.add_child(w)
 	w.load_prompt(p)
+
+func _on_prompt_widget_move_up_requested(widget: _PromptWidget) -> void:
+	var current_index := widget.get_index()
+	if current_index > 0:
+		prompts_container.move_child(widget, current_index - 1)
+
+func _on_prompt_widget_move_down_requested(widget: _PromptWidget) -> void:
+	var current_index := widget.get_index()
+	var last_index := prompts_container.get_child_count() - 1
+	if current_index < last_index:
+		prompts_container.move_child(widget, current_index + 1)
 
 func clear_prompt_chain() -> void:
 	for w in prompts_container.get_children():
