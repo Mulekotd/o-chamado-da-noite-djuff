@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="Pov" format=3 uid="uid://bd4w07l50wosy"]
+
+[ext_resource type="Script" uid="uid://deej6yes3fmnc" path="res://investigation/povs/scripts/element_resource.gd" id="1_c5ihj"]
+[ext_resource type="Resource" uid="uid://dn0eop153jc5w" path="res://investigation/povs/door/pov_door.tres" id="2_1tjny"]
+[ext_resource type="Script" uid="uid://dqj183h8d13hn" path="res://investigation/items/scripts/item_resource.gd" id="2_lin3y"]
+[ext_resource type="Texture2D" uid="uid://c5nbj6g2ve8h" path="res://investigation/povs/room_with_door/room_with_door_pov.jpg" id="3_lin3y"]
+[ext_resource type="Script" uid="uid://bti0kbjeofp0r" path="res://investigation/povs/scripts/pov_resource.gd" id="4_sgwqq"]
+
+[sub_resource type="Resource" id="Resource_3u1sj"]
+script = ExtResource("1_c5ihj")
+hitbox_left = 0.25
+hitbox_top = 0.25
+hitbox_right = 0.75
+hitbox_bottom = 0.75
+pov = ExtResource("2_1tjny")
+metadata/_custom_type_script = "uid://deej6yes3fmnc"
+
+[resource]
+script = ExtResource("4_sgwqq")
+name = "room_with_door"
+description = "has a door in it that can be clicked. It is to the right side of the main pov"
+image = ExtResource("3_lin3y")
+elements = Array[ExtResource("1_c5ihj")]([SubResource("Resource_3u1sj")])
+metadata/_custom_type_script = "uid://bti0kbjeofp0r"

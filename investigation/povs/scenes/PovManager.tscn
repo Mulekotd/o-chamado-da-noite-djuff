@@ -1,0 +1,90 @@
+[gd_scene format=3 uid="uid://bqse5lw2xwni0"]
+
+[ext_resource type="Script" uid="uid://c2b64ya5phios" path="res://investigation/povs/scripts/pov_manager.gd" id="1_m80ka"]
+[ext_resource type="Resource" uid="uid://862rcp5si1ve" path="res://investigation/povs/pov_level_test.tres" id="2_i0poh"]
+[ext_resource type="Texture2D" uid="uid://b513u1882j8ph" path="res://assets/images/interface/left_arrow.png" id="3_i0poh"]
+[ext_resource type="Texture2D" uid="uid://dtdkxktq3g8yr" path="res://assets/images/interface/top_arrow.png" id="4_8wbnf"]
+[ext_resource type="Texture2D" uid="uid://cm8l3y3l3dioj" path="res://assets/images/interface/bottom_arrow.png" id="6_p7y0m"]
+
+[node name="PovManager" type="Control" unique_id=1895825167]
+layout_mode = 3
+anchor_right = 0.873
+anchor_bottom = 0.528
+offset_right = -0.025024414
+offset_bottom = 0.24502563
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_m80ka")
+pov_level = ExtResource("2_i0poh")
+
+[node name="View" type="TextureRect" parent="." unique_id=1676758023]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+expand_mode = 2
+
+[node name="LeftFlowContainer" type="FlowContainer" parent="." unique_id=1575589308]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_vertical = 2
+
+[node name="LeftArrow" type="TextureRect" parent="LeftFlowContainer" unique_id=535993801]
+layout_mode = 2
+texture = ExtResource("3_i0poh")
+
+[node name="TopFlowContainer" type="FlowContainer" parent="." unique_id=1161824700]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+
+[node name="TopArrow" type="TextureRect" parent="TopFlowContainer" unique_id=1350687173]
+layout_mode = 2
+texture = ExtResource("4_8wbnf")
+
+[node name="RightFlowContainer" type="FlowContainer" parent="." unique_id=1493499474]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.0
+offset_bottom = 16.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="RightArrow" type="TextureRect" parent="RightFlowContainer" unique_id=1344175218]
+layout_mode = 2
+
+[node name="BottomFlowContainer" type="FlowContainer" parent="." unique_id=1486048636]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="BottomArrow" type="TextureRect" parent="BottomFlowContainer" unique_id=1892542167]
+layout_mode = 2
+texture = ExtResource("6_p7y0m")
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

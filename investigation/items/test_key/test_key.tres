@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://cqpw454xu78in"]
+
+[ext_resource type="Texture2D" uid="uid://ban6ktyfkm8sd" path="res://investigation/items/test_key/key.png" id="1_t0m1a"]
+[ext_resource type="Script" uid="uid://dqj183h8d13hn" path="res://investigation/items/scripts/item_resource.gd" id="1_y1lwf"]
+
+[resource]
+script = ExtResource("1_y1lwf")
+id = "test_key"
+name = "Test key"
+image = ExtResource("1_t0m1a")
+metadata/_custom_type_script = "uid://dqj183h8d13hn"

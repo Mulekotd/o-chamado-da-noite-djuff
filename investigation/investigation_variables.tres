@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="InvestigationVars" format=3]
+
+[ext_resource type="Script" path="res://investigation/items/scripts/item_resource.gd" id="1_2u1gg"]
+[ext_resource type="Resource" path="res://investigation/items/test_key/test_key.tres" id="2_x4l25"]
+[ext_resource type="Script" path="res://investigation/scripts/investigation_variables.gd" id="3_nj77k"]
+
+[resource]
+script = ExtResource("3_nj77k")
+vars = Dictionary[String, int]({
+"door_unlocked": 1,
+"mentiroso": 1,
+"test_var": 1
+})
+metadata/_custom_type_script = "uid://47pf0lrk86x5"
