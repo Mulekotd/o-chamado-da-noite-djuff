@@ -1,7 +1,8 @@
 class_name _ConditionsWidget extends VBoxContainer
 
-@onready var add: Button = $Add
-@onready var remove: Button = $Remove
+@onready var add_button: Button = $HBoxContainer/AddButton
+@onready var remove_button: Button = $HBoxContainer/RemoveButton
+
 const CONDITION_WIDGET = preload("uid://ckhy52qfjwd46")
 
 func parse_conditions() -> Dictionary[String, int]:

@@ -15,6 +15,10 @@ func remove_element(index: int) -> void:
 	elements.remove_at(index)
 	element_list.remove_item(index)
 
+func add_elements(elements: Array[Element]) -> void:
+	for e in elements:
+		add_element(e)
+
 func add_element(element: Element) -> void:
 	elements.append(element)
 	if element.name:

@@ -1,20 +1,26 @@
 [gd_scene format=3 uid="uid://bj378ngyim0ll"]
-[ext_resource type="Theme" path="res://themes/utils_theme.tres" id="999_utils_theme"]
 
 [ext_resource type="Script" uid="uid://bjungrsxayivw" path="res://investigation/utils/general/conditions_widget.gd" id="1_4qmvq"]
+[ext_resource type="Texture2D" uid="uid://bvti8hnpfr854" path="res://investigation/interface/images/plus.png" id="3_q8g77"]
+[ext_resource type="Texture2D" uid="uid://b0x0w4dtint7u" path="res://investigation/interface/images/minus.png" id="4_ep07c"]
+[ext_resource type="Theme" uid="uid://cyq5khk20nbm6" path="res://themes/utils_theme.tres" id="999_utils_theme"]
 
 [node name="ConditionsWidget" type="VBoxContainer" unique_id=1813019862]
-theme = ExtResource("999_utils_theme")
 size_flags_horizontal = 3
+theme = ExtResource("999_utils_theme")
 script = ExtResource("1_4qmvq")
 
-[node name="Add" type="Button" parent="." unique_id=312678487]
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=654239169]
 layout_mode = 2
-text = "Adicionar condicao"
+alignment = 1
 
-[node name="Remove" type="Button" parent="." unique_id=386768956]
+[node name="AddButton" type="Button" parent="HBoxContainer" unique_id=312678487]
 layout_mode = 2
-text = "Remover condicao"
+icon = ExtResource("3_q8g77")
 
-[connection signal="pressed" from="Add" to="." method="_on_adicionar_pressed"]
-[connection signal="pressed" from="Remove" to="." method="_on_remover_pressed"]
+[node name="RemoveButton" type="Button" parent="HBoxContainer" unique_id=386768956]
+layout_mode = 2
+icon = ExtResource("4_ep07c")
+
+[connection signal="pressed" from="HBoxContainer/AddButton" to="." method="_on_adicionar_pressed"]
+[connection signal="pressed" from="HBoxContainer/RemoveButton" to="." method="_on_remover_pressed"]

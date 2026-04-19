@@ -1,27 +1,37 @@
 [gd_scene format=3 uid="uid://c6s6iskf8pk6k"]
-[ext_resource type="Theme" path="res://themes/utils_theme.tres" id="999_utils_theme"]
 
-[ext_resource type="PackedScene" uid="uid://c7ijmdu431cqc" path="res://investigation/utils/pov_level_maker/hitbox_preview_widget.tscn" id="1_lkw25"]
 [ext_resource type="PackedScene" uid="uid://d3dyiv04e6brb" path="res://investigation/utils/general/prompt_chain_widget.tscn" id="2_42ls8"]
-[ext_resource type="PackedScene" uid="uid://dnoms4opqgf4v" path="res://investigation/utils/general/items_widget.tscn" id="3_l743g"]
+[ext_resource type="Script" uid="uid://dv0uvtjsfp340" path="res://investigation/utils/pov_level_maker/pov_widget.gd" id="2_l743g"]
+[ext_resource type="Texture2D" uid="uid://dwj11t2nw18l2" path="res://investigation/povs/no_image_pov.png" id="3_42ls8"]
 [ext_resource type="PackedScene" uid="uid://bj378ngyim0ll" path="res://investigation/utils/general/conditions_widget.tscn" id="4_qnhhs"]
 [ext_resource type="PackedScene" uid="uid://4cfakuwt60x0" path="res://investigation/utils/pov_level_maker/elements_widget.tscn" id="5_tijdk"]
+[ext_resource type="Theme" uid="uid://cyq5khk20nbm6" path="res://themes/utils_theme.tres" id="999_utils_theme"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lhig4"]
-bg_color = Color(0.09620472, 0.09620475, 0.09620469, 1)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_42ls8"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
 
-[node name="PovWidget" type="Control" unique_id=1781683254]
-theme = ExtResource("999_utils_theme")
+[node name="PovWidget" type="Control" unique_id=1781683254 groups=["util_parent_control"]]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("999_utils_theme")
+script = ExtResource("2_l743g")
+
+[node name="BackgroundRect" type="ColorRect" parent="." unique_id=648475876]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0.12, 0.77254903)
 
 [node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=494398733]
 layout_mode = 1
@@ -34,6 +44,7 @@ grow_vertical = 2
 [node name="Panel" type="PanelContainer" parent="ScrollContainer" unique_id=1417967029]
 layout_mode = 2
 size_flags_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_42ls8")
 
 [node name="MarginContainer" type="MarginContainer" parent="ScrollContainer/Panel" unique_id=1909059050]
 layout_mode = 2
@@ -47,6 +58,11 @@ theme_override_constants/margin_bottom = 38
 layout_mode = 2
 size_flags_vertical = 0
 
+[node name="Label" type="Label" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer" unique_id=2046434634]
+layout_mode = 2
+text = "POV"
+horizontal_alignment = 1
+
 [node name="HeaderContainer" type="MarginContainer" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer" unique_id=1303485950]
 layout_mode = 2
 theme_override_constants/margin_left = 4
@@ -57,7 +73,7 @@ theme_override_constants/margin_bottom = 4
 [node name="NameLineEdit" type="LineEdit" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/HeaderContainer" unique_id=1798401386]
 layout_mode = 2
 size_flags_horizontal = 0
-placeholder_text = "Nome do elemento"
+placeholder_text = "Nome do pov"
 max_length = 48
 expand_to_text_length = true
 
@@ -66,14 +82,43 @@ layout_mode = 2
 size_flags_horizontal = 8
 text = "FECHAR"
 
-[node name="HitboxPreviewWidget" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer" unique_id=250389957 instance=ExtResource("1_lkw25")]
-custom_minimum_size = Vector2(375.705, 0)
+[node name="PovImageRect" type="TextureRect" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer" unique_id=1417508740]
+custom_minimum_size = Vector2(256, 0)
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_vertical = 8
+texture = ExtResource("3_42ls8")
+expand_mode = 5
+stretch_mode = 4
+
+[node name="-----------------3" type="ColorRect" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer" unique_id=881009956]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
 
 [node name="AtributesContainer" type="VBoxContainer" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer" unique_id=966170385]
 layout_mode = 2
 size_flags_vertical = 0
+theme_override_constants/separation = 21
+
+[node name="DescricaoContainer" type="VBoxContainer" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer" unique_id=717493965]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/DescricaoContainer" unique_id=67144109]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+text = "Descricao"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="DescriptionTextEdit" type="TextEdit" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/DescricaoContainer" unique_id=1412766507]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+placeholder_text = "Descricao"
+wrap_mode = 1
+scroll_fit_content_height = true
+
+[node name="-----------------2" type="ColorRect" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer" unique_id=1389676899]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
 
 [node name="PromptChainContainer" type="HBoxContainer" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer" unique_id=910319225]
 layout_mode = 2
@@ -87,51 +132,54 @@ text = "Prompt chain: "
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
+theme = null
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer" unique_id=621765240]
+[node name="-----------------" type="ColorRect" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer" unique_id=1321378874]
+custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/HBoxContainer" unique_id=935166939]
-layout_mode = 2
-text = "Pov para levar: "
-
-[node name="PovLineEdit" type="LineEdit" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/HBoxContainer" unique_id=543314101]
-layout_mode = 2
-size_flags_horizontal = 3
-placeholder_text = "Digite o nome do pov"
-
-[node name="PovOptionButton" type="OptionButton" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/HBoxContainer" unique_id=880566893]
+[node name="ElementsContainer" type="VBoxContainer" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer" unique_id=1269870842]
 layout_mode = 2
 
-[node name="NecessaryItemsContainer" type="VBoxContainer" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer" unique_id=1931949669]
-layout_mode = 2
-size_flags_horizontal = 3
-alignment = 1
-
-[node name="Label" type="Label" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/NecessaryItemsContainer" unique_id=433701424]
+[node name="Label" type="Label" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/ElementsContainer" unique_id=822737687]
 custom_minimum_size = Vector2(1, 1)
 layout_mode = 2
-text = "Itens necessarios para o pov"
+text = "Elementos"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="NecessaryItemsWidget" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/NecessaryItemsContainer" unique_id=1978747484 instance=ExtResource("3_l743g")]
+[node name="ElementsWidget" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/ElementsContainer" unique_id=1045319547 instance=ExtResource("5_tijdk")]
+layout_mode = 2
+theme = null
+
+[node name="-----------------3" type="ColorRect" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer" unique_id=815824917]
+custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 
-[node name="ConditionsContainer" type="VBoxContainer" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer" unique_id=1011899606]
+[node name="ConditionsContainer" type="VBoxContainer" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer" unique_id=988457994]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="Label" type="Label" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/ConditionsContainer" unique_id=940478534]
+[node name="Label" type="Label" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/ConditionsContainer" unique_id=1461731712]
 custom_minimum_size = Vector2(1, 1)
 layout_mode = 2
-text = "Condicoes necessarias para o pov"
+text = "Condicoes"
 horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="ConditionsWidget" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/ConditionsContainer" unique_id=1813019862 instance=ExtResource("4_qnhhs")]
 layout_mode = 2
+theme = null
 
-[node name="ElementsWidget" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer" unique_id=1045319547 instance=ExtResource("5_tijdk")]
-layout_mode = 2
+[node name="ImageLoadFileDialog" type="FileDialog" parent="." unique_id=356340459]
+oversampling_override = 1.0
+title = "Open a File"
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.png", "*.jpg", "*.jpeg", "*.bmp")
+use_native_dialog = true
+
+[connection signal="pressed" from="ScrollContainer/Panel/MarginContainer/VBoxContainer/HeaderContainer/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="gui_input" from="ScrollContainer/Panel/MarginContainer/VBoxContainer/PovImageRect" to="." method="_on_pov_image_rect_gui_input"]
+[connection signal="file_selected" from="ImageLoadFileDialog" to="." method="_on_image_load_file_dialog_file_selected"]

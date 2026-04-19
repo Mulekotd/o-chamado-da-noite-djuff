@@ -1,8 +1,6 @@
 class_name _ItemsWidget extends VBoxContainer
 
 @onready var item_list: ItemList = $ItemList
-@onready var adicionar: Button = $Adicionar
-@onready var remover: Button = $Remover
 @onready var file_dialog: FileDialog = $FileDialog
 
 var items : Array[Item]
