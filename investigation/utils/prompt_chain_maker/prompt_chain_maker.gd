@@ -4,17 +4,21 @@ const PROMPT_WIDGET = preload("uid://cjh18gp04aw2o")
 @onready var save_file_dialog: FileDialog = $SaveFileDialog
 @onready var load_file_dialog: FileDialog = $LoadFileDialog
 @onready var prompts_container: VBoxContainer = $VBoxContainer/VScrollBar/PromptsContainer
+@onready var name_line_edit: LineEdit = $VBoxContainer/Container/HBoxContainer/NameLineEdit
 
 func _ready() -> void:
 	pass
 
 func load_prompt_chain(p_chain: PromptChain) -> void:
 	clear_prompt_chain()
+	name_line_edit.clear()
+	name_line_edit.text = p_chain.name
 	for p in p_chain.prompts:
 		add_prompt(p)
 
 func save_prompt_chain(path: String) -> void:
 	var p_chain := PromptChain.new()
+	p_chain.name = name_line_edit.text
 	for w in prompts_container.get_children():
 		if w.is_in_group("prompt_widget"):
 			p_chain.prompts.append(w.parse_prompt())

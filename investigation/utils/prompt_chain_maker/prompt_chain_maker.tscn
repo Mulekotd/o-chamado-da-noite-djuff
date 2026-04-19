@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://sde7emoawly0"]
 
-[ext_resource type="Script" uid="uid://bncnglat1o1x0" path="res://utils/prompt_chain_maker/prompt_chain_maker.gd" id="1_5ju4m"]
+[ext_resource type="Script" uid="uid://bncnglat1o1x0" path="res://investigation/utils/prompt_chain_maker/prompt_chain_maker.gd" id="1_5ju4m"]
 
 [node name="PromptChainMaker" type="Control" unique_id=750523266]
 layout_mode = 3
@@ -30,14 +30,31 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="BotoesContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1468384855]
+[node name="Container" type="PanelContainer" parent="VBoxContainer" unique_id=707393717]
 layout_mode = 2
 
-[node name="SaveButton" type="Button" parent="VBoxContainer/BotoesContainer" unique_id=86008004]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Container" unique_id=146748]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="NameLineEdit" type="LineEdit" parent="VBoxContainer/Container/HBoxContainer" unique_id=392628113]
+layout_mode = 2
+placeholder_text = "Nome da cadeia"
+alignment = 1
+max_length = 48
+expand_to_text_length = true
+
+[node name="ButtonContainer" type="HBoxContainer" parent="VBoxContainer/Container" unique_id=1468384855]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+
+[node name="SaveButton" type="Button" parent="VBoxContainer/Container/ButtonContainer" unique_id=86008004]
 layout_mode = 2
 text = "Salvar"
 
-[node name="LoadButton" type="Button" parent="VBoxContainer/BotoesContainer" unique_id=752094578]
+[node name="LoadButton" type="Button" parent="VBoxContainer/Container/ButtonContainer" unique_id=752094578]
 layout_mode = 2
 text = "Carregar"
 
@@ -67,8 +84,8 @@ access = 2
 filters = PackedStringArray("*.tres")
 use_native_dialog = true
 
-[connection signal="pressed" from="VBoxContainer/BotoesContainer/SaveButton" to="." method="_on_save_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/BotoesContainer/LoadButton" to="." method="_on_load_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Container/ButtonContainer/SaveButton" to="." method="_on_save_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Container/ButtonContainer/LoadButton" to="." method="_on_load_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/AddButton" to="." method="_on_add_button_pressed"]
 [connection signal="file_selected" from="LoadFileDialog" to="." method="_on_load_file_dialog_file_selected"]
 [connection signal="file_selected" from="SaveFileDialog" to="." method="_on_save_file_dialog_file_selected"]
