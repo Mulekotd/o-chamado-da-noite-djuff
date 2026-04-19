@@ -21,7 +21,12 @@ func load_hitbox_values(left: float = 0.25, top: float = 0.25, right: float = 0.
 	if bottom<top:
 		print("ERROR: bottom < top")
 		return -1
-
+	
+	left   = clampf(left  , 0, 1)
+	top    = clampf(top   , 0, 1)
+	right  = clampf(right , 0, 1)
+	bottom = clampf(bottom, 0, 1)
+	
 	hitbox_r.position.x = pov_image_r.size.x*left
 	hitbox_r.size.x = pov_image_r.size.x*right - hitbox_r.position.x
 	hitbox_r.position.y = pov_image_r.size.y*top

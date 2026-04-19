@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://4vvofk8yf8tk"]
 
 [ext_resource type="Script" uid="uid://bapgckgfpb43g" path="res://investigation/utils/pov_level_maker/hitbox_adjustment_container.gd" id="1_xrsnw"]
-[ext_resource type="Texture2D" uid="uid://gmk3i0ngwmv6" path="res://investigation/povs/test/pov_test.png" id="2_b0rdl"]
+[ext_resource type="Texture2D" uid="uid://dhvu2n53qbinv" path="res://investigation/povs/door/door_pov.png" id="2_xrsnw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4idgp"]
 bg_color = Color(0.09620472, 0.09620475, 0.09620469, 1)
@@ -12,11 +12,9 @@ corner_radius_bottom_left = 16
 
 [node name="AdjustHitboxWidget" type="Control" unique_id=1329658548]
 layout_mode = 3
-anchors_preset = 15
+anchors_preset = 10
 anchor_right = 1.0
-anchor_bottom = 1.0
 grow_horizontal = 2
-grow_vertical = 2
 script = ExtResource("1_xrsnw")
 
 [node name="Panel" type="PanelContainer" parent="." unique_id=1074882530]
@@ -62,7 +60,7 @@ layout_mode = 2
 [node name="PovImageRect" type="TextureRect" parent="Panel/MarginContainer/VBoxContainer/HitboxContainer" unique_id=1552959737]
 layout_mode = 2
 size_flags_vertical = 8
-texture = ExtResource("2_b0rdl")
+texture = ExtResource("2_xrsnw")
 expand_mode = 5
 stretch_mode = 4
 
