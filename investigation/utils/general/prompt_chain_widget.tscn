@@ -1,4 +1,5 @@
 [gd_scene format=3 uid="uid://d3dyiv04e6brb"]
+[ext_resource type="Theme" path="res://themes/utils_theme.tres" id="999_utils_theme"]
 
 [ext_resource type="Script" uid="uid://b3kolf0jkls77" path="res://investigation/utils/general/prompt_chain_widget.gd" id="1_brr2x"]
 
@@ -6,6 +7,7 @@
 bg_color = Color(0.15847227, 0.15847233, 0.15847221, 1)
 
 [node name="PromptChainWidget" type="MarginContainer" unique_id=1195115200]
+theme = ExtResource("999_utils_theme")
 offset_right = 343.0
 offset_bottom = 17.0
 size_flags_horizontal = 3
@@ -27,12 +29,9 @@ metadata/_edit_use_anchors_ = true
 
 [node name="NameLabel" type="Label" parent="HBoxContainer" unique_id=849846362]
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
 
 [node name="EditButton" type="Button" parent="HBoxContainer" unique_id=355551648]
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
-theme_override_styles/normal = SubResource("StyleBoxFlat_brr2x")
 text = "Editar/Criar"
 
 [connection signal="pressed" from="HBoxContainer/EditButton" to="." method="_on_edit_button_pressed"]

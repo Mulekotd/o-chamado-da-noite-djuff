@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://b5oqobf7ay1b1"]
+[ext_resource type="Theme" path="res://themes/utils_theme.tres" id="999_utils_theme"]
 
 [ext_resource type="Script" uid="uid://djug47wdeua1a" path="res://investigation/utils/pov_level_maker/pov_level_maker.gd" id="1_xm7nf"]
+[ext_resource type="PackedScene" uid="uid://c6s6iskf8pk6k" path="res://investigation/utils/pov_level_maker/pov_widget.tscn" id="2_ceakw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xm7nf"]
 bg_color = Color(0, 0, 0, 1)
@@ -9,7 +11,8 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 
-[node name="PovLevelMaker" type="Control" unique_id=1959134330]
+[node name="PovLevelMaker" type="Control" unique_id=1959134330 groups=["util_parent_control"]]
+theme = ExtResource("999_utils_theme")
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -18,20 +21,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_xm7nf")
 
-[node name="PovDirectionsContainer" type="MarginContainer" parent="." unique_id=2111069078]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="PovDirectionWidget" type="VBoxContainer" parent="PovDirectionsContainer" unique_id=201732235]
-layout_mode = 2
-
-[node name="DirectionWidget" type="VBoxContainer" parent="PovDirectionsContainer/PovDirectionWidget" unique_id=1298098620]
-layout_mode = 2
-
 [node name="ColorRect" type="PanelContainer" parent="." unique_id=1689825796]
 layout_mode = 1
 anchors_preset = 15
@@ -39,4 +28,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_xm7nf")
+
+[node name="PovWidget" parent="." unique_id=1781683254 instance=ExtResource("2_ceakw")]
+layout_mode = 1

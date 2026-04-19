@@ -1,4 +1,5 @@
 [gd_scene format=3 uid="uid://4vvofk8yf8tk"]
+[ext_resource type="Theme" path="res://themes/utils_theme.tres" id="999_utils_theme"]
 
 [ext_resource type="Script" uid="uid://bapgckgfpb43g" path="res://investigation/utils/pov_level_maker/adjust_hitbox_widget.gd" id="1_xrsnw"]
 [ext_resource type="Texture2D" uid="uid://dhvu2n53qbinv" path="res://investigation/povs/door/door_pov.png" id="2_xrsnw"]
@@ -11,6 +12,7 @@ corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
 [node name="AdjustHitboxWidget" type="Control" unique_id=1329658548]
+theme = ExtResource("999_utils_theme")
 layout_mode = 3
 anchors_preset = 10
 anchor_right = 1.0
@@ -23,7 +25,6 @@ anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 113.0
 grow_horizontal = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_4idgp")
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=699104623]
 layout_mode = 2

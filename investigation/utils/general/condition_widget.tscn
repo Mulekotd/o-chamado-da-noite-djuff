@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://ckhy52qfjwd46"]
+[ext_resource type="Theme" path="res://themes/utils_theme.tres" id="999_utils_theme"]
 
 [node name="ConditionWidget" type="GridContainer" unique_id=1453300596]
+theme = ExtResource("999_utils_theme")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -12,7 +14,6 @@ columns = 2
 custom_minimum_size = Vector2(64, 0)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 12
 placeholder_text = "Chave"
 wrap_mode = 1
 autowrap_mode = 1
@@ -21,7 +22,6 @@ scroll_fit_content_height = true
 [node name="Value" type="TextEdit" parent="." unique_id=793001974]
 custom_minimum_size = Vector2(48, 0)
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
 placeholder_text = "Valor"
 wrap_mode = 1
 scroll_fit_content_height = true

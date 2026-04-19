@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://4cfakuwt60x0"]
+[ext_resource type="Theme" path="res://themes/utils_theme.tres" id="999_utils_theme"]
+
+[ext_resource type="Script" uid="uid://7dnxlaveru1s" path="res://investigation/utils/pov_level_maker/elements_widget.gd" id="1_e220e"]
+
+[node name="ElementsWidget" type="VBoxContainer" unique_id=1045319547]
+theme = ExtResource("999_utils_theme")
+script = ExtResource("1_e220e")
+
+[node name="Add" type="Button" parent="." unique_id=117846860]
+layout_mode = 2
+text = "Adicionar elemento"
+
+[node name="Remove" type="Button" parent="." unique_id=1886682637]
+layout_mode = 2
+text = "Remover elemento"
+
+[node name="ElementList" type="ItemList" parent="." unique_id=592726785]
+layout_mode = 2
+auto_height = true
+
+[connection signal="pressed" from="Add" to="." method="_on_add_pressed"]
+[connection signal="pressed" from="Remove" to="." method="_on_remove_pressed"]
+[connection signal="item_activated" from="ElementList" to="." method="_on_element_list_item_activated"]
+[connection signal="item_selected" from="ElementList" to="." method="_on_element_list_item_selected"]

@@ -1,4 +1,5 @@
 [gd_scene format=3 uid="uid://cjh18gp04aw2o"]
+[ext_resource type="Theme" path="res://themes/utils_theme.tres" id="999_utils_theme"]
 
 [ext_resource type="PackedScene" uid="uid://dnoms4opqgf4v" path="res://investigation/utils/general/items_widget.tscn" id="1_eg3ew"]
 [ext_resource type="Script" uid="uid://bnwttvuex0jaa" path="res://investigation/utils/prompt_chain_maker/prompt_widget.gd" id="1_hnjur"]
@@ -20,6 +21,7 @@ bg_color = Color(0.24880221, 0, 0.002517846, 1)
 bg_color = Color(0.70518076, 6.858632e-07, 0.035928737, 1)
 
 [node name="PromptWidget" type="MarginContainer" unique_id=151020374]
+theme = ExtResource("999_utils_theme")
 custom_minimum_size = Vector2(0, 80)
 anchors_preset = -1
 anchor_right = 1.0
@@ -51,7 +53,6 @@ alignment = 1
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer/TextContainer" unique_id=1131979070]
 custom_minimum_size = Vector2(1, 1)
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
 text = "Texto"
 horizontal_alignment = 1
 autowrap_mode = 2
@@ -59,7 +60,6 @@ autowrap_mode = 2
 [node name="TextWidget" type="TextEdit" parent="MarginContainer/HBoxContainer/TextContainer" unique_id=1609192753]
 custom_minimum_size = Vector2(200, 100)
 layout_mode = 2
-theme_override_font_sizes/font_size = 14
 placeholder_text = "Texto"
 wrap_mode = 1
 
@@ -78,7 +78,6 @@ alignment = 1
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer/GridContainer/ConditionsContainer" unique_id=1612863587]
 custom_minimum_size = Vector2(1, 1)
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
 text = "Condicoes"
 horizontal_alignment = 1
 autowrap_mode = 2
@@ -94,7 +93,6 @@ alignment = 1
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer/GridContainer/NecessaryItemsContainer" unique_id=2010168285]
 custom_minimum_size = Vector2(1, 1)
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
 text = "Itens necessarios"
 horizontal_alignment = 1
 autowrap_mode = 2
@@ -110,7 +108,6 @@ alignment = 1
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer/GridContainer/OptionsContainer" unique_id=1972144797]
 custom_minimum_size = Vector2(1, 1)
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
 text = "Opcoes"
 horizontal_alignment = 1
 autowrap_mode = 2
@@ -126,7 +123,6 @@ alignment = 1
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer/GridContainer/VarsToChangeContainer" unique_id=2022840578]
 custom_minimum_size = Vector2(1, 1)
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
 text = "Vars para mudar"
 horizontal_alignment = 1
 autowrap_mode = 2
@@ -142,14 +138,12 @@ alignment = 1
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer/GridContainer/ConditionNumberContainer" unique_id=1355031731]
 custom_minimum_size = Vector2(1, 1)
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
 text = "Numero de condicao"
 horizontal_alignment = 1
 autowrap_mode = 2
 
 [node name="ConditionNumberWidget" type="TextEdit" parent="MarginContainer/HBoxContainer/GridContainer/ConditionNumberContainer" unique_id=502194860]
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
 text = "-1"
 placeholder_text = "-1"
 scroll_fit_content_height = true
@@ -161,7 +155,6 @@ size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer/GridContainer/GiveItemsContainer" unique_id=1520669969]
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
 text = "Itens para dar"
 horizontal_alignment = 1
 
@@ -174,7 +167,6 @@ size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer/GridContainer/TakeItemsContainer" unique_id=159580589]
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
 text = "Itens para remover"
 horizontal_alignment = 1
 
@@ -188,7 +180,6 @@ alignment = 1
 
 [node name="EndChainWidget" type="CheckBox" parent="MarginContainer/HBoxContainer/GridContainer/EndChainContainer" unique_id=80609606]
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
 text = "Should end chain"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1715678283]
@@ -201,27 +192,18 @@ alignment = 2
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-theme_override_font_sizes/font_size = 12
-theme_override_styles/normal = SubResource("StyleBoxFlat_hnjur")
-theme_override_styles/hover = SubResource("StyleBoxFlat_534rm")
 icon = ExtResource("5_wjclg")
 
 [node name="MoveUpButton" type="Button" parent="HBoxContainer" unique_id=1630432198]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-theme_override_font_sizes/font_size = 12
-theme_override_styles/normal = SubResource("StyleBoxFlat_hnjur")
-theme_override_styles/hover = SubResource("StyleBoxFlat_534rm")
 icon = ExtResource("6_lfw2h")
 
 [node name="RemoveButton" type="Button" parent="HBoxContainer" unique_id=1550368705]
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-theme_override_font_sizes/font_size = 12
-theme_override_styles/normal = SubResource("StyleBoxFlat_wjclg")
-theme_override_styles/hover = SubResource("StyleBoxFlat_lfw2h")
 text = "Remover"
 
 [connection signal="pressed" from="HBoxContainer/MoveDownButton" to="." method="_on_move_down_button_pressed"]

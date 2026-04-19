@@ -1,4 +1,5 @@
 [gd_scene format=3 uid="uid://bc2hdvncpbval"]
+[ext_resource type="Theme" path="res://themes/utils_theme.tres" id="999_utils_theme"]
 
 [ext_resource type="Script" uid="uid://h5g8y4rkiao8" path="res://investigation/utils/pov_level_maker/element_widget.gd" id="1_h56jg"]
 [ext_resource type="PackedScene" uid="uid://c7ijmdu431cqc" path="res://investigation/utils/pov_level_maker/hitbox_preview_widget.tscn" id="2_mbf48"]
@@ -14,6 +15,7 @@ corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
 [node name="ElementWidget" type="Control" unique_id=264122867 groups=["util_parent_control"]]
+theme = ExtResource("999_utils_theme")
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -34,7 +36,6 @@ grow_vertical = 2
 [node name="Panel" type="PanelContainer" parent="ScrollContainer" unique_id=1542410797]
 layout_mode = 2
 size_flags_horizontal = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_h56jg")
 
 [node name="MarginContainer" type="MarginContainer" parent="ScrollContainer/Panel" unique_id=1471040700]
 layout_mode = 2
@@ -99,7 +100,6 @@ alignment = 1
 [node name="Label" type="Label" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/NecessaryItemsContainer" unique_id=1848356472]
 custom_minimum_size = Vector2(1, 1)
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
 text = "Itens necessarios para o pov"
 horizontal_alignment = 1
 autowrap_mode = 2
@@ -115,7 +115,6 @@ alignment = 1
 [node name="Label" type="Label" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/ConditionsContainer" unique_id=698794012]
 custom_minimum_size = Vector2(1, 1)
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
 text = "Condicoes necessarias para o pov"
 horizontal_alignment = 1
 autowrap_mode = 2

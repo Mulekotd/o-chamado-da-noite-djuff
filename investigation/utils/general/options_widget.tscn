@@ -1,19 +1,19 @@
 [gd_scene format=3 uid="uid://b6aeholp6xcm3"]
+[ext_resource type="Theme" path="res://themes/utils_theme.tres" id="999_utils_theme"]
 
 [ext_resource type="Script" uid="uid://v26857g6c76s" path="res://investigation/utils/general/options_widget.gd" id="1_febti"]
 
 [node name="OptionsWidget" type="VBoxContainer" unique_id=1903776342]
+theme = ExtResource("999_utils_theme")
 size_flags_horizontal = 3
 script = ExtResource("1_febti")
 
 [node name="Add" type="Button" parent="." unique_id=1343124917]
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
 text = "Adicionar opcao"
 
 [node name="Remove" type="Button" parent="." unique_id=709429137]
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
 text = "Remover opcao"
 
 [connection signal="pressed" from="Add" to="." method="_on_add_pressed"]

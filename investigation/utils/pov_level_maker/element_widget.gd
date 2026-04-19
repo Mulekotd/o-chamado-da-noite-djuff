@@ -1,4 +1,4 @@
-extends Control
+class_name _ElementWidget extends Control
 
 @onready var name_line_edit: LineEdit = $ScrollContainer/Panel/MarginContainer/VBoxContainer/HeaderContainer/NameLineEdit
 @onready var pov_line_edit: LineEdit = $ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/HBoxContainer/PovLineEdit
