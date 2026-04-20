@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="PromptChain" format=3]
+
+[ext_resource type="Script" path="res://investigation/text_box/scripts/prompt_resource.gd" id="1_62hfw"]
+[ext_resource type="Script" path="res://investigation/text_box/scripts/prompt_chain_resource.gd" id="2_bmhfj"]
+
+[resource]
+script = ExtResource("2_bmhfj")

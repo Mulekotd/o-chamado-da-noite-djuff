@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Element" format=3]
+
+[ext_resource type="Script" path="res://investigation/items/scripts/item_resource.gd" id="1_5o4gm"]
+[ext_resource type="Resource" path="res://investigation/pov_levels/pov_level_export/prompt_chains/homem_prompt_chain_001.tres" id="2_60mvu"]
+[ext_resource type="Script" path="res://investigation/povs/scripts/element_resource.gd" id="3_ltb0b"]
+
+[resource]
+script = ExtResource("3_ltb0b")
+name = "homem"
+hitbox = Dictionary[String, float]({
+"bottom": 0.9255960893894544,
+"left": 0.2724867926703559,
+"right": 0.4085412101140098,
+"top": 0.4273001691629524
+})
+prompt_chain = ExtResource("2_60mvu")

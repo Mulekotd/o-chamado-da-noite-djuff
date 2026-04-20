@@ -11,6 +11,15 @@ func load_prompt_chain(p_chain: PromptChain) -> void:
 	prompt_chain = p_chain
 	name_label.text = prompt_chain.name
 
+func load_prompt_chain_file(path: String) -> void:
+	var p_chain := load(path)
+	if p_chain is PromptChain:
+		load_prompt_chain(p_chain)
+
+func save_prompt_chain_file(path: String) -> void:
+	if prompt_chain:
+		ResourceSaver.save(prompt_chain, path)
+
 func _on_edit_button_pressed() -> void:
 	var pcm := PROMPT_CHAIN_MAKER.instantiate()
 	# get parent util

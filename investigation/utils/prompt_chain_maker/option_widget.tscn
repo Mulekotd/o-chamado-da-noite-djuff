@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bxwlnaw7lnyb" path="res://investigation/utils/prompt_chain_maker/option_widget.gd" id="1_3a3aq"]
 [ext_resource type="PackedScene" uid="uid://bj378ngyim0ll" path="res://investigation/utils/general/conditions_widget.tscn" id="2_xvv75"]
+[ext_resource type="PackedScene" uid="uid://dnoms4opqgf4v" path="res://investigation/utils/general/items_widget.tscn" id="3_7b35e"]
 [ext_resource type="Theme" uid="uid://cyq5khk20nbm6" path="res://themes/utils_theme.tres" id="999_utils_theme"]
 
 [node name="OptionWidget" type="PanelContainer" unique_id=1311505647]
@@ -50,4 +51,17 @@ text = "Conditions:"
 horizontal_alignment = 1
 
 [node name="ConditionsWidget" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=1813019862 instance=ExtResource("2_xvv75")]
+layout_mode = 2
+
+[node name="NecessaryItemsContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=360782755]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/NecessaryItemsContainer" unique_id=1551732599]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("999_utils_theme")
+text = "Necessary Items:"
+horizontal_alignment = 1
+
+[node name="NecessaryItemsWidget" parent="MarginContainer/VBoxContainer/NecessaryItemsContainer" unique_id=1813019863 instance=ExtResource("3_7b35e")]
 layout_mode = 2

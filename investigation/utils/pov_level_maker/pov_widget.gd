@@ -33,6 +33,9 @@ func parse_pov() -> Pov:
 	pov.global_conditions = conditions_widget.parse_conditions()
 	return pov
 
+func save_pov_file(path: String) -> void:
+	ResourceSaver.save(parse_pov(), path)
+
 signal closed(pov: Pov)
 func _on_close_button_pressed() -> void:
 	closed.emit(parse_pov())

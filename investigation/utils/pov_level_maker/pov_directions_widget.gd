@@ -39,6 +39,9 @@ func parse_pov_directions() -> PovDirections:
 	changed.emit()
 	return p_dir
 
+func save_pov_directions_file(path: String) -> void:
+	ResourceSaver.save(parse_pov_directions(), path)
+
 func load_pov_directions(p_dir : PovDirections) -> void:
 	load_pov(p_dir.pov)
 	if p_dir.left:

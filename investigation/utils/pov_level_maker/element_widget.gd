@@ -46,6 +46,9 @@ func parse_element() -> Element:
 	e.conditions = conditions_widget.parse_conditions()
 	return e
 
+func save_element_file(path: String) -> void:
+	ResourceSaver.save(parse_element(), path)
+
 func load_pov_names() -> void:
 	var plm : _PovLevelMaker = get_tree().get_first_node_in_group("pov_level_maker")
 	if plm:

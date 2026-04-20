@@ -1,0 +1,77 @@
+[gd_resource type="Resource" script_class="PromptChain" format=3]
+
+[ext_resource type="Script" path="res://investigation/text_box/scripts/prompt_resource.gd" id="1_bbxqj"]
+[ext_resource type="Script" path="res://investigation/items/scripts/item_resource.gd" id="2_l1j7w"]
+[ext_resource type="Script" path="res://investigation/text_box/scripts/option_resource.gd" id="3_ocjvk"]
+[ext_resource type="Script" path="res://investigation/text_box/scripts/prompt_chain_resource.gd" id="4_c2lgs"]
+
+[sub_resource type="Resource" id="Resource_wppg2"]
+script = ExtResource("1_bbxqj")
+text = "Oi, tudo bem?"
+
+[sub_resource type="Resource" id="Resource_qvkiw"]
+script = ExtResource("1_bbxqj")
+text = "Estava começando a achar que você não iria acordar..."
+
+[sub_resource type="Resource" id="Resource_ho0jg"]
+script = ExtResource("3_ocjvk")
+text = "Nao tenho nada para perguntar."
+
+[sub_resource type="Resource" id="Resource_g84im"]
+script = ExtResource("3_ocjvk")
+text = "Onde estou?"
+conditions = Dictionary[String, int]({
+"respondeu1": 0
+})
+
+[sub_resource type="Resource" id="Resource_1hpal"]
+script = ExtResource("3_ocjvk")
+text = "Quem é você?"
+conditions = Dictionary[String, int]({
+"respondeu2": 0
+})
+
+[sub_resource type="Resource" id="Resource_67b1e"]
+script = ExtResource("1_bbxqj")
+text = "Enfim, começe com as perguntas"
+options = Array[ExtResource("3_ocjvk")]([SubResource("Resource_ho0jg"), SubResource("Resource_g84im"), SubResource("Resource_1hpal")])
+
+[sub_resource type="Resource" id="Resource_30e63"]
+script = ExtResource("1_bbxqj")
+text = "Tudo bem, então."
+condition_number = 0
+end_chain = true
+
+[sub_resource type="Resource" id="Resource_bs4rw"]
+script = ExtResource("1_bbxqj")
+text = "Você está na sua casa, amigo."
+condition_number = 1
+vars_to_change = Dictionary[String, int]({
+"esta_em_casa": 1,
+"respondeu1": 1
+})
+
+[sub_resource type="Resource" id="Resource_s5fsp"]
+script = ExtResource("1_bbxqj")
+text = "Que perguntinha besta."
+global_conditions = Dictionary[String, int]({
+"esta_em_casa": 1
+})
+end_chain = true
+vars_to_change = Dictionary[String, int]({
+"": 1
+})
+
+[sub_resource type="Resource" id="Resource_lkpxv"]
+script = ExtResource("1_bbxqj")
+text = "Irineu..."
+condition_number = 2
+end_chain = true
+vars_to_change = Dictionary[String, int]({
+"respondeu2": 1
+})
+
+[resource]
+script = ExtResource("4_c2lgs")
+name = "homem_sentado"
+prompts = Array[ExtResource("1_bbxqj")]([SubResource("Resource_wppg2"), SubResource("Resource_qvkiw"), SubResource("Resource_67b1e"), SubResource("Resource_30e63"), SubResource("Resource_bs4rw"), SubResource("Resource_s5fsp"), SubResource("Resource_lkpxv")])

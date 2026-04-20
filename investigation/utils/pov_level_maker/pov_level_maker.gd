@@ -34,6 +34,11 @@ func _ready() -> void:
 	view_offset = bg.position
 	apply_view()
 	screen_container.resized.connect(_on_screen_container_resized)
+	save_sub_resources_file_dialog.file_mode = FileDialog.FILE_MODE_SAVE_FILE
+	save_sub_resources_file_dialog.filters = PackedStringArray()
+	var on_file_selected := Callable(self, "_on_save_sub_resources_file_dialog_file_selected")
+	if !save_sub_resources_file_dialog.file_selected.is_connected(on_file_selected):
+		save_sub_resources_file_dialog.file_selected.connect(on_file_selected)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
@@ -77,7 +82,194 @@ func load_pov_level_file(path) -> void:
 	if pl is PovLevel:
 		load_pov_level(pl)
 
-# TODO func save_sub_resources(path) -> void:
+func _normalize_dir_path(path: String) -> String:
+	var normalized := path.replace("\\", "/")
+	while normalized.ends_with("/"):
+		normalized = normalized.left(normalized.length() - 1)
+	return normalized
+
+func _join_path(base: String, child: String) -> String:
+	if base.ends_with("/"):
+		return base + child
+	return base + "/" + child
+
+func _sanitize_file_name(raw: String, fallback: String) -> String:
+	var source := raw.strip_edges()
+	var out := ""
+	for i in range(source.length()):
+		var code := source.unicode_at(i)
+		if code < 32 or code == 34 or code == 42 or code == 47 or code == 58 or code == 60 or code == 62 or code == 63 or code == 92 or code == 124:
+			out += "_"
+		elif code == 32:
+			out += "_"
+		else:
+			out += char(code)
+	if out.is_empty():
+		return fallback
+	return out
+
+func _next_counter(counters: Dictionary, key: String) -> int:
+	var value := int(counters.get(key, 0))
+	counters[key] = value + 1
+	return value
+
+func _resource_key(resource: Resource) -> int:
+	if resource == null:
+		return 0
+	return resource.get_instance_id()
+
+func _create_subresource_dirs(root_dir: String) -> Dictionary:
+	var dirs := {
+		"root": root_dir,
+		"prompt_chains": _join_path(root_dir, "prompt_chains"),
+		"elements": _join_path(root_dir, "elements"),
+		"povs": _join_path(root_dir, "povs"),
+		"pov_directions": _join_path(root_dir, "pov_directions")
+	}
+	DirAccess.make_dir_recursive_absolute(root_dir)
+	DirAccess.make_dir_recursive_absolute(dirs["prompt_chains"])
+	DirAccess.make_dir_recursive_absolute(dirs["elements"])
+	DirAccess.make_dir_recursive_absolute(dirs["povs"])
+	DirAccess.make_dir_recursive_absolute(dirs["pov_directions"])
+	return dirs
+
+func _save_prompt_chain_subresource(prompt_chain: PromptChain, sub_dirs: Dictionary, caches: Dictionary, counters: Dictionary, name_hint: String) -> PromptChain:
+	if prompt_chain == null:
+		return null
+
+	var key := _resource_key(prompt_chain)
+	var prompt_chain_cache: Dictionary = caches["prompt_chains"]
+	if prompt_chain_cache.has(key):
+		return prompt_chain_cache[key]
+
+	var idx := _next_counter(counters, "prompt_chain")
+	var file_name := "%s_%03d.tres" % [_sanitize_file_name(name_hint, "prompt_chain"), idx]
+	var path := _join_path(sub_dirs["prompt_chains"], file_name)
+	ResourceSaver.save(prompt_chain, path)
+	var saved_prompt_chain := load(path) as PromptChain
+	prompt_chain_cache[key] = saved_prompt_chain
+	return saved_prompt_chain
+
+func _save_element_subresource(element: Element, sub_dirs: Dictionary, caches: Dictionary, counters: Dictionary, name_hint: String) -> Element:
+	if element == null:
+		return null
+
+	var key := _resource_key(element)
+	var element_cache: Dictionary = caches["elements"]
+	if element_cache.has(key):
+		return element_cache[key]
+
+	var prompt_chain_name := "%s_prompt_chain" % _sanitize_file_name(element.name, "element")
+	var saved_prompt_chain := _save_prompt_chain_subresource(element.prompt_chain, sub_dirs, caches, counters, prompt_chain_name)
+
+	var element_copy := Element.new()
+	element_copy.name = element.name
+	element_copy.hitbox = element.hitbox.duplicate(true)
+	element_copy.pov_name = element.pov_name
+	element_copy.prompt_chain = saved_prompt_chain
+	element_copy.necessary_items = element.necessary_items.duplicate()
+	element_copy.conditions = element.conditions.duplicate(true)
+
+	var idx := _next_counter(counters, "element")
+	var file_name := "%s_%03d.tres" % [_sanitize_file_name(name_hint, "element"), idx]
+	var path := _join_path(sub_dirs["elements"], file_name)
+	ResourceSaver.save(element_copy, path)
+	var saved_element := load(path) as Element
+	element_cache[key] = saved_element
+	return saved_element
+
+func _save_pov_subresource(pov: Pov, sub_dirs: Dictionary, caches: Dictionary, counters: Dictionary, name_hint: String) -> Pov:
+	if pov == null:
+		return null
+
+	var key := _resource_key(pov)
+	var pov_cache: Dictionary = caches["povs"]
+	if pov_cache.has(key):
+		return pov_cache[key]
+
+	var prompt_chain_name := "%s_prompt_chain" % _sanitize_file_name(pov.name, "pov")
+	var saved_prompt_chain := _save_prompt_chain_subresource(pov.prompt_chain, sub_dirs, caches, counters, prompt_chain_name)
+
+	var pov_copy := Pov.new()
+	pov_copy.name = pov.name
+	pov_copy.description = pov.description
+	pov_copy.prompt_chain = saved_prompt_chain
+	pov_copy.image = pov.image
+	pov_copy.global_conditions = pov.global_conditions.duplicate(true)
+	for element in pov.elements:
+		var element_name := "%s_element" % _sanitize_file_name(element.name, "element")
+		var saved_element := _save_element_subresource(element, sub_dirs, caches, counters, element_name)
+		if saved_element:
+			pov_copy.elements.append(saved_element)
+
+	var idx := _next_counter(counters, "pov")
+	var file_name := "%s_%03d.tres" % [_sanitize_file_name(name_hint, "pov"), idx]
+	var path := _join_path(sub_dirs["povs"], file_name)
+	ResourceSaver.save(pov_copy, path)
+	var saved_pov := load(path) as Pov
+	pov_cache[key] = saved_pov
+	return saved_pov
+
+func _save_pov_direction_subresource(pov_direction: PovDirections, sub_dirs: Dictionary, caches: Dictionary, counters: Dictionary, name_hint: String) -> PovDirections:
+	if pov_direction == null:
+		return null
+
+	var saved_pov := _save_pov_subresource(pov_direction.pov, sub_dirs, caches, counters, _sanitize_file_name(name_hint, "pov"))
+
+	var pov_direction_copy := PovDirections.new()
+	pov_direction_copy.pov = saved_pov
+	pov_direction_copy.left = pov_direction.left
+	pov_direction_copy.top = pov_direction.top
+	pov_direction_copy.right = pov_direction.right
+	pov_direction_copy.bottom = pov_direction.bottom
+	pov_direction_copy.rotation = pov_direction.rotation
+	pov_direction_copy.coords = pov_direction.coords
+
+	var idx := _next_counter(counters, "pov_direction")
+	var file_name := "%s_%03d.tres" % [_sanitize_file_name(name_hint, "pov_direction"), idx]
+	var path := _join_path(sub_dirs["pov_directions"], file_name)
+	ResourceSaver.save(pov_direction_copy, path)
+	return load(path) as PovDirections
+
+func save_pov_level_sub_resources(dir_path: String) -> void:
+	var root_dir := _normalize_dir_path(dir_path)
+	if root_dir.is_empty():
+		return
+
+	var source_level := parse_pov_level()
+	var sub_dirs := _create_subresource_dirs(root_dir)
+	var caches := {
+		"prompt_chains": {},
+		"elements": {},
+		"povs": {}
+	}
+	var counters := {
+		"prompt_chain": 0,
+		"element": 0,
+		"pov": 0,
+		"pov_direction": 0
+	}
+
+	var saved_level := PovLevel.new()
+	saved_level.bg_img = source_level.bg_img
+	for i in range(source_level.pov_directions_array.size()):
+		var direction := source_level.pov_directions_array[i]
+		var pd_name := "pov_direction_%03d" % i
+		var saved_direction := _save_pov_direction_subresource(direction, sub_dirs, caches, counters, pd_name)
+		if saved_direction:
+			saved_level.pov_directions_array.append(saved_direction)
+
+	var level_path := _join_path(root_dir, "pov_level.tres")
+	ResourceSaver.save(saved_level, level_path)
+
+func _get_subresources_export_root_from_dialog_path(path: String) -> String:
+	var normalized := _normalize_dir_path(path)
+	if normalized.is_empty():
+		return ""
+	var ext := normalized.get_extension().to_lower()
+	if ext == "tres" or ext == "res":
+		normalized = normalized.get_basename()
+	return normalized
 
 #_____________ FRONTEND ________________
 
@@ -305,6 +497,9 @@ func _on_save_button_pressed() -> void:
 	save_file_dialog.popup()
 
 func _on_save_sub_resources_button_pressed() -> void:
+	if !last_saved_path.is_empty():
+		save_sub_resources_file_dialog.current_dir = last_saved_path.get_base_dir()
+	save_sub_resources_file_dialog.current_file = "pov_level_export"
 	save_sub_resources_file_dialog.popup()
 
 func _on_load_button_pressed() -> void:
@@ -318,7 +513,13 @@ func _on_save_file_dialog_file_selected(path: String) -> void:
 	save_pov_level_file(path)
 
 func _on_save_sub_resources_file_dialog_dir_selected(dir: String) -> void:
-	pass # Replace with function body.
+	var folder_name := _sanitize_file_name(save_sub_resources_file_dialog.current_file, "pov_level_export")
+	var root_dir := _join_path(_normalize_dir_path(dir), folder_name)
+	save_pov_level_sub_resources(root_dir)
+
+func _on_save_sub_resources_file_dialog_file_selected(path: String) -> void:
+	var root_dir := _get_subresources_export_root_from_dialog_path(path)
+	save_pov_level_sub_resources(root_dir)
 
 func _on_load_image_button_pressed() -> void:
 	load_image_file_dialog.popup()
