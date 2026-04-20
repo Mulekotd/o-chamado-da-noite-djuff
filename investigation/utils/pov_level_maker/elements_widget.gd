@@ -50,6 +50,9 @@ func _on_element_list_item_activated(index: int) -> void:
 	if (p == null):
 		p = self
 	p.add_child(ew)
+	p.move_child(ew, p.get_child_count() - 1)
+	ew.z_as_relative = false
+	ew.z_index = 1000
 	ew.pov_name = pov_name
 	ew.pov_image = pov_image
 	ew.load_element(elements[index], )

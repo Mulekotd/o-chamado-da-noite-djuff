@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://d3dyiv04e6brb"]
-[ext_resource type="Theme" path="res://themes/utils_theme.tres" id="999_utils_theme"]
 
-[ext_resource type="Script" uid="uid://b3kolf0jkls77" path="res://investigation/utils/general/prompt_chain_widget.gd" id="1_brr2x"]
+[ext_resource type="Theme" uid="uid://cyq5khk20nbm6" path="res://themes/utils_theme.tres" id="999_utils_theme"]
+[ext_resource type="Script" uid="uid://b3kolf0jkls77" path="res://investigation/utils/prompt_chain_maker/prompt_chain_widget.gd" id="1_brr2x"]
+
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_brr2x"]
 bg_color = Color(0.15847227, 0.15847233, 0.15847221, 1)

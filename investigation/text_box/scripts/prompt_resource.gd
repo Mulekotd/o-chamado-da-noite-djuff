@@ -4,7 +4,7 @@ class_name Prompt extends Resource
 @export var condition_number : int = -1
 @export var necessary_items : Array[Item]
 @export var global_conditions : Dictionary[String, int]
-@export_multiline() var options : Array[String]
+@export var options : Array[Option]
 ## if true, this prompt ends the chain it originated from.
 @export var end_chain : bool = false
 ## items that the player receives after this prompt
@@ -13,5 +13,6 @@ class_name Prompt extends Resource
 @export var items_to_take : Array[Item]
 ## global vars that change after this prompt
 @export var vars_to_change : Dictionary[String, int]
+@export var pov : String
 ## this number will be overwriten by the prompt chain logic
 var chain_id : int

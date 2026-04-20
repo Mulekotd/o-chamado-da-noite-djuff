@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://yakp1hcldxl0"]
+
+[ext_resource type="Script" uid="uid://bxwlnaw7lnyb" path="res://investigation/utils/prompt_chain_maker/option_widget.gd" id="1_3a3aq"]
+[ext_resource type="PackedScene" uid="uid://bj378ngyim0ll" path="res://investigation/utils/general/conditions_widget.tscn" id="2_xvv75"]
+[ext_resource type="Theme" uid="uid://cyq5khk20nbm6" path="res://themes/utils_theme.tres" id="999_utils_theme"]
+
+[node name="OptionWidget" type="PanelContainer" unique_id=1311505647]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_3a3aq")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1649845550]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1906291746]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=529145773]
+custom_minimum_size = Vector2(0, 34.8)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=718142569]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("999_utils_theme")
+text = "Option: "
+
+[node name="TextEdit" type="TextEdit" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1944187967]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+theme = ExtResource("999_utils_theme")
+placeholder_text = "Opcao"
+wrap_mode = 1
+scroll_fit_content_height = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=360782754]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=1551732598]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("999_utils_theme")
+text = "Conditions:"
+horizontal_alignment = 1
+
+[node name="ConditionsWidget" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=1813019862 instance=ExtResource("2_xvv75")]
+layout_mode = 2

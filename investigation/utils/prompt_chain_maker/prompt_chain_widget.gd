@@ -18,6 +18,9 @@ func _on_edit_button_pressed() -> void:
 	if (p == null):
 		p = self
 	p.add_child(pcm)
+	p.move_child(pcm, p.get_child_count() - 1)
+	pcm.z_as_relative = false
+	pcm.z_index = 1100
 	if prompt_chain:
 		pcm.load_prompt_chain(prompt_chain)
 	pcm.closed.connect(load_prompt_chain)

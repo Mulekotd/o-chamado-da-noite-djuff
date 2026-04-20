@@ -31,5 +31,5 @@ func _on_adicionar_pressed() -> void:
 	add_condition("", 1)
 
 func _on_remover_pressed() -> void:
-	if get_children().size() > 2:
+	if get_children().size() > 1:
 		get_child(-1).queue_free()
