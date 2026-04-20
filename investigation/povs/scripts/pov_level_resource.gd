@@ -1,5 +1,4 @@
 class_name PovLevel extends Resource
 
-## colection of pov directions
-## procurar pelo pov em pov directions ate achar e pegar as directions
-@export var povs : Array[PovDirections]
+@export var bg_img : Texture2D
+@export var pov_directions_array : Array[PovDirections]

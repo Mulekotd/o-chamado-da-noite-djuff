@@ -6,5 +6,5 @@ class_name PovDirections extends Resource
 @export var top    : String
 @export var right  : String
 @export var bottom : String
-var visualizer_coords : Vector2 = Vector2(0.5, 0.5)
-var visualizer_rotation : float = 0
+@export_range(0,1,0.001) var rotation : float = 0
+@export var coords : Vector2 = Vector2.ZERO

@@ -5,6 +5,9 @@ const POV_DIRECTION_LINE = preload("uid://cx2wlsvbs6c56")
 
 @onready var bg: TextureRect = $ScreenContainer/TextureRect
 @onready var screen_container: Panel = $ScreenContainer
+@onready var load_file_dialog: FileDialog = $LoadFileDialog
+@onready var save_file_dialog: FileDialog = $SaveFileDialog
+@onready var save_sub_resources_file_dialog: FileDialog = $SaveSubResourcesFileDialog
 
 var is_panning: bool = false
 var last_mouse_pos: Vector2 = Vector2.ZERO
@@ -32,6 +35,42 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	pass
 
+#_____________ BACKEND _________________
+	# o que devo salvar/carregar?
+	# imagem de fundo []
+	# pov_directions []
+	#	pov []
+	#	direcoes []
+	#	-visual-
+	#	rotacao []
+	#	coordenadas []
+
+func parse_pov_level() -> PovLevel:
+	var pl := PovLevel.new()
+	pl.bg_img = bg.texture
+	for pdw in dirs:
+		pl.pov_directions_array.append(pdw.parse_pov_directions())
+	return pl
+
+func load_pov_level(pl: PovLevel) -> void:
+	bg.texture = pl.bg_img
+	for pd in pl.pov_directions_array:
+		add_pov_directions(pd.coords)
+		dirs[-1].load_pov_directions(pd)
+
+func save_pov_level_file(path) -> void:
+	var pl := parse_pov_level() 
+	ResourceSaver.save(pl, path)
+
+func load_pov_level_file(path) -> void:
+	var pl := load(path)
+	if pl is PovLevel:
+		load_pov_level(pl)
+
+# TODO func save_sub_resources(path) -> void:
+
+#_____________ FRONTEND ________________
+
 ## amout = [0,1]
 func zoom_in(amount: float, focus_pos: Vector2) -> void:
 	zoom_by(amount, focus_pos)
@@ -55,27 +94,6 @@ func apply_view() -> void:
 	view_offset = _clamp_offset(view_offset)
 	bg.scale = Vector2(zoom, zoom)
 	bg.position = view_offset
-
-func _clamp_offset(offset: Vector2) -> Vector2:
-	var viewport_size := screen_container.size
-	var content_size := bg.size * zoom
-
-	var min_x := viewport_size.x - content_size.x
-	var max_x := 0.0
-	if content_size.x <= viewport_size.x:
-		min_x = (viewport_size.x - content_size.x) * 0.5
-		max_x = min_x
-
-	var min_y := viewport_size.y - content_size.y
-	var max_y := 0.0
-	if content_size.y <= viewport_size.y:
-		min_y = (viewport_size.y - content_size.y) * 0.5
-		max_y = min_y
-
-	return Vector2(
-		clampf(offset.x, min_x, max_x),
-		clampf(offset.y, min_y, max_y)
-	)
 
 func move_screen(u : Vector2) -> void:
 	view_offset += u
@@ -137,13 +155,14 @@ func update_lines() -> void:
 				li += 1
 		i += 1
 	while li < lines.size():
+		lines[li].set_point_position(0, Vector2.ZERO)
 		shrink_line(lines[li])
 		li += 1
 
 ## make all points equal to the first
 func shrink_line(line: Line2D, points : int = line_res) -> void:
-	for i in line_res-1:
-			line.set_point_position(1, line.points[i+1])
+	for i in line_res:
+		line.set_point_position(i, line.points[0])
 
 func new_line() -> Line2D:
 	var line : Line2D = POV_DIRECTION_LINE.instantiate()
@@ -152,13 +171,6 @@ func new_line() -> Line2D:
 	bg.add_child(line)
 	lines.append(line)
 	return line
-
-func _get_dirs_with_name(name: String) -> Array[_PovDirectionsWidget]:
-	var arr : Array[_PovDirectionsWidget] = []
-	for dir in dirs:
-		if dir.pov.name == name:
-			arr.append(dir)
-	return arr
 
 func update_dir_names(index: int) -> void:
 	dirs[index].pov_names = get_all_pov_names()
@@ -181,6 +193,7 @@ func add_pov_directions(coords : Vector2) -> void:
 	pdw.coords = coords
 	pdw.changed.connect(update_lines)
 	pdw.moving.connect(update_lines)
+	pdw.closed.connect(dirs.erase.bind(pdw))
 	pdw.name = "pdw%d" % id
 	bg.add_child(pdw)
 	dirs.append(pdw)
@@ -200,7 +213,35 @@ func get_all_pov_names() -> Array[String]:
 		if d.pov.name not in names:
 			names.append(d.pov.name)
 	return names
+	
+func _get_dirs_with_name(name: String) -> Array[_PovDirectionsWidget]:
+	var arr : Array[_PovDirectionsWidget] = []
+	for dir in dirs:
+		if dir.pov.name == name:
+			arr.append(dir)
+	return arr
+	
+func _clamp_offset(offset: Vector2) -> Vector2:
+	var viewport_size := screen_container.size
+	var content_size := bg.size * zoom
 
+	var min_x := viewport_size.x - content_size.x
+	var max_x := 0.0
+	if content_size.x <= viewport_size.x:
+		min_x = (viewport_size.x - content_size.x) * 0.5
+		max_x = min_x
+
+	var min_y := viewport_size.y - content_size.y
+	var max_y := 0.0
+	if content_size.y <= viewport_size.y:
+		min_y = (viewport_size.y - content_size.y) * 0.5
+		max_y = min_y
+
+	return Vector2(
+		clampf(offset.x, min_x, max_x),
+		clampf(offset.y, min_y, max_y)
+	)
+	
 func _screen_mouse_pos() -> Vector2:
 	return screen_container.get_local_mouse_position()
 
@@ -233,3 +274,22 @@ func _on_screen_container_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and is_panning:
 		move_screen(event.position - last_mouse_pos)
 		last_mouse_pos = event.position
+
+
+func _on_save_button_pressed() -> void:
+	save_file_dialog.popup()
+
+func _on_save_sub_resources_button_pressed() -> void:
+	save_sub_resources_file_dialog.popup()
+
+func _on_load_button_pressed() -> void:
+	load_file_dialog.popup()
+
+func _on_load_file_dialog_file_selected(path: String) -> void:
+	load_pov_level_file(path)
+
+func _on_save_file_dialog_file_selected(path: String) -> void:
+	save_pov_level_file(path)
+
+func _on_save_sub_resources_file_dialog_dir_selected(dir: String) -> void:
+	pass # Replace with function body.

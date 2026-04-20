@@ -6,6 +6,7 @@
 [ext_resource type="Theme" uid="uid://cyq5khk20nbm6" path="res://themes/utils_theme.tres" id="999_utils_theme"]
 
 [node name="ElementsWidget" type="VBoxContainer" unique_id=1045319547]
+z_index = 2
 theme = ExtResource("999_utils_theme")
 script = ExtResource("1_e220e")
 

@@ -30,11 +30,12 @@ func parse_pov_directions() -> PovDirections:
 	var p_dir := PovDirections.new()
 	p_dir.pov = pov
 	p_dir.left = left_pov_name.text
-	p_dir.top = left_pov_name.top
-	p_dir.right = left_pov_name.right
-	p_dir.bottom = left_pov_name.bottom
-	p_dir.visualizer_coords = coords
-	p_dir.visualizer_rotation = rotation_slider.value
+	p_dir.top = top_pov_name.text
+	p_dir.right = right_pov_name.text
+	p_dir.bottom = bottom_pov_name.text
+	p_dir.coords = coords
+	p_dir.rotation = rotation_slider.value
+	changed.emit()
 	return p_dir
 
 func load_pov_directions(p_dir : PovDirections) -> void:
@@ -47,8 +48,10 @@ func load_pov_directions(p_dir : PovDirections) -> void:
 		right_pov_name.text = p_dir.right
 	if p_dir.bottom:
 		bottom_pov_name.text = p_dir.bottom
-	coords = p_dir.visualizer_coords
-	spin_arrow(p_dir.visualizer_rotation)
+	rotation_slider.value = p_dir.rotation
+	await get_tree().process_frame
+	spin_arrow(p_dir.rotation)
+	coords = p_dir.coords
 
 func load_pov(new_pov: Pov) -> void:
 	pov = new_pov
@@ -77,17 +80,9 @@ func open_pov_widget() -> void:
 func _on_pov_button_pressed() -> void:
 	open_pov_widget()
 
-var properties_open : bool = true
 func _on_pov_image_rect_gui_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("ui_mouse_pressed"):
-		var tween : Tween = get_tree().create_tween()
-		if properties_open:
-			tween.tween_property(properies_container, "scale", Vector2(1,0), colapse_speed)
-			tween.tween_property(properies_container, "visible", false, colapse_speed)
-		else:
-			tween.tween_property(properies_container, "visible", true, 0.00001)
-			tween.tween_property(properies_container, "scale", Vector2(1,1), colapse_speed)
-		properties_open = !properties_open
+		properies_container.visible = !properies_container.visible
 
 signal moving
 func _on_arrow_widget_gui_input(event: InputEvent) -> void:
@@ -120,6 +115,8 @@ func _update_coords_from_position() -> void:
 signal closed
 func _on_close_button_pressed() -> void:
 	closed.emit()
+	await  get_tree().process_frame
+	changed.emit()
 	queue_free()
 
 func _on_h_slider_value_changed(value: float) -> void:
