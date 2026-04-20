@@ -43,6 +43,7 @@ enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
 [global_group]
 
 util_parent_control="Node that will be the parent of \"standalone\" util widgets, generally the ones supposed to take the entire screen"
+pov_level_maker=""
 
 [gui]
 

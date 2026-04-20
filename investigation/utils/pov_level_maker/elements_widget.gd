@@ -3,6 +3,7 @@ class_name _ElementsWidget extends VBoxContainer
 @onready var element_list: ItemList = $ElementList
 
 @export var pov_image : Texture2D
+var pov_name : String
 
 const ELEMENT_WIDGET = preload("uid://bc2hdvncpbval")
 
@@ -49,6 +50,7 @@ func _on_element_list_item_activated(index: int) -> void:
 	if (p == null):
 		p = self
 	p.add_child(ew)
+	ew.pov_name = pov_name
 	ew.pov_image = pov_image
-	ew.load_element(elements[index])
+	ew.load_element(elements[index], )
 	ew.closed.connect(update_element.bind(index))

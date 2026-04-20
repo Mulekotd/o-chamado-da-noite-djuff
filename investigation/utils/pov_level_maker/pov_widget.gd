@@ -49,3 +49,4 @@ func _on_pov_image_rect_gui_input(event: InputEvent) -> void:
 
 func _on_elements_widget_opened_element() -> void:
 	elements_widget.pov_image = pov_image_rect.texture
+	elements_widget.pov_name = name_line_edit.text

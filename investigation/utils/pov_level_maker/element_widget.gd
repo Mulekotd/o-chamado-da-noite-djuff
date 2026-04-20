@@ -2,7 +2,7 @@ class_name _ElementWidget extends Control
 
 @onready var name_line_edit: LineEdit = $ScrollContainer/Panel/MarginContainer/VBoxContainer/HeaderContainer/NameLineEdit
 @onready var pov_line_edit: LineEdit = $ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/HBoxContainer/PovLineEdit
-@onready var pov_option_button: OptionButton = $ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/HBoxContainer/PovOptionButton
+@onready var pov_menu_button: MenuButton = $ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/HBoxContainer/PovMenuButton
 @onready var necessary_items_widget: _ItemsWidget = $ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/NecessaryItemsContainer/NecessaryItemsWidget
 @onready var conditions_widget: _ConditionsWidget = $ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/ConditionsContainer/ConditionsWidget
 @onready var prompt_chain_widget: _PromptChainWidget = $ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/PromptChainContainer/PromptChainWidget
@@ -10,6 +10,8 @@ class_name _ElementWidget extends Control
 
 @export var pov_level : PovLevel
 @export var pov_image : Texture2D
+@export var pov_names : Array[String]
+@export var pov_name : String
 
 var hitbox : Dictionary[String, float] = {
 	"left" : 0.5,
@@ -21,7 +23,10 @@ var hitbox : Dictionary[String, float] = {
 const NO_IMAGE_POV = preload("uid://dwj11t2nw18l2")
 const ADJUST_HITBOX_WIDGET = preload("uid://4vvofk8yf8tk")
 
-func load_element(e: Element) -> void:
+func _ready() -> void:
+	pov_menu_button.get_popup().id_pressed.connect(update_pov_name)
+
+func load_element(e: Element, pov_names : Array[String] = []) -> void:
 	name_line_edit.text = e.name
 	hitbox = e.hitbox.duplicate()
 	hitbox_preview_widget.load_hitbox_preview(get_pov_img(), e.hitbox)
@@ -29,6 +34,7 @@ func load_element(e: Element) -> void:
 	prompt_chain_widget.load_prompt_chain(e.prompt_chain)
 	necessary_items_widget.add_items(e.necessary_items)
 	conditions_widget.add_conditions(e.conditions)
+	load_pov_names()
 
 func parse_element() -> Element:
 	var e := Element.new()
@@ -40,6 +46,15 @@ func parse_element() -> Element:
 	e.conditions = conditions_widget.parse_conditions()
 	return e
 
+func load_pov_names() -> void:
+	var plm : _PovLevelMaker = get_tree().get_first_node_in_group("pov_level_maker")
+	if plm:
+		pov_names = (plm.get_all_pov_names())
+	pov_menu_button.get_popup().clear()
+	for pn in pov_names:
+		if pn != pov_name:
+			pov_menu_button.get_popup().add_item(pn)
+
 func update_hitbox(hitbox_values : Dictionary[String, float]) -> void:
 	hitbox = hitbox_values.duplicate()
 	hitbox_preview_widget.load_hitbox_preview(get_pov_img(), hitbox)
@@ -48,6 +63,9 @@ func get_pov_img() -> Texture2D:
 	if pov_image:
 		return pov_image
 	return NO_IMAGE_POV
+
+func update_pov_name(index: int) -> void:
+	print(index)
 
 func _on_hitbox_preview_widget_gui_input(_event: InputEvent) -> void:
 	if !Input.is_action_just_pressed("ui_mouse_pressed"):
