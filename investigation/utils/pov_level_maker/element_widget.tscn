@@ -119,6 +119,7 @@ size_flags_horizontal = 3
 placeholder_text = "Digite o nome do pov"
 
 [node name="PovMenuButton" type="MenuButton" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/HBoxContainer" unique_id=520097150]
+z_index = 1
 layout_mode = 2
 icon = ExtResource("4_gradj")
 item_count = 1

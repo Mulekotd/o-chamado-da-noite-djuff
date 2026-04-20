@@ -35,6 +35,7 @@ grow_vertical = 2
 color = Color(0, 0, 0.12, 0.77254903)
 
 [node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=494398733]
+z_index = 1
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.365

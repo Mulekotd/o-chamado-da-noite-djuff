@@ -38,6 +38,7 @@ corner_detail = 1
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dwgri"]
 
 [node name="PovDirectionsWidget" type="MarginContainer" unique_id=1886123741]
+z_index = 1
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
@@ -55,15 +56,18 @@ script = ExtResource("1_fcqll")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=653843388]
 layout_mode = 2
-theme_override_constants/separation = 61
+size_flags_vertical = 0
+theme_override_constants/separation = 36
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer" unique_id=354899350]
 layout_mode = 2
 size_flags_horizontal = 0
+size_flags_vertical = 0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/VBoxContainer" unique_id=43171215]
 layout_mode = 2
 size_flags_horizontal = 0
+size_flags_vertical = 0
 
 [node name="BackgroundRect" type="ColorRect" parent="VBoxContainer/VBoxContainer/VBoxContainer" unique_id=716171958]
 layout_mode = 2
@@ -72,10 +76,12 @@ color = Color(0, 0, 0.12, 0.77254903)
 [node name="Panel" type="PanelContainer" parent="VBoxContainer/VBoxContainer/VBoxContainer" unique_id=1334596646]
 layout_mode = 2
 size_flags_horizontal = 2
+size_flags_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_n2din")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/VBoxContainer/VBoxContainer/Panel" unique_id=570663726]
 layout_mode = 2
+size_flags_vertical = 0
 
 [node name="PovImageRect" type="TextureRect" parent="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer" unique_id=165035284]
 custom_minimum_size = Vector2(256, 0)
@@ -86,6 +92,7 @@ expand_mode = 5
 stretch_mode = 4
 
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer" unique_id=740406919]
+clip_contents = true
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/margin_left = 8
@@ -188,6 +195,11 @@ size_flags_vertical = 0
 icon = ExtResource("8_dwgri")
 
 [connection signal="gui_input" from="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/PovImageRect" to="." method="_on_pov_image_rect_gui_input"]
+[connection signal="item_rect_changed" from="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/PovImageRect" to="." method="_on_pov_image_rect_item_rect_changed"]
 [connection signal="pressed" from="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer/PovButton" to="." method="_on_pov_button_pressed"]
+[connection signal="text_changed" from="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer/DirectionsContainer/TopPovName" to="." method="_on_top_pov_name_text_changed"]
+[connection signal="text_changed" from="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer/DirectionsContainer/LeftPovName" to="." method="_on_left_pov_name_text_changed"]
+[connection signal="text_changed" from="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer/DirectionsContainer/RightPovName" to="." method="_on_right_pov_name_text_changed"]
+[connection signal="text_changed" from="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer/DirectionsContainer/BottomPovName" to="." method="_on_bottom_pov_name_text_changed"]
 [connection signal="value_changed" from="VBoxContainer/VBoxContainer/RotationSlider" to="." method="_on_h_slider_value_changed"]
 [connection signal="pressed" from="CloseButton" to="." method="_on_close_button_pressed"]
