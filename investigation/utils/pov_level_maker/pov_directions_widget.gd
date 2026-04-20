@@ -72,3 +72,8 @@ func _on_pov_button_pressed() -> void:
 func _on_pov_image_rect_gui_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("ui_mouse_pressed"):
 		open_pov_widget()
+
+signal closed
+func _on_close_button_pressed() -> void:
+	closed.emit()
+	queue_free()

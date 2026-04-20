@@ -1,11 +1,119 @@
 extends Control
 
+const POV_DIRECTIONS_WIDGET = preload("uid://cwvn21yf77xpp")
+
+@onready var bg: TextureRect = $ScreenContainer/TextureRect
+@onready var screen_container: Panel = $ScreenContainer
+
+var is_panning: bool = false
+var last_mouse_pos: Vector2 = Vector2.ZERO
+var view_offset: Vector2 = Vector2.ZERO
+var zoom: float = 1.0
+@export var zoom_factor : float = 0.04
+@export var min_zoom : float = 0.01
+@export var max_zoom : float = 4
+
+var dirs : Array[_PovDirectionsWidget] = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
-
+	view_offset = bg.position
+	apply_view()
+	screen_container.resized.connect(_on_screen_container_resized)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+
+## amout = [0,1]
+func zoom_in(amount: float, focus_pos: Vector2) -> void:
+	zoom_by(amount, focus_pos)
+
+## amout = [0,1]
+func zoom_out(amount: float, focus_pos: Vector2) -> void:
+	zoom_by(-amount, focus_pos)
+
+func zoom_by(amount: float, focus_pos: Vector2) -> void:
+	var old_zoom := zoom
+	var new_zoom := clampf(old_zoom + amount, min_zoom, max_zoom)
+	if is_equal_approx(old_zoom, new_zoom):
+		return
+
+	var world_pos := (focus_pos - view_offset) / old_zoom
+	zoom = new_zoom
+	view_offset = focus_pos - world_pos * new_zoom
+	apply_view()
+
+func apply_view() -> void:
+	view_offset = _clamp_offset(view_offset)
+	bg.scale = Vector2(zoom, zoom)
+	bg.position = view_offset
+
+func _clamp_offset(offset: Vector2) -> Vector2:
+	var viewport_size := screen_container.size
+	var content_size := bg.size * zoom
+
+	var min_x := viewport_size.x - content_size.x
+	var max_x := 0.0
+	if content_size.x <= viewport_size.x:
+		min_x = (viewport_size.x - content_size.x) * 0.5
+		max_x = min_x
+
+	var min_y := viewport_size.y - content_size.y
+	var max_y := 0.0
+	if content_size.y <= viewport_size.y:
+		min_y = (viewport_size.y - content_size.y) * 0.5
+		max_y = min_y
+
+	return Vector2(
+		clampf(offset.x, min_x, max_x),
+		clampf(offset.y, min_y, max_y)
+	)
+
+func move_screen(u : Vector2) -> void:
+	view_offset += u
+	apply_view()
+
+func add_pov_directions(coords : Vector2) -> void:
+	var pdw : _PovDirectionsWidget = POV_DIRECTIONS_WIDGET.instantiate()
+	pdw.anchor_left = 0
+	pdw.anchor_top = 0
+	pdw.anchor_right = 0
+	pdw.anchor_bottom = 0
+	pdw.pivot_offset = Vector2(0.5,1)
+	pdw.position = coords - Vector2(pdw.size.x/2, pdw.size.y*7/8)
+	pdw.coords = coords
+	bg.add_child(pdw)
+	dirs.append(pdw)
+
+func screen_to_bg_local(screen_pos: Vector2) -> Vector2:
+	var screen_to_canvas: Transform2D = screen_container.get_global_transform_with_canvas()
+	var bg_to_canvas: Transform2D = bg.get_global_transform_with_canvas()
+	var canvas_pos: Vector2 = screen_to_canvas * screen_pos
+	return bg_to_canvas.affine_inverse() * canvas_pos
+
+func _screen_mouse_pos() -> Vector2:
+	return screen_container.get_local_mouse_position()
+
+func _on_screen_container_resized() -> void:
+	apply_view()
+
+func _on_screen_container_gui_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		if event.pressed and Input.is_action_pressed("ui_scroll_pressed"):
+			is_panning = true
+			last_mouse_pos = event.position
+		elif !event.pressed and is_panning:
+			is_panning = false
+		
+		if event.pressed and event.button_index == MOUSE_BUTTON_RIGHT:
+			add_pov_directions(screen_to_bg_local(event.position))
+		
+		if event.pressed and event.button_index == MOUSE_BUTTON_WHEEL_UP:
+			zoom_in(zoom_factor, event.position)
+		if event.pressed and event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+			zoom_out(zoom_factor, event.position)
+
+	if event is InputEventMouseMotion and is_panning:
+		move_screen(event.position - last_mouse_pos)
+		last_mouse_pos = event.position

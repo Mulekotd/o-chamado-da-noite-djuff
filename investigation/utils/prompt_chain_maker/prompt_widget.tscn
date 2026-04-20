@@ -1,5 +1,4 @@
 [gd_scene format=3 uid="uid://cjh18gp04aw2o"]
-[ext_resource type="Theme" path="res://themes/utils_theme.tres" id="999_utils_theme"]
 
 [ext_resource type="PackedScene" uid="uid://dnoms4opqgf4v" path="res://investigation/utils/general/items_widget.tscn" id="1_eg3ew"]
 [ext_resource type="Script" uid="uid://bnwttvuex0jaa" path="res://investigation/utils/prompt_chain_maker/prompt_widget.gd" id="1_hnjur"]
@@ -7,21 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://b6aeholp6xcm3" path="res://investigation/utils/general/options_widget.tscn" id="3_vn5r7"]
 [ext_resource type="Texture2D" uid="uid://cm8l3y3l3dioj" path="res://investigation/interface/images/bottom_arrow.png" id="5_wjclg"]
 [ext_resource type="Texture2D" uid="uid://dtdkxktq3g8yr" path="res://investigation/interface/images/top_arrow.png" id="6_lfw2h"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hnjur"]
-bg_color = Color(0.22, 0.22, 0.22, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_534rm"]
-bg_color = Color(0.4661808, 0.46618086, 0.46618068, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wjclg"]
-bg_color = Color(0.24880221, 0, 0.002517846, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lfw2h"]
-bg_color = Color(0.70518076, 6.858632e-07, 0.035928737, 1)
+[ext_resource type="Theme" uid="uid://cyq5khk20nbm6" path="res://themes/utils_theme.tres" id="999_utils_theme"]
 
 [node name="PromptWidget" type="MarginContainer" unique_id=151020374]
-theme = ExtResource("999_utils_theme")
 custom_minimum_size = Vector2(0, 80)
 anchors_preset = -1
 anchor_right = 1.0
@@ -29,11 +16,12 @@ anchor_bottom = 0.33
 offset_bottom = -175.00002
 grow_horizontal = 2
 size_flags_horizontal = 3
+theme = ExtResource("999_utils_theme")
 script = ExtResource("1_hnjur")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=99060808]
 layout_mode = 2
-color = Color(0.04755766, 0.047557645, 0.047557645, 1)
+color = Color(0.047058824, 0.047058824, 0.047058824, 0.30980393)
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=571101295]
 layout_mode = 2
@@ -60,6 +48,7 @@ autowrap_mode = 2
 [node name="TextWidget" type="TextEdit" parent="MarginContainer/HBoxContainer/TextContainer" unique_id=1609192753]
 custom_minimum_size = Vector2(200, 100)
 layout_mode = 2
+size_flags_vertical = 3
 placeholder_text = "Texto"
 wrap_mode = 1
 
