@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://55u11pl1e6cr"]
+
+[ext_resource type="Script" uid="uid://cpjxc6e8frqkj" path="res://investigation/utils/pov_level_maker/arrow_widget.gd" id="1_j2fbb"]
+[ext_resource type="Texture2D" uid="uid://lveayo5sjnmp" path="res://investigation/interface/images/big_green_arrow.png" id="1_uum8w"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_spg3h"]
+bg_color = Color(0, 0.55916816, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+anti_aliasing = false
+
+[node name="ArrowWidget" type="MarginContainer" unique_id=2122320089]
+custom_minimum_size = Vector2(200, 100)
+pivot_offset_ratio = Vector2(0.5, 0.5)
+script = ExtResource("1_j2fbb")
+
+[node name="ArrowContainer" type="MarginContainer" parent="." unique_id=1719015737]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="TextureRect" type="TextureRect" parent="ArrowContainer" unique_id=1883204067]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+texture = ExtResource("1_uum8w")
+flip_h = true
+
+[node name="DotLeft" type="Panel" parent="." unique_id=1531243218]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_spg3h")
+
+[node name="DotRight" type="Panel" parent="." unique_id=1517452824]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_spg3h")
+
+[node name="DotTop" type="Panel" parent="." unique_id=1154552316]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_spg3h")
+
+[node name="DotBottom" type="Panel" parent="." unique_id=1907674472]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_spg3h")

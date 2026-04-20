@@ -1,4 +1,4 @@
-extends Control
+class_name _PovWidget extends Control
 
 @onready var name_line_edit: LineEdit = $ScrollContainer/Panel/MarginContainer/VBoxContainer/HeaderContainer/NameLineEdit
 @onready var description_text_edit: TextEdit = $ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/DescricaoContainer/DescriptionTextEdit

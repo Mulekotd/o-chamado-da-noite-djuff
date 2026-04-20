@@ -21,6 +21,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 4
 theme = ExtResource("999_utils_theme")
 script = ExtResource("2_l743g")
 
@@ -35,11 +36,20 @@ color = Color(0, 0, 0.12, 0.77254903)
 
 [node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=494398733]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = -1
+anchor_left = 0.365
+anchor_top = 0.097
+anchor_right = 0.63500005
+anchor_bottom = 0.90300006
+offset_left = 138.23999
+offset_top = 309.504
+offset_right = -138.24005
+offset_bottom = -309.50403
 grow_horizontal = 2
 grow_vertical = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 0
+metadata/_edit_use_anchors_ = true
 
 [node name="Panel" type="PanelContainer" parent="ScrollContainer" unique_id=1417967029]
 layout_mode = 2
