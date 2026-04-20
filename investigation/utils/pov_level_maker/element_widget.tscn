@@ -16,6 +16,7 @@ border_width_right = 2
 border_width_bottom = 2
 
 [node name="ElementWidget" type="Control" unique_id=264122867 groups=["util_parent_control"]]
+z_index = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -119,7 +120,6 @@ size_flags_horizontal = 3
 placeholder_text = "Digite o nome do pov"
 
 [node name="PovMenuButton" type="MenuButton" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/HBoxContainer" unique_id=520097150]
-z_index = 1
 layout_mode = 2
 icon = ExtResource("4_gradj")
 item_count = 1

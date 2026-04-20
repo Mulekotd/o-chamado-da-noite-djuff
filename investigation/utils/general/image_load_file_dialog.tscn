@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://cko8sykqdhkfw"]
+
+[node name="ImageLoadFileDialog" type="FileDialog" unique_id=520665760]
+oversampling_override = 1.0
+title = "Open a File"
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.png", "*.jpg", "*.jpeg", "*.bmp")

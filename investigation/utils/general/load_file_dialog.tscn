@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://cbec8em7mx07l"]
+
+[node name="LoadFileDialog" type="FileDialog" unique_id=739497904]
+title = "Open a File"
+size = Vector2i(800, 600)
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.tres")

@@ -85,7 +85,7 @@ prompts = Array[ExtResource("4_wppg2")]([SubResource("Resource_wppg2"), SubResou
 script = ExtResource("3_xi5ua")
 name = "homem"
 hitbox = Dictionary[String, float]({
-"bottom": 0.9255960893894545,
+"bottom": 0.9255960893894544,
 "left": 0.2724867926703559,
 "right": 0.4085412101140098,
 "top": 0.4273001691629524

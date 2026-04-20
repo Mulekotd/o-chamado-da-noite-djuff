@@ -17,6 +17,7 @@ var pov : Pov = Pov.new()
 var coords : Vector2
 var _is_dragging: bool = false
 var _drag_offset: Vector2 = Vector2.ZERO
+var _is_toggling_properties: bool = false
 @export var colapse_speed : float = 0.2
 
 signal changed
@@ -82,7 +83,34 @@ func _on_pov_button_pressed() -> void:
 
 func _on_pov_image_rect_gui_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("ui_mouse_pressed"):
-		properies_container.visible = !properies_container.visible
+		_toggle_properties_preserve_arrow_position()
+
+func _arrow_center_in_parent_local() -> Vector2:
+	var parent_ci := get_parent() as CanvasItem
+	if parent_ci == null:
+		return Vector2.ZERO
+	var center_local := arrow_widget.size * 0.5
+	var center_canvas := arrow_widget.get_global_transform_with_canvas() * center_local
+	return parent_ci.get_global_transform_with_canvas().affine_inverse() * center_canvas
+
+func _toggle_properties_preserve_arrow_position() -> void:
+	if _is_toggling_properties:
+		return
+	_is_toggling_properties = true
+
+	var old_arrow_center := _arrow_center_in_parent_local()
+	var old_arrow_rotation := arrow_widget.rotation
+	properies_container.visible = !properies_container.visible
+	await get_tree().process_frame
+	arrow_widget.rotation = old_arrow_rotation
+	position += old_arrow_center - _arrow_center_in_parent_local()
+	# One more settle pass keeps it stable across late container updates.
+	await get_tree().process_frame
+	arrow_widget.rotation = old_arrow_rotation
+	position += old_arrow_center - _arrow_center_in_parent_local()
+	spin_arrow(rotation_slider.value)
+
+	_is_toggling_properties = false
 
 signal moving
 func _on_arrow_widget_gui_input(event: InputEvent) -> void:
