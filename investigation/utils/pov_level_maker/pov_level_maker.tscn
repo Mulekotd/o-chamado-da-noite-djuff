@@ -57,6 +57,7 @@ expand_mode = 3
 stretch_mode = 4
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ScreenContainer" unique_id=1540156051]
+z_index = 2
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0

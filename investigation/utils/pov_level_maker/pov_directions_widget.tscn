@@ -39,6 +39,7 @@ corner_detail = 1
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dwgri"]
 
 [node name="PovDirectionsWidget" type="MarginContainer" unique_id=1886123741]
+z_index = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0

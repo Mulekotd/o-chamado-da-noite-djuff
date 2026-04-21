@@ -88,6 +88,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 func parse_pov_level() -> PovLevel:
 	var pl := PovLevel.new()
 	pl.bg_img = bg.texture
+	pl.dir_scale = current_widget_scale
 	for pdw in dirs:
 		pl.pov_directions_array.append(pdw.parse_pov_directions())
 		for stacked_dir in pdw.pov_directions_stack_widget.parse_pov_directions_stack():
@@ -96,6 +97,7 @@ func parse_pov_level() -> PovLevel:
 
 func load_pov_level(pl: PovLevel) -> void:
 	_is_loading_level = true
+	current_widget_scale = pl.dir_scale if pl.dir_scale > 0.0 else 1.0
 	clear_level()
 	bg.texture = pl.bg_img
 	for pd in pl.pov_directions_array:
@@ -285,6 +287,7 @@ func save_pov_level_sub_resources(dir_path: String) -> void:
 
 	var saved_level := PovLevel.new()
 	saved_level.bg_img = source_level.bg_img
+	saved_level.dir_scale = source_level.dir_scale
 	for i in range(source_level.pov_directions_array.size()):
 		var direction := source_level.pov_directions_array[i]
 		var pd_name := "pov_direction_%03d" % i
