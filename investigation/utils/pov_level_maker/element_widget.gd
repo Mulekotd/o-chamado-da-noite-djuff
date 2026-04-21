@@ -68,7 +68,7 @@ func get_pov_img() -> Texture2D:
 	return NO_IMAGE_POV
 
 func update_pov_name(index: int) -> void:
-	print(index)
+	pov_line_edit.text = pov_names[index]
 
 func _on_hitbox_preview_widget_gui_input(_event: InputEvent) -> void:
 	if !Input.is_action_just_pressed("ui_mouse_pressed"):

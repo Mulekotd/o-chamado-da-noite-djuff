@@ -13,7 +13,7 @@ var skip_chain_id : int = -1
 @export var wants_to_advance : bool = false # advance to next prompt
 @export var write_time_min : float = 0.04
 @export var write_time_max : float = 0.05
-@export var write_time_comma : float = 0.5
+@export var write_time_comma : float = 0.2
 @export var write_time_dot : float = 0.75
 
 func _ready() -> void:
@@ -124,11 +124,14 @@ func next_prompt(cond: int, can_end_chain: bool = true) -> void:
 	if can_end_chain:
 		# Only mutate vars for a prompt that was actually advanced by the player.
 		InvestigationVars.update_variables(previous_prompt.vars_to_change)
-	
-	if previous_prompt.pov:
-		pov_entered.emit(previous_prompt.pov)
+		InvestigationVars.append_item(previous_prompt.items_to_give)
+		InvestigationVars.remove_item(previous_prompt.items_to_take)
+			
+		if previous_prompt.pov:
+			pov_entered.emit(previous_prompt.pov)
 
 	if (prompt_qeue.size()): # if there is a next prompt
+		wants_to_advance = false
 		if _is_prompt_valid(prompt_qeue[0], cond):
 			main_text.clear()
 			clear_buttons()
