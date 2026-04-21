@@ -24,7 +24,7 @@ func _ready() -> void:
 
 func change_pov(index: int) -> void:
 	pov_index = index
-	current_pov = pov_level.povs[index].pov
+	current_pov = pov_level.pov_directions_array[index].pov
 	update_view(current_pov)
 	
 func update_view(pov: Pov) -> void:
@@ -32,19 +32,19 @@ func update_view(pov: Pov) -> void:
 	update_arrows()
 
 func update_arrows() -> void:
-	var pov_direction := pov_level.povs[pov_index]
+	var pov_direction := pov_level.pov_directions_array[pov_index]
 	_configure_arrow(left_arrow, LEFT_ARROW, pov_direction.left)
 	_configure_arrow(top_arrow, TOP_ARROW, pov_direction.top)
 	_configure_arrow(right_arrow, RIGHT_ARROW, pov_direction.right)
 	_configure_arrow(bottom_arrow, BOTTOM_ARROW, pov_direction.bottom)
 
-func _configure_arrow(arrow: TextureRect, arrow_texture: Texture2D, target_pov: Pov) -> void:
+func _configure_arrow(arrow: TextureRect, arrow_texture: Texture2D, target_pov: String) -> void:
 	# Avoid duplicate gui_input callbacks when changing POV multiple times.
 	for connection in arrow.gui_input.get_connections():
 		arrow.gui_input.disconnect(connection.callable)
 
 	if target_pov:
-		var target_index := get_pov_index(target_pov.name)
+		var target_index := get_pov_index(target_pov)
 		arrow.texture = arrow_texture
 		arrow.visible = true
 		arrow.mouse_filter = Control.MOUSE_FILTER_STOP
@@ -62,21 +62,23 @@ func _on_arrow_gui_input(event: InputEvent, index: int) -> void:
 	enabled:
 		change_pov(index)
 
-## returns the first index of the pov direction in the pov_level that has this pov as it's mains pov
+## returns the first index of the pov direction in the pov_level that has this pov as it's mains pov and has all the conditions met
 func get_pov_index(name: String) -> int:
-	for i in pov_level.povs.size():
-		if pov_level.povs[i].pov.name == name:
-			if InvestigationVars.check_global_conditions(pov_level.povs[i].global_conditions):
+	var i := 0
+	for dir in pov_level.pov_directions_array:
+		if dir.pov.name == name:
+			if InvestigationVars.check_global_conditions(dir.pov.global_conditions):
 				return i
+		i += 1
 	return -1
 
 ## gets the element is the relative position [0, 1]. returns null if none found
 func _get_element_in_pos(pos: Vector2) -> Element:
 	for e in current_pov.elements:
-		if (pos.x >= e.hitbox_left and\
-			pos.x <= e.hitbox_right and\
-			pos.y >= e.hitbox_top and\
-			pos.y <= e.hitbox_bottom):
+		if (pos.x >= e.hitbox.left and\
+			pos.x <= e.hitbox.right and\
+			pos.y >= e.hitbox.top and\
+			pos.y <= e.hitbox.bottom):
 			return e
 	return null
 
@@ -89,7 +91,7 @@ func _on_gui_input(_event: InputEvent) -> void:
 	
 	var e := _get_element_in_pos(mouse_relative)
 	if e:
-		if e.pov and InvestigationVars.check_inventory(e.necessary_items) and InvestigationVars.check_global_conditions(e.global_variables):
-			change_pov(get_pov_index(e.pov.name))
+		if e.pov_name and InvestigationVars.check_inventory(e.necessary_items) and InvestigationVars.check_global_conditions(e.global_variables):
+			change_pov(get_pov_index(e.pov_name))
 		else:
 			element_clicked.emit(e)

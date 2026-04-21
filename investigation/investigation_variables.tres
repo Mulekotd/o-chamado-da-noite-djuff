@@ -7,8 +7,13 @@
 [resource]
 script = ExtResource("3_nj77k")
 vars = Dictionary[String, int]({
+"": 1,
 "door_unlocked": 1,
+"esta_em_casa": 0,
 "mentiroso": 1,
+"porta_destrancada": 0,
+"respondeu1": 1,
+"respondeu2": 1,
 "test_var": 1
 })
 metadata/_custom_type_script = "uid://47pf0lrk86x5"

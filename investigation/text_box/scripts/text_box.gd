@@ -91,19 +91,21 @@ func display_prompt() -> void:
 	
 	var i : int = 0
 	for option in prompt_qeue[0].options:
-		var b := Button.new()
-		b.text = option
-		var name := "button_option_text_%d" % i
-		b.name = name
-		options_container.add_child(b)
-		if options_container.get_node(name):
-			# avoid connecting multiple times error '-'
-			if !options_container.get_node(name).is_connected("button_down", next_prompt.bind(i)):
-				options_container.get_node(name).connect("button_down", next_prompt.bind(i))
+		if InvestigationVars.check_global_conditions(option.conditions) and\
+		InvestigationVars.check_inventory(option.necessary_items):
+			var b := Button.new()
+			b.text = option.text
+			var name := "button_option_text_%d" % i
+			b.name = name
+			options_container.add_child(b)
+			if options_container.get_node(name):
+				# avoid connecting multiple times error '-'
+				if !options_container.get_node(name).is_connected("button_down", next_prompt.bind(i)):
+					options_container.get_node(name).connect("button_down", next_prompt.bind(i))
 		i += 1
 
 func next_prompt(cond: int, can_end_chain: bool = true) -> void:
-	# TODO transition to scene if has one
+	# TODO transition to pov if has one
 	if prompt_qeue.is_empty():
 		clear_box()
 		skip_chain_id = -1
@@ -137,10 +139,16 @@ func _on_mouse_exited() -> void:
 
 func _is_prompt_valid(prompt: Prompt, cond: int) -> bool:
 	# Shared prompt gate used by both first-display and next-prompt flows.
-	return (prompt.condition_number == cond or prompt.condition_number == -1) and \
-	InvestigationVars.check_global_conditions(prompt.global_conditions) and \
-	InvestigationVars.check_inventory(prompt.necessary_items) and \
-	prompt.chain_id != skip_chain_id
+	print(prompt.text, " P.COND: ", prompt.condition_number, " COND: ", cond)
+	if prompt.condition_number != -1 and prompt.condition_number != cond:
+		return false
+	if !InvestigationVars.check_global_conditions(prompt.global_conditions):
+		return false
+	if !InvestigationVars.check_inventory(prompt.necessary_items):
+		return false
+	if prompt.chain_id == skip_chain_id:
+		return false
+	return true
 
 func _skip_invalid_prompts(cond: int) -> void:
 	while !prompt_qeue.is_empty() and !_is_prompt_valid(prompt_qeue[0], cond):

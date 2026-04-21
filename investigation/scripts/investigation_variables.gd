@@ -10,12 +10,15 @@ class_name InvestigationVars extends Resource
 	preload("uid://cqpw454xu78in"),
 ]
 
-static var file := load("res://investigation/investigation_variables.tres")
+## value to assign to a newly created variable
+static var default_value : int = 0
+
+static var file : InvestigationVars = load("res://investigation/investigation_variables.tres")
 
 static func check_global_conditions(conditions: Dictionary[String, int]) -> bool:
 	for k : String in conditions.keys():
-		print(file.vars.get(k))
-		if file.vars.get(k) != conditions[k]:
+		#print(file.vars.get(k))
+		if file.vars.get_or_add(k, default_value) != conditions[k]:
 			#print(conditions.keys(), "FALSE")
 			return false
 	#print(conditions.keys(), "FALSE")
