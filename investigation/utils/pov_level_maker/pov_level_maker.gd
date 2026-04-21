@@ -23,16 +23,44 @@ var last_saved_path: String = ""
 @export var min_widget_scale : float = 0.25
 @export var max_widget_scale : float = 3.0
 var current_widget_scale : float = 1.0
+var _is_reconciling_dirs : bool = false
+var _is_loading_level : bool = false
 
 var dirs : Array[_PovDirectionsWidget] = []
 var lines : Array[Line2D] = []
 ## number of points in a line
 @export var line_res : int = 20
 
+## min-x, min-y, max-x, max-y
+func _get_panning_content_margins() -> Vector4:
+	var content_margins := Vector4(
+		0.0,
+		0.0,
+		bg.size.x,
+		bg.size.y,
+	)
+	var bg_inverse := bg.get_global_transform_with_canvas().affine_inverse()
+	for dir in dirs:
+		if !is_instance_valid(dir):
+			continue
+		var dir_transform := dir.get_global_transform_with_canvas()
+		var corners : Array[Vector2] = [
+			Vector2.ZERO,
+			Vector2(dir.size.x, 0.0),
+			Vector2(0.0, dir.size.y),
+			Vector2(dir.size.x, dir.size.y),
+		]
+		for corner in corners:
+			var local_corner := bg_inverse * (dir_transform * corner)
+			content_margins.x = minf(content_margins.x, local_corner.x)
+			content_margins.y = minf(content_margins.y, local_corner.y)
+			content_margins.z = maxf(content_margins.z, local_corner.x)
+			content_margins.w = maxf(content_margins.w, local_corner.y)
+	return content_margins
+	
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	view_offset = bg.position
-	apply_view()
 	screen_container.resized.connect(_on_screen_container_resized)
 	save_sub_resources_file_dialog.file_mode = FileDialog.FILE_MODE_SAVE_FILE
 	save_sub_resources_file_dialog.filters = PackedStringArray()
@@ -62,15 +90,20 @@ func parse_pov_level() -> PovLevel:
 	pl.bg_img = bg.texture
 	for pdw in dirs:
 		pl.pov_directions_array.append(pdw.parse_pov_directions())
+		for stacked_dir in pdw.pov_directions_stack_widget.parse_pov_directions_stack():
+			pl.pov_directions_array.append(stacked_dir)
 	return pl
 
 func load_pov_level(pl: PovLevel) -> void:
+	_is_loading_level = true
 	clear_level()
 	bg.texture = pl.bg_img
 	for pd in pl.pov_directions_array:
 		add_pov_directions(pd.coords)
 		await dirs[-1].load_pov_directions(pd)
+	_is_loading_level = false
 	await get_tree().process_frame
+	_reconcile_dirs_after_change()
 	update_lines()
 
 func save_pov_level_file(path) -> void:
@@ -315,7 +348,216 @@ func scale_pov_widgets(delta_scale: float) -> void:
 	current_widget_scale = clampf(current_widget_scale + delta_scale, min_widget_scale, max_widget_scale)
 	for dir in dirs:
 		dir.scale = Vector2(current_widget_scale, current_widget_scale)
+		dir.update_position_from_coords()
 	update_lines()
+
+func _copy_shared_dir_values(source: _PovDirectionsWidget, target: _PovDirectionsWidget, copy_transform: bool = true) -> void:
+	target.top_pov_name.text = source.top_pov_name.text
+	target.left_pov_name.text = source.left_pov_name.text
+	target.right_pov_name.text = source.right_pov_name.text
+	target.bottom_pov_name.text = source.bottom_pov_name.text
+	target.rotation_slider.set_value_no_signal(source.rotation_slider.value)
+	if copy_transform:
+		target.coords = source.coords
+		target.scale = source.scale
+		target.update_position_from_coords()
+
+func _collect_named_dir_groups() -> Dictionary:
+	var groups := {}
+	for dir in dirs:
+		if !is_instance_valid(dir) or dir.pov == null:
+			continue
+		var name := dir.pov.name.strip_edges()
+		if name.is_empty():
+			continue
+		if !groups.has(name):
+			groups[name] = []
+		var arr: Array = groups[name]
+		arr.append(dir)
+		groups[name] = arr
+	return groups
+
+func _create_pov_directions_widget(coords: Vector2) -> _PovDirectionsWidget:
+	var pdw : _PovDirectionsWidget = POV_DIRECTIONS_WIDGET.instantiate()
+	pdw.anchor_left = 0
+	pdw.anchor_top = 0
+	pdw.anchor_right = 0
+	pdw.anchor_bottom = 0
+	pdw.pivot_offset = Vector2(0.5,1)
+	pdw.scale = Vector2(current_widget_scale, current_widget_scale)
+	pdw.coords = coords
+	pdw.changed.connect(_on_dir_widget_changed.bind(pdw))
+	pdw.moving.connect(_on_dir_widget_moving.bind(pdw))
+	pdw.closed.connect(_on_dir_widget_closed.bind(pdw))
+	pdw.clone_requested.connect(_on_dir_widget_clone_requested.bind(pdw))
+	pdw.name = "pdw%d" % id
+	bg.add_child(pdw)
+	pdw.position = coords
+	pdw.call_deferred("update_position_from_coords")
+	dirs.append(pdw)
+	id += 1
+	return pdw
+
+func _collect_all_pov_names() -> Dictionary:
+	var names := {}
+	for dir in dirs:
+		if !is_instance_valid(dir):
+			continue
+		if dir.pov != null:
+			var base_name := dir.pov.name.strip_edges()
+			if !base_name.is_empty():
+				names[base_name] = true
+		for stacked_pov in dir.pov_directions_stack_widget.get_povs():
+			if stacked_pov == null:
+				continue
+			var stack_name := stacked_pov.name.strip_edges()
+			if !stack_name.is_empty():
+				names[stack_name] = true
+	return names
+
+func _unique_pov_name(base_name: String) -> String:
+	var clean_base := base_name.strip_edges()
+	if clean_base.is_empty():
+		clean_base = "Pov"
+	var names := _collect_all_pov_names()
+	if !names.has(clean_base):
+		return clean_base
+	var idx := 2
+	while true:
+		var candidate := "%s_%d" % [clean_base, idx]
+		if !names.has(candidate):
+			return candidate
+		idx += 1
+	return clean_base
+
+func _clone_pov_resource(source: Pov) -> Pov:
+	if source == null:
+		return Pov.new()
+	var dup := source.duplicate(true)
+	if dup is Pov:
+		return dup as Pov
+	return Pov.new()
+
+func _reconcile_dirs_after_change() -> void:
+	if _is_reconciling_dirs:
+		return
+	_is_reconciling_dirs = true
+
+	for di in range(dirs.size() - 1, -1, -1):
+		if !is_instance_valid(dirs[di]):
+			dirs.remove_at(di)
+
+	var spawn_requests : Array = []
+	for source in dirs:
+		if !is_instance_valid(source):
+			continue
+		var base_name := ""
+		if source.pov != null:
+			base_name = source.pov.name.strip_edges()
+		var extracted := source.pov_directions_stack_widget.pop_povs_not_named(base_name)
+		for extracted_name in extracted.keys():
+			var povs: Array = extracted[extracted_name]
+			if povs.is_empty():
+				continue
+			spawn_requests.append({
+				"source": source,
+				"offset_index": spawn_requests.size(),
+				"base_pov": povs[0],
+				"extra_povs": povs.slice(1, povs.size())
+			})
+
+	for req in spawn_requests:
+		var source := req["source"] as _PovDirectionsWidget
+		var base_pov := req["base_pov"] as Pov
+		if source == null or !is_instance_valid(source) or base_pov == null:
+			continue
+		var side_step := (source.size.x * source.scale.x) + 32.0
+		var offset_index := int(req["offset_index"]) + 1
+		var new_coords := source.coords + Vector2(side_step * offset_index, 0)
+		var new_dir := _create_pov_directions_widget(new_coords)
+		new_dir.load_pov(base_pov)
+		_copy_shared_dir_values(source, new_dir, false)
+		new_dir.update_position_from_coords()
+		var extra_povs: Array = req["extra_povs"]
+		for p in extra_povs:
+			if p is Pov:
+				new_dir.pov_directions_stack_widget.load_pov(p)
+
+	var groups := _collect_named_dir_groups()
+	for group_name in groups.keys():
+		var group: Array = groups[group_name]
+		if group.size() <= 1:
+			continue
+
+		var master := group[0] as _PovDirectionsWidget
+		if master == null or !is_instance_valid(master):
+			continue
+
+		for gi in range(1, group.size()):
+			var follower := group[gi] as _PovDirectionsWidget
+			if follower == null or !is_instance_valid(follower):
+				continue
+			if follower.pov != null:
+				master.pov_directions_stack_widget.load_pov(follower.pov)
+			for stacked_pov in follower.pov_directions_stack_widget.get_povs():
+				master.pov_directions_stack_widget.load_pov(stacked_pov)
+			dirs.erase(follower)
+			follower.queue_free()
+
+	_is_reconciling_dirs = false
+
+func _on_dir_widget_changed(_dir: _PovDirectionsWidget) -> void:
+	if _is_reconciling_dirs or _is_loading_level:
+		return
+	_reconcile_dirs_after_change()
+	update_lines()
+
+func _on_dir_widget_moving(_dir: _PovDirectionsWidget) -> void:
+	if _is_reconciling_dirs or _is_loading_level:
+		return
+	update_lines()
+
+func _on_dir_widget_closed(dir: _PovDirectionsWidget) -> void:
+	var previous_reconciling := _is_reconciling_dirs
+	_is_reconciling_dirs = true
+	if is_instance_valid(dir):
+		var stacked_povs := dir.pov_directions_stack_widget.get_povs()
+		if !stacked_povs.is_empty():
+			var replacement := _create_pov_directions_widget(dir.coords)
+			replacement.load_pov(stacked_povs[0])
+			_copy_shared_dir_values(dir, replacement)
+			for i in range(1, stacked_povs.size()):
+				replacement.pov_directions_stack_widget.load_pov(stacked_povs[i])
+
+	dirs.erase(dir)
+	_is_reconciling_dirs = previous_reconciling
+	if _is_reconciling_dirs or _is_loading_level:
+		return
+	_reconcile_dirs_after_change()
+	update_lines()
+
+func _on_dir_widget_clone_requested(clicked_pov: Pov, dir: _PovDirectionsWidget) -> void:
+	if _is_reconciling_dirs or _is_loading_level:
+		return
+	if dir == null or !is_instance_valid(dir):
+		return
+
+	var side_step := (dir.size.x * dir.scale.x) + 48.0
+	var clone_coords := dir.coords + Vector2(side_step, 0)
+	var clone_dir := _create_pov_directions_widget(clone_coords)
+	_copy_shared_dir_values(dir, clone_dir, false)
+
+	var source_pov := clicked_pov
+	if source_pov == null:
+		source_pov = dir.pov
+	clone_dir.load_pov(_clone_pov_resource(source_pov))
+
+	_reconcile_dirs_after_change()
+	update_lines()
+
+func _control_local_to_bg(control: Control, local_point: Vector2) -> Vector2:
+	var canvas_point := control.get_global_transform_with_canvas() * local_point
+	return bg.get_global_transform_with_canvas().affine_inverse() * canvas_point
 
 func update_lines() -> void:
 	for di in range(dirs.size() - 1, -1, -1):
@@ -330,42 +572,35 @@ func update_lines() -> void:
 			new_line()
 		
 		var dir : _PovDirectionsWidget = dirs[i]
-		var angle := dir.arrow_widget.rotation
-		var arrow_pivot := dir.arrow_widget.size * 0.5
-		var arrow_base := dir.position + dir.arrow_widget.position
 		if dir.top_pov_name.text: # connect top dot
 			for d in _get_dirs_with_name(dir.top_pov_name.text):
 				var top_dot_center := dir.arrow_widget.dot_top.position + dir.arrow_widget.dot_top.size * 0.5
-				var origin := arrow_base + arrow_pivot + (top_dot_center - arrow_pivot).rotated(angle)
-				var destiny := (d.position + 
-					d.arrow_widget.position + d.arrow_widget.size/2)
+				var origin := _control_local_to_bg(dir.arrow_widget, top_dot_center)
+				var destiny := _control_local_to_bg(d.arrow_widget, d.arrow_widget.size * 0.5)
 				for j : float in line_res:
 					set_line_point_pos(li, j, origin.lerp(destiny, j/(line_res-1)))
 				li += 1
 		if dir.left_pov_name.text: # connect left dot
 			for d in _get_dirs_with_name(dir.left_pov_name.text):
 				var left_dot_center := dir.arrow_widget.dot_left.position + dir.arrow_widget.dot_left.size * 0.5
-				var origin := arrow_base + arrow_pivot + (left_dot_center - arrow_pivot).rotated(angle)
-				var destiny := (d.position + 
-					d.arrow_widget.position + d.arrow_widget.size/2)
+				var origin := _control_local_to_bg(dir.arrow_widget, left_dot_center)
+				var destiny := _control_local_to_bg(d.arrow_widget, d.arrow_widget.size * 0.5)
 				for j : float in line_res:
 					set_line_point_pos(li, j, origin.lerp(destiny, j/(line_res-1)))
 				li += 1
 		if dir.bottom_pov_name.text: # connect bottom dot
 			for d in _get_dirs_with_name(dir.bottom_pov_name.text):
 				var bottom_dot_center := dir.arrow_widget.dot_bottom.position + dir.arrow_widget.dot_bottom.size * 0.5
-				var origin := arrow_base + arrow_pivot + (bottom_dot_center - arrow_pivot).rotated(angle)
-				var destiny := (d.position + 
-					d.arrow_widget.position + d.arrow_widget.size/2)
+				var origin := _control_local_to_bg(dir.arrow_widget, bottom_dot_center)
+				var destiny := _control_local_to_bg(d.arrow_widget, d.arrow_widget.size * 0.5)
 				for j : float in line_res:
 					set_line_point_pos(li, j, origin.lerp(destiny, j/(line_res-1)))
 				li += 1
 		if dir.right_pov_name.text: # connect right dot
 			for d in _get_dirs_with_name(dir.right_pov_name.text):
 				var right_dot_center := dir.arrow_widget.dot_right.position + dir.arrow_widget.dot_right.size * 0.5
-				var origin := arrow_base + arrow_pivot + (right_dot_center - arrow_pivot).rotated(angle)
-				var destiny := (d.position + 
-					d.arrow_widget.position + d.arrow_widget.size/2)
+				var origin := _control_local_to_bg(dir.arrow_widget, right_dot_center)
+				var destiny := _control_local_to_bg(d.arrow_widget, d.arrow_widget.size * 0.5)
 				for j : float in line_res:
 					set_line_point_pos(li, j, origin.lerp(destiny, j/(line_res-1)))
 				li += 1
@@ -398,24 +633,11 @@ func set_line_point_pos(line_index: int, point_index: int, pos: Vector2) -> void
 
 var id : int = 0
 func add_pov_directions(coords : Vector2) -> void:
-	# Generated by GitHub Copilot (GPT-5.3-Codex): right-click spawn positioning.
-	var pdw : _PovDirectionsWidget = POV_DIRECTIONS_WIDGET.instantiate()
-	pdw.anchor_left = 0
-	pdw.anchor_top = 0
-	pdw.anchor_right = 0
-	pdw.anchor_bottom = 0
-	pdw.pivot_offset = Vector2(0.5,1)
-	pdw.scale = Vector2(current_widget_scale, current_widget_scale)
-	pdw.position = coords - Vector2(pdw.size.x/2, pdw.size.y*7/8)
-	pdw.coords = coords
-	pdw.changed.connect(update_lines)
-	pdw.moving.connect(update_lines)
-	pdw.closed.connect(dirs.erase.bind(pdw))
-	pdw.name = "pdw%d" % id
-	bg.add_child(pdw)
-	dirs.append(pdw)
+	_create_pov_directions_widget(coords)
+	if _is_loading_level:
+		return
+	_reconcile_dirs_after_change()
 	update_lines()
-	id += 1
 
 func screen_to_bg_local(screen_pos: Vector2) -> Vector2:
 	# Generated by GitHub Copilot (GPT-5.3-Codex): screen-space to bg-local transform.
@@ -439,20 +661,23 @@ func _get_dirs_with_name(name: String) -> Array[_PovDirectionsWidget]:
 	return arr
 	
 func _clamp_offset(offset: Vector2) -> Vector2:
-	var viewport_size := screen_container.size
-	var content_size := bg.size * zoom
+	var content_margins : Vector4 = _get_panning_content_margins() * zoom
+	var top_left := Vector2(content_margins.x, content_margins.y)
+	var bottom_right := Vector2(content_margins.z, content_margins.w)
+	var min_x := screen_container.size.x - bottom_right.x
+	var max_x := -top_left.x
+	var min_y := screen_container.size.y - bottom_right.y
+	var max_y := -top_left.y
 
-	var min_x := viewport_size.x - content_size.x
-	var max_x := 0.0
-	if content_size.x <= viewport_size.x:
-		min_x = (viewport_size.x - content_size.x) * 0.5
-		max_x = min_x
+	if min_x > max_x:
+		var center_x := (min_x + max_x) * 0.5
+		min_x = center_x
+		max_x = center_x
 
-	var min_y := viewport_size.y - content_size.y
-	var max_y := 0.0
-	if content_size.y <= viewport_size.y:
-		min_y = (viewport_size.y - content_size.y) * 0.5
-		max_y = min_y
+	if min_y > max_y:
+		var center_y := (min_y + max_y) * 0.5
+		min_y = center_y
+		max_y = center_y
 
 	return Vector2(
 		clampf(offset.x, min_x, max_x),
