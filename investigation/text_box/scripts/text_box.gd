@@ -32,7 +32,7 @@ func _physics_process(_delta: float) -> void:
 
 func _process(_delta: float) -> void:
 	if ((Input.is_action_just_pressed("ui_accept") or (Input.is_action_just_pressed("ui_mouse_pressed") and is_mouse_inside))) and prompt_qeue.size()>0:
-		if prompt_qeue[0].options.size() == 0 and !is_writing:
+		if _has_visible_options(prompt_qeue[0]) == 0 and !is_writing:
 			next_prompt(-1)
 		else:
 			wants_to_advance = true
@@ -49,12 +49,13 @@ func clear_box() -> void:
 	chain_number = 0
 
 func append_prompt(prompt: Prompt) -> void:
+	#print(prompt.text," POV: ", prompt.pov)
 	prompt_qeue.append(prompt)
 	
 func append_prompt_chain(prompt_chain: PromptChain) -> void:
 	for p in prompt_chain.prompts:
 		p.chain_id = chain_number
-		prompt_qeue.append(p)
+		append_prompt(p)
 	chain_number += 1
 	if stand_by and !prompt_qeue.is_empty():
 		_skip_invalid_prompts(-1)
@@ -90,6 +91,7 @@ func display_prompt() -> void:
 	is_writing = false
 	
 	var i : int = 0
+	var options := 0
 	for option in prompt_qeue[0].options:
 		if InvestigationVars.check_global_conditions(option.conditions) and\
 		InvestigationVars.check_inventory(option.necessary_items):
@@ -102,8 +104,10 @@ func display_prompt() -> void:
 				# avoid connecting multiple times error '-'
 				if !options_container.get_node(name).is_connected("button_down", next_prompt.bind(i)):
 					options_container.get_node(name).connect("button_down", next_prompt.bind(i))
+			options += 1
 		i += 1
 
+signal pov_entered(p: String)
 func next_prompt(cond: int, can_end_chain: bool = true) -> void:
 	# TODO transition to pov if has one
 	if prompt_qeue.is_empty():
@@ -111,7 +115,8 @@ func next_prompt(cond: int, can_end_chain: bool = true) -> void:
 		skip_chain_id = -1
 		stand_by = true
 		return
-
+	
+	
 	var previous_prompt : Prompt = prompt_qeue.pop_front()
 	if can_end_chain and previous_prompt.end_chain:
 		skip_chain_id = previous_prompt.chain_id
@@ -119,6 +124,9 @@ func next_prompt(cond: int, can_end_chain: bool = true) -> void:
 	if can_end_chain:
 		# Only mutate vars for a prompt that was actually advanced by the player.
 		InvestigationVars.update_variables(previous_prompt.vars_to_change)
+	
+	if previous_prompt.pov:
+		pov_entered.emit(previous_prompt.pov)
 
 	if (prompt_qeue.size()): # if there is a next prompt
 		if _is_prompt_valid(prompt_qeue[0], cond):
@@ -139,7 +147,6 @@ func _on_mouse_exited() -> void:
 
 func _is_prompt_valid(prompt: Prompt, cond: int) -> bool:
 	# Shared prompt gate used by both first-display and next-prompt flows.
-	print(prompt.text, " P.COND: ", prompt.condition_number, " COND: ", cond)
 	if prompt.condition_number != -1 and prompt.condition_number != cond:
 		return false
 	if !InvestigationVars.check_global_conditions(prompt.global_conditions):
@@ -153,3 +160,11 @@ func _is_prompt_valid(prompt: Prompt, cond: int) -> bool:
 func _skip_invalid_prompts(cond: int) -> void:
 	while !prompt_qeue.is_empty() and !_is_prompt_valid(prompt_qeue[0], cond):
 		prompt_qeue.pop_front()
+
+func _has_visible_options(prompt: Prompt) -> int:
+	var count := 0
+	for option in prompt.options:
+		if InvestigationVars.check_global_conditions(option.conditions) and\
+		InvestigationVars.check_inventory(option.necessary_items):
+			count += 1
+	return count

@@ -21,11 +21,17 @@ var enabled : bool = true
 
 func _ready() -> void:
 	change_pov(0)
-
+	await get_tree().create_timer(1).timeout
+	for dir : PovDirections in pov_level.pov_directions_array:
+		for p in dir.pov.elements[0].prompt_chain.prompts:
+			print(p.text, " POV: ", p.pov)
 func change_pov(index: int) -> void:
 	pov_index = index
 	current_pov = pov_level.pov_directions_array[index].pov
 	update_view(current_pov)
+	
+func change_pov_by_name(pov_name: String) -> void:
+	change_pov(get_pov_index(pov_name))
 	
 func update_view(pov: Pov) -> void:
 	view.texture = pov.image
@@ -91,7 +97,11 @@ func _on_gui_input(_event: InputEvent) -> void:
 	
 	var e := _get_element_in_pos(mouse_relative)
 	if e:
-		if e.pov_name and InvestigationVars.check_inventory(e.necessary_items) and InvestigationVars.check_global_conditions(e.global_variables):
-			change_pov(get_pov_index(e.pov_name))
+		if e.pov_name and\
+		 InvestigationVars.check_inventory(e.necessary_items) and\
+		 InvestigationVars.check_global_conditions(e.conditions):
+			change_pov_by_name(e.pov_name)
 		else:
+			for p in e.prompt_chain.prompts:
+				pass#print(p.text, " POV: ", p.pov)
 			element_clicked.emit(e)

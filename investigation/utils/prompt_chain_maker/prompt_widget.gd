@@ -29,6 +29,7 @@ func parse_prompt() -> Prompt:
 	p.items_to_give = give_items_widget.items
 	p.items_to_take = take_items_widget.items
 	p.vars_to_change = change_vars_widget.parse_conditions()
+	p.pov = pov_widget.text
 	return p
 
 func load_prompt(p: Prompt) -> void:
@@ -41,6 +42,7 @@ func load_prompt(p: Prompt) -> void:
 	give_items_widget.add_items(p.items_to_give)
 	take_items_widget.add_items(p.items_to_take)
 	change_vars_widget.add_conditions(p.vars_to_change)
+	pov_widget.text = p.pov
 
 
 func _on_remove_button_pressed() -> void:

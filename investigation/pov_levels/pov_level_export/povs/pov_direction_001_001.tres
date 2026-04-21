@@ -20,7 +20,10 @@ image = SubResource("Image_je0tb")
 [resource]
 script = ExtResource("4_rhxnp")
 name = "porta"
-description = "Porta da frente da casa"
+description = "Porta da frente da casa TRANCADA"
 prompt_chain = ExtResource("3_tg0t4")
 image = SubResource("ImageTexture_slcly")
 elements = Array[ExtResource("1_2enbi")]([ExtResource("2_r06rf")])
+global_conditions = Dictionary[String, int]({
+"porta_destrancada": 0
+})

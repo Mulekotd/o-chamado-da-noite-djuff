@@ -13,8 +13,4 @@ hitbox = Dictionary[String, float]({
 "right": 0.7104962061321924,
 "top": 0.0
 })
-pov_name = "sala"
 prompt_chain = ExtResource("2_18xhs")
-conditions = Dictionary[String, int]({
-"porta_destrancada": 1
-})
