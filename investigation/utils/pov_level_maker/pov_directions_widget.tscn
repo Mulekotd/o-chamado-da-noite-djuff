@@ -118,6 +118,7 @@ theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/MarginContainer" unique_id=600357961]
+visible = false
 layout_mode = 2
 size_flags_vertical = 0
 

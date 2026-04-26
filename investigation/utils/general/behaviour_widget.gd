@@ -10,6 +10,7 @@ func _ready() -> void:
 	behaviour_button.text = default_text
 
 func load_behaviour(b: Script) -> void:
+	if !b: return
 	behaviour = b
 	behaviour_button.text = b.new().behaviour_name
 	print("NOME: ", b.new().behaviour_name)
