@@ -1,10 +1,10 @@
 class_name _PovDirectionsWidget extends Control
 
 @onready var pov_button: Button = $VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer/PovButton
-@onready var top_pov_name: LineEdit = $VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer/DirectionsContainer/TopPovName
-@onready var left_pov_name: LineEdit = $VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer/DirectionsContainer/LeftPovName
-@onready var right_pov_name: LineEdit = $VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer/DirectionsContainer/RightPovName
-@onready var bottom_pov_name: LineEdit = $VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer/DirectionsContainer/BottomPovName
+@onready var top_pov_name_widget: _PovNameWidget = $VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer/DirectionsContainer/TopPovNameWidget
+@onready var left_pov_name_widget: _PovNameWidget = $VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer/DirectionsContainer/LeftPovNameWidget
+@onready var right_pov_name_widget: _PovNameWidget = $VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer/DirectionsContainer/RightPovNameWidget
+@onready var bottom_pov_name_widget: _PovNameWidget = $VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer/DirectionsContainer/BottomPovNameWidget
 @onready var rotation_slider: HSlider = $VBoxContainer/VBoxContainer/RotationSlider
 @onready var pov_image_rect: TextureRect = $VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/PovImageRect
 @onready var arrow_widget: _ArrowWidget = $VBoxContainer/ArrowWidget
@@ -40,10 +40,10 @@ func _physics_process(delta: float) -> void:
 func parse_pov_directions() -> PovDirections:
 	var p_dir := PovDirections.new()
 	p_dir.pov = pov
-	p_dir.left = left_pov_name.text
-	p_dir.top = top_pov_name.text
-	p_dir.right = right_pov_name.text
-	p_dir.bottom = bottom_pov_name.text
+	p_dir.left = left_pov_name_widget.get_pov_name()
+	p_dir.top = top_pov_name_widget.get_pov_name()
+	p_dir.right = right_pov_name_widget.get_pov_name()
+	p_dir.bottom = bottom_pov_name_widget.get_pov_name()
 	p_dir.coords = coords
 	p_dir.rotation = rotation_slider.value
 	return p_dir
@@ -54,13 +54,13 @@ func save_pov_directions_file(path: String) -> void:
 func load_pov_directions(p_dir : PovDirections) -> void:
 	load_pov(p_dir.pov)
 	if p_dir.left:
-		left_pov_name.text = p_dir.left
+		left_pov_name_widget.load_pov_name(p_dir.left)
 	if p_dir.top:
-		top_pov_name.text = p_dir.top
+		top_pov_name_widget.load_pov_name(p_dir.top)
 	if p_dir.right:
-		right_pov_name.text = p_dir.right
+		right_pov_name_widget.load_pov_name(p_dir.right)
 	if p_dir.bottom:
-		bottom_pov_name.text = p_dir.bottom
+		bottom_pov_name_widget.load_pov_name(p_dir.bottom)
 	rotation_slider.value = p_dir.rotation
 	coords = p_dir.coords
 	update_widget()

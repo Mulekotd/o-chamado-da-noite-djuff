@@ -11,7 +11,7 @@ signal move_down_requested(widget: _PromptWidget)
 @onready var give_items_widget: _ItemsWidget = $MarginContainer/HBoxContainer/HSplitContainer/SplitContainer/GridContainer/GiveItemsContainer/GiveItemsWidget
 @onready var take_items_widget: _ItemsWidget = $MarginContainer/HBoxContainer/HSplitContainer/SplitContainer/GridContainer/TakeItemsContainer/TakeItemsWidget
 @onready var end_chain_widget: CheckBox = $MarginContainer/HBoxContainer/HSplitContainer/SplitContainer/GridContainer/EndChainContainer/EndChainWidget
-@onready var pov_widget: TextEdit = $MarginContainer/HBoxContainer/HSplitContainer/SplitContainer/GridContainer/PovContainer/PovWidget
+@onready var pov_name_widget: _PovNameWidget = $MarginContainer/HBoxContainer/HSplitContainer/SplitContainer/GridContainer/PovContainer/PovNameWidget
 @onready var conditions_widget: _ConditionsWidget = $MarginContainer/HBoxContainer/HSplitContainer/SplitContainer/GridContainer/ConditionsContainer/ConditionsWidget
 @onready var text_widget: TextEdit = $MarginContainer/HBoxContainer/HSplitContainer/SplitContainer/TextContainer/TextWidget
 
@@ -29,7 +29,7 @@ func parse_prompt() -> Prompt:
 	p.items_to_give = give_items_widget.items
 	p.items_to_take = take_items_widget.items
 	p.vars_to_change = change_vars_widget.parse_conditions()
-	p.pov = pov_widget.text
+	p.pov = pov_name_widget.get_pov_name()
 	return p
 
 func load_prompt(p: Prompt) -> void:
@@ -42,7 +42,7 @@ func load_prompt(p: Prompt) -> void:
 	give_items_widget.add_items(p.items_to_give)
 	take_items_widget.add_items(p.items_to_take)
 	change_vars_widget.add_conditions(p.vars_to_change)
-	pov_widget.text = p.pov
+	pov_name_widget.load_pov_name(p.pov)
 
 
 func _on_remove_button_pressed() -> void:

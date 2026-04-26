@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dtdkxktq3g8yr" path="res://investigation/interface/images/top_arrow.png" id="3_m4qdh"]
 [ext_resource type="Texture2D" uid="uid://b513u1882j8ph" path="res://investigation/interface/images/left_arrow.png" id="4_dwgri"]
 [ext_resource type="Texture2D" uid="uid://dlf5uc3tlxr2j" path="res://investigation/interface/images/right_arrow.png" id="5_kuqt0"]
+[ext_resource type="PackedScene" uid="uid://d0nk5v1faci5l" path="res://investigation/utils/pov_level_maker/pov_name_widget.tscn" id="6_1whd0"]
 [ext_resource type="Texture2D" uid="uid://cm8l3y3l3dioj" path="res://investigation/interface/images/bottom_arrow.png" id="6_n2din"]
 [ext_resource type="Texture2D" uid="uid://b0x0w4dtint7u" path="res://investigation/interface/images/minus.png" id="8_dwgri"]
 
@@ -146,11 +147,11 @@ size_flags_vertical = 4
 texture = ExtResource("3_m4qdh")
 stretch_mode = 4
 
-[node name="TopPovName" type="LineEdit" parent="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer/DirectionsContainer" unique_id=749402239]
-custom_minimum_size = Vector2(0, 40)
+[node name="TopPovNameWidget" parent="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer/DirectionsContainer" unique_id=1471266665 instance=ExtResource("6_1whd0")]
 layout_mode = 2
-size_flags_horizontal = 3
-placeholder_text = "POV Cima"
+
+[node name="PovNameLineEdit" parent="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer/DirectionsContainer/TopPovNameWidget" index="0" unique_id=2009480693]
+placeholder_text = "Pov cima"
 
 [node name="LeftArrow" type="TextureRect" parent="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer/DirectionsContainer" unique_id=672629846]
 layout_mode = 2
@@ -159,11 +160,11 @@ size_flags_vertical = 4
 texture = ExtResource("4_dwgri")
 stretch_mode = 4
 
-[node name="LeftPovName" type="LineEdit" parent="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer/DirectionsContainer" unique_id=520262189]
-custom_minimum_size = Vector2(0, 40)
+[node name="LeftPovNameWidget" parent="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer/DirectionsContainer" unique_id=779962298 instance=ExtResource("6_1whd0")]
 layout_mode = 2
-size_flags_horizontal = 3
-placeholder_text = "POV Esquerda"
+
+[node name="PovNameLineEdit" parent="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer/DirectionsContainer/LeftPovNameWidget" index="0" unique_id=2009480693]
+placeholder_text = "Pov esquerda"
 
 [node name="RightArrow" type="TextureRect" parent="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer/DirectionsContainer" unique_id=1909181966]
 layout_mode = 2
@@ -172,11 +173,11 @@ size_flags_vertical = 4
 texture = ExtResource("5_kuqt0")
 stretch_mode = 4
 
-[node name="RightPovName" type="LineEdit" parent="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer/DirectionsContainer" unique_id=1201510011]
-custom_minimum_size = Vector2(0, 40)
+[node name="RightPovNameWidget" parent="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer/DirectionsContainer" unique_id=684636487 instance=ExtResource("6_1whd0")]
 layout_mode = 2
-size_flags_horizontal = 3
-placeholder_text = "POV Direita"
+
+[node name="PovNameLineEdit" parent="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer/DirectionsContainer/RightPovNameWidget" index="0" unique_id=2009480693]
+placeholder_text = "Pov direita"
 
 [node name="BottomArrow" type="TextureRect" parent="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer/DirectionsContainer" unique_id=1517157727]
 layout_mode = 2
@@ -185,11 +186,11 @@ size_flags_vertical = 4
 texture = ExtResource("6_n2din")
 stretch_mode = 4
 
-[node name="BottomPovName" type="LineEdit" parent="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer/DirectionsContainer" unique_id=1867267793]
-custom_minimum_size = Vector2(0, 40)
+[node name="BottomPovNameWidget" parent="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer/DirectionsContainer" unique_id=1328801281 instance=ExtResource("6_1whd0")]
 layout_mode = 2
-size_flags_horizontal = 3
-placeholder_text = "POV Atras"
+
+[node name="PovNameLineEdit" parent="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer/DirectionsContainer/BottomPovNameWidget" index="0" unique_id=2009480693]
+placeholder_text = "Pov baixo"
 
 [node name="RotationSlider" type="HSlider" parent="VBoxContainer/VBoxContainer" unique_id=547504861]
 layout_mode = 2
@@ -211,9 +212,10 @@ size_flags_vertical = 0
 [connection signal="item_rect_changed" from="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/PovImageRect" to="." method="_on_pov_image_rect_item_rect_changed"]
 [connection signal="pressed" from="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/PovImageRect/CloseButton" to="." method="_on_close_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer/PovButton" to="." method="_on_pov_button_pressed"]
-[connection signal="text_changed" from="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer/DirectionsContainer/TopPovName" to="." method="_on_top_pov_name_text_changed"]
-[connection signal="text_changed" from="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer/DirectionsContainer/LeftPovName" to="." method="_on_left_pov_name_text_changed"]
-[connection signal="text_changed" from="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer/DirectionsContainer/RightPovName" to="." method="_on_right_pov_name_text_changed"]
-[connection signal="text_changed" from="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer/DirectionsContainer/BottomPovName" to="." method="_on_bottom_pov_name_text_changed"]
 [connection signal="value_changed" from="VBoxContainer/VBoxContainer/RotationSlider" to="." method="_on_h_slider_value_changed"]
 [connection signal="gui_input" from="VBoxContainer/ArrowWidget" to="." method="_on_arrow_widget_gui_input"]
+
+[editable path="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer/DirectionsContainer/TopPovNameWidget"]
+[editable path="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer/DirectionsContainer/LeftPovNameWidget"]
+[editable path="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer/DirectionsContainer/RightPovNameWidget"]
+[editable path="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/MarginContainer/VBoxContainer/DirectionsContainer/BottomPovNameWidget"]

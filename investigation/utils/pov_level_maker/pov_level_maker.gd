@@ -355,10 +355,10 @@ func scale_pov_widgets(delta_scale: float) -> void:
 	update_lines()
 
 func _copy_shared_dir_values(source: _PovDirectionsWidget, target: _PovDirectionsWidget, copy_transform: bool = true) -> void:
-	target.top_pov_name.text = source.top_pov_name.text
-	target.left_pov_name.text = source.left_pov_name.text
-	target.right_pov_name.text = source.right_pov_name.text
-	target.bottom_pov_name.text = source.bottom_pov_name.text
+	target.top_pov_name_widget.load_pov_name(source.top_pov_name_widget.get_pov_name())
+	target.left_pov_name_widget.load_pov_name(source.left_pov_name_widget.get_pov_name())
+	target.bottom_pov_name_widget.load_pov_name(source.bottom_pov_name_widget.get_pov_name())
+	target.right_pov_name_widget.load_pov_name(source.right_pov_name_widget.get_pov_name())
 	target.rotation_slider.set_value_no_signal(source.rotation_slider.value)
 	if copy_transform:
 		target.coords = source.coords
@@ -575,32 +575,32 @@ func update_lines() -> void:
 			new_line()
 		
 		var dir : _PovDirectionsWidget = dirs[i]
-		if dir.top_pov_name.text: # connect top dot
-			for d in _get_dirs_with_name(dir.top_pov_name.text):
+		if dir.top_pov_name_widget.get_pov_name(): # connect top dot
+			for d in _get_dirs_with_name(dir.top_pov_name_widget.get_pov_name()):
 				var top_dot_center := dir.arrow_widget.dot_top.position + dir.arrow_widget.dot_top.size * 0.5
 				var origin := _control_local_to_bg(dir.arrow_widget, top_dot_center)
 				var destiny := _control_local_to_bg(d.arrow_widget, d.arrow_widget.size * 0.5)
 				for j : float in line_res:
 					set_line_point_pos(li, j, origin.lerp(destiny, j/(line_res-1)))
 				li += 1
-		if dir.left_pov_name.text: # connect left dot
-			for d in _get_dirs_with_name(dir.left_pov_name.text):
+		if dir.left_pov_name_widget.get_pov_name(): # connect left dot
+			for d in _get_dirs_with_name(dir.left_pov_name_widget.get_pov_name()):
 				var left_dot_center := dir.arrow_widget.dot_left.position + dir.arrow_widget.dot_left.size * 0.5
 				var origin := _control_local_to_bg(dir.arrow_widget, left_dot_center)
 				var destiny := _control_local_to_bg(d.arrow_widget, d.arrow_widget.size * 0.5)
 				for j : float in line_res:
 					set_line_point_pos(li, j, origin.lerp(destiny, j/(line_res-1)))
 				li += 1
-		if dir.bottom_pov_name.text: # connect bottom dot
-			for d in _get_dirs_with_name(dir.bottom_pov_name.text):
+		if dir.bottom_pov_name_widget.get_pov_name(): # connect bottom dot
+			for d in _get_dirs_with_name(dir.bottom_pov_name_widget.get_pov_name()):
 				var bottom_dot_center := dir.arrow_widget.dot_bottom.position + dir.arrow_widget.dot_bottom.size * 0.5
 				var origin := _control_local_to_bg(dir.arrow_widget, bottom_dot_center)
 				var destiny := _control_local_to_bg(d.arrow_widget, d.arrow_widget.size * 0.5)
 				for j : float in line_res:
 					set_line_point_pos(li, j, origin.lerp(destiny, j/(line_res-1)))
 				li += 1
-		if dir.right_pov_name.text: # connect right dot
-			for d in _get_dirs_with_name(dir.right_pov_name.text):
+		if dir.right_pov_name_widget.get_pov_name(): # connect right dot
+			for d in _get_dirs_with_name(dir.right_pov_name_widget.get_pov_name()):
 				var right_dot_center := dir.arrow_widget.dot_right.position + dir.arrow_widget.dot_right.size * 0.5
 				var origin := _control_local_to_bg(dir.arrow_widget, right_dot_center)
 				var destiny := _control_local_to_bg(d.arrow_widget, d.arrow_widget.size * 0.5)
