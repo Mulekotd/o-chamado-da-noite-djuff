@@ -5,8 +5,13 @@ class_name TextBox extends Control
 @onready var bouncing_dots_widget: _Bouncing_Dots_Widget = $ColorRect/Text/BouncingDotsWidget
 
 signal stand_by_changed(state: bool)
+signal prompt_sound_requested(sound: AudioStream)
+signal letter_sound_requested(sound: AudioStream)
+signal displayed_prompt(chain_id: int)
+signal chain_added(chain_id: int, chain: PromptChain)
 
-var prompt_qeue : Array[Prompt]
+var prompt_queue : Array[Prompt]
+var sound_queue
 var stand_by : bool = true :
 	set(x):
 		stand_by = x
@@ -28,10 +33,10 @@ func _ready() -> void:
 	stand_by_changed.connect(func(x : bool): main_text.visible = !x)
 
 func _physics_process(_delta: float) -> void:
-	if stand_by and !prompt_qeue.is_empty():
+	if stand_by and !prompt_queue.is_empty():
 		# Ensure the first visible prompt also respects conditions.
 		_skip_invalid_prompts(-1)
-		if !prompt_qeue.is_empty():
+		if !prompt_queue.is_empty():
 			display_prompt()
 		else:
 			clear_box()
@@ -39,8 +44,8 @@ func _physics_process(_delta: float) -> void:
 			stand_by = true
 
 func _process(_delta: float) -> void:
-	if ((Input.is_action_just_pressed("ui_accept") or (Input.is_action_just_pressed("ui_mouse_pressed") and is_mouse_inside))) and prompt_qeue.size()>0:
-		if _has_visible_options(prompt_qeue[0]) == 0 and !is_writing:
+	if ((Input.is_action_just_pressed("ui_accept") or (Input.is_action_just_pressed("ui_mouse_pressed") and is_mouse_inside))) and prompt_queue.size()>0:
+		if _has_visible_options(prompt_queue[0]) == 0 and !is_writing:
 			next_prompt(-1)
 		else:
 			wants_to_advance = true
@@ -50,7 +55,7 @@ func clear_buttons() -> void:
 		n.queue_free()
 
 func clear_box() -> void:
-	prompt_qeue.clear()
+	prompt_queue.clear()
 	main_text.clear()
 	main_text.append_text("...")
 	clear_buttons()
@@ -58,32 +63,36 @@ func clear_box() -> void:
 
 func append_prompt(prompt: Prompt) -> void:
 	#print(prompt.text," POV: ", prompt.pov)
-	prompt_qeue.append(prompt)
+	prompt_queue.append(prompt)
 	
 func append_prompt_chain(prompt_chain: PromptChain) -> void:
 	for p in prompt_chain.prompts:
 		p.chain_id = chain_number
 		append_prompt(p)
+	chain_added.emit(chain_number, prompt_chain)
 	chain_number += 1
-	if stand_by and !prompt_qeue.is_empty():
+	if stand_by and !prompt_queue.is_empty():
 		_skip_invalid_prompts(-1)
-		if !prompt_qeue.is_empty():
+		if !prompt_queue.is_empty():
 			display_prompt()
 
 func display_prompt() -> void:
 	is_writing = true
 	stand_by = false
 	main_text.clear()
-	var current_prompt := prompt_qeue[0]
-	for c in prompt_qeue[0].text:
-		if current_prompt != prompt_qeue[0]:
+	var current_prompt := prompt_queue[0]
+	print("ADVANCED PROMPT")
+	displayed_prompt.emit(prompt_queue[0].chain_id)
+	for c in prompt_queue[0].text:
+		if current_prompt != prompt_queue[0]:
 			return
 		if wants_to_advance:
 			main_text.clear() 
-			main_text.append_text(prompt_qeue[0].text)
+			main_text.append_text(prompt_queue[0].text)
 			wants_to_advance = false
 			break
 		main_text.append_text(c)
+		letter_sound_requested.emit()
 		match c:
 			",": 
 				await get_tree().create_timer(write_time_comma).timeout
@@ -100,7 +109,7 @@ func display_prompt() -> void:
 	
 	var i : int = 0
 	var options := 0
-	for option in prompt_qeue[0].options:
+	for option in prompt_queue[0].options:
 		if InvestigationVars.check_global_conditions(option.conditions) and\
 		InvestigationVars.check_inventory(option.necessary_items):
 			var b := Button.new()
@@ -118,14 +127,14 @@ func display_prompt() -> void:
 signal pov_entered(p: String)
 func next_prompt(cond: int, can_end_chain: bool = true) -> void:
 	# TODO transition to pov if has one
-	if prompt_qeue.is_empty():
+	if prompt_queue.is_empty():
 		clear_box()
 		skip_chain_id = -1
 		stand_by = true
 		return
 	
 	
-	var previous_prompt : Prompt = prompt_qeue.pop_front()
+	var previous_prompt : Prompt = prompt_queue.pop_front()
 	if can_end_chain and previous_prompt.end_chain:
 		skip_chain_id = previous_prompt.chain_id
 
@@ -138,12 +147,14 @@ func next_prompt(cond: int, can_end_chain: bool = true) -> void:
 		if previous_prompt.pov:
 			pov_entered.emit(previous_prompt.pov)
 
-	if (prompt_qeue.size()): # if there is a next prompt
+	if (prompt_queue.size()): # if there is a next prompt
 		wants_to_advance = false
-		if _is_prompt_valid(prompt_qeue[0], cond):
+		if _is_prompt_valid(prompt_queue[0], cond):
 			main_text.clear()
 			clear_buttons()
 			display_prompt()
+			if prompt_queue[0].sound:
+				prompt_sound_requested.emit(prompt_queue[0].sound)
 		else:
 			next_prompt(cond, false)
 	else: 
@@ -169,8 +180,8 @@ func _is_prompt_valid(prompt: Prompt, cond: int) -> bool:
 	return true
 
 func _skip_invalid_prompts(cond: int) -> void:
-	while !prompt_qeue.is_empty() and !_is_prompt_valid(prompt_qeue[0], cond):
-		prompt_qeue.pop_front()
+	while !prompt_queue.is_empty() and !_is_prompt_valid(prompt_queue[0], cond):
+		prompt_queue.pop_front()
 
 func _has_visible_options(prompt: Prompt) -> int:
 	var count := 0

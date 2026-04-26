@@ -15,6 +15,7 @@ signal move_down_requested(widget: _PromptWidget)
 @onready var conditions_widget: _ConditionsWidget = $MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pre/GridContainer/ConditionsContainer/ConditionsWidget
 @onready var text_widget: TextEdit = $MarginContainer/HBoxContainer/HSplitContainer/TextContainer/TextWidget
 @onready var prompt_image_widget: _PromptImageWidget = $MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pre/GridContainer/PromptImageWidget
+@onready var sound_widget: _SoundWidget = $MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pre/GridContainer/SoundContainer/SoundWidget
 
 
 var id : int
@@ -32,6 +33,7 @@ func parse_prompt() -> Prompt:
 	p.vars_to_change = change_vars_widget.parse_conditions()
 	p.pov = pov_name_widget.get_pov_name()
 	p.img = prompt_image_widget.get_img()
+	p.sound = sound_widget.get_sound()
 	return p
 
 func load_prompt(p: Prompt) -> void:
@@ -46,6 +48,7 @@ func load_prompt(p: Prompt) -> void:
 	change_vars_widget.add_conditions(p.vars_to_change)
 	pov_name_widget.load_pov_name(p.pov)
 	prompt_image_widget.load_img(p.img)
+	sound_widget.load_sound(p.sound)
 
 func change_default_img(img: Texture2D):
 	prompt_image_widget.change_default_img(img)

@@ -3,8 +3,9 @@
 [ext_resource type="Script" uid="uid://1100rxsitcfq" path="res://investigation/scripts/investigation.gd" id="1_eyd3o"]
 [ext_resource type="PackedScene" uid="uid://dtd12y2eekoi1" path="res://investigation/text_box/scenes/text_box.tscn" id="1_kspld"]
 [ext_resource type="Texture2D" uid="uid://dg1nq4yoy3kes" path="res://investigation/interface/images/investigation_hud_overlay.png" id="2_838ch"]
-[ext_resource type="Resource" uid="uid://b4jd4pm2qd87c" path="res://investigation/pov_levels/pov_lvl.tres" id="4_3ibbm"]
+[ext_resource type="Resource" uid="uid://cmit3pjwegpgg" path="res://investigation/pov_levels/pov_lvl.tres" id="4_3ibbm"]
 [ext_resource type="PackedScene" uid="uid://bqse5lw2xwni0" path="res://investigation/povs/scenes/pov_manager.tscn" id="4_sf3q1"]
+[ext_resource type="PackedScene" uid="uid://fmeu1ocls847" path="res://investigation/scenes/sound_manager.tscn" id="6_ps6gc"]
 
 [node name="Investigation" type="Control" unique_id=1591324732]
 layout_mode = 3
@@ -58,3 +59,5 @@ grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("2_838ch")
 expand_mode = 2
+
+[node name="SoundManager" parent="." unique_id=1253211127 instance=ExtResource("6_ps6gc")]

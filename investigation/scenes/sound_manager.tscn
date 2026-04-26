@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://fmeu1ocls847"]
+
+[ext_resource type="Script" uid="uid://i3n6d1ft0muy" path="res://investigation/scenes/sound_manager.gd" id="1_a88hy"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_mi61x"]
+random_pitch = 1.122462
+random_volume_offset_db = 2.0
+
+[node name="SoundManager" type="Node" unique_id=1253211127]
+script = ExtResource("1_a88hy")
+
+[node name="PolyAudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1514236591]
+max_polyphony = 10
+
+[node name="LetterAudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1011006246]
+stream = SubResource("AudioStreamRandomizer_mi61x")

@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://cqon0s8g52b2h" path="res://investigation/utils/prompt_chain_maker/prompt_image_widget.tscn" id="5_tf5ai"]
 [ext_resource type="Texture2D" uid="uid://cm8l3y3l3dioj" path="res://investigation/interface/images/bottom_arrow.png" id="5_wjclg"]
 [ext_resource type="Texture2D" uid="uid://dtdkxktq3g8yr" path="res://investigation/interface/images/top_arrow.png" id="6_lfw2h"]
+[ext_resource type="PackedScene" uid="uid://cfiuj031kfyh3" path="res://investigation/utils/general/behaviour_widget.tscn" id="6_p1lpp"]
+[ext_resource type="PackedScene" uid="uid://cvlccjslejidx" path="res://investigation/utils/general/sound_widget.tscn" id="7_5icfr"]
 [ext_resource type="Theme" uid="uid://cyq5khk20nbm6" path="res://themes/utils_theme.tres" id="999_utils_theme"]
 
 [node name="PromptWidget" type="MarginContainer" unique_id=151020374]
@@ -140,6 +142,22 @@ layout_mode = 2
 text = "Comportamento especial"
 horizontal_alignment = 1
 autowrap_mode = 2
+
+[node name="BehaviourWidget" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pre/GridContainer/BehaviourContainer" unique_id=513523494 instance=ExtResource("6_p1lpp")]
+layout_mode = 2
+
+[node name="SoundContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pre/GridContainer" unique_id=841155674]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pre/GridContainer/SoundContainer" unique_id=1555212843]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+text = "Som"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="SoundWidget" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pre/GridContainer/SoundContainer" unique_id=1306229763 instance=ExtResource("7_5icfr")]
+layout_mode = 2
 
 [node name="Pos" type="MarginContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer" unique_id=326489978]
 visible = false

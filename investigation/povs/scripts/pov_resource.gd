@@ -8,3 +8,4 @@ class_name Pov extends Resource
 ## this is going to be used by the manager to pick the right "version" of a pov
 @export var global_conditions : Dictionary[String, int]
 @export var especial_behaviour : Script
+@export var sound : AudioStream

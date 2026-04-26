@@ -10,9 +10,8 @@ const ELEMENT_WIDGET = preload("uid://bc2hdvncpbval")
 var elements : Array[Element]
 var selected_index : int = -1
 
-#func parse_elements() -> Array[Element]:
-
-#func add_elements(elements: Array[Element]) -> void:
+func _physics_process(delta: float) -> void:
+	print(elements)
 
 func remove_element(index: int) -> void:
 	elements.remove_at(index)
