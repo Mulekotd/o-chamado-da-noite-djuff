@@ -10,8 +10,8 @@ const POV_DIRECTION_LINE = preload("uid://cx2wlsvbs6c56")
 @onready var save_sub_resources_file_dialog: FileDialog = $SaveSubResourcesFileDialog
 @onready var load_image_file_dialog: FileDialog = $LoadImageFileDialog
 @onready var default_pov_name_widget: _PovNameWidget = $ScreenContainer/FooterContainer/PanelContainer/MarginContainer/DefaultPovContainer/DefaultPovNameWidget
-@onready var pov_level_name_label: Label = $ScreenContainer/PanelContainer/HeaderContainer/HBoxContainer/PovLevelNameLabel
-@onready var not_saved_label: Label = $ScreenContainer/PanelContainer/HeaderContainer/HBoxContainer/NotSavedLabel
+@onready var pov_level_name_label: Label = $ScreenContainer/HeaderContainer/HBoxContainer/HBoxContainer/PovLevelNameLabel
+@onready var not_saved_label: Label = $ScreenContainer/HeaderContainer/HBoxContainer/HBoxContainer/NotSavedLabel
 
 
 var is_panning: bool = false
