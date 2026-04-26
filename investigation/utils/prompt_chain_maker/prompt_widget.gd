@@ -4,16 +4,16 @@ class_name _PromptWidget extends MarginContainer
 signal move_up_requested(widget: _PromptWidget)
 signal move_down_requested(widget: _PromptWidget)
 
-@onready var options_widget: _OptionsWidget = $MarginContainer/HBoxContainer/HSplitContainer/OptionsContainer/OptionsWidget
-@onready var necessary_items_widget: _ItemsWidget = $MarginContainer/HBoxContainer/HSplitContainer/SplitContainer/GridContainer/NecessaryItemsContainer/NecessaryItemsWidget
-@onready var change_vars_widget: _ConditionsWidget = $MarginContainer/HBoxContainer/HSplitContainer/SplitContainer/GridContainer/VarsToChangeContainer/ChangeVarsWidget
-@onready var condition_number_widget: TextEdit = $MarginContainer/HBoxContainer/HSplitContainer/SplitContainer/GridContainer/ConditionNumberContainer/ConditionNumberWidget
-@onready var give_items_widget: _ItemsWidget = $MarginContainer/HBoxContainer/HSplitContainer/SplitContainer/GridContainer/GiveItemsContainer/GiveItemsWidget
-@onready var take_items_widget: _ItemsWidget = $MarginContainer/HBoxContainer/HSplitContainer/SplitContainer/GridContainer/TakeItemsContainer/TakeItemsWidget
-@onready var end_chain_widget: CheckBox = $MarginContainer/HBoxContainer/HSplitContainer/SplitContainer/GridContainer/EndChainContainer/EndChainWidget
-@onready var pov_name_widget: _PovNameWidget = $MarginContainer/HBoxContainer/HSplitContainer/SplitContainer/GridContainer/PovContainer/PovNameWidget
-@onready var conditions_widget: _ConditionsWidget = $MarginContainer/HBoxContainer/HSplitContainer/SplitContainer/GridContainer/ConditionsContainer/ConditionsWidget
-@onready var text_widget: TextEdit = $MarginContainer/HBoxContainer/HSplitContainer/SplitContainer/TextContainer/TextWidget
+@onready var give_items_widget: _ItemsWidget = $MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Mudancas/GridContainer/GiveItemsContainer/GiveItemsWidget
+@onready var take_items_widget: _ItemsWidget = $MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Mudancas/GridContainer/TakeItemsContainer/TakeItemsWidget
+@onready var end_chain_widget: CheckBox = $MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Mudancas/GridContainer/EndChainContainer/EndChainWidget
+@onready var pov_name_widget: _PovNameWidget = $MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Mudancas/GridContainer/PovContainer/PovNameWidget
+@onready var change_vars_widget: _ConditionsWidget = $MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Mudancas/GridContainer/VarsToChangeContainer/ChangeVarsWidget
+@onready var options_widget: _OptionsWidget = $MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Opcoes/OptionsWidget
+@onready var necessary_items_widget: _ItemsWidget = $MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Condicoes/GridContainer/NecessaryItemsContainer/NecessaryItemsWidget
+@onready var condition_number_widget: TextEdit = $MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Condicoes/GridContainer/ConditionNumberContainer/ConditionNumberWidget
+@onready var conditions_widget: _ConditionsWidget = $MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Condicoes/GridContainer/ConditionsContainer/ConditionsWidget
+@onready var text_widget: TextEdit = $MarginContainer/HBoxContainer/HSplitContainer/TextContainer/TextWidget
 
 
 var id : int

@@ -34,7 +34,7 @@ text = "Option: "
 [node name="TextEdit" type="TextEdit" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1944187967]
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
-size_flags_horizontal = 2
+size_flags_horizontal = 6
 theme = ExtResource("999_utils_theme")
 placeholder_text = "Opcao"
 wrap_mode = 1

@@ -38,158 +38,184 @@ theme_override_constants/separation = 14
 [node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer/HBoxContainer" unique_id=1268872802]
 layout_mode = 2
 size_flags_horizontal = 3
+split_offsets = PackedInt32Array(356)
+split_offset = 356
 
-[node name="SplitContainer" type="SplitContainer" parent="MarginContainer/HBoxContainer/HSplitContainer" unique_id=16605644]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="TextContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/SplitContainer" unique_id=691582231]
+[node name="TextContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer" unique_id=691582231]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/HSplitContainer/SplitContainer/TextContainer" unique_id=1131979070]
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/HSplitContainer/TextContainer" unique_id=1131979070]
 custom_minimum_size = Vector2(1, 1)
 layout_mode = 2
 text = "Texto"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="TextWidget" type="TextEdit" parent="MarginContainer/HBoxContainer/HSplitContainer/SplitContainer/TextContainer" unique_id=1609192753]
+[node name="TextWidget" type="TextEdit" parent="MarginContainer/HBoxContainer/HSplitContainer/TextContainer" unique_id=1609192753]
 custom_minimum_size = Vector2(175, 100)
 layout_mode = 2
 size_flags_vertical = 3
 placeholder_text = "Texto"
 wrap_mode = 1
 
-[node name="GridContainer" type="GridContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/SplitContainer" unique_id=689460388]
+[node name="TabContainer" type="TabContainer" parent="MarginContainer/HBoxContainer/HSplitContainer" unique_id=241532051]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/h_separation = 16
-theme_override_constants/v_separation = 16
-columns = 4
+current_tab = 1
 
-[node name="ConditionsContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/SplitContainer/GridContainer" unique_id=701184403]
+[node name="Condicoes" type="MarginContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer" unique_id=1916516240]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+metadata/_tab_index = 0
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Condicoes" unique_id=1186498463]
+layout_mode = 2
+theme_override_constants/h_separation = 32
+columns = 3
+
+[node name="ConditionsContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Condicoes/GridContainer" unique_id=701184403]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/HSplitContainer/SplitContainer/GridContainer/ConditionsContainer" unique_id=1612863587]
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Condicoes/GridContainer/ConditionsContainer" unique_id=1612863587]
 custom_minimum_size = Vector2(1, 1)
 layout_mode = 2
 text = "Condicoes"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="ConditionsWidget" parent="MarginContainer/HBoxContainer/HSplitContainer/SplitContainer/GridContainer/ConditionsContainer" unique_id=1813019862 instance=ExtResource("2_52qs4")]
+[node name="ConditionsWidget" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Condicoes/GridContainer/ConditionsContainer" unique_id=1813019862 instance=ExtResource("2_52qs4")]
 layout_mode = 2
 
-[node name="NecessaryItemsContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/SplitContainer/GridContainer" unique_id=866713110]
+[node name="NecessaryItemsContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Condicoes/GridContainer" unique_id=866713110]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/HSplitContainer/SplitContainer/GridContainer/NecessaryItemsContainer" unique_id=2010168285]
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Condicoes/GridContainer/NecessaryItemsContainer" unique_id=2010168285]
 custom_minimum_size = Vector2(1, 1)
 layout_mode = 2
 text = "Itens necessarios"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="NecessaryItemsWidget" parent="MarginContainer/HBoxContainer/HSplitContainer/SplitContainer/GridContainer/NecessaryItemsContainer" unique_id=589692923 instance=ExtResource("1_eg3ew")]
+[node name="NecessaryItemsWidget" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Condicoes/GridContainer/NecessaryItemsContainer" unique_id=589692923 instance=ExtResource("1_eg3ew")]
 layout_mode = 2
 
-[node name="VarsToChangeContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/SplitContainer/GridContainer" unique_id=429128829]
-layout_mode = 2
-size_flags_horizontal = 3
-alignment = 1
-
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/HSplitContainer/SplitContainer/GridContainer/VarsToChangeContainer" unique_id=2022840578]
-custom_minimum_size = Vector2(1, 1)
-layout_mode = 2
-text = "Vars para mudar"
-horizontal_alignment = 1
-autowrap_mode = 2
-
-[node name="ChangeVarsWidget" parent="MarginContainer/HBoxContainer/HSplitContainer/SplitContainer/GridContainer/VarsToChangeContainer" unique_id=2009519092 instance=ExtResource("2_52qs4")]
-layout_mode = 2
-
-[node name="ConditionNumberContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/SplitContainer/GridContainer" unique_id=263075385]
+[node name="ConditionNumberContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Condicoes/GridContainer" unique_id=263075385]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/HSplitContainer/SplitContainer/GridContainer/ConditionNumberContainer" unique_id=1355031731]
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Condicoes/GridContainer/ConditionNumberContainer" unique_id=1355031731]
 custom_minimum_size = Vector2(1, 1)
 layout_mode = 2
 text = "Numero de condicao"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="ConditionNumberWidget" type="TextEdit" parent="MarginContainer/HBoxContainer/HSplitContainer/SplitContainer/GridContainer/ConditionNumberContainer" unique_id=502194860]
+[node name="ConditionNumberWidget" type="TextEdit" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Condicoes/GridContainer/ConditionNumberContainer" unique_id=502194860]
 layout_mode = 2
 text = "-1"
 placeholder_text = "-1"
 scroll_fit_content_height = true
 scroll_fit_content_width = true
 
-[node name="GiveItemsContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/SplitContainer/GridContainer" unique_id=1826676483]
+[node name="Mudancas" type="MarginContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer" unique_id=326489978]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+metadata/_tab_index = 1
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Mudancas" unique_id=630316187]
+layout_mode = 2
+theme_override_constants/h_separation = 32
+theme_override_constants/v_separation = 32
+columns = 3
+
+[node name="VarsToChangeContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Mudancas/GridContainer" unique_id=429128829]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Mudancas/GridContainer/VarsToChangeContainer" unique_id=2022840578]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+text = "Vars para mudar"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="ChangeVarsWidget" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Mudancas/GridContainer/VarsToChangeContainer" unique_id=2009519092 instance=ExtResource("2_52qs4")]
+layout_mode = 2
+
+[node name="GiveItemsContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Mudancas/GridContainer" unique_id=1826676483]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/HSplitContainer/SplitContainer/GridContainer/GiveItemsContainer" unique_id=1520669969]
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Mudancas/GridContainer/GiveItemsContainer" unique_id=1520669969]
 layout_mode = 2
 text = "Itens para dar"
 horizontal_alignment = 1
 
-[node name="GiveItemsWidget" parent="MarginContainer/HBoxContainer/HSplitContainer/SplitContainer/GridContainer/GiveItemsContainer" unique_id=1978747484 instance=ExtResource("1_eg3ew")]
+[node name="GiveItemsWidget" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Mudancas/GridContainer/GiveItemsContainer" unique_id=1978747484 instance=ExtResource("1_eg3ew")]
 layout_mode = 2
 
-[node name="TakeItemsContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/SplitContainer/GridContainer" unique_id=450291044]
+[node name="TakeItemsContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Mudancas/GridContainer" unique_id=450291044]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/HSplitContainer/SplitContainer/GridContainer/TakeItemsContainer" unique_id=159580589]
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Mudancas/GridContainer/TakeItemsContainer" unique_id=159580589]
 layout_mode = 2
 text = "Itens para remover"
 horizontal_alignment = 1
 
-[node name="TakeItemsWidget" parent="MarginContainer/HBoxContainer/HSplitContainer/SplitContainer/GridContainer/TakeItemsContainer" unique_id=98264587 instance=ExtResource("1_eg3ew")]
+[node name="TakeItemsWidget" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Mudancas/GridContainer/TakeItemsContainer" unique_id=98264587 instance=ExtResource("1_eg3ew")]
 layout_mode = 2
 
-[node name="EndChainContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/SplitContainer/GridContainer" unique_id=107193213]
+[node name="EndChainContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Mudancas/GridContainer" unique_id=107193213]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
 
-[node name="EndChainWidget" type="CheckBox" parent="MarginContainer/HBoxContainer/HSplitContainer/SplitContainer/GridContainer/EndChainContainer" unique_id=80609606]
+[node name="EndChainWidget" type="CheckBox" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Mudancas/GridContainer/EndChainContainer" unique_id=80609606]
 layout_mode = 2
-text = "Should end chain"
+text = "Should end chain?"
 
-[node name="PovContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/SplitContainer/GridContainer" unique_id=280504026]
+[node name="PovContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Mudancas/GridContainer" unique_id=280504026]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/HSplitContainer/SplitContainer/GridContainer/PovContainer" unique_id=1803686655]
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Mudancas/GridContainer/PovContainer" unique_id=1803686655]
 layout_mode = 2
 text = "Pov para ir"
 horizontal_alignment = 1
 
-[node name="PovNameWidget" parent="MarginContainer/HBoxContainer/HSplitContainer/SplitContainer/GridContainer/PovContainer" unique_id=1471266665 instance=ExtResource("5_r4mer")]
+[node name="PovNameWidget" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Mudancas/GridContainer/PovContainer" unique_id=1471266665 instance=ExtResource("5_r4mer")]
 layout_mode = 2
 
-[node name="OptionsContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer" unique_id=300089472]
+[node name="Opcoes" type="VBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer" unique_id=300089472]
+visible = false
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 size_flags_horizontal = 8
 alignment = 1
+metadata/_tab_index = 2
 
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/HSplitContainer/OptionsContainer" unique_id=1972144797]
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Opcoes" unique_id=1972144797]
 custom_minimum_size = Vector2(1, 1)
 layout_mode = 2
 text = "Opcoes"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="OptionsWidget" parent="MarginContainer/HBoxContainer/HSplitContainer/OptionsContainer" unique_id=1903776342 instance=ExtResource("3_vn5r7")]
+[node name="OptionsWidget" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Opcoes" unique_id=1903776342 instance=ExtResource("3_vn5r7")]
 layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1715678283]
