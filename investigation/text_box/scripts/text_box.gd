@@ -59,7 +59,6 @@ func clear_box() -> void:
 	main_text.clear()
 	main_text.append_text("...")
 	clear_buttons()
-	chain_number = 0
 
 func append_prompt(prompt: Prompt) -> void:
 	#print(prompt.text," POV: ", prompt.pov)
@@ -126,13 +125,11 @@ func display_prompt() -> void:
 
 signal pov_entered(p: String)
 func next_prompt(cond: int, can_end_chain: bool = true) -> void:
-	# TODO transition to pov if has one
 	if prompt_queue.is_empty():
 		clear_box()
 		skip_chain_id = -1
 		stand_by = true
 		return
-	
 	
 	var previous_prompt : Prompt = prompt_queue.pop_front()
 	if can_end_chain and previous_prompt.end_chain:
@@ -143,18 +140,21 @@ func next_prompt(cond: int, can_end_chain: bool = true) -> void:
 		InvestigationVars.update_variables(previous_prompt.vars_to_change)
 		InvestigationVars.append_item(previous_prompt.items_to_give)
 		InvestigationVars.remove_item(previous_prompt.items_to_take)
+		
+		if previous_prompt.pos_sound:
+			prompt_sound_requested.emit(previous_prompt.pos_sound)
 			
 		if previous_prompt.pov:
 			pov_entered.emit(previous_prompt.pov)
-
+	
 	if (prompt_queue.size()): # if there is a next prompt
 		wants_to_advance = false
 		if _is_prompt_valid(prompt_queue[0], cond):
 			main_text.clear()
 			clear_buttons()
 			display_prompt()
-			if prompt_queue[0].sound:
-				prompt_sound_requested.emit(prompt_queue[0].sound)
+			if prompt_queue[0].pre_sound:
+				prompt_sound_requested.emit(prompt_queue[0].pre_sound)
 		else:
 			next_prompt(cond, false)
 	else: 

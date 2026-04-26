@@ -95,7 +95,8 @@ text = "cancelar"
 [node name="CloseButton" type="Button" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/HeaderContainer/HBoxContainer" unique_id=1996993864]
 layout_mode = 2
 size_flags_horizontal = 8
-text = "SALVAR"
+text = "FECHAR
+"
 
 [node name="NameLineEdit" type="LineEdit" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/HeaderContainer" unique_id=1798401386]
 layout_mode = 2

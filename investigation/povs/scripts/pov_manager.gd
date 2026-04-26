@@ -31,6 +31,7 @@ func change_pov(index: int) -> void:
 	update_view(current_pov)
 	_save_last_pov(current_pov.name)
 	if current_pov.prompt_chain.prompts:
+		print(current_pov.name)
 		enabled = false
 		await get_tree().create_timer(prompt_wait_time).timeout
 		prompt_chain_called.emit(current_pov.prompt_chain)
@@ -57,7 +58,7 @@ func _configure_arrow(arrow: TextureRect, arrow_texture: Texture2D, target_pov: 
 	# Avoid duplicate gui_input callbacks when changing POV multiple times.
 	for connection in arrow.gui_input.get_connections():
 		arrow.gui_input.disconnect(connection.callable)
-
+	
 	if target_pov:
 		var target_index := get_pov_index(target_pov)
 		arrow.texture = arrow_texture

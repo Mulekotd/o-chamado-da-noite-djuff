@@ -233,6 +233,19 @@ horizontal_alignment = 1
 [node name="PovNameWidget" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pos/GridContainer/PovContainer" unique_id=1471266665 instance=ExtResource("5_r4mer")]
 layout_mode = 2
 
+[node name="SoundContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pos/GridContainer" unique_id=1303742279]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pos/GridContainer/SoundContainer" unique_id=196743984]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+text = "Som"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="SoundWidget" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pos/GridContainer/SoundContainer" unique_id=708147311 instance=ExtResource("7_5icfr")]
+layout_mode = 2
+
 [node name="Opcoes" type="VBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer" unique_id=300089472]
 visible = false
 custom_minimum_size = Vector2(160, 0)

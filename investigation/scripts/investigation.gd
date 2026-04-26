@@ -18,7 +18,7 @@ func _ready() -> void:
 	text_box.chain_added.connect(_append_prompt_chain_sound)
 
 func _update_sound_manager_letter_sounds(chain_id: int) -> void:
-	print("UPDATE SOUND MANAGER LETTER SOUNDS")
+	print("UPDATE SOUND MANAGER LETTER SOUNDS: ", chain_id)
 	while chain_id_queue[0] != chain_id:
 		chain_id_queue.pop_front()
 		prompt_chain_queue.pop_front()

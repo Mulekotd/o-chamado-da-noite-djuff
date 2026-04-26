@@ -17,6 +17,8 @@ class_name Prompt extends Resource
 ## this will be the image displayed besides the textbox when this prompt comes up
 @export var img : Texture2D
 ## audio to play immediately
-@export var sound : AudioStream
+@export var pre_sound : AudioStream
+## audio to after this prompt
+@export var pos_sound : AudioStream
 ## this number will be overwriten by the prompt chain logic
 var chain_id : int
