@@ -1,27 +1,9 @@
 [gd_scene format=3 uid="uid://sde7emoawly0"]
 
 [ext_resource type="Script" uid="uid://bncnglat1o1x0" path="res://investigation/utils/prompt_chain_maker/prompt_chain_maker.gd" id="1_5ju4m"]
-[ext_resource type="Texture2D" uid="uid://btl648umtkl7m" path="res://themes/background.tres" id="3_ok0tj"]
+[ext_resource type="PackedScene" uid="uid://f2qd0iww8k1p" path="res://investigation/utils/general/moving_noise_widget.tscn" id="3_pcfx8"]
 [ext_resource type="PackedScene" uid="uid://cqon0s8g52b2h" path="res://investigation/utils/prompt_chain_maker/prompt_image_widget.tscn" id="4_pcfx8"]
 [ext_resource type="Theme" uid="uid://cyq5khk20nbm6" path="res://themes/utils_theme.tres" id="999_utils_theme"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ok0tj"]
-content_margin_left = 0.0
-content_margin_top = 0.0
-content_margin_right = 0.0
-content_margin_bottom = 0.0
-bg_color = Color(0.12970808, 0.08108256, 0.14196941, 0.6)
-border_width_left = 46
-border_width_top = 64
-border_width_right = 64
-border_width_bottom = 64
-border_color = Color(0, 0, 0, 0.7607843)
-border_blend = true
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
-corner_detail = 5
 
 [node name="PromptChainMaker" type="Control" unique_id=750523266]
 z_index = 2
@@ -36,23 +18,8 @@ grow_vertical = 2
 theme = ExtResource("999_utils_theme")
 script = ExtResource("1_5ju4m")
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=1225639781]
+[node name="MovingNoiseWidget" parent="." unique_id=292722013 instance=ExtResource("3_pcfx8")]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("3_ok0tj")
-
-[node name="ColorRect" type="Panel" parent="TextureRect" unique_id=1034873242]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ok0tj")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=741396627]
 layout_mode = 1

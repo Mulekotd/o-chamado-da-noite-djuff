@@ -5,22 +5,7 @@ const PROMPT_WIDGET = preload("uid://cjh18gp04aw2o")
 @onready var load_file_dialog: FileDialog = $LoadFileDialog
 @onready var prompts_container: VBoxContainer = $VBoxContainer/VScrollBar/PromptsContainer
 @onready var name_line_edit: LineEdit = $VBoxContainer/Container/HBoxContainer/NameLineEdit
-@onready var texture_rect: TextureRect = $TextureRect
 @onready var default_prompt_image_widget: _PromptImageWidget = $VBoxContainer/Container/HBoxContainer/FoldableContainer/DefaultPromptImageWidget
-
-var bg : NoiseTexture2D
-var bg_speed : Vector2 = Vector2(0.05,0.5)
-
-func _ready() -> void:
-	bg = texture_rect.texture
-
-var elapsed : float = 0
-func _physics_process(delta: float) -> void:
-	elapsed += delta
-	bg.noise.set("offset", Vector2(
-		sin(bg_speed.x * elapsed) * 200,
-		(bg_speed.y * elapsed) * 10 + cos(elapsed * bg_speed.y) * 5
-		))
 
 func load_prompt_chain(p_chain: PromptChain) -> void:
 	clear_prompt_chain()

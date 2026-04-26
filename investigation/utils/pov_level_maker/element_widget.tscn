@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://h5g8y4rkiao8" path="res://investigation/utils/pov_level_maker/element_widget.gd" id="1_h56jg"]
 [ext_resource type="PackedScene" uid="uid://c7ijmdu431cqc" path="res://investigation/utils/pov_level_maker/hitbox_preview_widget.tscn" id="2_mbf48"]
+[ext_resource type="PackedScene" uid="uid://f2qd0iww8k1p" path="res://investigation/utils/general/moving_noise_widget.tscn" id="3_kus40"]
 [ext_resource type="PackedScene" uid="uid://dnoms4opqgf4v" path="res://investigation/utils/general/items_widget.tscn" id="3_oqdgp"]
 [ext_resource type="PackedScene" uid="uid://bj378ngyim0ll" path="res://investigation/utils/general/conditions_widget.tscn" id="4_atknv"]
 [ext_resource type="PackedScene" uid="uid://d0nk5v1faci5l" path="res://investigation/utils/pov_level_maker/pov_name_widget.tscn" id="4_gradj"]
@@ -26,6 +27,9 @@ grow_vertical = 2
 theme = ExtResource("999_utils_theme")
 script = ExtResource("1_h56jg")
 metadata/_edit_use_anchors_ = true
+
+[node name="MovingNoiseWidget" parent="." unique_id=292722013 instance=ExtResource("3_kus40")]
+layout_mode = 1
 
 [node name="BackgroundRect" type="ColorRect" parent="." unique_id=2025292537]
 layout_mode = 1
@@ -179,10 +183,8 @@ layout_mode = 2
 size_flags_horizontal = 0
 text = "Prompt chain: "
 
-[node name="PromptChainWidget" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/PromptChainContainer" unique_id=1938228351 instance=ExtResource("5_atknv")]
+[node name="PromptChainWidget" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/PromptChainContainer" unique_id=1195115200 instance=ExtResource("5_atknv")]
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
 
 [connection signal="pressed" from="ScrollContainer/Panel/MarginContainer/VBoxContainer/HeaderContainer/HBoxContainer/CancelButton" to="." method="_on_cancel_button_pressed"]
 [connection signal="pressed" from="ScrollContainer/Panel/MarginContainer/VBoxContainer/HeaderContainer/HBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]
