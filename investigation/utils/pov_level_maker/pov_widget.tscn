@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dwj11t2nw18l2" path="res://investigation/povs/no_image_pov.png" id="3_42ls8"]
 [ext_resource type="PackedScene" uid="uid://bj378ngyim0ll" path="res://investigation/utils/general/conditions_widget.tscn" id="4_qnhhs"]
 [ext_resource type="PackedScene" uid="uid://4cfakuwt60x0" path="res://investigation/utils/pov_level_maker/elements_widget.tscn" id="5_tijdk"]
+[ext_resource type="PackedScene" uid="uid://cfiuj031kfyh3" path="res://investigation/utils/general/behaviour_widget.tscn" id="7_l743g"]
 [ext_resource type="Theme" uid="uid://cyq5khk20nbm6" path="res://themes/utils_theme.tres" id="999_utils_theme"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_42ls8"]
@@ -48,6 +49,7 @@ grow_vertical = 2
 horizontal_scroll_mode = 0
 
 [node name="Panel" type="PanelContainer" parent="ScrollContainer" unique_id=1417967029]
+custom_minimum_size = Vector2(343.29, 0)
 layout_mode = 2
 size_flags_horizontal = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_42ls8")
@@ -78,14 +80,8 @@ theme_override_constants/margin_bottom = 4
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/HeaderContainer" unique_id=573430845]
 layout_mode = 2
+size_flags_horizontal = 8
 alignment = 1
-
-[node name="NameLineEdit" type="LineEdit" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/HeaderContainer/HBoxContainer" unique_id=1798401386]
-layout_mode = 2
-size_flags_horizontal = 0
-placeholder_text = "Nome do pov"
-max_length = 48
-expand_to_text_length = true
 
 [node name="CancelButton" type="Button" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/HeaderContainer/HBoxContainer" unique_id=1319970033]
 layout_mode = 2
@@ -97,6 +93,13 @@ layout_mode = 2
 size_flags_horizontal = 8
 text = "SALVAR"
 
+[node name="NameLineEdit" type="LineEdit" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/HeaderContainer" unique_id=1798401386]
+layout_mode = 2
+size_flags_horizontal = 0
+placeholder_text = "Nome do pov"
+max_length = 48
+expand_to_text_length = true
+
 [node name="PovImageRect" type="TextureRect" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer" unique_id=1417508740]
 custom_minimum_size = Vector2(256, 0)
 layout_mode = 2
@@ -105,14 +108,14 @@ texture = ExtResource("3_42ls8")
 expand_mode = 5
 stretch_mode = 4
 
-[node name="-----------------3" type="ColorRect" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer" unique_id=881009956]
-custom_minimum_size = Vector2(0, 2)
-layout_mode = 2
-
 [node name="AtributesContainer" type="VBoxContainer" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer" unique_id=966170385]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/separation = 21
+
+[node name="-----------------4" type="ColorRect" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer" unique_id=881009956]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
 
 [node name="DescricaoContainer" type="VBoxContainer" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer" unique_id=717493965]
 layout_mode = 2
@@ -186,6 +189,24 @@ autowrap_mode = 2
 [node name="ConditionsWidget" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/ConditionsContainer" unique_id=1813019862 instance=ExtResource("4_qnhhs")]
 layout_mode = 2
 theme = null
+
+[node name="-----------------5" type="ColorRect" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer" unique_id=604246218]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+
+[node name="HBoxContainer" type="VBoxContainer" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer" unique_id=1081235391]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/HBoxContainer" unique_id=1405898318]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+text = "Comportamento Especial"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="BehaviourWidget" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/HBoxContainer" unique_id=513523494 instance=ExtResource("7_l743g")]
+layout_mode = 2
+size_flags_horizontal = 4
 
 [node name="ImageLoadFileDialog" type="FileDialog" parent="." unique_id=356340459]
 oversampling_override = 1.0

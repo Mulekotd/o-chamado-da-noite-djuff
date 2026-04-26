@@ -131,6 +131,16 @@ scroll_fit_content_width = true
 [node name="PromptImageWidget" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pre/GridContainer" unique_id=489540816 instance=ExtResource("5_tf5ai")]
 layout_mode = 2
 
+[node name="BehaviourContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pre/GridContainer" unique_id=674273464]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pre/GridContainer/BehaviourContainer" unique_id=729301820]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+text = "Comportamento especial"
+horizontal_alignment = 1
+autowrap_mode = 2
+
 [node name="Pos" type="MarginContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer" unique_id=326489978]
 visible = false
 layout_mode = 2

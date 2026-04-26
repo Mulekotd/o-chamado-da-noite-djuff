@@ -34,6 +34,10 @@ func change_pov(index: int) -> void:
 		enabled = false
 		await get_tree().create_timer(prompt_wait_time).timeout
 		prompt_chain_called.emit(current_pov.prompt_chain)
+	if current_pov.especial_behaviour:
+		var n := Node.new()
+		n.set_script(current_pov.especial_behaviour)
+		add_sibling(n)
 	
 func change_pov_by_name(pov_name: String) -> void:
 	change_pov(get_pov_index(pov_name))

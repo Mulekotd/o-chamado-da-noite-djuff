@@ -1,6 +1,7 @@
 class_name _PovWidget extends Control
 
-@onready var name_line_edit: LineEdit = $ScrollContainer/Panel/MarginContainer/VBoxContainer/HeaderContainer/HBoxContainer/NameLineEdit
+@onready var name_line_edit: LineEdit = $ScrollContainer/Panel/MarginContainer/VBoxContainer/HeaderContainer/NameLineEdit
+@onready var behaviour_widget: _ScriptWidget = $ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/HBoxContainer/BehaviourWidget
 @onready var description_text_edit: TextEdit = $ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/DescricaoContainer/DescriptionTextEdit
 @onready var prompt_chain_widget: _PromptChainWidget = $ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/PromptChainContainer/PromptChainWidget
 @onready var elements_widget: _ElementsWidget = $ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/ElementsContainer/ElementsWidget
@@ -21,6 +22,7 @@ func load_pov(pov: Pov) -> void:
 	prompt_chain_widget.load_prompt_chain(pov.prompt_chain)
 	elements_widget.add_elements(pov.elements)
 	conditions_widget.add_conditions(pov.global_conditions)
+	behaviour_widget.load_behaviour(pov.especial_behaviour)
 
 func parse_pov() -> Pov:
 	var pov := Pov.new()
@@ -31,6 +33,7 @@ func parse_pov() -> Pov:
 	pov.prompt_chain = prompt_chain_widget.prompt_chain
 	pov.elements = elements_widget.elements
 	pov.global_conditions = conditions_widget.parse_conditions()
+	pov.especial_behaviour = behaviour_widget.get_behaviour()
 	return pov
 
 func save_pov_file(path: String) -> void:
