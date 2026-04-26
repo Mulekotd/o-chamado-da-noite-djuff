@@ -9,6 +9,7 @@ const POV_DIRECTION_LINE = preload("uid://cx2wlsvbs6c56")
 @onready var save_file_dialog: FileDialog = $SaveFileDialog
 @onready var save_sub_resources_file_dialog: FileDialog = $SaveSubResourcesFileDialog
 @onready var load_image_file_dialog: FileDialog = $LoadImageFileDialog
+@onready var default_pov_name_widget: _PovNameWidget = $ScreenContainer/FooterContainer/PanelContainer/MarginContainer/DefaultPovContainer/DefaultPovNameWidget
 
 
 var is_panning: bool = false
@@ -89,6 +90,7 @@ func parse_pov_level() -> PovLevel:
 	var pl := PovLevel.new()
 	pl.bg_img = bg.texture
 	pl.dir_scale = current_widget_scale
+	pl.default_pov = default_pov_name_widget.get_pov_name()
 	for pdw in dirs:
 		pl.pov_directions_array.append(pdw.parse_pov_directions())
 		for stacked_dir in pdw.pov_directions_stack_widget.parse_pov_directions_stack():
@@ -99,6 +101,7 @@ func load_pov_level(pl: PovLevel) -> void:
 	_is_loading_level = true
 	current_widget_scale = pl.dir_scale if pl.dir_scale > 0.0 else 1.0
 	clear_level()
+	default_pov_name_widget.load_pov_name(pl.default_pov)
 	bg.texture = pl.bg_img
 	for pd in pl.pov_directions_array:
 		add_pov_directions(pd.coords)

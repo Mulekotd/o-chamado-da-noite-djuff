@@ -12,23 +12,28 @@ const RIGHT_ARROW = preload("uid://dlf5uc3tlxr2j")
 const TOP_ARROW = preload("uid://dtdkxktq3g8yr")
 
 signal element_clicked(element: Element)
+signal prompt_chain_called(p_chain: PromptChain)
 
 @export var pov_level : PovLevel
 var pov_index : int
 var current_pov : Pov
 var enabled : bool = true
 @export var arrow_hitbox : float = 16
+## time to wait before showing the prompt_chain if a pov has one
+@export var prompt_wait_time : float = 1
 
 func _ready() -> void:
-	change_pov(0)
-	await get_tree().create_timer(1).timeout
-	for dir : PovDirections in pov_level.pov_directions_array:
-		for p in dir.pov.elements[0].prompt_chain.prompts:
-			print(p.text, " POV: ", p.pov)
+	_load_last_pov()
+
 func change_pov(index: int) -> void:
 	pov_index = index
 	current_pov = pov_level.pov_directions_array[index].pov
 	update_view(current_pov)
+	_save_last_pov(current_pov.name)
+	if current_pov.prompt_chain.prompts:
+		enabled = false
+		await get_tree().create_timer(prompt_wait_time).timeout
+		prompt_chain_called.emit(current_pov.prompt_chain)
 	
 func change_pov_by_name(pov_name: String) -> void:
 	change_pov(get_pov_index(pov_name))
@@ -72,11 +77,16 @@ func _on_arrow_gui_input(event: InputEvent, index: int) -> void:
 func get_pov_index(name: String) -> int:
 	var i := 0
 	for dir in pov_level.pov_directions_array:
+		print(i, " : ", dir.pov.name)
 		if dir.pov.name == name:
 			if InvestigationVars.check_global_conditions(dir.pov.global_conditions):
 				return i
 		i += 1
 	return -1
+
+func _save_last_pov(p_name: String) -> void:
+	print("salvou: ", p_name)
+	InvestigationVars.set_last_pov(p_name)
 
 ## gets the element is the relative position [0, 1]. returns null if none found
 func _get_element_in_pos(pos: Vector2) -> Element:
@@ -87,6 +97,15 @@ func _get_element_in_pos(pos: Vector2) -> Element:
 			pos.y <= e.hitbox.bottom):
 			return e
 	return null
+
+func _load_last_pov() -> void:
+	print("tentando achar: ",InvestigationVars.get_last_pov() )
+	if get_pov_index(InvestigationVars.get_last_pov()) != -1:
+		print("achou last pov: ", InvestigationVars.get_last_pov())
+		change_pov(get_pov_index(InvestigationVars.get_last_pov()))
+	else:
+		print("nao achou, carregando default.")
+		change_pov(get_pov_index(pov_level.default_pov))
 
 func _on_gui_input(_event: InputEvent) -> void:
 	if !Input.is_action_just_pressed("ui_mouse_pressed") or !enabled:

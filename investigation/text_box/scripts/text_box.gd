@@ -3,8 +3,13 @@ class_name TextBox extends Control
 @onready var main_text: RichTextLabel = $ColorRect/Text/MainText
 @onready var options_container: HFlowContainer = $ColorRect/Text/OptionsContainer
 
+signal stand_by_changed(state: bool)
+
 var prompt_qeue : Array[Prompt]
-var stand_by : bool = true
+var stand_by : bool = true :
+	set(x):
+		stand_by = x
+		stand_by_changed.emit(x)
 var is_writing : bool = false
 var is_mouse_inside : bool = false
 var chain_number : int = 0

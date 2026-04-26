@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://djug47wdeua1a" path="res://investigation/utils/pov_level_maker/pov_level_maker.gd" id="1_xm7nf"]
 [ext_resource type="Texture2D" uid="uid://c6uq8ruu8dc8f" path="res://investigation/povs/pov_level_bg.jpeg" id="3_mcsh5"]
+[ext_resource type="PackedScene" uid="uid://d0nk5v1faci5l" path="res://investigation/utils/pov_level_maker/pov_name_widget.tscn" id="4_acxws"]
 [ext_resource type="PackedScene" uid="uid://cbec8em7mx07l" path="res://investigation/utils/general/load_file_dialog.tscn" id="4_q725i"]
 [ext_resource type="PackedScene" uid="uid://dt165ad2qtj64" path="res://investigation/utils/general/save_file_dialog.tscn" id="5_acxws"]
 [ext_resource type="PackedScene" uid="uid://cko8sykqdhkfw" path="res://investigation/utils/general/image_load_file_dialog.tscn" id="6_5g44b"]
@@ -18,6 +19,9 @@ corner_radius_top_right = 3
 corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_acxws"]
+bg_color = Color(0, 0, 0, 1)
 
 [node name="PovLevelMaker" type="Control" unique_id=1959134330 groups=["pov_level_maker", "util_parent_control"]]
 layout_mode = 3
@@ -56,27 +60,60 @@ texture = ExtResource("3_mcsh5")
 expand_mode = 3
 stretch_mode = 4
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ScreenContainer" unique_id=1540156051]
+[node name="HeaderContainer" type="HBoxContainer" parent="ScreenContainer" unique_id=1540156051]
 z_index = 2
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 28.0
+grow_horizontal = 2
 
-[node name="SaveButton" type="Button" parent="ScreenContainer/HBoxContainer" unique_id=843172508]
+[node name="SaveButton" type="Button" parent="ScreenContainer/HeaderContainer" unique_id=843172508]
 layout_mode = 2
 text = "Salvar"
 
-[node name="SaveSubResourcesButton" type="Button" parent="ScreenContainer/HBoxContainer" unique_id=404927200]
+[node name="SaveSubResourcesButton" type="Button" parent="ScreenContainer/HeaderContainer" unique_id=404927200]
 layout_mode = 2
 text = "Salvar sub-resources"
 
-[node name="LoadButton" type="Button" parent="ScreenContainer/HBoxContainer" unique_id=42024235]
+[node name="LoadButton" type="Button" parent="ScreenContainer/HeaderContainer" unique_id=42024235]
 layout_mode = 2
 text = "Abrir"
 
-[node name="LoadImageButton" type="Button" parent="ScreenContainer/HBoxContainer" unique_id=1078090342]
+[node name="LoadImageButton" type="Button" parent="ScreenContainer/HeaderContainer" unique_id=1078090342]
 layout_mode = 2
 text = "Mudar Imagem"
+
+[node name="FooterContainer" type="HBoxContainer" parent="ScreenContainer" unique_id=406536730]
+z_index = 2
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -28.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="ScreenContainer/FooterContainer" unique_id=256254473]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_acxws")
+
+[node name="MarginContainer" type="MarginContainer" parent="ScreenContainer/FooterContainer/PanelContainer" unique_id=2051512112]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 7
+theme_override_constants/margin_bottom = 8
+
+[node name="DefaultPovContainer" type="HBoxContainer" parent="ScreenContainer/FooterContainer/PanelContainer/MarginContainer" unique_id=1831815611]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScreenContainer/FooterContainer/PanelContainer/MarginContainer/DefaultPovContainer" unique_id=1851708089]
+layout_mode = 2
+text = "Pov padrão: "
+
+[node name="DefaultPovNameWidget" parent="ScreenContainer/FooterContainer/PanelContainer/MarginContainer/DefaultPovContainer" unique_id=1471266665 instance=ExtResource("4_acxws")]
+layout_mode = 2
 
 [node name="LoadFileDialog" parent="." unique_id=739497904 instance=ExtResource("4_q725i")]
 
@@ -91,10 +128,10 @@ filters = PackedStringArray("*.tres")
 [node name="LoadImageFileDialog" parent="." unique_id=520665760 instance=ExtResource("6_5g44b")]
 
 [connection signal="gui_input" from="ScreenContainer" to="." method="_on_screen_container_gui_input"]
-[connection signal="pressed" from="ScreenContainer/HBoxContainer/SaveButton" to="." method="_on_save_button_pressed"]
-[connection signal="pressed" from="ScreenContainer/HBoxContainer/SaveSubResourcesButton" to="." method="_on_save_sub_resources_button_pressed"]
-[connection signal="pressed" from="ScreenContainer/HBoxContainer/LoadButton" to="." method="_on_load_button_pressed"]
-[connection signal="pressed" from="ScreenContainer/HBoxContainer/LoadImageButton" to="." method="_on_load_image_button_pressed"]
+[connection signal="pressed" from="ScreenContainer/HeaderContainer/SaveButton" to="." method="_on_save_button_pressed"]
+[connection signal="pressed" from="ScreenContainer/HeaderContainer/SaveSubResourcesButton" to="." method="_on_save_sub_resources_button_pressed"]
+[connection signal="pressed" from="ScreenContainer/HeaderContainer/LoadButton" to="." method="_on_load_button_pressed"]
+[connection signal="pressed" from="ScreenContainer/HeaderContainer/LoadImageButton" to="." method="_on_load_image_button_pressed"]
 [connection signal="file_selected" from="LoadFileDialog" to="." method="_on_load_file_dialog_file_selected"]
 [connection signal="file_selected" from="SaveFileDialog" to="." method="_on_save_file_dialog_file_selected"]
 [connection signal="dir_selected" from="SaveSubResourcesFileDialog" to="." method="_on_save_sub_resources_file_dialog_dir_selected"]

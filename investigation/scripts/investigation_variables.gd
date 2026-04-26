@@ -10,6 +10,8 @@ class_name InvestigationVars extends Resource
 	preload("uid://cqpw454xu78in"),
 ]
 
+@export var last_pov : String
+
 ## value to assign to a newly created variable
 static var default_value : int = 0
 
@@ -44,3 +46,11 @@ static func remove_item(items: Array[Item]) -> void:
 	for item in items:
 		file.inventory.erase(item)
 	ResourceSaver.save(file)
+
+static func set_last_pov(p_name: String) -> void:
+	file.last_pov = p_name
+	ResourceSaver.save(file)
+
+static func get_last_pov() -> String:
+	print("FILE.LAST_POV: ", file.last_pov)
+	return file.last_pov
