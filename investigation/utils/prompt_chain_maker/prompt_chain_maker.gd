@@ -28,6 +28,7 @@ func load_prompt_chain(p_chain: PromptChain) -> void:
 	name_line_edit.text = p_chain.name
 	default_prompt_image_widget.load_img(p_chain.default_image)
 	for p in p_chain.prompts:
+		await get_tree().process_frame
 		add_prompt(p)
 
 func save_prompt_chain(path: String) -> void:
@@ -91,4 +92,8 @@ signal closed(p_chain: PromptChain)
 func _on_close_button_pressed() -> void:
 	closed.emit(parse_prompt_chain())
 	await get_tree().process_frame
+	queue_free()
+
+
+func _on_cancel_button_pressed() -> void:
 	queue_free()

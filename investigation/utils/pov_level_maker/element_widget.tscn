@@ -88,7 +88,17 @@ placeholder_text = "Nome do elemento"
 max_length = 48
 expand_to_text_length = true
 
-[node name="CloseButton" type="Button" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/HeaderContainer" unique_id=1751207098]
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/HeaderContainer" unique_id=1511540600]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="CancelButton" type="Button" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/HeaderContainer/HBoxContainer" unique_id=1930238528]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "cancelar
+"
+
+[node name="CloseButton" type="Button" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/HeaderContainer/HBoxContainer" unique_id=1751207098]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "FECHAR"
@@ -98,14 +108,14 @@ custom_minimum_size = Vector2(375.705, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="-----------------3" type="ColorRect" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer" unique_id=1670065309]
-custom_minimum_size = Vector2(0, 2)
-layout_mode = 2
-
 [node name="AtributesContainer" type="VBoxContainer" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer" unique_id=246317049]
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_constants/separation = 21
+
+[node name="-----------------4" type="ColorRect" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer" unique_id=1670065309]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer" unique_id=167265216]
 layout_mode = 2
@@ -174,5 +184,6 @@ layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 
-[connection signal="pressed" from="ScrollContainer/Panel/MarginContainer/VBoxContainer/HeaderContainer/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="pressed" from="ScrollContainer/Panel/MarginContainer/VBoxContainer/HeaderContainer/HBoxContainer/CancelButton" to="." method="_on_cancel_button_pressed"]
+[connection signal="pressed" from="ScrollContainer/Panel/MarginContainer/VBoxContainer/HeaderContainer/HBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]
 [connection signal="gui_input" from="ScrollContainer/Panel/MarginContainer/VBoxContainer/HitboxPreviewWidget" to="." method="_on_hitbox_preview_widget_gui_input"]

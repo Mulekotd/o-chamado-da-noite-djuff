@@ -37,20 +37,15 @@ color = Color(0, 0, 0.12, 0.77254903)
 
 [node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=494398733]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.365
-anchor_top = 0.097
-anchor_right = 0.63500005
-anchor_bottom = 0.90300006
-offset_left = 138.23999
-offset_top = 309.504
-offset_right = -138.24005
-offset_bottom = -309.50403
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -138.0
+offset_right = 138.0
 grow_horizontal = 2
 grow_vertical = 2
 horizontal_scroll_mode = 0
-vertical_scroll_mode = 0
-metadata/_edit_use_anchors_ = true
 
 [node name="Panel" type="PanelContainer" parent="ScrollContainer" unique_id=1417967029]
 layout_mode = 2
@@ -81,17 +76,26 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="NameLineEdit" type="LineEdit" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/HeaderContainer" unique_id=1798401386]
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/HeaderContainer" unique_id=573430845]
+layout_mode = 2
+alignment = 1
+
+[node name="NameLineEdit" type="LineEdit" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/HeaderContainer/HBoxContainer" unique_id=1798401386]
 layout_mode = 2
 size_flags_horizontal = 0
 placeholder_text = "Nome do pov"
 max_length = 48
 expand_to_text_length = true
 
-[node name="CloseButton" type="Button" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/HeaderContainer" unique_id=1996993864]
+[node name="CancelButton" type="Button" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/HeaderContainer/HBoxContainer" unique_id=1319970033]
 layout_mode = 2
 size_flags_horizontal = 8
-text = "FECHAR"
+text = "cancelar"
+
+[node name="CloseButton" type="Button" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/HeaderContainer/HBoxContainer" unique_id=1996993864]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "SALVAR"
 
 [node name="PovImageRect" type="TextureRect" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer" unique_id=1417508740]
 custom_minimum_size = Vector2(256, 0)
@@ -192,7 +196,8 @@ access = 2
 filters = PackedStringArray("*.png", "*.jpg", "*.jpeg", "*.bmp")
 use_native_dialog = true
 
-[connection signal="pressed" from="ScrollContainer/Panel/MarginContainer/VBoxContainer/HeaderContainer/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="pressed" from="ScrollContainer/Panel/MarginContainer/VBoxContainer/HeaderContainer/HBoxContainer/CancelButton" to="." method="_on_cancel_button_pressed"]
+[connection signal="pressed" from="ScrollContainer/Panel/MarginContainer/VBoxContainer/HeaderContainer/HBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]
 [connection signal="gui_input" from="ScrollContainer/Panel/MarginContainer/VBoxContainer/PovImageRect" to="." method="_on_pov_image_rect_gui_input"]
 [connection signal="opened_element" from="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/ElementsContainer/ElementsWidget" to="." method="_on_elements_widget_opened_element"]
 [connection signal="file_selected" from="ImageLoadFileDialog" to="." method="_on_image_load_file_dialog_file_selected"]

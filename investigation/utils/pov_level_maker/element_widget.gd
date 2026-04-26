@@ -69,3 +69,7 @@ signal closed(element: Element)
 func _on_close_button_pressed() -> void:
 	closed.emit(parse_element())
 	queue_free()
+
+
+func _on_cancel_button_pressed() -> void:
+	queue_free()

@@ -1,6 +1,6 @@
 class_name _PovWidget extends Control
 
-@onready var name_line_edit: LineEdit = $ScrollContainer/Panel/MarginContainer/VBoxContainer/HeaderContainer/NameLineEdit
+@onready var name_line_edit: LineEdit = $ScrollContainer/Panel/MarginContainer/VBoxContainer/HeaderContainer/HBoxContainer/NameLineEdit
 @onready var description_text_edit: TextEdit = $ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/DescricaoContainer/DescriptionTextEdit
 @onready var prompt_chain_widget: _PromptChainWidget = $ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/PromptChainContainer/PromptChainWidget
 @onready var elements_widget: _ElementsWidget = $ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/ElementsContainer/ElementsWidget
@@ -53,3 +53,6 @@ func _on_pov_image_rect_gui_input(event: InputEvent) -> void:
 func _on_elements_widget_opened_element() -> void:
 	elements_widget.pov_image = pov_image_rect.texture
 	elements_widget.pov_name = name_line_edit.text
+
+func _on_cancel_button_pressed() -> void:
+	queue_free()
