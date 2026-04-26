@@ -14,5 +14,7 @@ class_name Prompt extends Resource
 ## global vars that change after this prompt
 @export var vars_to_change : Dictionary[String, int]
 @export var pov : String
+## this will be the image displayed besides the textbox when this prompt comes up
+@export var img : Texture2D
 ## this number will be overwriten by the prompt chain logic
 var chain_id : int

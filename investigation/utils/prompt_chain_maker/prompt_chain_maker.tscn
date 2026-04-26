@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bncnglat1o1x0" path="res://investigation/utils/prompt_chain_maker/prompt_chain_maker.gd" id="1_5ju4m"]
 [ext_resource type="Texture2D" uid="uid://btl648umtkl7m" path="res://themes/background.tres" id="3_ok0tj"]
+[ext_resource type="PackedScene" uid="uid://cqon0s8g52b2h" path="res://investigation/utils/prompt_chain_maker/prompt_image_widget.tscn" id="4_pcfx8"]
 [ext_resource type="Theme" uid="uid://cyq5khk20nbm6" path="res://themes/utils_theme.tres" id="999_utils_theme"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ok0tj"]
@@ -75,6 +76,18 @@ placeholder_text = "Nome da cadeia"
 alignment = 1
 max_length = 48
 expand_to_text_length = true
+
+[node name="FoldableContainer" type="FoldableContainer" parent="VBoxContainer/Container/HBoxContainer" unique_id=859979855]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+folded = true
+title = "imagem padrao"
+title_alignment = 1
+
+[node name="DefaultPromptImageWidget" parent="VBoxContainer/Container/HBoxContainer/FoldableContainer" unique_id=489540816 instance=ExtResource("4_pcfx8")]
+visible = false
+layout_mode = 2
 
 [node name="ButtonContainer" type="HBoxContainer" parent="VBoxContainer/Container" unique_id=1468384855]
 layout_mode = 2

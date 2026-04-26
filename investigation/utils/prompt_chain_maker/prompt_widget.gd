@@ -4,16 +4,17 @@ class_name _PromptWidget extends MarginContainer
 signal move_up_requested(widget: _PromptWidget)
 signal move_down_requested(widget: _PromptWidget)
 
-@onready var give_items_widget: _ItemsWidget = $MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Mudancas/GridContainer/GiveItemsContainer/GiveItemsWidget
-@onready var take_items_widget: _ItemsWidget = $MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Mudancas/GridContainer/TakeItemsContainer/TakeItemsWidget
-@onready var end_chain_widget: CheckBox = $MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Mudancas/GridContainer/EndChainContainer/EndChainWidget
-@onready var pov_name_widget: _PovNameWidget = $MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Mudancas/GridContainer/PovContainer/PovNameWidget
-@onready var change_vars_widget: _ConditionsWidget = $MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Mudancas/GridContainer/VarsToChangeContainer/ChangeVarsWidget
+@onready var give_items_widget: _ItemsWidget = $MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pos/GridContainer/GiveItemsContainer/GiveItemsWidget
+@onready var take_items_widget: _ItemsWidget = $MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pos/GridContainer/TakeItemsContainer/TakeItemsWidget
+@onready var end_chain_widget: CheckBox = $MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pos/GridContainer/EndChainContainer/EndChainWidget
+@onready var pov_name_widget: _PovNameWidget = $MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pos/GridContainer/PovContainer/PovNameWidget
+@onready var change_vars_widget: _ConditionsWidget = $MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pos/GridContainer/VarsToChangeContainer/ChangeVarsWidget
 @onready var options_widget: _OptionsWidget = $MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Opcoes/OptionsWidget
-@onready var necessary_items_widget: _ItemsWidget = $MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Condicoes/GridContainer/NecessaryItemsContainer/NecessaryItemsWidget
-@onready var condition_number_widget: TextEdit = $MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Condicoes/GridContainer/ConditionNumberContainer/ConditionNumberWidget
-@onready var conditions_widget: _ConditionsWidget = $MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Condicoes/GridContainer/ConditionsContainer/ConditionsWidget
+@onready var necessary_items_widget: _ItemsWidget = $MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pre/GridContainer/NecessaryItemsContainer/NecessaryItemsWidget
+@onready var condition_number_widget: TextEdit = $MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pre/GridContainer/ConditionNumberContainer/ConditionNumberWidget
+@onready var conditions_widget: _ConditionsWidget = $MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pre/GridContainer/ConditionsContainer/ConditionsWidget
 @onready var text_widget: TextEdit = $MarginContainer/HBoxContainer/HSplitContainer/TextContainer/TextWidget
+@onready var prompt_image_widget: _PromptImageWidget = $MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pre/GridContainer/PromptImageWidget
 
 
 var id : int
@@ -30,6 +31,7 @@ func parse_prompt() -> Prompt:
 	p.items_to_take = take_items_widget.items
 	p.vars_to_change = change_vars_widget.parse_conditions()
 	p.pov = pov_name_widget.get_pov_name()
+	p.img = prompt_image_widget.get_img()
 	return p
 
 func load_prompt(p: Prompt) -> void:
@@ -43,7 +45,10 @@ func load_prompt(p: Prompt) -> void:
 	take_items_widget.add_items(p.items_to_take)
 	change_vars_widget.add_conditions(p.vars_to_change)
 	pov_name_widget.load_pov_name(p.pov)
+	prompt_image_widget.load_img(p.img)
 
+func change_default_img(img: Texture2D):
+	prompt_image_widget.change_default_img(img)
 
 func _on_remove_button_pressed() -> void:
 	queue_free()

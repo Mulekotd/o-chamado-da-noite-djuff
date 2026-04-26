@@ -6,6 +6,7 @@ const PROMPT_WIDGET = preload("uid://cjh18gp04aw2o")
 @onready var prompts_container: VBoxContainer = $VBoxContainer/VScrollBar/PromptsContainer
 @onready var name_line_edit: LineEdit = $VBoxContainer/Container/HBoxContainer/NameLineEdit
 @onready var texture_rect: TextureRect = $TextureRect
+@onready var default_prompt_image_widget: _PromptImageWidget = $VBoxContainer/Container/HBoxContainer/FoldableContainer/DefaultPromptImageWidget
 
 var bg : NoiseTexture2D
 var bg_speed : Vector2 = Vector2(0.05,0.5)
@@ -25,6 +26,7 @@ func load_prompt_chain(p_chain: PromptChain) -> void:
 	clear_prompt_chain()
 	name_line_edit.clear()
 	name_line_edit.text = p_chain.name
+	default_prompt_image_widget.load_img(p_chain.default_image)
 	for p in p_chain.prompts:
 		add_prompt(p)
 
@@ -35,6 +37,7 @@ func save_prompt_chain(path: String) -> void:
 func parse_prompt_chain() -> PromptChain:
 	var p_chain := PromptChain.new()
 	p_chain.name = name_line_edit.text
+	p_chain.default_image = default_prompt_image_widget.get_img()
 	for w in prompts_container.get_children():
 		if w.is_in_group("prompt_widget"):
 			p_chain.prompts.append(w.parse_prompt())
@@ -46,7 +49,9 @@ func add_prompt(p: Prompt) -> void:
 	w.move_up_requested.connect(_on_prompt_widget_move_up_requested)
 	w.move_down_requested.connect(_on_prompt_widget_move_down_requested)
 	prompts_container.add_child(w)
+	w.change_default_img(default_prompt_image_widget.get_img())
 	w.load_prompt(p)
+	default_prompt_image_widget.changed.connect(w.change_default_img)
 
 func _on_prompt_widget_move_up_requested(widget: _PromptWidget) -> void:
 	var current_index := widget.get_index()
