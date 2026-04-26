@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dtd12y2eekoi1"]
 
 [ext_resource type="Script" uid="uid://c2714okm11ol2" path="res://investigation/text_box/scripts/text_box.gd" id="1_2ofle"]
+[ext_resource type="PackedScene" uid="uid://beife6rlcgvk6" path="res://investigation/text_box/scenes/bouncing_dots_widget.tscn" id="2_cvo1r"]
 
 [node name="TextBox" type="Control" unique_id=1436468660]
 layout_mode = 3
@@ -32,7 +33,12 @@ grow_vertical = 2
 mouse_filter = 2
 alignment = 1
 
+[node name="BouncingDotsWidget" parent="ColorRect/Text" unique_id=1713922320 instance=ExtResource("2_cvo1r")]
+layout_mode = 2
+range = 2.0
+
 [node name="MainText" type="RichTextLabel" parent="ColorRect/Text" unique_id=971175684]
+visible = false
 layout_mode = 2
 mouse_filter = 2
 text = "DO YOU WANT TO DO THIS?"

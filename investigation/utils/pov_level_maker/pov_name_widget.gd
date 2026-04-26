@@ -5,8 +5,11 @@ class_name _PovNameWidget extends HBoxContainer
 @export var pov_names : Array[String]
 @export var pov_name : String
 
+signal changed
+
 func _ready() -> void:
 	pov_name_menu_button.get_popup().id_pressed.connect(update_pov_name)
+	pov_name_line_edit.text_changed.connect(func(x): changed.emit())
 
 func update_pov_name(index: int):
 	load_pov_name(pov_names[index])

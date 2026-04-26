@@ -60,29 +60,49 @@ texture = ExtResource("3_mcsh5")
 expand_mode = 3
 stretch_mode = 4
 
-[node name="HeaderContainer" type="HBoxContainer" parent="ScreenContainer" unique_id=1540156051]
-z_index = 2
+[node name="PanelContainer" type="PanelContainer" parent="ScreenContainer" unique_id=812005745]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 28.0
 grow_horizontal = 2
 
-[node name="SaveButton" type="Button" parent="ScreenContainer/HeaderContainer" unique_id=843172508]
+[node name="HeaderContainer" type="HBoxContainer" parent="ScreenContainer/PanelContainer" unique_id=1540156051]
+z_index = 2
+layout_mode = 2
+
+[node name="SaveButton" type="Button" parent="ScreenContainer/PanelContainer/HeaderContainer" unique_id=843172508]
 layout_mode = 2
 text = "Salvar"
 
-[node name="SaveSubResourcesButton" type="Button" parent="ScreenContainer/HeaderContainer" unique_id=404927200]
+[node name="SaveSubResourcesButton" type="Button" parent="ScreenContainer/PanelContainer/HeaderContainer" unique_id=404927200]
 layout_mode = 2
 text = "Salvar sub-resources"
 
-[node name="LoadButton" type="Button" parent="ScreenContainer/HeaderContainer" unique_id=42024235]
+[node name="LoadButton" type="Button" parent="ScreenContainer/PanelContainer/HeaderContainer" unique_id=42024235]
 layout_mode = 2
 text = "Abrir"
 
-[node name="LoadImageButton" type="Button" parent="ScreenContainer/HeaderContainer" unique_id=1078090342]
+[node name="LoadImageButton" type="Button" parent="ScreenContainer/PanelContainer/HeaderContainer" unique_id=1078090342]
 layout_mode = 2
 text = "Mudar Imagem"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScreenContainer/PanelContainer/HeaderContainer" unique_id=1212169886]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="PovLevelNameLabel" type="Label" parent="ScreenContainer/PanelContainer/HeaderContainer/HBoxContainer" unique_id=664913122]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "[novo pov level]"
+horizontal_alignment = 1
+
+[node name="NotSavedLabel" type="Label" parent="ScreenContainer/PanelContainer/HeaderContainer/HBoxContainer" unique_id=1516337631]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+text = "(NÃO SALVO)"
 
 [node name="FooterContainer" type="HBoxContainer" parent="ScreenContainer" unique_id=406536730]
 z_index = 2
@@ -128,10 +148,10 @@ filters = PackedStringArray("*.tres")
 [node name="LoadImageFileDialog" parent="." unique_id=520665760 instance=ExtResource("6_5g44b")]
 
 [connection signal="gui_input" from="ScreenContainer" to="." method="_on_screen_container_gui_input"]
-[connection signal="pressed" from="ScreenContainer/HeaderContainer/SaveButton" to="." method="_on_save_button_pressed"]
-[connection signal="pressed" from="ScreenContainer/HeaderContainer/SaveSubResourcesButton" to="." method="_on_save_sub_resources_button_pressed"]
-[connection signal="pressed" from="ScreenContainer/HeaderContainer/LoadButton" to="." method="_on_load_button_pressed"]
-[connection signal="pressed" from="ScreenContainer/HeaderContainer/LoadImageButton" to="." method="_on_load_image_button_pressed"]
+[connection signal="pressed" from="ScreenContainer/PanelContainer/HeaderContainer/SaveButton" to="." method="_on_save_button_pressed"]
+[connection signal="pressed" from="ScreenContainer/PanelContainer/HeaderContainer/SaveSubResourcesButton" to="." method="_on_save_sub_resources_button_pressed"]
+[connection signal="pressed" from="ScreenContainer/PanelContainer/HeaderContainer/LoadButton" to="." method="_on_load_button_pressed"]
+[connection signal="pressed" from="ScreenContainer/PanelContainer/HeaderContainer/LoadImageButton" to="." method="_on_load_image_button_pressed"]
 [connection signal="file_selected" from="LoadFileDialog" to="." method="_on_load_file_dialog_file_selected"]
 [connection signal="file_selected" from="SaveFileDialog" to="." method="_on_save_file_dialog_file_selected"]
 [connection signal="dir_selected" from="SaveSubResourcesFileDialog" to="." method="_on_save_sub_resources_file_dialog_dir_selected"]

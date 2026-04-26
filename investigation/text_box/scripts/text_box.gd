@@ -2,6 +2,7 @@ class_name TextBox extends Control
 
 @onready var main_text: RichTextLabel = $ColorRect/Text/MainText
 @onready var options_container: HFlowContainer = $ColorRect/Text/OptionsContainer
+@onready var bouncing_dots_widget: _Bouncing_Dots_Widget = $ColorRect/Text/BouncingDotsWidget
 
 signal stand_by_changed(state: bool)
 
@@ -23,6 +24,8 @@ var skip_chain_id : int = -1
 
 func _ready() -> void:
 	clear_box()
+	stand_by_changed.connect(func(x : bool): bouncing_dots_widget.visible = x)
+	stand_by_changed.connect(func(x : bool): main_text.visible = !x)
 
 func _physics_process(_delta: float) -> void:
 	if stand_by and !prompt_qeue.is_empty():
