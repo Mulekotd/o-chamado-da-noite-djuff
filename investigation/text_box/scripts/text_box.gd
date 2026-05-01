@@ -111,7 +111,7 @@ func display_prompt() -> void:
 	for option in prompt_queue[0].options:
 		if InvestigationVars.check_global_conditions(option.conditions) and\
 		InvestigationVars.check_inventory(option.necessary_items):
-			var b := Button.new()
+			var b := TextBoxButton.new()
 			b.text = option.text
 			var name := "button_option_text_%d" % i
 			b.name = name

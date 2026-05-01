@@ -9,5 +9,7 @@ class_name Element extends Resource
 }
 @export var pov_name: String = ""
 @export var prompt_chain: PromptChain = PromptChain.new()
+## necessary items to go to pov
 @export var necessary_items: Array[Item]
+## conditions to go to pov
 @export var conditions: Dictionary[String, int]

@@ -10,14 +10,17 @@ const BOTTOM_ARROW = preload("uid://cm8l3y3l3dioj")
 const LEFT_ARROW = preload("uid://b513u1882j8ph")
 const RIGHT_ARROW = preload("uid://dlf5uc3tlxr2j")
 const TOP_ARROW = preload("uid://dtdkxktq3g8yr")
+const NORMAL_CURSOR = CURSOR_ARROW
+const DISABLED_CURSOR = CURSOR_FORBIDDEN
+const CLICKABLE_CURSOR = CURSOR_POINTING_HAND
 
 signal element_clicked(element: Element)
 signal prompt_chain_called(p_chain: PromptChain)
 
-@export var pov_level : PovLevel
 var pov_index : int
 var current_pov : Pov
 var enabled : bool = true
+@export var pov_level : PovLevel
 @export var arrow_hitbox : float = 16
 ## time to wait before showing the prompt_chain if a pov has one
 @export var prompt_wait_time : float = 1
@@ -112,7 +115,24 @@ func _load_last_pov() -> void:
 		print("nao achou, carregando default.")
 		change_pov(get_pov_index(pov_level.default_pov))
 
+func _update_cursor() -> void:
+	var mouse_pos := get_local_mouse_position()
+	var mouse_relative := Vector2(mouse_pos.x/size.x, mouse_pos.y/size.y)
+	if enabled:
+		if _get_element_in_pos(mouse_relative):
+			_change_cursor(CLICKABLE_CURSOR)
+		else:
+			_change_cursor(NORMAL_CURSOR)
+	else:
+		_change_cursor(DISABLED_CURSOR)
+
+func _change_cursor(cursor: int) -> void:
+	if mouse_default_cursor_shape != cursor:
+		mouse_default_cursor_shape = cursor
+
 func _on_gui_input(_event: InputEvent) -> void:
+	_update_cursor()
+	
 	if !Input.is_action_just_pressed("ui_mouse_pressed") or !enabled:
 		return
 		

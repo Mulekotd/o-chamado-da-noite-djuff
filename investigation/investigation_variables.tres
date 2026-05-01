@@ -14,5 +14,5 @@ vars = Dictionary[String, int]({
 "respondeu2": 0,
 "surpreso com a porta": 0
 })
-last_pov = "porta"
+last_pov = "sala"
 metadata/_custom_type_script = "uid://47pf0lrk86x5"

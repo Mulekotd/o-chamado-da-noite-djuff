@@ -6,6 +6,7 @@
 [ext_resource type="Resource" uid="uid://cedpkb3m0slj2" path="res://investigation/pov_levels/pov_lvl.tres" id="4_3ibbm"]
 [ext_resource type="PackedScene" uid="uid://bqse5lw2xwni0" path="res://investigation/povs/scenes/pov_manager.tscn" id="4_sf3q1"]
 [ext_resource type="PackedScene" uid="uid://fmeu1ocls847" path="res://investigation/scenes/sound_manager.tscn" id="6_ps6gc"]
+[ext_resource type="Script" uid="uid://611kuu1dngvi" path="res://investigation/scripts/cursor_loader.gd" id="7_h8d2x"]
 
 [node name="Investigation" type="Control" unique_id=1591324732]
 layout_mode = 3
@@ -61,3 +62,9 @@ texture = ExtResource("2_838ch")
 expand_mode = 2
 
 [node name="SoundManager" parent="." unique_id=1253211127 instance=ExtResource("6_ps6gc")]
+
+[node name="CursorLoader" type="Node" parent="." unique_id=365877593]
+script = ExtResource("7_h8d2x")
+metadata/_custom_type_script = "uid://611kuu1dngvi"
+
+[connection signal="mouse_entered" from="PovManager" to="." method="_on_pov_manager_mouse_entered"]
