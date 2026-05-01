@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://ch7gu2n8g0kih"]
+
+[ext_resource type="Texture2D" uid="uid://ceqfsq3141bo0" path="res://investigation/images/detetive/detetive_neutro.png" id="1_btxbm"]
+[ext_resource type="Script" uid="uid://en2r2ct2q0rw" path="res://investigation/scripts/person_display.gd" id="2_4ysrs"]
+
+[node name="PersonDisplay" type="TextureRect" unique_id=1676715533]
+anchors_preset = -1
+anchor_left = 0.016601563
+anchor_top = 0.62630206
+anchor_right = 0.20800781
+anchor_bottom = 0.9817708
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_btxbm")
+script = ExtResource("2_4ysrs")
+metadata/_edit_use_anchors_ = true

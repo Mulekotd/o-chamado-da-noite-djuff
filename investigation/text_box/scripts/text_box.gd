@@ -7,11 +7,11 @@ class_name TextBox extends Control
 signal stand_by_changed(state: bool)
 signal prompt_sound_requested(sound: AudioStream)
 signal letter_sound_requested(sound: AudioStream)
-signal displayed_prompt(chain_id: int)
+signal displayed_prompt(chain_id: int, prompt: Prompt)
 signal chain_added(chain_id: int, chain: PromptChain)
 
+
 var prompt_queue : Array[Prompt]
-var sound_queue
 var stand_by : bool = true :
 	set(x):
 		stand_by = x
@@ -81,7 +81,7 @@ func display_prompt() -> void:
 	main_text.clear()
 	var current_prompt := prompt_queue[0]
 	print("ADVANCED PROMPT")
-	displayed_prompt.emit(prompt_queue[0].chain_id)
+	displayed_prompt.emit(prompt_queue[0].chain_id, current_prompt)
 	for c in prompt_queue[0].text:
 		if current_prompt != prompt_queue[0]:
 			return
