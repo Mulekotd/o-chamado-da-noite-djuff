@@ -44,7 +44,11 @@ func _physics_process(_delta: float) -> void:
 			stand_by = true
 
 func _process(_delta: float) -> void:
-	if ((Input.is_action_just_pressed("ui_accept") or (Input.is_action_just_pressed("ui_mouse_pressed") and is_mouse_inside))) and prompt_queue.size()>0:
+	if ((Input.is_action_just_pressed("ui_accept") or\
+	(Input.is_action_just_pressed("ui_mouse_pressed") and\
+	is_mouse_inside))) and\
+	prompt_queue.size()>0 and\
+	!stand_by:
 		if _has_visible_options(prompt_queue[0]) == 0 and !is_writing:
 			next_prompt(-1)
 		else:

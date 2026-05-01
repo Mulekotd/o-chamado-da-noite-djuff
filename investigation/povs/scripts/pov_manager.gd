@@ -19,7 +19,10 @@ signal prompt_chain_called(p_chain: PromptChain)
 
 var pov_index : int
 var current_pov : Pov
-var enabled : bool = true
+var enabled : bool = true :
+	set(x):
+		enabled = x
+		update_arrows()
 @export var pov_level : PovLevel
 @export var arrow_hitbox : float = 16
 ## time to wait before showing the prompt_chain if a pov has one
@@ -62,7 +65,7 @@ func _configure_arrow(arrow: TextureRect, arrow_texture: Texture2D, target_pov: 
 	for connection in arrow.gui_input.get_connections():
 		arrow.gui_input.disconnect(connection.callable)
 	
-	if target_pov:
+	if target_pov and enabled:
 		var target_index := get_pov_index(target_pov)
 		arrow.texture = arrow_texture
 		arrow.visible = true

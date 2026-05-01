@@ -4,6 +4,7 @@
 [ext_resource type="Resource" uid="uid://c06lvdpcxu5l3" path="res://investigation/povs/pov_level_test.tres" id="2_i0poh"]
 [ext_resource type="Texture2D" uid="uid://b513u1882j8ph" path="res://investigation/interface/images/left_arrow.png" id="3_i0poh"]
 [ext_resource type="Texture2D" uid="uid://dtdkxktq3g8yr" path="res://investigation/interface/images/top_arrow.png" id="4_8wbnf"]
+[ext_resource type="Texture2D" uid="uid://dlf5uc3tlxr2j" path="res://investigation/interface/images/right_arrow.png" id="5_dss2o"]
 [ext_resource type="Texture2D" uid="uid://cm8l3y3l3dioj" path="res://investigation/interface/images/bottom_arrow.png" id="6_p7y0m"]
 
 [node name="PovManager" type="Control" unique_id=1895825167]
@@ -75,8 +76,10 @@ grow_horizontal = 0
 grow_vertical = 2
 
 [node name="RightArrow" type="TextureRect" parent="RightFlowContainer" unique_id=1344175218]
+custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 mouse_default_cursor_shape = 2
+texture = ExtResource("5_dss2o")
 stretch_mode = 5
 
 [node name="BottomFlowContainer" type="FlowContainer" parent="." unique_id=1486048636]
