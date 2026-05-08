@@ -10,6 +10,7 @@ const NO_IMAGE = preload("uid://dwj11t2nw18l2")
 signal changed(img: Texture2D)
 
 func _ready() -> void:
+	# Initialize with the chain's default image.
 	texture = default_img
 
 func load_img(img: Texture2D) -> void:

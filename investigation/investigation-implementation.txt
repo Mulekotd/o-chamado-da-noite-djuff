@@ -1,0 +1,194 @@
+
+
+DJUFF - INVESTIGAÇÃO
+Documentação do sistema de investigação
+Este documento descreve as funcionalidades das ferramentas de criação de níveis para a etapa de investigação, também como parte da gameplay.
+
+Variáveis de investigação	2
+Interface de Investigação	2
+Text Box	3
+-Prompt-	3
+-Prompt Chain-	4
+Pov Manager	4
+-POV-	4
+-Elemento-	5
+-POV Level-	6
+Editor de Nível	6
+Tela de nível	7
+Tela de Pov	8
+Tela de Elemento	11
+Tela de Hitbox	12
+Tela de Prompt Chain	13
+Tela de Prompt	14
+
+Variáveis de investigação
+	A classe InvestigationVars possui métodos estáticos que podem ser acessados para mudar ou consultar certas variáveis, sendo elas “vars”, um dicionário de [String : int] (no caso “nome : valor”) e “inventory”, um array de “Item”. Qualquer modificação através de alguma função é salva em um arquivo referenciado pelos métodos estáticos, ou seja, é tudo salvo em tempo real.
+
+Vale dizer que as variáveis no dicionário “vars” são chamadas de “condições globais”, “variáveis globais” e “variáveis de investigação” alternadamente, não faz diferença.
+Interface de Investigação
+
+
+Text Box
+	As falas do personagem / narração são mostradas pela Text Box. Cada frase mostrada na Text Box é um prompt.
+
+-Prompt-
+Text: Texto a ser mostrado pela Text Box;
+
+Condition Number: Número utilizado pela lógica de opções. Quando o jogador escolhe uma opção, o índice da opção (começando em zero) é passado para o próximo prompt, se o número de condição do próximo prompt não ser igual ao índice da opção escolhida, o prompt é pulado até que se ache um prompt com o número de condição certo.
+
+Necessary Items: Itens necessários para que o prompt seja mostrado.
+
+Global Conditions: Condições necessárias para que o prompt seja mostrado.
+
+Options: Opções a serem mostradas. A ordem das opções importam, pois seu índice será passado como número de condição para o próximo prompt. Cada opção possui condições globais e itens necessários para que seja mostrada.
+
+End Chain: Se esse prompt deve ou não ser o último da cadeia de prompt a ser mostrado. Mais sobre cadeia de prompt depois.
+
+Items to Give: Itens para dar ao jogador após esse prompt.
+
+Items to Take: Itens para tirar do jogador após esse prompt.
+
+Vars to Change: Variáveis globais a serem mudadas. Após o prompt, as variáveis globais vão passar a ter o valor correspondente inserido.
+
+Pov: Nome do Pov que o player será redirecionado imediatamente depois desse prompt.
+
+Img: Imagem que será mostrada no Person Display junto com o prompt.
+
+Pre Sound: Audio a ser tocado imediatamente após o prompt começar a ser mostrado.
+
+Pos Sound: Audio a ser tocado após o prompt ser avançado.
+
+-Prompt Chain-
+	Prompts tecnicamente não podem ser adicionados à fila de prompts da Text Box por conta própria, eles precisam pertencer a uma Prompt Chain. Prompt Chains são cadeias de prompts que guardam uma lista de prompts assim como algumas informações suplementares.
+
+Name: Nome da cadeia de prompt.
+
+Prompts: Array de prompts que serão sequencialmente adicionados a fila de prompts da Text Box.
+
+Default Image: Imagem padrão a ser mostrada no Person Display se um prompt da cadeia não tiver uma imagem própria.
+
+Letter Sounds: Um array de sons a serem tocados quando cada letra é digitada ao mostrar o prompt. Os sons são tocados aleatóriamente com pequenas diferenças (também aleatórias) no volume e tom.
+
+Pov Manager
+	O Pov Manager mostra o ponto de vista (Pov) atual e permite que o player navegue pelo cenário e interaja com os elementos do Pov.
+
+-POV-
+Name: Nome do pov. A mudança de pov ocorre em relação a nomes, vários povs podem compartilhar o mesmo nome, sendo escolhido um pov de acordo com outras condições.
+
+Description: Uma descrição do pov para os desenvolvedores.
+
+Prompt Chain: Cadeia de prompt a ser mostrada imediatamente após o jogador entrar no pov.
+
+Image: Imagem a ser mostrada no Pov Manager.
+
+Elements: Elementos presentes no Pov. Mais sobre elementos depois.
+
+Global Conditions: Condições para o pov ser escolhido.
+
+Especial Behaviour: Um script que será adicionado a um nó filho de Investigation (raiz da cena) para que seja implementado um comportamento especial.
+
+Sound: Som a ser emitido ao entrar no Pov.
+
+-Elemento-
+	Um Pov pode possuir n elementos que o player pode interagir ao clicar em uma região específica do Pov no Pov Manager.
+
+Name: Nome do elemento.
+
+Hitbox: Valores de zero a um que são usados para determinar a região que o player tem que clicar para interagir com o elemento.
+
+Pov Name: Nome do Pov para redirecionar assim que o player interagir com o elemento.
+
+Necessary Items: Itens necessários para avançar para o pov.
+
+Conditions: Condições globais necessárias para avançar para o pov.
+
+Prompt Chain: Cadeia de prompt a ser mostrada assim que o player interagir com o elemento.
+
+
+-POV Directions-
+É o que possibilita a navegação pelas setas no Pov Manager.
+
+Pov: Pov associado ao Pov Directions.
+
+Left: Nome do Pov à esquerda do Pov associado.
+
+Top: Nome do Pov acima do Pov associado.
+
+Right: Nome do Pov à direita do Pov associado.
+
+Bottom: Nome do Pov atrás do Pov associado.
+
+Rotation: Valor de zero a um associado a rotação da seta no editor de nível. Não afeta o gameplay.
+
+Coords: Coordenadas do Widget do Pov Directions no editor de nível. Não afeta o gameplay.
+
+-POV Level-
+	Um conjunto de Pov Directions que compõem um nível jogável.
+
+Background Image: Imagem de fundo a ser mostrada no editor de nível. Não afeta o gameplay.
+
+Pov Directions Array: Array com todos os Pov Directions do nível.
+
+Dir Scale: Tamanho dos widgets de Pov Directions no editor de nível. Não afeta o gameplay.
+
+Default Pov: Pov a mostrar quando o nível é jogado pela primeira vez.
+
+
+Editor de Nível
+	O editor de nível é uma ferramenta completa que permite carregar, editar e salvar um Pov Level, assim como os seus sub-resources individuais.
+Neste capítulo serão descritas informações que ajudaram na navegação do editor de nível, sendo assim, informações específicas sobre cada parâmetro serão inferidas pelo capítulo de Interface de Investigação.
+
+Botões de “cancelar” e “fechar”: se o usuário estiver editando algum objeto e apertar em “cancelar”, todas as modificações feitas serão perdidas, e se clicar em fechar, volta a tela anterior salvando as mudanças. Lembrando que para salvar as modificações feitas ao nível em um arquivo é necessário salvar de fato.
+Tela de nível
+	Quando abrimos o editor de nível, nos deparamos com a tela de Pov Directions. Cada Pov Directions Widget tem uma seta verde embaixo que simboliza o ângulo do ponto de vista no cenário. Cada seta possui quatro pontos que simbolizam as quatro setas de cada Pov Directions. Quando uma seta possui um Pov que existe no nível, uma linha aparece indo do ponto respectivo a seta para o Pov relacionado.
+
+
+Para deslocar: segure o botão do meio do mouse e arraste.
+
+Para dar zoom: scroll do mouse.
+
+Criar Pov Direction: clicar com o botão direito onde quer adicionar o novo widget.
+
+Clonar Pov Direction: clicar com o botão direito na imagem de algum Pov.
+
+Colapsar Pov Direction: clicar com o botão esquerdo na imagem do Pov base (o Pov mais abaixo em um widget de Pov Directions).
+
+	Para editar um Pov, o usuário precisa clicar no nome do Pov se ele for o Pov base, ou na imagem do Pov se ele estiver em cima de outro no mesmo widget.
+Tela de Pov
+
+
+
+Editar nome: Escrever no campo superior esquerdo.
+
+Selecionar imagem nova: clicar na imagem do Pov.
+
+Editar elemento: clicar duas vezes no elemento na lista de elementos.
+
+Editar condições: Adicionar uma condição e inserir seu nome e seu valor esperado. Ao apertar no símbolo “-”, a última condição adicionada é apagada.
+
+Tela de Elemento
+
+
+Editar hitbox: clicar na imagem do Pov relacionado.
+
+Tela de Hitbox
+
+
+	Para ajustar a hitbox basta clicar nas extremidades desejadas, depois clicar em fechar.
+
+Tela de Prompt Chain
+
+Adicionar/remover letter sounds: clicar em “sons” no cabeçalho e adicionar/remover os arquivos.
+
+Salvar/carregar Prompt Chains: clicar em salvar ou carregar.
+
+	Ao clicar em adicionar prompt, um prompt widget é adicionado no fim da lista.
+Tela de Prompt
+
+	A aba “Pre” se refere às coisas que acontecem imediatamente ao começar a mostrar o prompt, por exemplo a variável “pre sound”. A aba “Pos” se refere às coisas que acontecem ao sair desse prompt. A aba “Opcoes” é totalmente dedicada às opções apresentadas nesse prompt.
+
+As setas para cima e para baixo movem o prompt na cadeia.
+
+O botão remover apaga o prompt da cadeia.
+
+Para editar a imagem do prompt o usuário precisa clicar na imagem na aba “Pre”.

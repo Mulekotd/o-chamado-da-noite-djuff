@@ -14,6 +14,10 @@ config/name="O CHAMADO DA NOITE"
 run/main_scene="uid://chs5heeu26nd3"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 
+[audio]
+
+buses/default_bus_layout="uid://x0arpbwsahop"
+
 [autoload]
 
 DialogueManager="*uid://c3rodes2l3gxb"

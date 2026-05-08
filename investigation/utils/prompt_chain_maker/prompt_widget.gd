@@ -53,6 +53,7 @@ func load_prompt(p: Prompt) -> void:
 	pos_sound_widget.load_sound(p.pos_sound)
 
 func change_default_img(img: Texture2D):
+	# Update default image for prompts that do not set one.
 	prompt_image_widget.change_default_img(img)
 
 func _on_remove_button_pressed() -> void:

@@ -33,6 +33,7 @@ func parse_prompt_chain() -> PromptChain:
 	return p_chain
 
 func add_prompt(p: Prompt) -> void:
+	# Add a new prompt editor widget and bind default image updates.
 	var w : _PromptWidget = PROMPT_WIDGET.instantiate()
 	w.add_to_group("prompt_widget")
 	w.move_up_requested.connect(_on_prompt_widget_move_up_requested)
@@ -43,6 +44,7 @@ func add_prompt(p: Prompt) -> void:
 	default_prompt_image_widget.changed.connect(w.change_default_img)
 
 func _on_prompt_widget_move_up_requested(widget: _PromptWidget) -> void:
+	# Reorder prompt widgets within the chain.
 	var current_index := widget.get_index()
 	if current_index > 0:
 		prompts_container.move_child(widget, current_index - 1)
@@ -54,6 +56,7 @@ func _on_prompt_widget_move_down_requested(widget: _PromptWidget) -> void:
 		prompts_container.move_child(widget, current_index + 1)
 
 func clear_prompt_chain() -> void:
+	# Remove all prompt widgets from the editor.
 	for w in prompts_container.get_children():
 		if w.is_in_group("prompt_widget"):
 			w.queue_free()

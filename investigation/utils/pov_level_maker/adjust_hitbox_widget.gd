@@ -19,6 +19,7 @@ func get_hitbox_values() -> Dictionary[String, float]:
 	return _hitbox_values.duplicate()
 
 func load_hitbox(img: Texture2D, hitbox: Dictionary[String, float]) -> void:
+	# Load preview image and apply the current normalized hitbox.
 	pov_image_r.texture = img
 	load_hitbox_values(
 		hitbox["left"],
@@ -28,6 +29,7 @@ func load_hitbox(img: Texture2D, hitbox: Dictionary[String, float]) -> void:
 	)
 
 func load_hitbox_values(left: float = 0.5, top: float = 0.5, right: float = 0.5, bottom: float = 0.5) -> int:
+	# Validate and clamp hitbox values before applying to the UI.
 	if right<left:
 		print("ERROR: right < left")
 		return -1
@@ -52,6 +54,7 @@ func load_hitbox_values(left: float = 0.5, top: float = 0.5, right: float = 0.5,
 	return 0
 
 func _apply_hitbox_to_rect() -> void:
+	# Convert normalized hitbox to pixel rect inside the image.
 	if pov_image_r.size.x <= 0 or pov_image_r.size.y <= 0:
 		return
 

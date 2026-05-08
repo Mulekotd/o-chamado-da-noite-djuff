@@ -34,10 +34,12 @@ func _ready() -> void:
 		pov_directions_stack_widget.clone_requested.connect(_on_stack_clone_requested)
 
 func _physics_process(delta: float) -> void:
+	# Smoothly animate arrow rotation to match the slider.
 	_arrow_rot = lerpf(_arrow_rot, rotation_slider.value, arrow_speed*delta)
 	spin_arrow(_arrow_rot)
 
 func parse_pov_directions() -> PovDirections:
+	# Serialize the widget state into a PovDirections resource.
 	var p_dir := PovDirections.new()
 	p_dir.pov = pov
 	p_dir.left = left_pov_name_widget.get_pov_name()
@@ -66,6 +68,7 @@ func load_pov_directions(p_dir : PovDirections) -> void:
 	update_widget()
 
 func load_pov(new_pov: Pov) -> void:
+	# Update the widget visuals and button title from a Pov resource.
 	pov = new_pov
 	if new_pov.image:
 		pov_image_rect.texture = new_pov.image
@@ -82,6 +85,7 @@ func spin_arrow(value: float) -> void:
 	arrow_widget.rotation_degrees = 360*value
 
 func open_pov_widget() -> void:
+	# Open the POV editor window for this entry.
 	var pw : _PovWidget = POV_WIDGET.instantiate()
 	var p : Control = get_tree().get_first_node_in_group("util_parent_control")
 	if (p == null):

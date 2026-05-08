@@ -25,6 +25,7 @@ func _ready() -> void:
 	pov_name_widget.pov_name = pov_name
 
 func load_element(e: Element, pov_names : Array[String] = []) -> void:
+	# Populate the widget controls from an Element resource.
 	name_line_edit.text = e.name
 	hitbox = e.hitbox.duplicate()
 	hitbox_preview_widget.load_hitbox_preview(get_pov_img(), e.hitbox)
@@ -35,6 +36,7 @@ func load_element(e: Element, pov_names : Array[String] = []) -> void:
 	conditions_widget.add_conditions(e.conditions)
 
 func parse_element() -> Element:
+	# Build a new Element resource from the current UI state.
 	var e := Element.new()
 	e.name = name_line_edit.text
 	e.hitbox = hitbox.duplicate()
@@ -48,6 +50,7 @@ func save_element_file(path: String) -> void:
 	ResourceSaver.save(parse_element(), path)
 
 func update_hitbox(hitbox_values : Dictionary[String, float]) -> void:
+	# Store and preview the updated hitbox.
 	hitbox = hitbox_values.duplicate()
 	hitbox_preview_widget.load_hitbox_preview(get_pov_img(), hitbox)
 
@@ -59,6 +62,7 @@ func get_pov_img() -> Texture2D:
 func _on_hitbox_preview_widget_gui_input(_event: InputEvent) -> void:
 	if !Input.is_action_just_pressed("ui_mouse_pressed"):
 		return
+	# Open the hitbox adjustment popup.
 	var ahw : _AdjustHitboxWidget = ADJUST_HITBOX_WIDGET.instantiate()
 	add_child(ahw)
 	await get_tree().process_frame

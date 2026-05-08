@@ -22,6 +22,7 @@ func load_pov_name(p_name: String) -> void:
 	pov_name_line_edit.text = p_name
 
 func load_pov_names() -> void:
+	# Pull the latest POV names from the level maker and populate the menu.
 	var plm : _PovLevelMaker = get_tree().get_first_node_in_group("pov_level_maker")
 	if plm:
 		pov_names = (plm.get_all_pov_names())

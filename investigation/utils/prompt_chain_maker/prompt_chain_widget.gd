@@ -21,6 +21,7 @@ func save_prompt_chain_file(path: String) -> void:
 		ResourceSaver.save(prompt_chain, path)
 
 func _on_edit_button_pressed() -> void:
+	# Open the prompt chain editor window.
 	var pcm := PROMPT_CHAIN_MAKER.instantiate()
 	# get parent util
 	var p : Control = get_tree().get_first_node_in_group("util_parent_control")

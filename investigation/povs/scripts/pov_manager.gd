@@ -38,10 +38,12 @@ func change_pov(index: int) -> void:
 	_save_last_pov(current_pov.name)
 	if current_pov.prompt_chain.prompts:
 		print(current_pov.name)
+		# Pause navigation while the POV's prompt chain is displayed.
 		enabled = false
 		await get_tree().create_timer(prompt_wait_time).timeout
 		prompt_chain_called.emit(current_pov.prompt_chain)
 	if current_pov.especial_behaviour:
+		# Spawn a runtime behaviour node to allow custom POV logic.
 		var n := Node.new()
 		n.set_script(current_pov.especial_behaviour)
 		add_sibling(n)
@@ -119,6 +121,7 @@ func _load_last_pov() -> void:
 		change_pov(get_pov_index(pov_level.default_pov))
 
 func _update_cursor() -> void:
+	# Cursor feedback changes based on enabled state and hitbox hover.
 	var mouse_pos := get_local_mouse_position()
 	var mouse_relative := Vector2(mouse_pos.x/size.x, mouse_pos.y/size.y)
 	if enabled:

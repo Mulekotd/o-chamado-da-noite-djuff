@@ -14,6 +14,7 @@ func _ready() -> void:
 	pov_image_r.resized.connect(_on_pov_image_rect_resized)
 
 func load_hitbox_preview(img: Texture2D, hitbox: Dictionary[String, float]) -> void:
+	# Display the POV image and draw the hitbox overlay.
 	pov_image_r.texture = img
 	load_hitbox_values(
 		hitbox["left"],
@@ -24,6 +25,7 @@ func load_hitbox_preview(img: Texture2D, hitbox: Dictionary[String, float]) -> v
 
 # copiado do outro mermo dane-se
 func load_hitbox_values(left: float = 0.5, top: float = 0.5, right: float = 0.5, bottom: float = 0.5) -> int:
+	# Normalize and validate the hitbox before previewing.
 	if right<left:
 		print("ERROR: right < left")
 		return -1
@@ -48,6 +50,7 @@ func load_hitbox_values(left: float = 0.5, top: float = 0.5, right: float = 0.5,
 	return 0
 
 func _apply_hitbox_to_rect() -> void:
+	# Convert normalized hitbox values into the preview rect.
 	if pov_image_r.size.x <= 0 or pov_image_r.size.y <= 0:
 		return
 

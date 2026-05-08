@@ -92,6 +92,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 
 #_____________ BACKEND _________________
 
+# Serialize the current editor state into a PovLevel resource.
 func parse_pov_level() -> PovLevel:
 	var pl := PovLevel.new()
 	pl.bg_img = bg.texture
@@ -104,6 +105,7 @@ func parse_pov_level() -> PovLevel:
 	return pl
 
 func load_pov_level(pl: PovLevel) -> void:
+	# Populate widgets from a PovLevel resource and reconcile duplicates.
 	_is_loading_level = true
 	current_widget_scale = pl.dir_scale if pl.dir_scale > 0.0 else 1.0
 	clear_level()
@@ -167,6 +169,7 @@ func _resource_key(resource: Resource) -> int:
 	return resource.get_instance_id()
 
 func _create_subresource_dirs(root_dir: String) -> Dictionary:
+	# Ensure all subresource folders exist under the export root.
 	var dirs := {
 		"root": root_dir,
 		"prompt_chains": _join_path(root_dir, "prompt_chains"),
@@ -189,6 +192,7 @@ func _save_prompt_chain_subresource(prompt_chain: PromptChain, sub_dirs: Diction
 	var prompt_chain_cache: Dictionary = caches["prompt_chains"]
 	if prompt_chain_cache.has(key):
 		return prompt_chain_cache[key]
+	# Save once per unique resource and reuse for references.
 
 	var idx := _next_counter(counters, "prompt_chain")
 	var file_name := "%s_%03d.tres" % [_sanitize_file_name(name_hint, "prompt_chain"), idx]
@@ -280,6 +284,7 @@ func _save_pov_direction_subresource(pov_direction: PovDirections, sub_dirs: Dic
 	return load(path) as PovDirections
 
 func save_pov_level_sub_resources(dir_path: String) -> void:
+	# Export a PovLevel with all subresources split into their own files.
 	var root_dir := _normalize_dir_path(dir_path)
 	if root_dir.is_empty():
 		return
@@ -456,6 +461,7 @@ func _clone_pov_resource(source: Pov) -> Pov:
 	return Pov.new()
 
 func _reconcile_dirs_after_change() -> void:
+	# Normalize POV directions: split mismatched names and merge duplicates.
 	if _is_reconciling_dirs:
 		return
 	_is_reconciling_dirs = true
@@ -577,6 +583,7 @@ func _control_local_to_bg(control: Control, local_point: Vector2) -> Vector2:
 	return bg.get_global_transform_with_canvas().affine_inverse() * canvas_point
 
 func update_lines() -> void:
+	# Draw connection lines between direction dots with shared POV names.
 	for di in range(dirs.size() - 1, -1, -1):
 		if !is_instance_valid(dirs[di]):
 			dirs.remove_at(di)
@@ -682,6 +689,7 @@ func _get_dirs_with_name(name: String) -> Array[_PovDirectionsWidget]:
 	return arr
 	
 func _clamp_offset(offset: Vector2) -> Vector2:
+	# Keep the panning offset inside the content bounds.
 	var content_margins : Vector4 = _get_panning_content_margins() * zoom
 	var top_left := Vector2(content_margins.x, content_margins.y)
 	var bottom_right := Vector2(content_margins.z, content_margins.w)
@@ -712,6 +720,7 @@ func _on_screen_container_resized() -> void:
 	apply_view()
 
 func _on_screen_container_gui_input(event: InputEvent) -> void:
+	# Handle panning, zooming, and POV direction creation.
 	if event is InputEventMouseButton:
 		if event.pressed and Input.is_action_pressed("ui_scroll_pressed"):
 			is_panning = true

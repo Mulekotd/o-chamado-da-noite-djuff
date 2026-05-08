@@ -11,6 +11,7 @@ var elements : Array[Element]
 var selected_index : int = -1
 
 func _physics_process(delta: float) -> void:
+	# Debug: keep track of the current elements array in output.
 	print(elements)
 
 func remove_element(index: int) -> void:
@@ -22,6 +23,7 @@ func add_elements(elements: Array[Element]) -> void:
 		add_element(e)
 
 func add_element(element: Element) -> void:
+	# Add element to list and show a fallback label if needed.
 	elements.append(element)
 	if element.name:
 		element_list.add_item(element.name)
@@ -44,6 +46,7 @@ func _on_element_list_item_selected(index: int) -> void:
 signal opened_element
 func _on_element_list_item_activated(index: int) -> void:
 	opened_element.emit()
+	# Spawn an element editor window and bind updates to this list entry.
 	var ew : _ElementWidget = ELEMENT_WIDGET.instantiate()
 	var p : Control = get_tree().get_first_node_in_group("util_parent_control")
 	if (p == null):

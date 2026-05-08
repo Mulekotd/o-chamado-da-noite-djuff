@@ -45,6 +45,7 @@ func _on_close_button_pressed() -> void:
 	queue_free()
 
 func _on_image_load_file_dialog_file_selected(path: String) -> void:
+	# Load and assign a new POV image.
 	var img := Image.load_from_file(path)
 	pov_image_rect.texture = ImageTexture.create_from_image(img)
 
@@ -54,6 +55,7 @@ func _on_pov_image_rect_gui_input(event: InputEvent) -> void:
 	image_load_file_dialog.popup()
 
 func _on_elements_widget_opened_element() -> void:
+	# Keep element editor context in sync with current POV.
 	elements_widget.pov_image = pov_image_rect.texture
 	elements_widget.pov_name = name_line_edit.text
 

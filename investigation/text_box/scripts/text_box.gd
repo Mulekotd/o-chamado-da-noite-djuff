@@ -34,6 +34,7 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:
 	if stand_by and !prompt_queue.is_empty():
+		# Try to display the next valid prompt as soon as we are idle.
 		# Ensure the first visible prompt also respects conditions.
 		_skip_invalid_prompts(-1)
 		if !prompt_queue.is_empty():
@@ -86,6 +87,7 @@ func display_prompt() -> void:
 	var current_prompt := prompt_queue[0]
 	print("ADVANCED PROMPT")
 	displayed_prompt.emit(prompt_queue[0].chain_id, current_prompt)
+	# Typewriter effect; can be fast-forwarded by player input.
 	for c in prompt_queue[0].text:
 		if current_prompt != prompt_queue[0]:
 			return
@@ -110,6 +112,7 @@ func display_prompt() -> void:
 				await get_tree().create_timer(delay).timeout
 	is_writing = false
 	
+	# Build option buttons only for options that pass conditions.
 	var i : int = 0
 	var options := 0
 	for option in prompt_queue[0].options:
@@ -140,6 +143,7 @@ func next_prompt(cond: int, can_end_chain: bool = true) -> void:
 		skip_chain_id = previous_prompt.chain_id
 
 	if can_end_chain:
+		# Apply prompt side-effects when the player advances it.
 		# Only mutate vars for a prompt that was actually advanced by the player.
 		InvestigationVars.update_variables(previous_prompt.vars_to_change)
 		InvestigationVars.append_item(previous_prompt.items_to_give)

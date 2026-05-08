@@ -25,6 +25,7 @@ func _on_gui_input(event: InputEvent) -> void:
 		accept_event()
 		return
 	if Input.is_action_just_pressed("ui_mouse_pressed"):
+		# Open the POV editor window for this stacked entry.
 		var pw : _PovWidget = POV_WIDGET.instantiate()
 		var parent_control := get_tree().get_first_node_in_group("util_parent_control") as Control
 		if parent_control == null:

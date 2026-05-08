@@ -20,6 +20,7 @@ func _on_pov_image_widget_clone_requested(clicked_pov: Pov) -> void:
 	clone_requested.emit(clicked_pov)
 
 func get_povs() -> Array[Pov]:
+	# Collect all POVs currently stacked under this direction.
 	var povs : Array[Pov] = []
 	for child in povs_container.get_children():
 		if child is _PovImageWidget:
@@ -30,6 +31,7 @@ func get_povs() -> Array[Pov]:
 	return povs
 
 func parse_pov_directions_stack() -> Array[PovDirections]:
+	# Mirror the base directions for each stacked POV.
 	var dirs : Array[PovDirections] = []
 	if pov_dir_widget == null:
 		return dirs
@@ -54,6 +56,7 @@ func load_pov(p: Pov) -> void:
 	piw.load_pov(p)
 
 func pop_povs_not_named(name: String) -> Dictionary:
+	# Remove POVs that do not match the main name and group them.
 	var target_name := name.strip_edges()
 	var grouped := {}
 	for child in povs_container.get_children():
@@ -77,4 +80,5 @@ func pop_povs_not_named(name: String) -> Dictionary:
 	return grouped
 
 func add_pov() -> void:
+	# Add a blank POV entry to the stack.
 	load_pov(Pov.new())

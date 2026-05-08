@@ -18,6 +18,7 @@ static var default_value : int = 0
 static var file : InvestigationVars = load("res://investigation/investigation_variables.tres")
 
 static func check_global_conditions(conditions: Dictionary[String, int]) -> bool:
+	# Missing vars are created with the default value on first access.
 	for k : String in conditions.keys():
 		#print(file.vars.get(k))
 		if file.vars.get_or_add(k, default_value) != conditions[k]:
@@ -33,11 +34,13 @@ static func check_inventory(items: Array[Item]) -> bool:
 	return true
 
 static func update_variables(vars: Dictionary[String, int]) -> void:
+	# Persist variable changes immediately.
 	for k: String in vars.keys():
 		file.vars[k] = vars[k]
 	ResourceSaver.save(file)
 
 static func append_item(items: Array[Item]) -> void:
+	# Inventory updates are also persisted to disk.
 	for item in items:
 		file.inventory.append(item)
 	ResourceSaver.save(file)

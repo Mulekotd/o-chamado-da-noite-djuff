@@ -1,6 +1,7 @@
 class_name Prompt extends Resource
 
 @export_multiline() var text : String
+## Option index required to show this prompt; -1 ignores branching.
 @export var condition_number : int = -1
 @export var necessary_items : Array[Item]
 @export var global_conditions : Dictionary[String, int]

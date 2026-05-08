@@ -1,6 +1,7 @@
 class_name Element extends Resource
 
 @export var name: String = ""
+## Hitbox is normalized in POV space, values in [0,1].
 @export var hitbox : Dictionary[String, float] = {
 	"left" : 0.5,
 	"top" : 0.5,

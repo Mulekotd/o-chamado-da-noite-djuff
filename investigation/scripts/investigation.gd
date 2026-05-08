@@ -5,10 +5,12 @@ extends Control
 @onready var sound_manager: _SoundManager = $SoundManager
 @onready var person_display: PersonDisplay = $PersonDisplay
 
+## Tracks prompt chains so letter sounds can follow the active chain order.
 var chain_id_queue : Array[int]
 var prompt_chain_queue : Array[PromptChain]
 
 func _ready() -> void:
+	# Wire the main investigation flow between POVs, text box, and audio.
 	pov_manager.element_clicked.connect(_append_prompt_chain_from_element)
 	pov_manager.prompt_chain_called.connect(text_box.append_prompt_chain)
 	text_box.pov_entered.connect(pov_manager.change_pov_by_name)
@@ -29,6 +31,7 @@ func _clear_person_display(stand_by: bool) -> void:
 
 func _update_sound_manager_letter_sounds(chain_id: int, prompt: Prompt) -> void:
 	print("UPDATE SOUND MANAGER LETTER SOUNDS: ", chain_id)
+	# Keep the chain queue aligned with the prompt being displayed.
 	while chain_id_queue[0] != chain_id:
 		chain_id_queue.pop_front()
 		prompt_chain_queue.pop_front()
@@ -40,9 +43,11 @@ func _update_pov_manager_enabled(stand_by: bool) -> void:
 	pov_manager.enabled = stand_by
 
 func _append_prompt_chain_from_element(e: Element) -> void:
+	# Clicking an element can enqueue its prompt chain.
 	if e.prompt_chain:
 		text_box.append_prompt_chain(e.prompt_chain)
 
 func _append_prompt_chain_sound(chain_id: int, chain: PromptChain) -> void:
+	# Cache chain meta so letter sounds can be swapped later.
 	chain_id_queue.append(chain_id)
 	prompt_chain_queue.append(chain)

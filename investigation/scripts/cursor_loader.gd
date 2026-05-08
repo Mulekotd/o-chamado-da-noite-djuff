@@ -7,6 +7,7 @@ const CURSOR_MAGNIFIER = preload("uid://0uthes6vc12q")
 
 
 func _ready() -> void:
+	# Register all custom cursors used by the investigation UI.
 	Input.set_custom_mouse_cursor(CURSOR_MAGNIFIER, Input.CURSOR_HELP, Vector2(11,11))
 	Input.set_custom_mouse_cursor(CURSOR_ARROW, Input.CURSOR_ARROW)
 	Input.set_custom_mouse_cursor(CURSOR_BLOCKED, Input.CURSOR_FORBIDDEN, Vector2(16,16))
