@@ -67,17 +67,17 @@ func _configure_arrow(arrow: TextureRect, arrow_texture: Texture2D, target_pov: 
 	for connection in arrow.gui_input.get_connections():
 		arrow.gui_input.disconnect(connection.callable)
 	
+	arrow.texture = null
+	arrow.visible = false
+	arrow.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	
 	if target_pov and enabled:
 		var target_index := get_pov_index(target_pov)
-		arrow.texture = arrow_texture
-		arrow.visible = true
-		arrow.mouse_filter = Control.MOUSE_FILTER_STOP
 		if target_index != -1:
 			arrow.gui_input.connect(_on_arrow_gui_input.bind(target_index))
-	else:
-		arrow.texture = null
-		arrow.visible = false
-		arrow.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			arrow.texture = arrow_texture
+			arrow.visible = true
+			arrow.mouse_filter = Control.MOUSE_FILTER_STOP
 
 func _on_arrow_gui_input(event: InputEvent, index: int) -> void:
 	if event is InputEventMouseButton and\
@@ -86,16 +86,23 @@ func _on_arrow_gui_input(event: InputEvent, index: int) -> void:
 	enabled:
 		change_pov(index)
 
-## returns the first index of the pov direction in the pov_level that has this pov as it's mains pov and has all the conditions met
+## returns the first index of the pov direction in the pov_level that has this pov as it's mains pov and has the highest conditions value
 func get_pov_index(name: String) -> int:
 	var i := 0
+	## highest conditions value yet
+	var highest_value : float = -1
+	## the most suitable pov
+	var considered_pov : int = -1
+	## current conditions value
+	var x : float = -1
 	for dir in pov_level.pov_directions_array:
-		print(i, " : ", dir.pov.name)
 		if dir.pov.name == name:
-			if InvestigationVars.check_global_conditions(dir.pov.global_conditions):
-				return i
+			x = InvestigationVars.get_conditions_value(dir.pov.global_conditions)
+			if x > highest_value:
+				highest_value = x
+				considered_pov = i
 		i += 1
-	return -1
+	return considered_pov
 
 func _save_last_pov(p_name: String) -> void:
 	print("salvou: ", p_name)
@@ -149,7 +156,7 @@ func _on_gui_input(_event: InputEvent) -> void:
 	if e:
 		if e.pov_name and\
 		 InvestigationVars.check_inventory(e.necessary_items) and\
-		 InvestigationVars.check_global_conditions(e.conditions):
+		 InvestigationVars.get_conditions_met(e.conditions):
 			change_pov_by_name(e.pov_name)
 		else:
 			for p in e.prompt_chain.prompts:

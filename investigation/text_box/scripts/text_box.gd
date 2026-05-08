@@ -47,13 +47,13 @@ func _physics_process(_delta: float) -> void:
 func _process(_delta: float) -> void:
 	if ((Input.is_action_just_pressed("ui_accept") or\
 	(Input.is_action_just_pressed("ui_mouse_pressed") and\
-	is_mouse_inside))) and\
-	prompt_queue.size()>0 and\
-	!stand_by:
+	is_mouse_inside))) and prompt_queue.size():
 		if _has_visible_options(prompt_queue[0]) == 0 and !is_writing:
 			next_prompt(-1)
 		else:
 			wants_to_advance = true
+	if stand_by:
+		wants_to_advance = false
 
 func clear_buttons() -> void:
 	for n in options_container.get_children():
@@ -116,7 +116,7 @@ func display_prompt() -> void:
 	var i : int = 0
 	var options := 0
 	for option in prompt_queue[0].options:
-		if InvestigationVars.check_global_conditions(option.conditions) and\
+		if InvestigationVars.get_conditions_met(option.conditions) and\
 		InvestigationVars.check_inventory(option.necessary_items):
 			var b := TextBoxButton.new()
 			b.text = option.text
@@ -179,7 +179,7 @@ func _is_prompt_valid(prompt: Prompt, cond: int) -> bool:
 	# Shared prompt gate used by both first-display and next-prompt flows.
 	if prompt.condition_number != -1 and prompt.condition_number != cond:
 		return false
-	if !InvestigationVars.check_global_conditions(prompt.global_conditions):
+	if InvestigationVars.get_conditions_met(prompt.global_conditions) == 0:
 		return false
 	if !InvestigationVars.check_inventory(prompt.necessary_items):
 		return false
@@ -194,7 +194,7 @@ func _skip_invalid_prompts(cond: int) -> void:
 func _has_visible_options(prompt: Prompt) -> int:
 	var count := 0
 	for option in prompt.options:
-		if InvestigationVars.check_global_conditions(option.conditions) and\
+		if InvestigationVars.get_conditions_met(option.conditions) and\
 		InvestigationVars.check_inventory(option.necessary_items):
 			count += 1
 	return count
