@@ -7,7 +7,17 @@
 [ext_resource type="Texture2D" uid="uid://dlf5uc3tlxr2j" path="res://investigation/interface/images/right_arrow.png" id="5_dss2o"]
 [ext_resource type="Texture2D" uid="uid://cm8l3y3l3dioj" path="res://investigation/interface/images/bottom_arrow.png" id="6_p7y0m"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dss2o"]
+bg_color = Color(1, 1, 1, 0)
+border_width_left = 200
+border_width_top = 200
+border_width_right = 200
+border_width_bottom = 200
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+
 [node name="PovManager" type="Control" unique_id=1895825167]
+clip_contents = true
 layout_mode = 3
 anchor_right = 0.873
 anchor_bottom = 0.528
@@ -17,6 +27,9 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_m80ka")
 pov_level = ExtResource("2_i0poh")
+arrow_slide_duration = 0.25
+arrow_fade_duration = 0.75
+arrow_transition_offset_scale = 0.1
 
 [node name="View" type="TextureRect" parent="." unique_id=1676758023]
 layout_mode = 1
@@ -26,6 +39,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 expand_mode = 2
+
+[node name="ShadowPanel" type="Panel" parent="View" unique_id=1749330548]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_dss2o")
 
 [node name="LeftFlowContainer" type="FlowContainer" parent="." unique_id=1575589308]
 layout_mode = 1

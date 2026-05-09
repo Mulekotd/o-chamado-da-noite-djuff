@@ -10,7 +10,6 @@ signal letter_sound_requested(sound: AudioStream)
 signal displayed_prompt(chain_id: int, prompt: Prompt)
 signal chain_added(chain_id: int, chain: PromptChain)
 
-
 var prompt_queue : Array[Prompt]
 var stand_by : bool = true :
 	set(x):
@@ -146,7 +145,10 @@ func display_prompt() -> void:
 		InvestigationVars.check_inventory(option.necessary_items):
 			var b := TextBoxButton.new()
 			b.text = option.text
+			if (option.actions):
+				b.text = b.text + " [-%d AÇÃO]" % option.actions
 			var name := "button_option_text_%d" % i
+			b.actions = option.actions
 			b.name = name
 			options_container.add_child(b)
 			if options_container.get_node(name):

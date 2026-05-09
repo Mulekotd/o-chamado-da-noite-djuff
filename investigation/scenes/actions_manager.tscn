@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://kmy4ol8bdnbn"]
+
+[ext_resource type="Script" uid="uid://cu7gy8n5c3rgc" path="res://investigation/scripts/actions_manager.gd" id="1_bf7xv"]
+
+[node name="ActionsManager" type="VBoxContainer" unique_id=2116191467]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -25.0
+offset_top = -308.0
+offset_right = 25.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset_ratio = Vector2(0.5, 1)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 12
+alignment = 2
+script = ExtResource("1_bf7xv")
+clock_size = Vector2(50.245, 0)
+actions = 1
+max_actions = 4
+modulate_speed = 10.0
+bob_speed = null
+bob_amplitude = null
+spin_speed = 1.855

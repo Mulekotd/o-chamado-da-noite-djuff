@@ -5,6 +5,7 @@ class_name PovManager extends Control
 @onready var top_arrow: TextureRect = $TopFlowContainer/TopArrow
 @onready var right_arrow: TextureRect = $RightFlowContainer/RightArrow
 @onready var bottom_arrow: TextureRect = $BottomFlowContainer/BottomArrow
+@onready var shadow_panel: Panel = $View/ShadowPanel
 
 const BOTTOM_ARROW = preload("uid://cm8l3y3l3dioj")
 const LEFT_ARROW = preload("uid://b513u1882j8ph")
@@ -22,14 +23,39 @@ var current_pov : Pov
 var enabled : bool = true :
 	set(x):
 		enabled = x
+		if enabled:
+			_pan_locked = false
 		update_arrows()
 @export var pov_level : PovLevel
 @export var arrow_hitbox : float = 16
 ## time to wait before showing the prompt_chain if a pov has one
 @export var prompt_wait_time : float = 1
+## how far the POV image pans based on mouse distance to center
+@export var pan_amount : Vector2 = Vector2(12, 8)
+## how quickly the POV image lerps to its pan position
+@export var pan_lerp_speed : float = 10.0
+## seconds for the arrow transition slide
+@export var arrow_slide_duration : float = 0.3
+## seconds for the arrow transition fade
+@export var arrow_fade_duration : float = 0.1
+## how far the POV image slides during arrow transitions (as a fraction of view size)
+@export var arrow_transition_offset_scale : float = 0.35
+
+var _view_base_pos : Vector2
+var _pan_locked : bool = false
+var _is_transitioning : bool = false
 
 func _ready() -> void:
+	_sync_view_base_pos()
+	_reset_shadow_panel()
 	_load_last_pov()
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_RESIZED:
+		_sync_view_base_pos()
+
+func _process(_delta: float) -> void:
+	_update_view_pan(_delta)
 
 func change_pov(index: int) -> void:
 	pov_index = index
@@ -70,12 +96,13 @@ func update_view(pov: Pov) -> void:
 
 func update_arrows() -> void:
 	var pov_direction := pov_level.pov_directions_array[pov_index]
-	_configure_arrow(left_arrow, LEFT_ARROW, pov_direction.left)
-	_configure_arrow(top_arrow, TOP_ARROW, pov_direction.top)
-	_configure_arrow(right_arrow, RIGHT_ARROW, pov_direction.right)
-	_configure_arrow(bottom_arrow, BOTTOM_ARROW, pov_direction.bottom)
+	_configure_arrow(left_arrow, LEFT_ARROW, pov_direction.left, Vector2.LEFT)
+	_configure_arrow(top_arrow, TOP_ARROW, pov_direction.top, Vector2.UP)
+	_configure_arrow(right_arrow, RIGHT_ARROW, pov_direction.right, Vector2.RIGHT)
+	# Bottom arrow backs out, so the slide direction is inverted.
+	_configure_arrow(bottom_arrow, BOTTOM_ARROW, pov_direction.bottom, Vector2.UP)
 
-func _configure_arrow(arrow: TextureRect, arrow_texture: Texture2D, target_pov: String) -> void:
+func _configure_arrow(arrow: TextureRect, arrow_texture: Texture2D, target_pov: String, direction: Vector2) -> void:
 	# Avoid duplicate gui_input callbacks when changing POV multiple times.
 	for connection in arrow.gui_input.get_connections():
 		arrow.gui_input.disconnect(connection.callable)
@@ -87,17 +114,17 @@ func _configure_arrow(arrow: TextureRect, arrow_texture: Texture2D, target_pov: 
 	if target_pov and enabled:
 		var target_index := get_pov_index(target_pov)
 		if target_index != -1:
-			arrow.gui_input.connect(_on_arrow_gui_input.bind(target_index))
+			arrow.gui_input.connect(_on_arrow_gui_input.bind(target_index, direction))
 			arrow.texture = arrow_texture
 			arrow.visible = true
 			arrow.mouse_filter = Control.MOUSE_FILTER_STOP
 
-func _on_arrow_gui_input(event: InputEvent, index: int) -> void:
+func _on_arrow_gui_input(event: InputEvent, index: int, direction: Vector2) -> void:
 	if event is InputEventMouseButton and\
 	event.button_index == MOUSE_BUTTON_LEFT and\
 	event.pressed and\
 	enabled:
-		change_pov(index)
+		await _transition_to_pov(index, direction)
 
 ## returns the first index of the pov direction in the pov_level that has this pov as it's mains pov and has the highest conditions value
 func get_pov_index(name: String) -> int:
@@ -143,8 +170,7 @@ func _load_last_pov() -> void:
 
 func _update_cursor() -> void:
 	# Cursor feedback changes based on enabled state and hitbox hover.
-	var mouse_pos := get_local_mouse_position()
-	var mouse_relative := Vector2(mouse_pos.x/size.x, mouse_pos.y/size.y)
+	var mouse_relative := _get_mouse_relative_to_view()
 	if enabled:
 		if _get_element_in_pos(mouse_relative):
 			_change_cursor(CLICKABLE_CURSOR)
@@ -162,17 +188,122 @@ func _on_gui_input(_event: InputEvent) -> void:
 	
 	if !Input.is_action_just_pressed("ui_mouse_pressed") or !enabled:
 		return
-		
-	var mouse_pos := get_local_mouse_position()
-	var mouse_relative := Vector2(mouse_pos.x/size.x, mouse_pos.y/size.y)
+
+	var mouse_relative := _get_mouse_relative_to_view()
 	
 	var e := _get_element_in_pos(mouse_relative)
 	if e:
 		if e.pov_name and\
 		 InvestigationVars.check_inventory(e.necessary_items) and\
 		 InvestigationVars.get_conditions_met(e.conditions):
-			change_pov_by_name(e.pov_name)
+			_pan_locked = true
+			var target_index := get_pov_index(e.pov_name)
+			if target_index != -1:
+				await _transition_to_pov(target_index, Vector2.ZERO)
+			else:
+				change_pov_by_name(e.pov_name)
 		else:
 			for p in e.prompt_chain.prompts:
 				pass#print(p.text, " POV: ", p.pov)
+			_pan_locked = true
 			element_clicked.emit(e)
+
+func _sync_view_base_pos() -> void:
+	if view == null:
+		view = get_node_or_null("View")
+	if view == null:
+		return
+	_view_base_pos = view.position
+	_reset_shadow_panel()
+
+
+func _update_view_pan(delta: float) -> void:
+	if view == null:
+		return
+	if size.x <= 0 or size.y <= 0:
+		return
+	if _pan_locked:
+		return
+	if _is_transitioning:
+		return
+	var center := size * 0.5
+	var mouse_pos := get_local_mouse_position()
+	var offset := Vector2.ZERO
+	var is_inside := Rect2(Vector2.ZERO, size).has_point(mouse_pos)
+	if is_inside:
+		var normalized := Vector2(
+			(mouse_pos.x - center.x) / center.x,
+			(mouse_pos.y - center.y) / center.y
+		)
+		normalized.x = clampf(normalized.x, -1.0, 1.0)
+		normalized.y = clampf(normalized.y, -1.0, 1.0)
+		offset = Vector2(-normalized.x * pan_amount.x, -normalized.y * pan_amount.y)
+	var target_pos := _view_base_pos + offset
+	view.position = view.position.lerp(target_pos, clampf(pan_lerp_speed * delta, 0.0, 1.0))
+
+func _get_mouse_relative_to_view() -> Vector2:
+	if view == null:
+		return Vector2(-1, -1)
+	var view_size := view.size
+	if view_size.x <= 0 or view_size.y <= 0:
+		return Vector2(-1, -1)
+	var mouse_pos := get_local_mouse_position()
+	return Vector2(
+		(mouse_pos.x - view.position.x) / view_size.x,
+		(mouse_pos.y - view.position.y) / view_size.y
+	)
+
+func _transition_to_pov(index: int, direction: Vector2) -> void:
+	if _is_transitioning:
+		return
+	if view == null:
+		change_pov(index)
+		return
+	_is_transitioning = true
+	_pan_locked = true
+	var was_enabled := enabled
+	enabled = false
+
+	var dir := direction.normalized()
+	var slide_offset := _get_transition_offset(dir)
+	var out_pos := _view_base_pos - slide_offset
+	var in_pos := _view_base_pos + slide_offset
+
+	# Slide out and fade to black before swapping the POV.
+	var tween := create_tween()
+	tween.tween_property(view, "position", out_pos, arrow_slide_duration)
+	tween.parallel().tween_property(view, "modulate", Color(0, 0, 0, 1), arrow_fade_duration)
+	if shadow_panel:
+		tween.parallel().tween_property(shadow_panel, "modulate", Color(0, 0, 0, 1), arrow_fade_duration)
+	await tween.finished
+
+	view.position = in_pos
+	view.modulate = Color(0, 0, 0, 1)
+	if shadow_panel:
+		shadow_panel.modulate = Color(0, 0, 0, 1)
+	change_pov(index)
+
+	# Slide in and fade back to white for the new POV.
+	tween = create_tween()
+	tween.tween_property(view, "position", _view_base_pos, arrow_slide_duration)
+	tween.parallel().tween_property(view, "modulate", Color(1, 1, 1, 1), arrow_fade_duration)
+	if shadow_panel:
+		tween.parallel().tween_property(shadow_panel, "modulate", Color(0, 0, 0, 0), arrow_fade_duration)
+	await tween.finished
+
+	_is_transitioning = false
+	_pan_locked = false
+	if was_enabled and enabled == false and !current_pov.prompt_chain.prompts:
+		enabled = true
+	_reset_shadow_panel()
+
+func _reset_shadow_panel() -> void:
+	if shadow_panel:
+		# Keep the vignette subtle while idle.
+		shadow_panel.modulate = Color(0, 0, 0, 0)
+
+func _get_transition_offset(direction: Vector2) -> Vector2:
+	return Vector2(
+		absf(view.size.x) * arrow_transition_offset_scale * direction.x,
+		absf(view.size.y) * arrow_transition_offset_scale * direction.y
+	)
