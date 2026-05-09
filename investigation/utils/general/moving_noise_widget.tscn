@@ -15,10 +15,6 @@ border_width_right = 64
 border_width_bottom = 64
 border_color = Color(0, 0, 0, 0.7607843)
 border_blend = true
-corner_radius_top_left = 3
-corner_radius_top_right = 3
-corner_radius_bottom_right = 3
-corner_radius_bottom_left = 3
 corner_detail = 5
 
 [node name="MovingNoiseWidget" type="TextureRect" unique_id=292722013]

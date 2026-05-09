@@ -12,6 +12,15 @@
 [ext_resource type="PackedScene" uid="uid://cvlccjslejidx" path="res://investigation/utils/general/sound_widget.tscn" id="7_5icfr"]
 [ext_resource type="Theme" uid="uid://cyq5khk20nbm6" path="res://themes/utils_theme.tres" id="999_utils_theme"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p1lpp"]
+bg_color = Color(0.41675407, 8.4830447e-07, 2.1658838e-07, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cen2o"]
+bg_color = Color(0.22225624, 1.5792902e-07, 3.008172e-08, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5icfr"]
+bg_color = Color(1, 0, 0, 1)
+
 [node name="PromptWidget" type="MarginContainer" unique_id=151020374]
 custom_minimum_size = Vector2(0, 80)
 anchors_preset = -1
@@ -286,6 +295,9 @@ icon = ExtResource("6_lfw2h")
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
+theme_override_styles/normal = SubResource("StyleBoxFlat_p1lpp")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_cen2o")
+theme_override_styles/hover = SubResource("StyleBoxFlat_5icfr")
 text = "Remover"
 
 [connection signal="pressed" from="HBoxContainer/MoveDownButton" to="." method="_on_move_down_button_pressed"]

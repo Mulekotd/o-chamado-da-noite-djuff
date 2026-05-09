@@ -20,13 +20,13 @@ static var file : InvestigationVars = load("res://investigation/investigation_va
 ## returns int(number-of-conditions-met / number-of-keys-given) * number-of-keys-given - 1
 static func get_conditions_value(conditions: Dictionary[String, int]) -> float:
 	var len : int = len(conditions.keys())
-	if len == 0: return INF
+	if len == 0: return 9999999999999
 	var conditions_met : int = get_conditions_met(conditions)
 	return floorf(conditions_met / len) * len - 1
 
 ## returns how many conditions were met
 static func get_conditions_met(conditions: Dictionary[String, int]) -> int:
-	if len(conditions.keys()) == 0: return INF
+	if len(conditions.keys()) == 0: return 999999999999
 	var conditions_met: int = 0
 	for k : String in conditions.keys():
 		if file.vars.get_or_add(k, default_value) == conditions[k]:

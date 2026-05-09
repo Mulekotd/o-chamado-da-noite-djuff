@@ -1,46 +1,37 @@
-class_name _PovImageWidget extends TextureRect
+class_name _PovImageWidget extends Control
 
-const POV_WIDGET = preload("uid://c6s6iskf8pk6k")
+@export var pov_image_texture_2d : TextureRect
+@export var conditions_widget : _ConditionsWidget
+
+@onready var image_load_file_dialog: FileDialog = $ImageLoadFileDialog
+
+
 const NO_IMAGE_POV = preload("uid://dwj11t2nw18l2")
 
-var pov : Pov
+func load_pov_image(pi: PovImage) -> void:
+	_load_texture(pi.texture)
+	conditions_widget.add_conditions(pi.conditions)
 
-signal changed
-signal clone_requested(clicked_pov: Pov)
+func parse_pov_image() -> PovImage:
+	var pi : PovImage = PovImage.new()
+	pi.texture = pov_image_texture_2d.texture
+	pi.conditions = conditions_widget.parse_conditions()
+	return pi
 
-func load_pov(p: Pov) -> void:
-	pov = p
-	if p and p.image:
-		texture = p.image
+func _load_texture(texture: Texture2D) -> void:
+	if texture:
+		pov_image_texture_2d.texture = texture
 	else:
-		texture = NO_IMAGE_POV
-	changed.emit()
+		pov_image_texture_2d.texture = NO_IMAGE_POV
 
-func get_pov() -> Pov:
-	return pov
+func _on_image_load_file_dialog_file_selected(path: String) -> void:
+	# Load and assign a new POV image.
+	var img := Image.load_from_file(path)
+	_load_texture(ImageTexture.create_from_image(img))
 
-func _on_gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
-		clone_requested.emit(pov)
-		accept_event()
-		return
+func _on_pov_image_texture_2d_gui_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("ui_mouse_pressed"):
-		# Open the POV editor window for this stacked entry.
-		var pw : _PovWidget = POV_WIDGET.instantiate()
-		var parent_control := get_tree().get_first_node_in_group("util_parent_control") as Control
-		if parent_control == null:
-			parent_control = self
-		if pov == null:
-			pov = Pov.new()
-		parent_control.add_child(pw)
-		pw.call_deferred("load_pov", pov)
-		pw.closed.connect(load_pov)
-
-signal closed(p: Pov)
-func _on_close_button_pressed() -> void:
-	var parent_node := get_parent()
-	if parent_node:
-		parent_node.remove_child(self)
-	closed.emit(pov)
-	changed.emit()
+		image_load_file_dialog.popup()
+		
+func _on_remove_button_pressed() -> void:
 	queue_free()

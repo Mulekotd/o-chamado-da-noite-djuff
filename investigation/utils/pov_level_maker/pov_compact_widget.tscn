@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://bxcsi7dhp2yv6"]
+
+[ext_resource type="Texture2D" uid="uid://dwj11t2nw18l2" path="res://investigation/povs/no_image_pov.png" id="1_lr5w4"]
+[ext_resource type="Script" uid="uid://cxnsdwsfkxqix" path="res://investigation/utils/pov_level_maker/pov_compact_widget.gd" id="2_12fc3"]
+[ext_resource type="Texture2D" uid="uid://b0x0w4dtint7u" path="res://investigation/interface/images/minus.png" id="3_s43dy"]
+
+[node name="PovCompactWidget" type="TextureRect" unique_id=489540816]
+custom_minimum_size = Vector2(256, 0)
+size_flags_vertical = 8
+texture = ExtResource("1_lr5w4")
+expand_mode = 5
+stretch_mode = 4
+script = ExtResource("2_12fc3")
+
+[node name="CloseButton" type="Button" parent="." unique_id=360356737]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+icon = ExtResource("3_s43dy")
+metadata/_edit_use_anchors_ = true
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="pressed" from="CloseButton" to="." method="_on_close_button_pressed"]

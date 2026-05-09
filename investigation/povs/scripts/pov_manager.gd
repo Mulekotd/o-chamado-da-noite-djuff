@@ -43,16 +43,29 @@ func change_pov(index: int) -> void:
 		await get_tree().create_timer(prompt_wait_time).timeout
 		prompt_chain_called.emit(current_pov.prompt_chain)
 	if current_pov.especial_behaviour:
+		for s in get_parent().get_children():
+			if s.name == current_pov.name + "_behaviour":
+				return
 		# Spawn a runtime behaviour node to allow custom POV logic.
 		var n := Node.new()
 		n.set_script(current_pov.especial_behaviour)
+		n.name = current_pov.name + "_behaviour"
 		add_sibling(n)
 	
 func change_pov_by_name(pov_name: String) -> void:
 	change_pov(get_pov_index(pov_name))
 	
 func update_view(pov: Pov) -> void:
-	view.texture = pov.image
+	var img : Texture2D
+	var highest := -1
+	var x := -1
+	for pi in pov.images:
+		x = InvestigationVars.get_conditions_value(pi.conditions)
+		print(x)
+		if x > highest:
+			highest = x
+			img = pi.texture
+	view.texture = img
 	update_arrows()
 
 func update_arrows() -> void:
@@ -98,6 +111,7 @@ func get_pov_index(name: String) -> int:
 	for dir in pov_level.pov_directions_array:
 		if dir.pov.name == name:
 			x = InvestigationVars.get_conditions_value(dir.pov.global_conditions)
+			print("NAME: %s, CondVal: %f" % [name, x])
 			if x > highest_value:
 				highest_value = x
 				considered_pov = i

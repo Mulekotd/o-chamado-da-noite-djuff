@@ -30,6 +30,9 @@ script = ExtResource("2_l743g")
 
 [node name="MovingNoiseWidget" parent="." unique_id=292722013 instance=ExtResource("3_qnhhs")]
 layout_mode = 1
+bg_speed = Vector2(0.05, 0.5)
+default_frequency = 0.0049
+fade_in_duration = 0.5
 
 [node name="BackgroundRect" type="ColorRect" parent="." unique_id=648475876]
 layout_mode = 1

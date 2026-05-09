@@ -1,29 +1,84 @@
-[gd_scene format=3 uid="uid://boyvv4inx1pxw"]
+[gd_scene format=3 uid="uid://bgk0a5do5pmd1"]
 
-[ext_resource type="Texture2D" uid="uid://dwj11t2nw18l2" path="res://investigation/povs/no_image_pov.png" id="1_lr5w4"]
-[ext_resource type="Script" uid="uid://cxnsdwsfkxqix" path="res://investigation/utils/pov_level_maker/pov_image_widget.gd" id="2_12fc3"]
-[ext_resource type="Texture2D" uid="uid://b0x0w4dtint7u" path="res://investigation/interface/images/minus.png" id="3_s43dy"]
+[ext_resource type="Script" uid="uid://bxf1yg0pgkvgq" path="res://investigation/utils/pov_level_maker/pov_image_widget.gd" id="1_q6bf7"]
+[ext_resource type="Texture2D" uid="uid://dwj11t2nw18l2" path="res://investigation/povs/no_image_pov.png" id="2_s43dy"]
+[ext_resource type="PackedScene" uid="uid://bj378ngyim0ll" path="res://investigation/utils/general/conditions_widget.tscn" id="3_0m3c3"]
 
-[node name="PovImageWidget" type="TextureRect" unique_id=489540816]
-custom_minimum_size = Vector2(256, 0)
-size_flags_vertical = 8
-texture = ExtResource("1_lr5w4")
-expand_mode = 5
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d446r"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 12.0
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s43dy"]
+bg_color = Color(0.41675407, 8.4830447e-07, 2.1658838e-07, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0m3c3"]
+bg_color = Color(0.22225624, 1.5792902e-07, 3.008172e-08, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u3ocb"]
+bg_color = Color(1, 0, 0, 1)
+
+[node name="PovImageWidget" type="MarginContainer" unique_id=76398816 node_paths=PackedStringArray("pov_image_texture_2d", "conditions_widget")]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -178.5
+offset_right = 178.5
+offset_bottom = 298.0
+grow_horizontal = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+script = ExtResource("1_q6bf7")
+pov_image_texture_2d = NodePath("PanelContainer/VBoxContainer/PovImageTexture2D")
+conditions_widget = NodePath("PanelContainer/VBoxContainer/ConditionsWidget")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1541035707]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_d446r")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=307484516]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="PovImageTexture2D" type="TextureRect" parent="PanelContainer/VBoxContainer" unique_id=124136536]
+custom_minimum_size = Vector2(0, 192)
+layout_mode = 2
+texture = ExtResource("2_s43dy")
+expand_mode = 3
 stretch_mode = 4
-script = ExtResource("2_12fc3")
 
-[node name="CloseButton" type="Button" parent="." unique_id=360356737]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -40.0
-offset_bottom = 40.0
-grow_horizontal = 0
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer" unique_id=2050399103]
+layout_mode = 2
+text = "Condições"
+horizontal_alignment = 1
+
+[node name="ConditionsWidget" parent="PanelContainer/VBoxContainer" unique_id=1813019862 instance=ExtResource("3_0m3c3")]
+layout_mode = 2
+
+[node name="RemoveButton" type="Button" parent="PanelContainer/VBoxContainer" unique_id=314059357]
+layout_mode = 2
 size_flags_horizontal = 8
-size_flags_vertical = 0
-icon = ExtResource("3_s43dy")
-metadata/_edit_use_anchors_ = true
+size_flags_vertical = 8
+theme_override_styles/normal = SubResource("StyleBoxFlat_s43dy")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0m3c3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_u3ocb")
+text = "Remover"
 
-[connection signal="gui_input" from="." to="." method="_on_gui_input"]
-[connection signal="pressed" from="CloseButton" to="." method="_on_close_button_pressed"]
+[node name="ImageLoadFileDialog" type="FileDialog" parent="." unique_id=2142454277]
+oversampling_override = 1.0
+title = "Open a File"
+size = Vector2i(800, 600)
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.png", "*.jpg", "*.jpeg", "*.bmp")
+use_native_dialog = true
+
+[connection signal="gui_input" from="PanelContainer/VBoxContainer/PovImageTexture2D" to="." method="_on_pov_image_texture_2d_gui_input"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/RemoveButton" to="." method="_on_remove_button_pressed"]
+[connection signal="file_selected" from="ImageLoadFileDialog" to="." method="_on_image_load_file_dialog_file_selected"]

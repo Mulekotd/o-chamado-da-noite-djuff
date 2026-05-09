@@ -1,4 +1,4 @@
 class_name PovImage extends Resource
 
-var texture : Texture2D
-var conditions : Dictionary[String, int]
+@export var texture : Texture2D
+@export var conditions : Dictionary[String, int]

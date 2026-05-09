@@ -1,0 +1,103 @@
+[gd_scene format=3 uid="uid://b2nqv18l1c3xo"]
+
+[ext_resource type="Script" uid="uid://fvr7082pmfwt" path="res://investigation/utils/pov_level_maker/pov_images_widget.gd" id="1_h2nmj"]
+[ext_resource type="PackedScene" uid="uid://f2qd0iww8k1p" path="res://investigation/utils/general/moving_noise_widget.tscn" id="2_p3m7v"]
+[ext_resource type="Texture2D" uid="uid://bvti8hnpfr854" path="res://investigation/interface/images/plus.png" id="2_qgs10"]
+[ext_resource type="Texture2D" uid="uid://b0x0w4dtint7u" path="res://investigation/interface/images/minus.png" id="3_p3m7v"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2nmj"]
+content_margin_left = 8.0
+content_margin_top = 14.0
+content_margin_right = 8.0
+content_margin_bottom = 12.0
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+
+[node name="PovImagesWidget" type="MarginContainer" unique_id=448407935 node_paths=PackedStringArray("cancel_button", "close_button", "add_button", "remove_button", "pov_images_container")]
+z_index = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+script = ExtResource("1_h2nmj")
+cancel_button = NodePath("PanelContainer/VBoxContainer/HBoxContainer/CancelButton")
+close_button = NodePath("PanelContainer/VBoxContainer/HBoxContainer/CloseButton")
+add_button = NodePath("PanelContainer/VBoxContainer/HBoxContainer2/AddButton")
+remove_button = NodePath("PanelContainer/VBoxContainer/HBoxContainer2/RemoveButton")
+pov_images_container = NodePath("PanelContainer/VBoxContainer/ScrollContainer/PovImagesContainer")
+
+[node name="MovingNoiseWidget" parent="." unique_id=292722013 instance=ExtResource("2_p3m7v")]
+layout_mode = 2
+bg_speed = Vector2(0.05, 0.5)
+default_frequency = 0.0049
+fade_in_duration = 0.5
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=417095100]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_h2nmj")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=1148408654]
+custom_minimum_size = Vector2(271.73, 0)
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=1247186893]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="Label" type="Label" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=1949102275]
+layout_mode = 2
+text = "Imagens do Pov"
+horizontal_alignment = 1
+
+[node name="CancelButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=1513186741]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "cancelar"
+
+[node name="CloseButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer" unique_id=539708603]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "FECHAR
+"
+
+[node name="-----------------4" type="ColorRect" parent="PanelContainer/VBoxContainer" unique_id=1318952015]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="PanelContainer/VBoxContainer" unique_id=1747880432]
+layout_mode = 2
+alignment = 1
+
+[node name="AddButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer2" unique_id=414619423]
+layout_mode = 2
+icon = ExtResource("2_qgs10")
+
+[node name="RemoveButton" type="Button" parent="PanelContainer/VBoxContainer/HBoxContainer2" unique_id=2068614875]
+layout_mode = 2
+icon = ExtResource("3_p3m7v")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/VBoxContainer" unique_id=926084282]
+custom_minimum_size = Vector2(0, 549.72)
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="PovImagesContainer" type="VBoxContainer" parent="PanelContainer/VBoxContainer/ScrollContainer" unique_id=1230242402]
+layout_mode = 2
+size_flags_vertical = 3
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/CancelButton" to="." method="_on_cancel_button_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer2/AddButton" to="." method="_on_add_button_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/HBoxContainer2/RemoveButton" to="." method="_on_remove_button_pressed"]
