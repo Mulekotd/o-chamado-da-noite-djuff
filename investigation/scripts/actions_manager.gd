@@ -29,21 +29,24 @@ const EMPTY_CLOCK_CIRCLE = preload("uid://dxy5eor5rqd4y")
 const CLOCK_CONTAINER = preload("uid://b7fn23a6vcsgi")
 
 func _ready() -> void:
+	update_variables()
 	_repopulate_clocks()
 	rnd_number = randf_range(3932, 393932)
 
 func _process(delta: float) -> void:
 	_update_clocks(delta)
 
+func update_variables() -> void:
+	max_actions = InvestigationVars.get_max_actions()
+	actions = InvestigationVars.get_actions()
+
 ## adds empty clocks for i in max_actions; removes exceeding clocks if exists.
 func _repopulate_clocks() -> void:
 	for c in get_children():
 		c.queue_free()
-	print("CONTAINERS:")
 	for i in max_actions:
 		var clock_container := CLOCK_CONTAINER.instantiate()
 		clock_container.position.x = (int(rnd_number * i)) % 10
-		print(clock_container.position.x)
 		clock_container.get_child(0).custom_minimum_size = clock_size
 		clock_container.get_child(0).pivot_offset_ratio = Vector2(0.5,0.5)
 		clock_container.get_child(1).custom_minimum_size = clock_size
@@ -64,5 +67,5 @@ func _update_clocks(delta: float) -> void:
 			i -= 1
 		else: # exceeding
 			clock.modulate = lerp(clock.modulate, Color(0,0,1,0), modulate_speed * delta)
-			clock.rotation = lerp(clock.rotation, PI*2, modulate_speed * delta)
+			clock.rotation = lerp(clock.rotation, PI*2 * 2, modulate_speed * delta)
 		clock_container.get_child(0).rotation = clock_container.get_child(0).rotation + spin_speed * delta

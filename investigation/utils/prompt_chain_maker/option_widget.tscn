@@ -19,6 +19,7 @@ theme_override_constants/margin_bottom = 8
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1906291746]
 layout_mode = 2
+theme_override_constants/separation = 12
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=529145773]
 custom_minimum_size = Vector2(0, 34.8)
@@ -34,7 +35,7 @@ text = "Option: "
 [node name="TextEdit" type="TextEdit" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1944187967]
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 3
 theme = ExtResource("999_utils_theme")
 placeholder_text = "Opcao"
 wrap_mode = 1
@@ -65,3 +66,15 @@ horizontal_alignment = 1
 
 [node name="NecessaryItemsWidget" parent="MarginContainer/VBoxContainer/NecessaryItemsContainer" unique_id=1813019863 instance=ExtResource("3_7b35e")]
 layout_mode = 2
+
+[node name="ActionsContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1374293148]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ActionsContainer" unique_id=188260952]
+layout_mode = 2
+text = "Ações: "
+
+[node name="ActionsSpinBox" type="SpinBox" parent="MarginContainer/VBoxContainer/ActionsContainer" unique_id=1559333312]
+layout_mode = 2
+rounded = true

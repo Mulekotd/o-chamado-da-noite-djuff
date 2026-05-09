@@ -5,6 +5,9 @@ extends Control
 @onready var sound_manager: _SoundManager = $SoundManager
 @onready var person_display: PersonDisplay = $PersonDisplay
 @onready var eye_sprite_2d: AnimatedSprite2D = $EyeSprite2D
+@onready var actions_manager: ActionsManager = $ActionsManager
+
+const USED_ACTION_SOUND = preload("uid://bfamn2x4funyi")
 
 ## Tracks prompt chains so letter sounds can follow the active chain order.
 var chain_id_queue : Array[int]
@@ -22,6 +25,7 @@ func _ready() -> void:
 	text_box.displayed_prompt.connect(_update_sound_manager_letter_sounds)
 	text_box.displayed_prompt.connect(_update_person_display)
 	text_box.chain_added.connect(_append_prompt_chain_sound)
+	text_box.actions_used.connect(_use_actions)
 
 var elapsed : int = 0
 var advances : int = 0
@@ -41,6 +45,11 @@ func _update_person_display(chain_id: int, prompt: Prompt) -> void:
 func _clear_person_display(stand_by: bool) -> void:
 	if stand_by:
 		person_display.clear_img()
+
+func _use_actions(actions: int) -> void:
+	InvestigationVars.add_actions(-actions)
+	actions_manager.actions = InvestigationVars.get_actions()
+	sound_manager.play_poly_sound(USED_ACTION_SOUND)
 
 func _update_sound_manager_letter_sounds(chain_id: int, prompt: Prompt) -> void:
 	# print("UPDATE SOUND MANAGER LETTER SOUNDS: ", chain_id)

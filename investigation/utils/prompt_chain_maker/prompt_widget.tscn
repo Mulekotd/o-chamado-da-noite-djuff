@@ -74,7 +74,7 @@ wrap_mode = 1
 [node name="TabContainer" type="TabContainer" parent="MarginContainer/HBoxContainer/HSplitContainer" unique_id=241532051]
 layout_mode = 2
 size_flags_horizontal = 3
-current_tab = 1
+current_tab = 2
 
 [node name="Pre" type="MarginContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer" unique_id=1916516240]
 visible = false
@@ -121,25 +121,6 @@ autowrap_mode = 2
 [node name="NecessaryItemsWidget" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pre/GridContainer/NecessaryItemsContainer" unique_id=589692923 instance=ExtResource("1_eg3ew")]
 layout_mode = 2
 
-[node name="ConditionNumberContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pre/GridContainer" unique_id=263075385]
-layout_mode = 2
-size_flags_horizontal = 3
-alignment = 1
-
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pre/GridContainer/ConditionNumberContainer" unique_id=1355031731]
-custom_minimum_size = Vector2(1, 1)
-layout_mode = 2
-text = "Numero de condicao"
-horizontal_alignment = 1
-autowrap_mode = 2
-
-[node name="ConditionNumberWidget" type="TextEdit" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pre/GridContainer/ConditionNumberContainer" unique_id=502194860]
-layout_mode = 2
-text = "-1"
-placeholder_text = "-1"
-scroll_fit_content_height = true
-scroll_fit_content_width = true
-
 [node name="PromptImageWidget" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pre/GridContainer" unique_id=489540816 instance=ExtResource("5_tf5ai")]
 layout_mode = 2
 
@@ -170,6 +151,7 @@ autowrap_mode = 2
 layout_mode = 2
 
 [node name="Pos" type="MarginContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer" unique_id=326489978]
+visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
@@ -274,7 +256,6 @@ autowrap_mode = 2
 layout_mode = 2
 
 [node name="Opcoes" type="VBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer" unique_id=300089472]
-visible = false
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 size_flags_horizontal = 8

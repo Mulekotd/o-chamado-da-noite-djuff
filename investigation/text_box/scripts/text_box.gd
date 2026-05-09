@@ -9,6 +9,7 @@ signal prompt_sound_requested(sound: AudioStream)
 signal letter_sound_requested(sound: AudioStream)
 signal displayed_prompt(chain_id: int, prompt: Prompt)
 signal chain_added(chain_id: int, chain: PromptChain)
+signal actions_used(actions: int)
 
 var prompt_queue : Array[Prompt]
 var stand_by : bool = true :
@@ -75,6 +76,7 @@ func insert_prompt(prompt: Prompt, index: int = -1) -> void:
 
 ## if index = -1, appends to end of queue
 func insert_prompt_chain(prompt_chain: PromptChain, index: int = -1) -> void:
+	InvestigationVars.set_option(-1)
 	_insert_prompt_chain_from_index(prompt_chain, 0, index)
 
 func _insert_prompt_chain_from_index(prompt_chain: PromptChain, start_index: int, index: int = -1) -> void:
@@ -142,13 +144,15 @@ func display_prompt() -> void:
 	var options := 0
 	for option in prompt_queue[0].options:
 		if InvestigationVars.get_conditions_met(option.conditions) and\
-		InvestigationVars.check_inventory(option.necessary_items):
+		InvestigationVars.check_inventory(option.necessary_items) and\
+		option.actions <= InvestigationVars.get_actions() if option.actions else true:
 			var b := TextBoxButton.new()
 			b.text = option.text
+			b.actions = option.actions
 			if (option.actions):
 				b.text = b.text + " [-%d AÇÃO]" % option.actions
+				b.connect("button_down", actions_used.emit.bind(option.actions))
 			var name := "button_option_text_%d" % i
-			b.actions = option.actions
 			b.name = name
 			options_container.add_child(b)
 			if options_container.get_node(name):
@@ -169,6 +173,8 @@ func next_prompt(cond: int, can_end_chain: bool = true) -> void:
 		skip_chain_id = -1
 		stand_by = true
 		return
+	if can_end_chain and cond != -1:
+		InvestigationVars.set_option(cond)
 	
 	var previous_prompt : Prompt = prompt_queue.pop_front()
 	if can_end_chain and (previous_prompt.end_chain or previous_prompt.go_to != -1):
@@ -211,8 +217,6 @@ func _on_mouse_exited() -> void:
 
 func _is_prompt_valid(prompt: Prompt, cond: int) -> bool:
 	# Shared prompt gate used by both first-display and next-prompt flows.
-	if prompt.condition_number != -1 and prompt.condition_number != cond:
-		return false
 	if InvestigationVars.get_conditions_met(prompt.global_conditions) == 0:
 		return false
 	if !InvestigationVars.check_inventory(prompt.necessary_items):
@@ -229,6 +233,7 @@ func _has_visible_options(prompt: Prompt) -> int:
 	var count := 0
 	for option in prompt.options:
 		if InvestigationVars.get_conditions_met(option.conditions) and\
-		InvestigationVars.check_inventory(option.necessary_items):
+		InvestigationVars.check_inventory(option.necessary_items) and\
+		option.actions <= InvestigationVars.get_actions() if option.actions else true:
 			count += 1
 	return count

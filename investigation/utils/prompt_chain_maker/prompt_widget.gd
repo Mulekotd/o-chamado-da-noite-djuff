@@ -11,7 +11,6 @@ signal move_down_requested(widget: _PromptWidget)
 @onready var change_vars_widget: _ConditionsWidget = $MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pos/GridContainer/VarsToChangeContainer/ChangeVarsWidget
 @onready var options_widget: _OptionsWidget = $MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Opcoes/OptionsWidget
 @onready var necessary_items_widget: _ItemsWidget = $MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pre/GridContainer/NecessaryItemsContainer/NecessaryItemsWidget
-@onready var condition_number_widget: TextEdit = $MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pre/GridContainer/ConditionNumberContainer/ConditionNumberWidget
 @onready var conditions_widget: _ConditionsWidget = $MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pre/GridContainer/ConditionsContainer/ConditionsWidget
 @onready var text_widget: TextEdit = $MarginContainer/HBoxContainer/HSplitContainer/TextContainer/TextWidget
 @onready var prompt_image_widget: _PromptImageWidget = $MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pre/GridContainer/PromptImageWidget
@@ -28,7 +27,6 @@ var id : int
 func parse_prompt() -> Prompt:
 	var p := Prompt.new()
 	p.text = text_widget.text
-	p.condition_number = condition_number_widget.text.to_int()
 	p.necessary_items = necessary_items_widget.items
 	p.global_conditions = conditions_widget.parse_conditions()
 	p.options = options_widget.parse_options()
@@ -45,7 +43,6 @@ func parse_prompt() -> Prompt:
 
 func load_prompt(p: Prompt) -> void:
 	text_widget.text = p.text
-	condition_number_widget.text = "%d" % p.condition_number
 	necessary_items_widget.add_items(p.necessary_items)
 	conditions_widget.add_conditions(p.global_conditions)
 	options_widget.load_options(p.options)

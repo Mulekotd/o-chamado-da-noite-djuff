@@ -4,11 +4,17 @@ class_name InvestigationVars extends Resource
 @export var vars : Dictionary[String, int] = {
 	"test_var": 1,
 	"door_unlocked": 0,
+	"option": -1,
 }
 
 @export var inventory : Array[Item] = [
 	preload("uid://cqpw454xu78in"),
 ]
+
+## maximum amount of actions the player can have
+@export var _max_actions : int = 5
+## how many actions the player has
+@export var _actions : int = _max_actions
 
 @export var last_pov : String
 
@@ -41,7 +47,13 @@ static func check_inventory(items: Array[Item]) -> bool:
 
 static func update_variables(vars: Dictionary[String, int]) -> void:
 	for k: String in vars.keys():
+		if k == "option":
+			continue
 		file.vars[k] = vars[k]
+	ResourceSaver.save(file)
+
+static func set_option(value: int) -> void:
+	file.vars["option"] = value
 	ResourceSaver.save(file)
 
 static func append_item(items: Array[Item]) -> void:
@@ -61,3 +73,23 @@ static func set_last_pov(p_name: String) -> void:
 static func get_last_pov() -> String:
 	# print("FILE.LAST_POV: ", file.last_pov)
 	return file.last_pov
+
+static func set_actions(amount: int) -> void:
+	file._actions = clamp(amount, 0, file._max_actions)
+	ResourceSaver.save(file)
+
+static func get_actions() -> int:
+	return file._actions
+
+## add a value to actions, negative or positive
+static func add_actions(amount: int) -> void:
+	print(get_actions() + amount)
+	set_actions(get_actions() + amount)
+
+static func set_max_actions(amount: int) -> void:
+	file._max_actions = max(0, amount)
+	file._actions = min(file._actions, file._max_actions)
+	ResourceSaver.save(file)
+
+static func get_max_actions() -> int:
+	return file._max_actions
