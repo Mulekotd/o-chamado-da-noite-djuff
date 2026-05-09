@@ -4,6 +4,7 @@ extends Control
 @onready var pov_manager: PovManager = $PovManager
 @onready var sound_manager: _SoundManager = $SoundManager
 @onready var person_display: PersonDisplay = $PersonDisplay
+@onready var eye_sprite_2d: AnimatedSprite2D = $EyeSprite2D
 
 ## Tracks prompt chains so letter sounds can follow the active chain order.
 var chain_id_queue : Array[int]
@@ -21,6 +22,18 @@ func _ready() -> void:
 	text_box.displayed_prompt.connect(_update_sound_manager_letter_sounds)
 	text_box.displayed_prompt.connect(_update_person_display)
 	text_box.chain_added.connect(_append_prompt_chain_sound)
+
+var elapsed : int = 0
+var advances : int = 0
+var vision_x : float = 0.5
+var look_speed : float = 0.1
+func _physics_process(delta: float) -> void:
+	# move eye in relation to mouse in pov_manager
+	vision_x = lerpf(vision_x, pov_manager.get_local_mouse_position().x / pov_manager.size.x, look_speed)
+	if elapsed % 16 == 0: # only move in certain intervals
+		eye_sprite_2d.frame = int((vision_x) * 13) * 2 + (advances / 2 % 2)
+		advances += 1
+	elapsed += 1
 
 func _update_person_display(chain_id: int, prompt: Prompt) -> void:
 	person_display.load_img_from_prompt(prompt)

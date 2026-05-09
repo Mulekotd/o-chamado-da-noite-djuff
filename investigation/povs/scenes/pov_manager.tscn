@@ -28,8 +28,8 @@ grow_vertical = 2
 script = ExtResource("1_m80ka")
 pov_level = ExtResource("2_i0poh")
 arrow_slide_duration = 0.25
-arrow_fade_duration = 0.75
-arrow_transition_offset_scale = 0.1
+arrow_fade_duration = 0.075
+arrow_transition_offset_scale = 0.05
 
 [node name="View" type="TextureRect" parent="." unique_id=1676758023]
 layout_mode = 1
