@@ -21,6 +21,8 @@ var is_mouse_inside : bool = false
 var chain_number : int = 0
 ## if a prompt has this chain_id, it will be skipped
 var skip_chain_id : int = -1
+## chain buffer for chains with "go to" prompts; clear once on stand by
+var chain_buffer : Dictionary[int, PromptChain]
 @export var wants_to_advance : bool = false # advance to next prompt
 @export var write_time_min : float = 0.04
 @export var write_time_max : float = 0.05
@@ -62,17 +64,41 @@ func clear_buttons() -> void:
 func clear_box() -> void:
 	prompt_queue.clear()
 	main_text.clear()
-	main_text.append_text("...")
 	clear_buttons()
+	chain_buffer.clear()
 
-func append_prompt(prompt: Prompt) -> void:
+func insert_prompt(prompt: Prompt, index: int = -1) -> void:
 	#print(prompt.text," POV: ", prompt.pov)
-	prompt_queue.append(prompt)
-	
-func append_prompt_chain(prompt_chain: PromptChain) -> void:
-	for p in prompt_chain.prompts:
+	if index == -1:
+		prompt_queue.append(prompt)
+	else:
+		prompt_queue.insert(index, prompt)
+
+## if index = -1, appends to end of queue
+func insert_prompt_chain(prompt_chain: PromptChain, index: int = -1) -> void:
+	_insert_prompt_chain_from_index(prompt_chain, 0, index)
+
+func _insert_prompt_chain_from_index(prompt_chain: PromptChain, start_index: int, index: int = -1) -> void:
+	if !prompt_chain:
+		return
+	var prompt_count := prompt_chain.prompts.size()
+	if prompt_count == 0:
+		return
+	var start := clampi(start_index, 0, prompt_count)
+	if start >= prompt_count:
+		return
+	var has_go_to := false
+	for i in range(start, prompt_count):
+		# Duplicate prompts so per-queue chain_id does not mutate shared resources.
+		var p := prompt_chain.prompts[i].duplicate(true)
 		p.chain_id = chain_number
-		append_prompt(p)
+		insert_prompt(p, index)
+		if index != -1:
+			index += 1
+		if p.go_to != -1:
+			has_go_to = true
+	if has_go_to:
+		chain_buffer.set(chain_number, prompt_chain)
 	chain_added.emit(chain_number, prompt_chain)
 	chain_number += 1
 	if stand_by and !prompt_queue.is_empty():
@@ -85,7 +111,7 @@ func display_prompt() -> void:
 	stand_by = false
 	main_text.clear()
 	var current_prompt := prompt_queue[0]
-	print("ADVANCED PROMPT")
+	#print("ADVANCED PROMPT")
 	displayed_prompt.emit(prompt_queue[0].chain_id, current_prompt)
 	# Typewriter effect; can be fast-forwarded by player input.
 	for c in prompt_queue[0].text:
@@ -130,6 +156,10 @@ func display_prompt() -> void:
 			options += 1
 		i += 1
 
+## appends a prompt chain immediately after the current one
+func _insert_chain_to_front(pc: PromptChain, start_index: int) -> void:
+	_insert_prompt_chain_from_index(pc, start_index, 0)
+
 signal pov_entered(p: String)
 func next_prompt(cond: int, can_end_chain: bool = true) -> void:
 	if prompt_queue.is_empty():
@@ -139,8 +169,10 @@ func next_prompt(cond: int, can_end_chain: bool = true) -> void:
 		return
 	
 	var previous_prompt : Prompt = prompt_queue.pop_front()
-	if can_end_chain and previous_prompt.end_chain:
+	if can_end_chain and (previous_prompt.end_chain or previous_prompt.go_to != -1):
 		skip_chain_id = previous_prompt.chain_id
+		if previous_prompt.go_to != -1 and chain_buffer.has(previous_prompt.chain_id):
+			_insert_chain_to_front(chain_buffer[previous_prompt.chain_id], previous_prompt.go_to)
 
 	if can_end_chain:
 		# Apply prompt side-effects when the player advances it.

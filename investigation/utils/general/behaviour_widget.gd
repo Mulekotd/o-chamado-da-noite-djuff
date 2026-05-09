@@ -13,7 +13,7 @@ func load_behaviour(b: Script) -> void:
 	if !b: return
 	behaviour = b
 	behaviour_button.text = b.new().behaviour_name
-	print("NOME: ", b.new().behaviour_name)
+	# print("NOME: ", b.new().behaviour_name)
 
 func get_behaviour() -> Script:
 	return behaviour

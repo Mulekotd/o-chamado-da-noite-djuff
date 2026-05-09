@@ -74,9 +74,10 @@ wrap_mode = 1
 [node name="TabContainer" type="TabContainer" parent="MarginContainer/HBoxContainer/HSplitContainer" unique_id=241532051]
 layout_mode = 2
 size_flags_horizontal = 3
-current_tab = 0
+current_tab = 1
 
 [node name="Pre" type="MarginContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer" unique_id=1916516240]
+visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
@@ -169,7 +170,6 @@ autowrap_mode = 2
 layout_mode = 2
 
 [node name="Pos" type="MarginContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer" unique_id=326489978]
-visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
@@ -224,12 +224,30 @@ layout_mode = 2
 
 [node name="EndChainContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pos/GridContainer" unique_id=107193213]
 layout_mode = 2
-size_flags_horizontal = 3
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pos/GridContainer/EndChainContainer" unique_id=741048812]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pos/GridContainer/EndChainContainer/HBoxContainer" unique_id=206398779]
+layout_mode = 2
+text = "Ir para prompt :"
+
+[node name="GoToSpinBox" type="SpinBox" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pos/GridContainer/EndChainContainer/HBoxContainer" unique_id=856922251]
+layout_mode = 2
+size_flags_horizontal = 0
+min_value = -1.0
+value = -1.0
 alignment = 1
 
 [node name="EndChainWidget" type="CheckBox" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pos/GridContainer/EndChainContainer" unique_id=80609606]
 layout_mode = 2
-text = "Should end chain?"
+size_flags_horizontal = 4
+text = "Sair da cadeia?"
 
 [node name="PovContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pos/GridContainer" unique_id=280504026]
 layout_mode = 2
@@ -273,6 +291,12 @@ autowrap_mode = 2
 [node name="OptionsWidget" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Opcoes" unique_id=1903776342 instance=ExtResource("3_vn5r7")]
 layout_mode = 2
 
+[node name="IndexLabel" type="Label" parent="MarginContainer" unique_id=1029606726]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "0"
+
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1715678283]
 layout_mode = 2
 size_flags_horizontal = 8
@@ -300,6 +324,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_cen2o")
 theme_override_styles/hover = SubResource("StyleBoxFlat_5icfr")
 text = "Remover"
 
+[connection signal="value_changed" from="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pos/GridContainer/EndChainContainer/HBoxContainer/GoToSpinBox" to="." method="_on_spin_box_value_changed"]
 [connection signal="pressed" from="HBoxContainer/MoveDownButton" to="." method="_on_move_down_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/MoveUpButton" to="." method="_on_move_up_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/RemoveButton" to="." method="_on_remove_button_pressed"]

@@ -12,7 +12,7 @@ var selected_index : int = -1
 
 func _physics_process(delta: float) -> void:
 	# Debug: keep track of the current elements array in output.
-	print(elements)
+	pass# print(elements)
 
 func remove_element(index: int) -> void:
 	elements.remove_at(index)

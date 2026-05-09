@@ -31,10 +31,10 @@ func load_hitbox(img: Texture2D, hitbox: Dictionary[String, float]) -> void:
 func load_hitbox_values(left: float = 0.5, top: float = 0.5, right: float = 0.5, bottom: float = 0.5) -> int:
 	# Validate and clamp hitbox values before applying to the UI.
 	if right<left:
-		print("ERROR: right < left")
+		# print("ERROR: right < left")
 		return -1
 	if bottom<top:
-		print("ERROR: bottom < top")
+		# print("ERROR: bottom < top")
 		return -1
 	
 	left   = clampf(left  , 0, 1)

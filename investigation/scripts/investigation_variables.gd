@@ -59,5 +59,5 @@ static func set_last_pov(p_name: String) -> void:
 	ResourceSaver.save(file)
 
 static func get_last_pov() -> String:
-	print("FILE.LAST_POV: ", file.last_pov)
+	# print("FILE.LAST_POV: ", file.last_pov)
 	return file.last_pov

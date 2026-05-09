@@ -14,6 +14,9 @@ class_name Prompt extends Resource
 @export var items_to_take : Array[Item]
 ## global vars that change after this prompt
 @export var vars_to_change : Dictionary[String, int]
+## Prompt to come back to after this one; -1 goes to none
+@export var go_to : int = -1
+## Pov to go to after this prompt
 @export var pov : String
 ## this will be the image displayed besides the textbox when this prompt comes up
 @export var img : Texture2D

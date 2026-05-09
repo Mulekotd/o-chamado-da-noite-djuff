@@ -37,7 +37,7 @@ func change_pov(index: int) -> void:
 	update_view(current_pov)
 	_save_last_pov(current_pov.name)
 	if current_pov.prompt_chain.prompts:
-		print(current_pov.name)
+		# print(current_pov.name)
 		# Pause navigation while the POV's prompt chain is displayed.
 		enabled = false
 		await get_tree().create_timer(prompt_wait_time).timeout
@@ -61,7 +61,7 @@ func update_view(pov: Pov) -> void:
 	var x := -1
 	for pi in pov.images:
 		x = InvestigationVars.get_conditions_value(pi.conditions)
-		print(x)
+		# print(x)
 		if x > highest:
 			highest = x
 			img = pi.texture
@@ -111,7 +111,7 @@ func get_pov_index(name: String) -> int:
 	for dir in pov_level.pov_directions_array:
 		if dir.pov.name == name:
 			x = InvestigationVars.get_conditions_value(dir.pov.global_conditions)
-			print("NAME: %s, CondVal: %f" % [name, x])
+			# print("NAME: %s, CondVal: %f" % [name, x])
 			if x > highest_value:
 				highest_value = x
 				considered_pov = i
@@ -119,7 +119,7 @@ func get_pov_index(name: String) -> int:
 	return considered_pov
 
 func _save_last_pov(p_name: String) -> void:
-	print("salvou: ", p_name)
+	# print("salvou: ", p_name)
 	InvestigationVars.set_last_pov(p_name)
 
 ## gets the element is the relative position [0, 1]. returns null if none found
@@ -133,12 +133,12 @@ func _get_element_in_pos(pos: Vector2) -> Element:
 	return null
 
 func _load_last_pov() -> void:
-	print("tentando achar: ",InvestigationVars.get_last_pov() )
+	# print("tentando achar: ",InvestigationVars.get_last_pov() )
 	if get_pov_index(InvestigationVars.get_last_pov()) != -1:
-		print("achou last pov: ", InvestigationVars.get_last_pov())
+		# print("achou last pov: ", InvestigationVars.get_last_pov())
 		change_pov(get_pov_index(InvestigationVars.get_last_pov()))
 	else:
-		print("nao achou, carregando default.")
+		# print("nao achou, carregando default.")
 		change_pov(get_pov_index(pov_level.default_pov))
 
 func _update_cursor() -> void:

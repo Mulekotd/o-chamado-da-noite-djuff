@@ -17,8 +17,12 @@ signal move_down_requested(widget: _PromptWidget)
 @onready var prompt_image_widget: _PromptImageWidget = $MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pre/GridContainer/PromptImageWidget
 @onready var pre_sound_widget: _SoundWidget = $MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pre/GridContainer/SoundContainer/SoundWidget
 @onready var pos_sound_widget: _SoundWidget = $MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pos/GridContainer/SoundContainer/SoundWidget
+@onready var index_label: Label = $MarginContainer/IndexLabel
+@onready var go_to_spin_box: SpinBox = $MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pos/GridContainer/EndChainContainer/HBoxContainer/GoToSpinBox
 
-
+## highest prompt index in chain
+var _max_go_to : int = -1
+var go_to : int = -1
 var id : int
 
 func parse_prompt() -> Prompt:
@@ -36,6 +40,7 @@ func parse_prompt() -> Prompt:
 	p.img = prompt_image_widget.get_img()
 	p.pre_sound = pre_sound_widget.get_sound()
 	p.pos_sound = pos_sound_widget.get_sound()
+	p.go_to = go_to
 	return p
 
 func load_prompt(p: Prompt) -> void:
@@ -51,10 +56,15 @@ func load_prompt(p: Prompt) -> void:
 	pov_name_widget.load_pov_name(p.pov)
 	prompt_image_widget.load_img(p.img)
 	pos_sound_widget.load_sound(p.pos_sound)
+	go_to_spin_box.value = p.go_to
 
 func change_default_img(img: Texture2D):
 	# Update default image for prompts that do not set one.
 	prompt_image_widget.change_default_img(img)
+
+func set_max_go_to(max: int) -> void:
+	_max_go_to = max
+	go_to_spin_box.max_value = max
 
 func _on_remove_button_pressed() -> void:
 	queue_free()
@@ -64,3 +74,13 @@ func _on_move_up_button_pressed() -> void:
 
 func _on_move_down_button_pressed() -> void:
 	move_down_requested.emit(self)
+
+func _on_spin_box_value_changed(value: float) -> void:
+	if value != index_label.text.to_int():
+		go_to = value
+	else:
+		if value == go_to_spin_box.max_value:
+			go_to_spin_box.value = go_to
+		else:
+			go_to_spin_box.value = value + (value - go_to)
+			go_to = go_to_spin_box.value

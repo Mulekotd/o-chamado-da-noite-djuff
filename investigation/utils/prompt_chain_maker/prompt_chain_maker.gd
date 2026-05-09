@@ -17,6 +17,7 @@ func load_prompt_chain(p_chain: PromptChain) -> void:
 	for p in p_chain.prompts:
 		await get_tree().process_frame
 		add_prompt(p)
+	_update_prompt_indexes()
 
 func save_prompt_chain(path: String) -> void:
 	var p_chain := parse_prompt_chain()
@@ -42,18 +43,30 @@ func add_prompt(p: Prompt) -> void:
 	w.change_default_img(default_prompt_image_widget.get_img())
 	w.load_prompt(p)
 	default_prompt_image_widget.changed.connect(w.change_default_img)
+	_update_prompt_indexes()
 
 func _on_prompt_widget_move_up_requested(widget: _PromptWidget) -> void:
 	# Reorder prompt widgets within the chain.
 	var current_index := widget.get_index()
 	if current_index > 0:
 		prompts_container.move_child(widget, current_index - 1)
+	_update_prompt_indexes()
 
 func _on_prompt_widget_move_down_requested(widget: _PromptWidget) -> void:
 	var current_index := widget.get_index()
 	var last_index := prompts_container.get_child_count() - 1
 	if current_index < last_index:
 		prompts_container.move_child(widget, current_index + 1)
+	_update_prompt_indexes()
+
+func _update_prompt_indexes() -> void:
+	var pws := prompts_container.get_children()
+	var i : int = 0 
+	for pw in pws:
+		if pw is _PromptWidget:
+			pw.index_label.text = "%d" % i
+			pw.set_max_go_to(pws.size() - 1)
+			i += 1
 
 func clear_prompt_chain() -> void:
 	# Remove all prompt widgets from the editor.

@@ -18,13 +18,13 @@ func load_letter_sounds(sounds: Array[AudioStream]) -> void:
 		letter_stream.remove_stream(0)
 	if sounds:
 		for i in sounds.size():
-			print("LOAD LETTER SOUND ", i)
+			# print("LOAD LETTER SOUND ", i)
 			letter_stream.add_stream(i, sounds[i])
 	else:
 		letter_stream.add_stream(0, DEFAULT_LETTER_SOUND)
 
 func play_poly_sound(sound: AudioStream) -> void:
-	print("SOUND: ", sound)
+	# print("SOUND: ", sound)
 	poly_player.stream = sound
 	poly_player.play()
 

@@ -13,7 +13,7 @@ func load_sound(s: AudioStream) -> void:
 	if !s: return
 	sound = s
 	sound_button.text = s.resource_path.get_file()
-	print("NOME: ", s.resource_name)
+	# print("NOME: ", s.resource_name)
 
 func get_sound() -> AudioStream:
 	return sound

@@ -15,7 +15,7 @@ func _ready() -> void:
 
 func load_img(img: Texture2D) -> void:
 	if img:
-		print(img)
+		# print(img)
 		texture = img
 	else:
 		texture = default_img
