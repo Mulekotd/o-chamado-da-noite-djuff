@@ -46,13 +46,11 @@ options = Array[ExtResource("6_xi5ua")]([SubResource("Resource_ho0jg"), SubResou
 [sub_resource type="Resource" id="Resource_30e63"]
 script = ExtResource("4_wppg2")
 text = "Tudo bem, então."
-condition_number = 0
 end_chain = true
 
 [sub_resource type="Resource" id="Resource_bs4rw"]
 script = ExtResource("4_wppg2")
 text = "Você está na sua casa, amigo."
-condition_number = 1
 vars_to_change = Dictionary[String, int]({
 "esta_em_casa": 1,
 "respondeu1": 1
@@ -72,7 +70,6 @@ vars_to_change = Dictionary[String, int]({
 [sub_resource type="Resource" id="Resource_lkpxv"]
 script = ExtResource("4_wppg2")
 text = "Irineu..."
-condition_number = 2
 end_chain = true
 vars_to_change = Dictionary[String, int]({
 "respondeu2": 1
@@ -124,7 +121,6 @@ options = Array[ExtResource("6_xi5ua")]([SubResource("Resource_bvt70")])
 [sub_resource type="Resource" id="Resource_dotia"]
 script = ExtResource("4_wppg2")
 text = "Você destrancou a porta."
-condition_number = 0
 vars_to_change = Dictionary[String, int]({
 "porta_destrancada": 1
 })

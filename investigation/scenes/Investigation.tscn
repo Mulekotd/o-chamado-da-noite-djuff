@@ -3,13 +3,14 @@
 [ext_resource type="Script" uid="uid://1100rxsitcfq" path="res://investigation/scripts/investigation.gd" id="1_eyd3o"]
 [ext_resource type="PackedScene" uid="uid://dtd12y2eekoi1" path="res://investigation/text_box/scenes/text_box.tscn" id="1_kspld"]
 [ext_resource type="Texture2D" uid="uid://dg1nq4yoy3kes" path="res://investigation/interface/images/investigation_hud_overlay.png" id="2_838ch"]
-[ext_resource type="Resource" uid="uid://7ho1ic6nlqps" path="res://investigation/pov_levels/pov_lvl.tres" id="4_3ibbm"]
+[ext_resource type="Resource" uid="uid://c7t6xr70yst1v" path="res://investigation/pov_levels/pov_lvl.tres" id="4_3ibbm"]
 [ext_resource type="PackedScene" uid="uid://bqse5lw2xwni0" path="res://investigation/povs/scenes/pov_manager.tscn" id="4_sf3q1"]
 [ext_resource type="Texture2D" uid="uid://cy7q7mjb03npd" path="res://investigation/interface/images/eye-Sheet.png" id="5_2a0iw"]
 [ext_resource type="PackedScene" uid="uid://kmy4ol8bdnbn" path="res://investigation/scenes/actions_manager.tscn" id="5_ftui2"]
 [ext_resource type="PackedScene" uid="uid://ch7gu2n8g0kih" path="res://investigation/scenes/person_display.tscn" id="5_xwqjb"]
 [ext_resource type="PackedScene" uid="uid://fmeu1ocls847" path="res://investigation/scenes/sound_manager.tscn" id="6_ps6gc"]
 [ext_resource type="Script" uid="uid://611kuu1dngvi" path="res://investigation/scripts/cursor_loader.gd" id="7_h8d2x"]
+[ext_resource type="PackedScene" uid="uid://dse2ma2f5xas5" path="res://investigation/interface/scenes/clock.tscn" id="9_ha276"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ha276"]
 atlas = ExtResource("5_2a0iw")
@@ -293,6 +294,10 @@ modulate_speed = 2.0
 bob_speed = 1.0
 bob_amplitude = 0.15
 spin_speed = 0.5
+
+[node name="Clock" parent="." unique_id=1983170265 instance=ExtResource("9_ha276")]
+layout_mode = 1
+shake_factor = 0.003
 
 [node name="SoundManager" parent="." unique_id=1253211127 instance=ExtResource("6_ps6gc")]
 

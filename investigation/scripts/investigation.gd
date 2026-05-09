@@ -6,12 +6,21 @@ extends Control
 @onready var person_display: PersonDisplay = $PersonDisplay
 @onready var eye_sprite_2d: AnimatedSprite2D = $EyeSprite2D
 @onready var actions_manager: ActionsManager = $ActionsManager
+@onready var clock: _Clock = $Clock
 
 const USED_ACTION_SOUND = preload("uid://bfamn2x4funyi")
+const NO_MORE_ACTIONS_SOUND = preload("uid://c5hv7vps3lut6")
 
 ## Tracks prompt chains so letter sounds can follow the active chain order.
 var chain_id_queue : Array[int]
 var prompt_chain_queue : Array[PromptChain]
+# eye variables
+var vision_x : float = 0.5
+var look_speed : float = 0.1
+# clock variables
+var clock_total_speed : float = 500
+var clock_display_duration : float = 1
+var clock_fade_duration : float = 1
 
 func _ready() -> void:
 	# Wire the main investigation flow between POVs, text box, and audio.
@@ -26,11 +35,11 @@ func _ready() -> void:
 	text_box.displayed_prompt.connect(_update_person_display)
 	text_box.chain_added.connect(_append_prompt_chain_sound)
 	text_box.actions_used.connect(_use_actions)
+	
+	clock.modulate = Color(0,0,0,0)
 
 var elapsed : int = 0
 var advances : int = 0
-var vision_x : float = 0.5
-var look_speed : float = 0.1
 func _physics_process(delta: float) -> void:
 	# move eye in relation to mouse in pov_manager
 	vision_x = lerpf(vision_x, pov_manager.get_local_mouse_position().x / pov_manager.size.x, look_speed)
@@ -50,6 +59,7 @@ func _use_actions(actions: int) -> void:
 	InvestigationVars.add_actions(-actions)
 	actions_manager.actions = InvestigationVars.get_actions()
 	sound_manager.play_poly_sound(USED_ACTION_SOUND)
+	_show_clock()
 
 func _update_sound_manager_letter_sounds(chain_id: int, prompt: Prompt) -> void:
 	# print("UPDATE SOUND MANAGER LETTER SOUNDS: ", chain_id)
@@ -63,6 +73,33 @@ func _update_sound_manager_letter_sounds(chain_id: int, prompt: Prompt) -> void:
 	
 func _update_pov_manager_enabled(stand_by: bool) -> void:
 	pov_manager.enabled = stand_by
+
+func _show_clock() -> void:
+	_update_clock()
+	clock.modulate = Color(1,1,1,1)
+	clock.visible = true
+	if (InvestigationVars.get_actions()):
+		await get_tree().create_timer(clock_display_duration).timeout
+		var tween := get_tree().create_tween()
+		tween.tween_property(clock, "modulate", Color(0,0,0,0), clock_fade_duration)
+		await tween.finished
+	else:
+		await get_tree().create_timer(clock_display_duration).timeout
+		sound_manager.play_poly_sound(NO_MORE_ACTIONS_SOUND)
+		var tween := get_tree().create_tween()
+		tween.tween_property(clock, "speed", 0, 1.4)
+		await tween.finished
+		await get_tree().create_timer(clock_display_duration).timeout
+		tween = get_tree().create_tween()
+		tween.tween_property(clock, "modulate", Color(0,0,0,0), clock_fade_duration)
+		await tween.finished
+		
+	clock.visible = false
+
+func _update_clock() -> void:
+	var factor : float = float(InvestigationVars.get_actions()) / InvestigationVars.get_max_actions()
+	print("FACTOR: ", factor)
+	clock.speed = lerpf(clock_total_speed, 0.0, factor)
 
 func _append_prompt_chain_from_element(e: Element) -> void:
 	# Clicking an element can enqueue its prompt chain.
