@@ -1,16 +1,18 @@
-[gd_resource type="Resource" script_class="InvestigationVars" format=3 uid="uid://nk4ilmee5lf2"]
+[gd_resource type="Resource" script_class="InvestigationVars" format=3 uid="uid://c1grygijt1n2u"]
 
 [ext_resource type="Script" uid="uid://dqj183h8d13hn" path="res://investigation/items/scripts/item_resource.gd" id="1_2u1gg"]
+[ext_resource type="Resource" uid="uid://cqpw454xu78in" path="res://investigation/items/test_key/test_key.tres" id="2_p848r"]
 [ext_resource type="Script" uid="uid://47pf0lrk86x5" path="res://investigation/scripts/investigation_variables.gd" id="3_nj77k"]
 
 [resource]
 script = ExtResource("3_nj77k")
 vars = Dictionary[String, int]({
-"deu chave": 0,
+"deu chave": 1,
 "esta_em_casa": 0,
-"option": 0,
-"porta_destrancada": 0
+"option": 4,
+"porta_destrancada": 0,
+"surpreso com a porta": 1
 })
-inventory = Array[ExtResource("1_2u1gg")]([])
-_actions = 5
+_actions = 1
+last_pov = "sala"
 metadata/_custom_type_script = "uid://47pf0lrk86x5"

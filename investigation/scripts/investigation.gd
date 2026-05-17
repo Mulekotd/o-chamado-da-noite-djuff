@@ -18,7 +18,7 @@ var prompt_chain_queue : Array[PromptChain]
 var vision_x : float = 0.5
 var look_speed : float = 0.1
 # clock variables
-var clock_total_speed : float = 500
+var clock_total_speed : float = 1000
 var clock_display_duration : float = 1
 var clock_fade_duration : float = 1
 
@@ -81,17 +81,20 @@ func _show_clock() -> void:
 	if (InvestigationVars.get_actions()):
 		await get_tree().create_timer(clock_display_duration).timeout
 		var tween := get_tree().create_tween()
+		# turn clock invisible by fade out
 		tween.tween_property(clock, "modulate", Color(0,0,0,0), clock_fade_duration)
 		await tween.finished
 	else:
 		await get_tree().create_timer(clock_display_duration).timeout
 		sound_manager.play_poly_sound(NO_MORE_ACTIONS_SOUND)
 		var tween := get_tree().create_tween()
-		tween.tween_property(clock, "speed", 0, 1.4)
+		# slow down clock
+		tween.tween_property(clock, "speed", 0, 1.4).set_ease(Tween.EASE_IN)
 		await tween.finished
 		await get_tree().create_timer(clock_display_duration).timeout
 		tween = get_tree().create_tween()
-		tween.tween_property(clock, "modulate", Color(0,0,0,0), clock_fade_duration)
+		# turn clock invisible by fade out
+		tween.tween_property(clock, "modulate", Color(0,0,1,0), clock_fade_duration)
 		await tween.finished
 		
 	clock.visible = false

@@ -11,13 +11,13 @@ class_name _Clock extends Control
 
 var elapsed : float = 0
 func _process(delta: float) -> void:
-	seconds.rotation = (elapsed / 60) * (PI*2) * speed
-	minute.rotation = (elapsed / 60 / 60) * (PI*2) * speed
-	hour.rotation = (elapsed / 60 / 60 / 60) * (PI*2) * speed
+	seconds.rotation = (elapsed / 60) * (PI*2)
+	minute.rotation  = (elapsed / 60 / 60) * (PI*2)
+	hour.rotation    = (elapsed / 60 / 60 / 60) * (PI*2)
 	
 	apply_shake()
 	
-	elapsed += delta
+	elapsed += delta * speed
 
 func apply_shake() -> void:
 	var displacement : Vector2 = Vector2(

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dse2ma2f5xas5"]
 
-[ext_resource type="Script" path="res://investigation/interface/scripts/clock.gd" id="1_venu5"]
+[ext_resource type="Script" uid="uid://df24ckr0b753q" path="res://investigation/interface/scripts/clock.gd" id="1_venu5"]
 [ext_resource type="Texture2D" uid="uid://o06voawiuyu4" path="res://investigation/interface/images/clock_base.png" id="2_c2meu"]
 [ext_resource type="Texture2D" uid="uid://dewchqd8wncm0" path="res://investigation/interface/images/clock_pointer_seconds.png" id="3_ck37u"]
 [ext_resource type="Texture2D" uid="uid://d0ptvsqiik0h8" path="res://investigation/interface/images/clock_pointer_minutes.png" id="4_nmps5"]
@@ -28,17 +28,17 @@ shake_factor = 1.0
 texture = ExtResource("2_c2meu")
 
 [node name="Seconds" type="Sprite2D" parent="Base" unique_id=206837570]
-rotation = 6.027839
+rotation = 11.562418
 texture = ExtResource("3_ck37u")
 offset = Vector2(-2.865, -0.96)
 
 [node name="Minute" type="Sprite2D" parent="Base" unique_id=327830300]
-rotation = 0.10046399
+rotation = 0.19270697
 texture = ExtResource("4_nmps5")
 offset = Vector2(-4.085, -1.185)
 
 [node name="Hour" type="Sprite2D" parent="Base" unique_id=568247163]
-rotation = 0.0016743998
+rotation = 0.0032117828
 scale = Vector2(0.99999994, 0.99999994)
 texture = ExtResource("5_rwv3y")
 offset = Vector2(-4.74, -4.68)
