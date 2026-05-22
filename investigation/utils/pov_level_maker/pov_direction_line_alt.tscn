@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://deg5rxlwt8gmf"]
+
+[ext_resource type="Curve" uid="uid://bof4t6yf64do5" path="res://investigation/utils/pov_level_maker/direction_line_curve.tres" id="1_opop8"]
+[ext_resource type="Gradient" uid="uid://dkip33jckella" path="res://investigation/utils/pov_level_maker/line_direction_alt_gradient.tres" id="2_a8cf8"]
+
+[node name="PovDirectionLine" type="Line2D" unique_id=1387133965]
+width_curve = ExtResource("1_opop8")
+gradient = ExtResource("2_a8cf8")

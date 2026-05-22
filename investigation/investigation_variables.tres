@@ -14,6 +14,6 @@ vars = Dictionary[String, int]({
 "surpreso com a porta": 1
 })
 inventory = Array[ExtResource("1_2u1gg")]([ExtResource("2_p848r"), ExtResource("2_p848r"), ExtResource("2_p848r")])
-_actions = 0
+_actions = 1
 last_pov = "porta"
 metadata/_custom_type_script = "uid://47pf0lrk86x5"

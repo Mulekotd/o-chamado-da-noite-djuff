@@ -2,6 +2,9 @@ class_name _PovLevelMaker extends Control
 
 const POV_DIRECTIONS_WIDGET = preload("uid://cwvn21yf77xpp")
 const POV_DIRECTION_LINE = preload("uid://cx2wlsvbs6c56")
+const POV_DIRECTION_LINE_ALT = preload("uid://deg5rxlwt8gmf")
+const LINE_DIRECTION_ALT_GRADIENT = preload("uid://dkip33jckella")
+const LINE_DIRECTION_GRADIENT = preload("uid://ugwxn3xcw58j")
 
 @onready var bg: TextureRect = $ScreenContainer/TextureRect
 @onready var screen_container: Panel = $ScreenContainer
@@ -77,7 +80,6 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	update_lines()
-	print("DIRS: ", dirs.size())
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed and !event.echo and event.keycode == KEY_S and event.ctrl_pressed:
@@ -588,7 +590,7 @@ func update_lines() -> void:
 		if !is_instance_valid(dirs[di]):
 			dirs.remove_at(di)
 
-	# reutilizar linhas, criar so se necessario
+	# reutilize lines, only create if necessary
 	var li : int = 0
 	var i : int = 0
 	while i < dirs.size():
@@ -596,14 +598,17 @@ func update_lines() -> void:
 			new_line()
 		
 		var dir : _PovDirectionsWidget = dirs[i]
-		if dir.top_pov_name_widget.get_pov_name(): # connect top dot
-			for d in _get_dirs_with_name(dir.top_pov_name_widget.get_pov_name()):
-				var top_dot_center := dir.arrow_widget.dot_top.position + dir.arrow_widget.dot_top.size * 0.5
-				var origin := _control_local_to_bg(dir.arrow_widget, top_dot_center)
-				var destiny := _control_local_to_bg(d.arrow_widget, d.arrow_widget.size * 0.5)
-				for j : float in line_res:
-					set_line_point_pos(li, j, origin.lerp(destiny, j/(line_res-1)))
-				li += 1
+		for e in dir.pov.elements:
+			if e.pov_name: # connect from center
+				print(e.pov_name)
+				for d in _get_dirs_with_name(e.pov_name):
+					print("DIR FOUND")
+					var top_dot_center := dir.arrow_widget.dot_top.position + dir.arrow_widget.dot_top.size * 0.5
+					var origin := _control_local_to_bg(dir.arrow_widget, top_dot_center)
+					var destiny := _control_local_to_bg(d.arrow_widget, d.arrow_widget.size * 0.5)
+					for j : float in line_res:
+						set_line_point_pos(li, j, origin.lerp(destiny, j/(line_res-1)), true)
+					li += 1
 		if dir.left_pov_name_widget.get_pov_name(): # connect left dot
 			for d in _get_dirs_with_name(dir.left_pov_name_widget.get_pov_name()):
 				var left_dot_center := dir.arrow_widget.dot_left.position + dir.arrow_widget.dot_left.size * 0.5
@@ -628,6 +633,9 @@ func update_lines() -> void:
 				for j : float in line_res:
 					set_line_point_pos(li, j, origin.lerp(destiny, j/(line_res-1)))
 				li += 1
+		# connect pov from elements
+		
+				
 		i += 1
 	while li < lines.size():
 		lines[li].set_point_position(0, Vector2.ZERO)
@@ -650,10 +658,14 @@ func new_line() -> Line2D:
 func update_dir_names(index: int) -> void:
 	dirs[index].pov_names = get_all_pov_names()
 
-func set_line_point_pos(line_index: int, point_index: int, pos: Vector2) -> void:
+func set_line_point_pos(line_index: int, point_index: int, pos: Vector2, alt: bool = false) -> void:
 	while line_index >= lines.size():
 		new_line()
 	lines[line_index].set_point_position(point_index, pos)
+	if alt:
+		lines[line_index].gradient = LINE_DIRECTION_ALT_GRADIENT
+	else:
+		lines[line_index].gradient = LINE_DIRECTION_GRADIENT
 
 var id : int = 0
 func add_pov_directions(coords : Vector2) -> void:
