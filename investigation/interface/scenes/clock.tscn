@@ -28,21 +28,41 @@ shake_factor = 1.0
 texture = ExtResource("2_c2meu")
 
 [node name="Seconds" type="Sprite2D" parent="Base" unique_id=206837570]
-rotation = 11.562418
+rotation = 112.17109
 texture = ExtResource("3_ck37u")
 offset = Vector2(-2.865, -0.96)
 
 [node name="Minute" type="Sprite2D" parent="Base" unique_id=327830300]
-rotation = 0.19270697
+rotation = 1.8695182
 texture = ExtResource("4_nmps5")
 offset = Vector2(-4.085, -1.185)
 
 [node name="Hour" type="Sprite2D" parent="Base" unique_id=568247163]
-rotation = 0.0032117828
+rotation = 0.031158635
 scale = Vector2(0.99999994, 0.99999994)
 texture = ExtResource("5_rwv3y")
 offset = Vector2(-4.74, -4.68)
 
 [node name="Screw" type="Sprite2D" parent="Base" unique_id=963677907]
+texture = ExtResource("6_ck37u")
+offset = Vector2(-3.585, -3.27)
+
+[node name="StaticClock" type="Sprite2D" parent="." unique_id=233824530]
+modulate = Color(1, 1, 1, 0)
+texture = ExtResource("2_c2meu")
+
+[node name="Seconds" type="Sprite2D" parent="StaticClock" unique_id=683733714]
+texture = ExtResource("3_ck37u")
+offset = Vector2(-2.865, -0.96)
+
+[node name="Minute" type="Sprite2D" parent="StaticClock" unique_id=158874400]
+texture = ExtResource("4_nmps5")
+offset = Vector2(-4.085, -1.185)
+
+[node name="Hour" type="Sprite2D" parent="StaticClock" unique_id=1917728488]
+texture = ExtResource("5_rwv3y")
+offset = Vector2(-4.74, -4.68)
+
+[node name="Screw" type="Sprite2D" parent="StaticClock" unique_id=749421032]
 texture = ExtResource("6_ck37u")
 offset = Vector2(-3.585, -3.27)

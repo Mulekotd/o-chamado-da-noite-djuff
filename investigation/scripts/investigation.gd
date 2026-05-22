@@ -91,9 +91,11 @@ func _show_clock() -> void:
 		# slow down clock
 		tween.tween_property(clock, "speed", 0, 1.4).set_ease(Tween.EASE_IN)
 		await tween.finished
+		# blow clock
+		clock.blow_static_clock(0.75,3)
 		await get_tree().create_timer(clock_display_duration).timeout
-		tween = get_tree().create_tween()
 		# turn clock invisible by fade out
+		tween = get_tree().create_tween()
 		tween.tween_property(clock, "modulate", Color(0,0,1,0), clock_fade_duration)
 		await tween.finished
 		
