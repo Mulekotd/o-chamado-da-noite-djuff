@@ -1,9 +1,10 @@
 class_name _OptionWidget extends PanelContainer
 
-@onready var text_edit: TextEdit = $MarginContainer/VBoxContainer/HBoxContainer/TextEdit
-@onready var conditions_widget: _ConditionsWidget = $MarginContainer/VBoxContainer/VBoxContainer/ConditionsWidget
-@onready var necessary_items_widget: _ItemsWidget = $MarginContainer/VBoxContainer/NecessaryItemsContainer/NecessaryItemsWidget
-@onready var actions_spin_box: SpinBox = $MarginContainer/VBoxContainer/ActionsContainer/ActionsSpinBox
+@export var text_edit: TextEdit
+@export var conditions_widget: _ConditionsWidget
+@export var necessary_items_widget: _ItemsWidget
+@export var actions_spin_box: SpinBox
+@export var index_label: Label
 
 func get_option() -> Option:
 	var o : Option = Option.new()
@@ -18,3 +19,7 @@ func load_option(o: Option) -> void:
 	conditions_widget.add_conditions(o.conditions)
 	necessary_items_widget.add_items(o.necessary_items)
 	actions_spin_box.value = o.actions
+
+func set_index(index: int):
+	if index >= 0:
+		index_label.text = str(index)

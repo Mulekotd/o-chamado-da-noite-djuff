@@ -5,10 +5,51 @@
 [ext_resource type="PackedScene" uid="uid://dnoms4opqgf4v" path="res://investigation/utils/general/items_widget.tscn" id="3_7b35e"]
 [ext_resource type="Theme" uid="uid://cyq5khk20nbm6" path="res://themes/utils_theme.tres" id="999_utils_theme"]
 
-[node name="OptionWidget" type="PanelContainer" unique_id=1311505647]
-offset_right = 40.0
-offset_bottom = 40.0
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f1d7y"]
+bg_color = Color(0, 0, 0, 0.33333334)
+border_width_right = 32
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_coydv"]
+content_margin_left = 6.0
+content_margin_top = 6.0
+content_margin_right = 6.0
+content_margin_bottom = 6.0
+bg_color = Color(0, 0, 0, 0.35686275)
+border_width_right = 4
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+expand_margin_right = 6.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fayd4"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 24
+border_width_right = 24
+border_color = Color(0, 0, 1, 1)
+border_blend = true
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+expand_margin_left = 42.0
+expand_margin_top = 4.0
+expand_margin_right = 42.0
+expand_margin_bottom = 4.0
+
+[node name="OptionWidget" type="PanelContainer" unique_id=1311505647 node_paths=PackedStringArray("text_edit", "conditions_widget", "necessary_items_widget", "actions_spin_box", "index_label")]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 267.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_f1d7y")
 script = ExtResource("1_3a3aq")
+text_edit = NodePath("MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/HBoxContainer/TextEdit")
+conditions_widget = NodePath("MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/VBoxContainer/ConditionsWidget")
+necessary_items_widget = NodePath("MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/NecessaryItemsContainer/NecessaryItemsWidget")
+actions_spin_box = NodePath("MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/Panel/ActionsContainer/ActionsSpinBox")
+index_label = NodePath("MarginContainer/HBoxContainer/IndexLabel")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1649845550]
 layout_mode = 2
@@ -17,22 +58,32 @@ theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1906291746]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=430534051]
+layout_mode = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer" unique_id=575013874]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_coydv")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/PanelContainer" unique_id=1906291746]
 layout_mode = 2
 theme_override_constants/separation = 12
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=529145773]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/PanelContainer/VBoxContainer" unique_id=529145773]
 custom_minimum_size = Vector2(0, 34.8)
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=718142569]
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=718142569]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("999_utils_theme")
 text = "Option: "
 
-[node name="TextEdit" type="TextEdit" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1944187967]
+[node name="TextEdit" type="TextEdit" parent="MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/HBoxContainer" unique_id=1944187967]
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -41,40 +92,56 @@ placeholder_text = "Opcao"
 wrap_mode = 1
 scroll_fit_content_height = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=360782754]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/PanelContainer/VBoxContainer" unique_id=360782754]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=1551732598]
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/VBoxContainer" unique_id=1551732598]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("999_utils_theme")
 text = "Conditions:"
 horizontal_alignment = 1
 
-[node name="ConditionsWidget" parent="MarginContainer/VBoxContainer/VBoxContainer" unique_id=1813019862 instance=ExtResource("2_xvv75")]
+[node name="ConditionsWidget" parent="MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/VBoxContainer" unique_id=1813019862 instance=ExtResource("2_xvv75")]
 layout_mode = 2
 
-[node name="NecessaryItemsContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=360782755]
+[node name="NecessaryItemsContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/PanelContainer/VBoxContainer" unique_id=360782755]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/NecessaryItemsContainer" unique_id=1551732599]
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/NecessaryItemsContainer" unique_id=1551732599]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("999_utils_theme")
 text = "Necessary Items:"
 horizontal_alignment = 1
 
-[node name="NecessaryItemsWidget" parent="MarginContainer/VBoxContainer/NecessaryItemsContainer" unique_id=1813019863 instance=ExtResource("3_7b35e")]
+[node name="NecessaryItemsWidget" parent="MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/NecessaryItemsContainer" unique_id=1813019863 instance=ExtResource("3_7b35e")]
 layout_mode = 2
 
-[node name="ActionsContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1374293148]
+[node name="Panel" type="MarginContainer" parent="MarginContainer/HBoxContainer/PanelContainer/VBoxContainer" unique_id=1714294864]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_constants/margin_bottom = 4
+
+[node name="Panel" type="Panel" parent="MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/Panel" unique_id=566237855]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_fayd4")
+
+[node name="ActionsContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/Panel" unique_id=1374293148]
+layout_mode = 2
+size_flags_horizontal = 4
 alignment = 1
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/ActionsContainer" unique_id=188260952]
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/Panel/ActionsContainer" unique_id=188260952]
 layout_mode = 2
 text = "Ações: "
 
-[node name="ActionsSpinBox" type="SpinBox" parent="MarginContainer/VBoxContainer/ActionsContainer" unique_id=1559333312]
+[node name="ActionsSpinBox" type="SpinBox" parent="MarginContainer/HBoxContainer/PanelContainer/VBoxContainer/Panel/ActionsContainer" unique_id=1559333312]
 layout_mode = 2
 rounded = true
+
+[node name="IndexLabel" type="Label" parent="MarginContainer/HBoxContainer" unique_id=1060876202]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "0"
