@@ -175,6 +175,26 @@ theme = null
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 
+[node name="VarsToChangeContainer" type="VBoxContainer" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer" unique_id=1355431332]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Label" type="Label" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/VarsToChangeContainer" unique_id=319055147]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+text = "Variaveis para mudar"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="VarsToChangeWidget" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/VarsToChangeContainer" unique_id=166329387 instance=ExtResource("4_atknv")]
+layout_mode = 2
+theme = null
+
+[node name="-----------------5" type="ColorRect" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer" unique_id=736546479]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+
 [node name="PromptChainContainer" type="HBoxContainer" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer" unique_id=428526028]
 layout_mode = 2
 

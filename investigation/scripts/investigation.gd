@@ -26,6 +26,7 @@ func _ready() -> void:
 	# Wire the main investigation flow between POVs, text box, and audio.
 	pov_manager.element_clicked.connect(_append_prompt_chain_from_element)
 	pov_manager.prompt_chain_called.connect(text_box.insert_prompt_chain)
+	pov_manager.pov_entered.connect(text_box.clear_box)
 	text_box.pov_entered.connect(pov_manager.change_pov_by_name)
 	text_box.stand_by_changed.connect(_update_pov_manager_enabled)
 	text_box.stand_by_changed.connect(_clear_person_display)

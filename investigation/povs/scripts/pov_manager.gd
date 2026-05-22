@@ -17,6 +17,7 @@ const CLICKABLE_CURSOR = CURSOR_POINTING_HAND
 
 signal element_clicked(element: Element)
 signal prompt_chain_called(p_chain: PromptChain)
+signal pov_entered()
 
 var pov_index : int
 var current_pov : Pov
@@ -87,7 +88,7 @@ func update_view(pov: Pov) -> void:
 	var x := -1
 	for pi in pov.images:
 		x = InvestigationVars.get_conditions_value(pi.conditions)
-		# print(x)
+		#print(pi.conditions, x)
 		if x > highest:
 			highest = x
 			img = pi.texture
@@ -149,7 +150,7 @@ func _save_last_pov(p_name: String) -> void:
 	# print("salvou: ", p_name)
 	InvestigationVars.set_last_pov(p_name)
 
-## gets the element is the relative position [0, 1]. returns null if none found
+## gets the first found element in the relative position [0, 1]. returns null if none found
 func _get_element_in_pos(pos: Vector2) -> Element:
 	for e in current_pov.elements:
 		if (pos.x >= e.hitbox.left and\
@@ -158,6 +159,17 @@ func _get_element_in_pos(pos: Vector2) -> Element:
 			pos.y <= e.hitbox.bottom):
 			return e
 	return null
+
+## gets all the elements that overlap with the mouse in the relative position [0, 1].
+func _get_elements_in_pos(pos: Vector2) -> Array[Element]:
+	var elements : Array[Element] = []
+	for e in current_pov.elements:
+		if (pos.x >= e.hitbox.left and\
+			pos.x <= e.hitbox.right and\
+			pos.y >= e.hitbox.top and\
+			pos.y <= e.hitbox.bottom):
+			elements.append(e)
+	return elements
 
 func _load_last_pov() -> void:
 	# print("tentando achar: ",InvestigationVars.get_last_pov() )
@@ -191,11 +203,21 @@ func _on_gui_input(_event: InputEvent) -> void:
 
 	var mouse_relative := _get_mouse_relative_to_view()
 	
-	var e := _get_element_in_pos(mouse_relative)
-	if e:
-		if e.pov_name and\
-		 InvestigationVars.check_inventory(e.necessary_items) and\
-		 InvestigationVars.get_conditions_met(e.conditions):
+	var elements := _get_elements_in_pos(mouse_relative)
+	var valid_elements : Array[Element] = []
+	for e in elements:
+		if (InvestigationVars.check_inventory(e.necessary_items) and\
+		InvestigationVars.get_conditions_met(e.conditions)): # is valid
+			valid_elements.append(e)
+		else:
+			if e.prompt_chain.prompts:
+				_pan_locked = true
+			element_clicked.emit(e)
+	for e in valid_elements:
+		if e.vars_to_change:
+			InvestigationVars.update_variables(e.vars_to_change)
+			update_view(current_pov)
+		if e.pov_name:
 			_pan_locked = true
 			var target_index := get_pov_index(e.pov_name)
 			if target_index != -1:
@@ -203,9 +225,8 @@ func _on_gui_input(_event: InputEvent) -> void:
 			else:
 				change_pov_by_name(e.pov_name)
 		else:
-			for p in e.prompt_chain.prompts:
-				pass#print(p.text, " POV: ", p.pov)
-			_pan_locked = true
+			if e.prompt_chain.prompts:
+				_pan_locked = true
 			element_clicked.emit(e)
 
 func _sync_view_base_pos() -> void:
@@ -263,6 +284,7 @@ func _transition_to_pov(index: int, direction: Vector2) -> void:
 	_pan_locked = true
 	var was_enabled := enabled
 	enabled = false
+	pov_entered.emit()
 
 	var dir := direction.normalized()
 	var slide_offset := _get_transition_offset(dir)

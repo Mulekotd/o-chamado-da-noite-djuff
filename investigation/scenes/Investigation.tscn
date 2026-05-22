@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://1100rxsitcfq" path="res://investigation/scripts/investigation.gd" id="1_eyd3o"]
 [ext_resource type="PackedScene" uid="uid://dtd12y2eekoi1" path="res://investigation/text_box/scenes/text_box.tscn" id="1_kspld"]
 [ext_resource type="Texture2D" uid="uid://dg1nq4yoy3kes" path="res://investigation/interface/images/investigation_hud_overlay.png" id="2_838ch"]
-[ext_resource type="Resource" uid="uid://tsg06ujl7scs" path="res://investigation/pov_levels/pov_lvl.tres" id="4_3ibbm"]
+[ext_resource type="Resource" uid="uid://dultm6ibmeyfy" path="res://investigation/pov_levels/pov_lvl.tres" id="4_3ibbm"]
 [ext_resource type="PackedScene" uid="uid://bqse5lw2xwni0" path="res://investigation/povs/scenes/pov_manager.tscn" id="4_sf3q1"]
 [ext_resource type="Texture2D" uid="uid://cy7q7mjb03npd" path="res://investigation/interface/images/eye-Sheet.png" id="5_2a0iw"]
 [ext_resource type="PackedScene" uid="uid://kmy4ol8bdnbn" path="res://investigation/scenes/actions_manager.tscn" id="5_ftui2"]

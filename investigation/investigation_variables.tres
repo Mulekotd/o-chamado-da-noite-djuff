@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="InvestigationVars" format=3 uid="uid://ce6l56brvygng"]
+[gd_resource type="Resource" script_class="InvestigationVars" format=3 uid="uid://dcmhrrc42g5iu"]
 
 [ext_resource type="Script" uid="uid://dqj183h8d13hn" path="res://investigation/items/scripts/item_resource.gd" id="1_2u1gg"]
 [ext_resource type="Resource" uid="uid://cqpw454xu78in" path="res://investigation/items/test_key/test_key.tres" id="2_p848r"]
@@ -9,11 +9,12 @@ script = ExtResource("3_nj77k")
 vars = Dictionary[String, int]({
 "deu chave": 1,
 "esta_em_casa": 0,
+"luz_da_sala_ligada": 0,
 "option": -1,
-"porta_destrancada": 0,
+"porta_destrancada": 1,
 "surpreso com a porta": 1
 })
 inventory = Array[ExtResource("1_2u1gg")]([ExtResource("2_p848r"), ExtResource("2_p848r"), ExtResource("2_p848r")])
-_actions = 1
-last_pov = "porta"
+_actions = 0
+last_pov = "sala"
 metadata/_custom_type_script = "uid://47pf0lrk86x5"

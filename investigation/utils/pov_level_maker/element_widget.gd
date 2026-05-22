@@ -6,6 +6,7 @@ class_name _ElementWidget extends Control
 @onready var prompt_chain_widget: _PromptChainWidget = $ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/PromptChainContainer/PromptChainWidget
 @onready var hitbox_preview_widget: _HitboxPreviewWidget = $ScrollContainer/Panel/MarginContainer/VBoxContainer/HitboxPreviewWidget
 @onready var pov_name_widget: _PovNameWidget = $ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/HBoxContainer/PovNameWidget
+@onready var vars_to_change_widget: _ConditionsWidget = $ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/VarsToChangeContainer/VarsToChangeWidget
 
 @export var pov_level : PovLevel
 @export var pov_image : Texture2D
@@ -34,6 +35,7 @@ func load_element(e: Element, pov_names : Array[String] = []) -> void:
 	prompt_chain_widget.load_prompt_chain(e.prompt_chain)
 	necessary_items_widget.add_items(e.necessary_items)
 	conditions_widget.add_conditions(e.conditions)
+	vars_to_change_widget.add_conditions(e.vars_to_change)
 
 func parse_element() -> Element:
 	# Build a new Element resource from the current UI state.
@@ -44,6 +46,7 @@ func parse_element() -> Element:
 	e.prompt_chain = prompt_chain_widget.prompt_chain
 	e.necessary_items = necessary_items_widget.items
 	e.conditions = conditions_widget.parse_conditions()
+	e.vars_to_change = vars_to_change_widget.parse_conditions()
 	return e
 
 func save_element_file(path: String) -> void:

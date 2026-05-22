@@ -14,3 +14,5 @@ class_name Element extends Resource
 @export var necessary_items: Array[Item]
 ## conditions to go to pov
 @export var conditions: Dictionary[String, int]
+## variables to change when this element is clicked
+@export var vars_to_change: Dictionary[String, int]
