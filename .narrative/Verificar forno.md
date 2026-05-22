@@ -1,0 +1,2 @@
+Diálogo:
+"É um forno."
