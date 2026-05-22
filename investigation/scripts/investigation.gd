@@ -70,7 +70,10 @@ func _update_sound_manager_letter_sounds(chain_id: int, prompt: Prompt) -> void:
 		prompt_chain_queue.pop_front()
 	if !chain_id_queue: 
 		return
-	sound_manager.load_letter_sounds(prompt_chain_queue[0].letter_sounds)
+	if prompt.letter_sound:
+		sound_manager.load_letter_sounds(LetterSoundsGlobal.sounds[prompt.letter_sound])
+	else:
+		sound_manager.load_letter_sounds(LetterSoundsGlobal.default_sound)
 	
 func _update_pov_manager_enabled(stand_by: bool) -> void:
 	pov_manager.enabled = stand_by

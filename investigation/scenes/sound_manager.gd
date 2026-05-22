@@ -13,7 +13,7 @@ func _ready() -> void:
 	poly_player.play()
 	letter_stream = letter_player.stream
 
-func load_letter_sounds(sounds: Array[AudioStream]) -> void:
+func load_letter_sounds(sounds: Array) -> void:
 	while letter_stream.streams_count:
 		letter_stream.remove_stream(0)
 	if sounds:

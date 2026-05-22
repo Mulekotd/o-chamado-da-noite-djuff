@@ -14,8 +14,9 @@ signal move_down_requested(widget: _PromptWidget)
 @onready var conditions_widget: _ConditionsWidget = $MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pre/GridContainer/ConditionsContainer/ConditionsWidget
 @onready var text_widget: TextEdit = $MarginContainer/HBoxContainer/HSplitContainer/TextContainer/TextWidget
 @onready var prompt_image_widget: _PromptImageWidget = $MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pre/GridContainer/PromptImageWidget
-@onready var pre_sound_widget: _SoundWidget = $MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pre/GridContainer/SoundContainer/SoundWidget
-@onready var pos_sound_widget: _SoundWidget = $MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pos/GridContainer/SoundContainer/SoundWidget
+@onready var pre_sound_widget: _SoundWidget = $MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Sounds/VBoxContainer/HBoxContainer/PreSoundContainer/HBoxContainer/SoundWidget
+@onready var pos_sound_widget: _SoundWidget = $MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Sounds/VBoxContainer/HBoxContainer/PosSoundContainer/HBoxContainer/SoundWidget
+@onready var letter_sounds_widget: _LetterSoundsWidget = $MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Sounds/VBoxContainer/LetterSoundsWidget
 @onready var index_label: Label = $MarginContainer/IndexLabel
 @onready var go_to_spin_box: SpinBox = $MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pos/GridContainer/EndChainContainer/HBoxContainer/GoToSpinBox
 
@@ -38,6 +39,7 @@ func parse_prompt() -> Prompt:
 	p.img = prompt_image_widget.get_img()
 	p.pre_sound = pre_sound_widget.get_sound()
 	p.pos_sound = pos_sound_widget.get_sound()
+	p.letter_sound = letter_sounds_widget.parse_letter_sound()
 	p.go_to = go_to
 	return p
 
@@ -54,6 +56,8 @@ func load_prompt(p: Prompt) -> void:
 	prompt_image_widget.load_img(p.img)
 	pos_sound_widget.load_sound(p.pos_sound)
 	go_to_spin_box.value = p.go_to
+	letter_sounds_widget.load_global_letter_sounds()
+	letter_sounds_widget.select_letter_sound(p.letter_sound)
 
 func change_default_img(img: Texture2D):
 	# Update default image for prompts that do not set one.

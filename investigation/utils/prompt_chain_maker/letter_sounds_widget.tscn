@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://cfwh3va43jnsl"]
+
+[ext_resource type="Script" uid="uid://dta0ivsasj783" path="res://investigation/utils/prompt_chain_maker/letter_sounds_widget.gd" id="1_fl1rk"]
+[ext_resource type="PackedScene" uid="uid://fmeu1ocls847" path="res://investigation/scenes/sound_manager.tscn" id="3_rbnq7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m0vb2"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7qsel"]
+content_margin_top = 12.0
+content_margin_bottom = 8.0
+bg_color = Color(0, 0, 0, 1)
+border_width_top = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 70
+corner_radius_top_right = 70
+
+[node name="LetterSoundsWidget" type="Control" unique_id=629520457 node_paths=PackedStringArray("button_grid", "sound_manager")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fl1rk")
+button_grid = NodePath("MarginContainer/PanelContainer/VBoxContainer/ScrollContainer/LetterSoundsButtonGrid")
+sound_manager = NodePath("SoundManager")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=2100329860]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer" unique_id=444769565]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_m0vb2")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer" unique_id=1472157100]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer" unique_id=1129076999]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_7qsel")
+text = "Letter Sounds"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/PanelContainer/VBoxContainer" unique_id=532284011]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="LetterSoundsButtonGrid" type="GridContainer" parent="MarginContainer/PanelContainer/VBoxContainer/ScrollContainer" unique_id=567479589]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 3
+
+[node name="SoundManager" parent="." unique_id=1253211127 instance=ExtResource("3_rbnq7")]

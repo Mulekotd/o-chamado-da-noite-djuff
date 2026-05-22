@@ -22,5 +22,7 @@ class_name Prompt extends Resource
 @export var pre_sound : AudioStream
 ## audio to after this prompt
 @export var pos_sound : AudioStream
+## key to search for in the global letter sounds to play as the text displays
+@export var letter_sound : String
 ## this number will be overwriten by the prompt chain logic
 var chain_id : int

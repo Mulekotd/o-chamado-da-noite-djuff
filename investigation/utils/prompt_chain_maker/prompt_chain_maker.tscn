@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://bncnglat1o1x0" path="res://investigation/utils/prompt_chain_maker/prompt_chain_maker.gd" id="1_5ju4m"]
 [ext_resource type="PackedScene" uid="uid://f2qd0iww8k1p" path="res://investigation/utils/general/moving_noise_widget.tscn" id="3_pcfx8"]
 [ext_resource type="PackedScene" uid="uid://cqon0s8g52b2h" path="res://investigation/utils/prompt_chain_maker/prompt_image_widget.tscn" id="4_pcfx8"]
-[ext_resource type="PackedScene" uid="uid://djma68caknis7" path="res://investigation/utils/general/sounds_widget.tscn" id="5_f5prf"]
 [ext_resource type="Theme" uid="uid://cyq5khk20nbm6" path="res://themes/utils_theme.tres" id="999_utils_theme"]
 
 [node name="PromptChainMaker" type="Control" unique_id=750523266]
@@ -54,18 +53,6 @@ title = "imagem padrao"
 title_alignment = 1
 
 [node name="DefaultPromptImageWidget" parent="VBoxContainer/Container/HBoxContainer/ImagemContainer" unique_id=489540816 instance=ExtResource("4_pcfx8")]
-visible = false
-layout_mode = 2
-
-[node name="SoundsContainer" type="FoldableContainer" parent="VBoxContainer/Container/HBoxContainer" unique_id=775778718]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-folded = true
-title = "sons"
-title_alignment = 1
-
-[node name="SoundsWidget" parent="VBoxContainer/Container/HBoxContainer/SoundsContainer" unique_id=1978747484 instance=ExtResource("5_f5prf")]
 visible = false
 layout_mode = 2
 
