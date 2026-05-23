@@ -33,7 +33,7 @@ interaction and comes back to the beginning when it reaches the end.
 ## array of positions of each digit in the pov; also used to get the quantity of digits (len)
 @export var positions : Array[Vector2] = [] 
 ## combinations and their respective var-to-change; Combination should be of format "0 1 2 3"
-@export var combinations : Dictionary[String, String]
+@export var combinations : Dictionary[String, String] = {}
 # "prompt_chain" will be displayed every time a combination is struck.
 # "global_conditions" will be used for the "can i interact" logic.
 

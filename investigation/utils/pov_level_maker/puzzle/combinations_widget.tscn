@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://3u4i0h3jayrp"]
+
+[ext_resource type="Texture2D" uid="uid://bvti8hnpfr854" path="res://investigation/interface/images/plus.png" id="1_x1prp"]
+[ext_resource type="Script" uid="uid://cuhjak3qrvtyv" path="res://investigation/utils/pov_level_maker/puzzle/combinations_widget.gd" id="1_x3mtj"]
+[ext_resource type="Texture2D" uid="uid://b0x0w4dtint7u" path="res://investigation/interface/images/minus.png" id="2_x3mtj"]
+
+[node name="CombinationsWidget" type="VBoxContainer" unique_id=1678274799]
+offset_right = 40.0
+offset_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_x3mtj")
+
+[node name="ButtonsContainer" type="HBoxContainer" parent="." unique_id=1279659249]
+layout_mode = 2
+alignment = 1
+
+[node name="AddButton" type="Button" parent="ButtonsContainer" unique_id=29024835]
+layout_mode = 2
+icon = ExtResource("1_x1prp")
+
+[node name="RemoveButton" type="Button" parent="ButtonsContainer" unique_id=1093694452]
+layout_mode = 2
+icon = ExtResource("2_x3mtj")
+
+[connection signal="pressed" from="ButtonsContainer/AddButton" to="." method="_on_add_button_pressed"]
+[connection signal="pressed" from="ButtonsContainer/RemoveButton" to="." method="_on_remove_button_pressed"]

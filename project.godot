@@ -50,6 +50,7 @@ enabled=PackedStringArray("res://addons/debug_menu/plugin.cfg", "res://addons/di
 
 util_parent_control="Node that will be the parent of \"standalone\" util widgets, generally the ones supposed to take the entire screen"
 pov_level_maker=""
+symbol_widget=""
 
 [gui]
 

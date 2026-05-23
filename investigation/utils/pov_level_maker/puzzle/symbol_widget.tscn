@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://dmdlrdl74dq2f"]
+
+[ext_resource type="Texture2D" uid="uid://byxcwmb372yeg" path="res://investigation/images/symbols/no_symbol.png" id="1_ru302"]
+
+[node name="SymbolWidget" type="TextureRect" unique_id=1848092910 groups=["symbol_widget"]]
+custom_minimum_size = Vector2(64, 86)
+texture = ExtResource("1_ru302")
+expand_mode = 5
+stretch_mode = 4
+
+[node name="IndexLabel" type="Label" parent="." unique_id=1483806570]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 23.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 26
+text = "0"
+horizontal_alignment = 2
