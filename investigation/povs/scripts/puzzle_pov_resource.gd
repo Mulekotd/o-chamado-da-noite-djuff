@@ -27,7 +27,7 @@ interaction and comes back to the beginning when it reaches the end.
 """
 
 ## name of the pov behind this one; Where the player came from.
-@export var behind_pov : String = ""
+@export var back_pov : String = ""
 ## array of images representing the symbols of this pov; order matters.
 @export var symbols : Array[Texture2D] = []
 ## array of digits in this pov; each key is a digit position and the value is the digit size, both in relation to the pov image (are normalized).

@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://bg38qwfjhkdr"]
+
+[ext_resource type="Texture2D" uid="uid://cxihnp0u5dpkf" path="res://investigation/interface/images/big_cyan_circle.png" id="1_415e6"]
+
+[node name="CircleWidget" type="TextureRect" unique_id=1883204067]
+custom_minimum_size = Vector2(200, 200)
+offset_right = 100.0
+offset_bottom = 100.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_415e6")
+expand_mode = 1
