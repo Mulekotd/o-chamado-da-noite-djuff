@@ -1,4 +1,4 @@
-class_name _SymbolsContainer extends Control
+class_name _SymbolsWidget extends Control
 
 const NO_SYMBOL = preload("uid://byxcwmb372yeg")
 const SYMBOL_WIDGET = preload("uid://dmdlrdl74dq2f")
@@ -8,6 +8,8 @@ const SYMBOL_WIDGET = preload("uid://dmdlrdl74dq2f")
 
 var symbol_count : int = 0
 var selected_symbol : int = -1
+
+signal changed()
 
 func add_symbol(img: Texture2D = null) -> void:
 	var symbol : TextureRect = SYMBOL_WIDGET.instantiate()
@@ -19,10 +21,22 @@ func add_symbol(img: Texture2D = null) -> void:
 	symbol.gui_input.connect(load_image_file.bind(symbol_count))
 	symbols_container.add_child(symbol)
 	symbol_count += 1
+	changed.emit()
 
-func add_symbols(imgs: Array[Texture2D]):
+func add_symbols(imgs: Array[Texture2D]) -> void:
 	for img in imgs:
 		add_symbol(img)
+
+func load_symbols(imgs: Array[Texture2D]) -> void:
+	clear()
+	add_symbols(imgs)
+
+func clear() -> void:
+	var children := symbols_container.get_children()
+	for c in children:
+		if c.is_in_group("symbol_widget"):
+			c.queue_free()
+	changed.emit()
 
 func parse_symbols() -> Array[Texture2D]:
 	var symbols : Array[Texture2D]
@@ -38,6 +52,7 @@ func _on_remove_button_pressed() -> void:
 	if nodes:
 		nodes[-1].queue_free()
 		symbol_count -= 1
+		changed.emit()
 
 func get_selected_symbol() -> TextureRect:
 	for symbol in get_tree().get_nodes_in_group("symbol_widget"):
@@ -46,9 +61,10 @@ func get_selected_symbol() -> TextureRect:
 	return null
 
 func load_image_file(event, symbol_index: int) -> void:
-	if event is InputEventMouseButton:
+	if  Input.is_action_pressed("ui_mouse_pressed"):
 		selected_symbol = symbol_index
 		img_load_file_dialog.popup()
+		changed.emit()
 
 func _on_image_load_file_dialog_file_selected(path: String) -> void:
 	if selected_symbol == -1 or symbol_count < 1:
@@ -58,4 +74,5 @@ func _on_image_load_file_dialog_file_selected(path: String) -> void:
 		var symbol = get_selected_symbol()
 		if symbol:
 			symbol.texture = img
+			changed.emit()
 			return

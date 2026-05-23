@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://bghg8nqelsyy3"]
+
+[ext_resource type="Script" uid="uid://bahscxuenan3w" path="res://investigation/utils/pov_level_maker/puzzle/digits_widget.gd" id="1_4bm04"]
+[ext_resource type="Texture2D" uid="uid://dwj11t2nw18l2" path="res://investigation/povs/no_image_pov.png" id="2_ti7t2"]
+[ext_resource type="Texture2D" uid="uid://bvti8hnpfr854" path="res://investigation/interface/images/plus.png" id="4_80lon"]
+[ext_resource type="Texture2D" uid="uid://b0x0w4dtint7u" path="res://investigation/interface/images/minus.png" id="5_snje4"]
+
+[node name="DigitsWidget" type="MarginContainer" unique_id=1359414701 node_paths=PackedStringArray("pov_image_rect")]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_4bm04")
+pov_image_rect = NodePath("PanelContainer/VBoxContainer/PovImageRect")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=738442050]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=613804709]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="PovImageRect" type="TextureRect" parent="PanelContainer/VBoxContainer" unique_id=984261169]
+clip_contents = true
+custom_minimum_size = Vector2(680, 0)
+layout_mode = 2
+texture = ExtResource("2_ti7t2")
+expand_mode = 5
+stretch_mode = 4
+
+[node name="ButtonContainer" type="HBoxContainer" parent="PanelContainer/VBoxContainer/PovImageRect" unique_id=1624790541]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -84.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_vertical = 4
+alignment = 1
+
+[node name="AddButton" type="Button" parent="PanelContainer/VBoxContainer/PovImageRect/ButtonContainer" unique_id=893804538]
+layout_mode = 2
+icon = ExtResource("4_80lon")
+
+[node name="RemoveButton" type="Button" parent="PanelContainer/VBoxContainer/PovImageRect/ButtonContainer" unique_id=340662159]
+layout_mode = 2
+icon = ExtResource("5_snje4")
+
+[connection signal="pressed" from="PanelContainer/VBoxContainer/PovImageRect/ButtonContainer/AddButton" to="." method="_on_add_button_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/PovImageRect/ButtonContainer/RemoveButton" to="." method="_on_remove_button_pressed"]

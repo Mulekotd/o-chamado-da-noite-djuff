@@ -41,8 +41,6 @@ func save_pov_file(path: String) -> void:
 
 func _load_pov_images(pis: Array[PovImage]) -> void:
 	pov_images = pis
-	for pi in pis:
-		print(pi.texture)
 	_load_preview_image()
 
 func _load_preview_image() -> void:

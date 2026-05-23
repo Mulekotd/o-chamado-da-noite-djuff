@@ -20,6 +20,9 @@ func save_prompt_chain_file(path: String) -> void:
 	if prompt_chain:
 		ResourceSaver.save(prompt_chain, path)
 
+func parse_prompt_chain() -> PromptChain:
+	return prompt_chain
+
 func _on_edit_button_pressed() -> void:
 	# Open the prompt chain editor window.
 	var pcm := PROMPT_CHAIN_MAKER.instantiate()

@@ -1,0 +1,153 @@
+[gd_scene format=3 uid="uid://ckx7ly58wwqe4"]
+
+[ext_resource type="PackedScene" uid="uid://be7uy8675dts1" path="res://investigation/utils/pov_level_maker/puzzle/symbols_widget.tscn" id="1_5fed7"]
+[ext_resource type="PackedScene" uid="uid://f2qd0iww8k1p" path="res://investigation/utils/general/moving_noise_widget.tscn" id="1_5jlhf"]
+[ext_resource type="Script" uid="uid://cu8woxwrq33uw" path="res://investigation/utils/pov_level_maker/puzzle_pov_widget.gd" id="1_8roye"]
+[ext_resource type="PackedScene" uid="uid://bghg8nqelsyy3" path="res://investigation/utils/pov_level_maker/puzzle/digits_widget.tscn" id="1_ikkdt"]
+[ext_resource type="PackedScene" uid="uid://3u4i0h3jayrp" path="res://investigation/utils/pov_level_maker/puzzle/combinations_widget.tscn" id="2_ikkdt"]
+[ext_resource type="PackedScene" uid="uid://bj378ngyim0ll" path="res://investigation/utils/general/conditions_widget.tscn" id="3_5jlhf"]
+[ext_resource type="PackedScene" uid="uid://d3dyiv04e6brb" path="res://investigation/utils/prompt_chain_maker/prompt_chain_widget.tscn" id="4_8roye"]
+[ext_resource type="PackedScene" uid="uid://cko8sykqdhkfw" path="res://investigation/utils/general/image_load_file_dialog.tscn" id="8_ky3bp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5jlhf"]
+content_margin_left = 32.0
+content_margin_top = 16.0
+content_margin_right = 32.0
+content_margin_bottom = 32.0
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+
+[node name="PuzzlePovWidget" type="Control" unique_id=31164012 node_paths=PackedStringArray("pov_name_line_edit", "digits_widget", "symbols_widget", "combinations_widget", "prompt_chain_widget", "conditions_widget")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_8roye")
+pov_name_line_edit = NodePath("MarginContainer/ScrollContainer/PanelContainer/VBoxContainer/HeaderContainer/PovNameLineEdit")
+digits_widget = NodePath("MarginContainer/ScrollContainer/PanelContainer/VBoxContainer/VBoxContainer/DigitsWidget")
+symbols_widget = NodePath("MarginContainer/ScrollContainer/PanelContainer/VBoxContainer/GridContainer/SymbolsWidget")
+combinations_widget = NodePath("MarginContainer/ScrollContainer/PanelContainer/VBoxContainer/GridContainer/CombinationsWidget")
+prompt_chain_widget = NodePath("MarginContainer/ScrollContainer/PanelContainer/VBoxContainer/GridContainer/PromptChainWidget")
+conditions_widget = NodePath("MarginContainer/ScrollContainer/PanelContainer/VBoxContainer/GridContainer/ConditionsWidget")
+
+[node name="MovingNoiseWidget" parent="." unique_id=292722013 instance=ExtResource("1_5jlhf")]
+layout_mode = 1
+
+[node name="Panel" type="ColorRect" parent="MovingNoiseWidget" unique_id=1307393425]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.38866666, 0.53, 0.24705882)
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1126022947]
+layout_mode = 1
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -376.0
+offset_right = 376.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer" unique_id=1944723994]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/ScrollContainer" unique_id=557567007]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5jlhf")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer/PanelContainer" unique_id=1306282169]
+layout_mode = 2
+theme_override_constants/separation = 31
+
+[node name="HeaderContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/PanelContainer/VBoxContainer" unique_id=1065975992]
+layout_mode = 2
+
+[node name="PovNameLineEdit" type="LineEdit" parent="MarginContainer/ScrollContainer/PanelContainer/VBoxContainer/HeaderContainer" unique_id=1234842963]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+placeholder_text = "Nome do Pov"
+expand_to_text_length = true
+
+[node name="ButtonsContainer" type="HBoxContainer" parent="MarginContainer/ScrollContainer/PanelContainer/VBoxContainer/HeaderContainer" unique_id=425293016]
+layout_mode = 2
+size_flags_horizontal = 10
+alignment = 2
+
+[node name="CancelButton" type="Button" parent="MarginContainer/ScrollContainer/PanelContainer/VBoxContainer/HeaderContainer/ButtonsContainer" unique_id=1278722199]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+text = "cancelar"
+
+[node name="CloseButton" type="Button" parent="MarginContainer/ScrollContainer/PanelContainer/VBoxContainer/HeaderContainer/ButtonsContainer" unique_id=1387675221]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+text = "FECHAR"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ScrollContainer/PanelContainer/VBoxContainer" unique_id=2142411236]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="DigitsWidget" parent="MarginContainer/ScrollContainer/PanelContainer/VBoxContainer/VBoxContainer" unique_id=1865509117 instance=ExtResource("1_ikkdt")]
+layout_mode = 2
+
+[node name="ChooseImageButton" type="Button" parent="MarginContainer/ScrollContainer/PanelContainer/VBoxContainer/VBoxContainer" unique_id=1435037398]
+layout_mode = 2
+text = "Escolher Imagens do Pov"
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/ScrollContainer/PanelContainer/VBoxContainer" unique_id=1021786913]
+layout_mode = 2
+theme_override_constants/v_separation = 39
+columns = 2
+
+[node name="SymbolsLabel" type="Label" parent="MarginContainer/ScrollContainer/PanelContainer/VBoxContainer/GridContainer" unique_id=1394274914]
+layout_mode = 2
+text = "Simbolos: "
+
+[node name="SymbolsWidget" parent="MarginContainer/ScrollContainer/PanelContainer/VBoxContainer/GridContainer" unique_id=782692993 instance=ExtResource("1_5fed7")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CombinationsLabel" type="Label" parent="MarginContainer/ScrollContainer/PanelContainer/VBoxContainer/GridContainer" unique_id=16137953]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Combinacoes: "
+
+[node name="CombinationsWidget" parent="MarginContainer/ScrollContainer/PanelContainer/VBoxContainer/GridContainer" unique_id=1678274799 instance=ExtResource("2_ikkdt")]
+layout_mode = 2
+
+[node name="PromptChainLabel" type="Label" parent="MarginContainer/ScrollContainer/PanelContainer/VBoxContainer/GridContainer" unique_id=1440467062]
+layout_mode = 2
+text = "Prompt Chain: "
+
+[node name="PromptChainWidget" parent="MarginContainer/ScrollContainer/PanelContainer/VBoxContainer/GridContainer" unique_id=1195115200 instance=ExtResource("4_8roye")]
+layout_mode = 2
+
+[node name="ConditionsLabel" type="Label" parent="MarginContainer/ScrollContainer/PanelContainer/VBoxContainer/GridContainer" unique_id=283950300]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Condicoes para interagir: "
+
+[node name="ConditionsWidget" parent="MarginContainer/ScrollContainer/PanelContainer/VBoxContainer/GridContainer" unique_id=1813019862 instance=ExtResource("3_5jlhf")]
+layout_mode = 2
+
+[node name="ImageLoadFileDialog" parent="." unique_id=520665760 instance=ExtResource("8_ky3bp")]
+
+[connection signal="pressed" from="MarginContainer/ScrollContainer/PanelContainer/VBoxContainer/HeaderContainer/ButtonsContainer/CancelButton" to="." method="_on_cancel_button_pressed"]
+[connection signal="pressed" from="MarginContainer/ScrollContainer/PanelContainer/VBoxContainer/HeaderContainer/ButtonsContainer/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="pressed" from="MarginContainer/ScrollContainer/PanelContainer/VBoxContainer/VBoxContainer/ChooseImageButton" to="." method="_on_choose_image_button_pressed"]

@@ -26,13 +26,13 @@ The symbols go in a positive cyclic manner. Meaning the index is += 1 every
 interaction and comes back to the beginning when it reaches the end.
 """
 
-## name of the pov behind this one; Where the player came from
+## name of the pov behind this one; Where the player came from.
 @export var behind_pov : String = ""
 ## array of images representing the symbols of this pov; order matters.
 @export var symbols : Array[Texture2D] = []
-## array of positions of each digit in the pov; also used to get the quantity of digits (len)
-@export var positions : Array[Vector2] = [] 
-## combinations and their respective var-to-change; Combination should be of format "0 1 2 3"
+## array of digits in this pov; each key is a digit position and the value is the digit size, both in relation to the pov image (are normalized).
+@export var digits : Dictionary[Vector2, Vector2] = {}
+## combinations and their respective var-to-change; Combination should be of format "0 1 2 3".
 @export var combinations : Dictionary[String, String] = {}
 # "prompt_chain" will be displayed every time a combination is struck.
 # "global_conditions" will be used for the "can i interact" logic.

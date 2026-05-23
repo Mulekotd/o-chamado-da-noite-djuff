@@ -20,6 +20,16 @@ func add_conditions(conds: Dictionary[String, int]) -> void:
 	for k : String in conds.keys():
 		add_condition(k, conds[k])
 
+func load_conditions(conds: Dictionary[String, int]) -> void:
+	clear()
+	add_conditions(conds)
+
+func clear() -> void:
+	var children = get_children()
+	for c in children:
+		if c.is_in_group("condition_widget"):
+			c.queue_free()
+
 func add_condition(title: String, value: int) -> void:
 	var c := CONDITION_WIDGET.instantiate()
 	c.get_child(0).text = title

@@ -5,7 +5,6 @@ class_name _PovImageWidget extends Control
 
 @onready var image_load_file_dialog: FileDialog = $ImageLoadFileDialog
 
-
 const NO_IMAGE_POV = preload("uid://dwj11t2nw18l2")
 
 func load_pov_image(pi: PovImage) -> void:

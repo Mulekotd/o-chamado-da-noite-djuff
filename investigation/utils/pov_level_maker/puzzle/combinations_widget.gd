@@ -26,6 +26,16 @@ func add_combinations(combinations: Dictionary[String, String]):
 	for c in combinations.keys():
 		add_combination(c, combinations[c])
 
+func load_combinations(combinations: Dictionary[String, String]):
+	clear()
+	add_combinations(combinations)
+	
+func clear() -> void:
+	var children := get_children()
+	for c in children:
+		if c.is_in_group("combination_widget"):
+			c.queue_free()
+
 func _on_add_button_pressed() -> void:
 	add_combination("","")
 

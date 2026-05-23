@@ -22,6 +22,7 @@ use_native_dialog = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=2050359857]
 layout_mode = 2
+size_flags_horizontal = 4
 metadata/_edit_use_anchors_ = true
 
 [node name="NameLabel" type="Label" parent="HBoxContainer" unique_id=849846362]
