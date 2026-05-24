@@ -6,5 +6,4 @@
 Opções:
 [[Planta]]
 [[Mesa]]
-[[Quadros]]
 [[Cadeira]]

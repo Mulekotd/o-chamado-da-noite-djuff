@@ -1,4 +1,4 @@
-Se jogador não tiver ligado a tv com sucesso:
+Se jogador não tiver [[Conectar fio]] e [[Tentar ligar]]:
 
 Diálogo 1:
 *Não acontece nada*

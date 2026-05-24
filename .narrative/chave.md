@@ -1,0 +1,1 @@
+Encontrada em [[Abrir mesa]] e usada em [[Abrir portas]]

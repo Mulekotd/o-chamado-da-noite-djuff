@@ -1,1 +1,2 @@
-código que deve ser inserido no armário da cozinha
+Código: 3067
+código que deve ser inserido no [[Armários]]

@@ -1,2 +1,0 @@
-Opções:
-- [[Verificar quadros]]

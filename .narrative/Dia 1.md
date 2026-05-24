@@ -8,3 +8,5 @@ Opções do jogador:
 [[Sala de Estar]]
 [[Cozinha]]
 [[Sala de Jantar]]
+
+Canon order:
