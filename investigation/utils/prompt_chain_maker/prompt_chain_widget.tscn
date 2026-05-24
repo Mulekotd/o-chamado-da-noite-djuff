@@ -3,13 +3,16 @@
 [ext_resource type="Script" uid="uid://b3kolf0jkls77" path="res://investigation/utils/prompt_chain_maker/prompt_chain_widget.gd" id="1_brr2x"]
 [ext_resource type="Theme" uid="uid://cyq5khk20nbm6" path="res://themes/utils_theme.tres" id="999_utils_theme"]
 
-[node name="PromptChainWidget" type="MarginContainer" unique_id=1195115200]
+[node name="PromptChainWidget" type="MarginContainer" unique_id=1195115200 node_paths=PackedStringArray("load_file_dialog", "name_label", "edit_button")]
 offset_right = 343.0
 offset_bottom = 17.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("999_utils_theme")
 script = ExtResource("1_brr2x")
+load_file_dialog = NodePath("LoadFileDialog")
+name_label = NodePath("HBoxContainer/NameLabel")
+edit_button = NodePath("HBoxContainer/EditButton")
 metadata/_edit_use_anchors_ = true
 
 [node name="LoadFileDialog" type="FileDialog" parent="." unique_id=1193663734]

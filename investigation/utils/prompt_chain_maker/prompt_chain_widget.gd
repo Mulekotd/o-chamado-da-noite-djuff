@@ -1,8 +1,8 @@
 class_name _PromptChainWidget extends Control
 
-@onready var load_file_dialog: FileDialog = $LoadFileDialog
-@onready var name_label: Label = $HBoxContainer/NameLabel
-@onready var edit_button: Button = $HBoxContainer/EditButton
+@export var load_file_dialog: FileDialog
+@export var name_label: Label
+@export var edit_button: Button
 const PROMPT_CHAIN_MAKER = preload("uid://sde7emoawly0")
 
 var prompt_chain : PromptChain

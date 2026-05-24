@@ -22,6 +22,7 @@ border_width_bottom = 1
 border_color = Color(1, 1, 1, 1)
 
 [node name="PuzzlePovWidget" type="Control" unique_id=31164012 node_paths=PackedStringArray("pov_name_line_edit", "digits_widget", "symbols_widget", "combinations_widget", "prompt_chain_widget", "conditions_widget")]
+z_index = 1
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

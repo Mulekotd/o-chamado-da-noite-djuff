@@ -3,6 +3,7 @@ class_name _PovLevelMaker extends Control
 const POV_DIRECTIONS_WIDGET = preload("uid://cwvn21yf77xpp")
 const POV_DIRECTION_LINE = preload("uid://cx2wlsvbs6c56")
 const POV_DIRECTION_LINE_ALT = preload("uid://deg5rxlwt8gmf")
+const PUZZLE_POV_DIRECTIONS_WIDGET = preload("uid://bdnc5n83lv5b8")
 const LINE_DIRECTION_ALT_GRADIENT = preload("uid://dkip33jckella")
 const LINE_DIRECTION_GRADIENT = preload("uid://ugwxn3xcw58j")
 
@@ -32,10 +33,14 @@ var current_widget_scale : float = 1.0
 var _is_reconciling_dirs : bool = false
 var _is_loading_level : bool = false
 
+## standard pov directions widgets
 var dirs : Array[_PovDirectionsWidget] = []
+## puzzle pov directions widgets
+var p_dirs : Array[_PuzzlePovDirectionsWidget] = []
 var lines : Array[Line2D] = []
 ## number of points in a line
 @export var line_res : int = 20
+var id : int = 0
 
 ## min-x, min-y, max-x, max-y
 func _get_panning_content_margins() -> Vector4:
@@ -104,6 +109,8 @@ func parse_pov_level() -> PovLevel:
 		pl.pov_directions_array.append(pdw.parse_pov_directions())
 		for stacked_dir in pdw.pov_directions_stack_widget.parse_pov_directions_stack():
 			pl.pov_directions_array.append(stacked_dir)
+	for ppdw in p_dirs:
+		pl.puzzle_povs.append(ppdw.parse_puzzle_pov())
 	return pl
 
 func load_pov_level(pl: PovLevel) -> void:
@@ -116,6 +123,9 @@ func load_pov_level(pl: PovLevel) -> void:
 	for pd in pl.pov_directions_array:
 		add_pov_directions(pd.coords)
 		await dirs[-1].load_pov_directions(pd)
+	for pp in pl.puzzle_povs:
+		add_puzzle_pov_directions(pp.coords)
+		await p_dirs[-1].load_puzzle_pov(pp)
 	_is_loading_level = false
 	await get_tree().process_frame
 	_reconcile_dirs_after_change()
@@ -172,19 +182,21 @@ func _resource_key(resource: Resource) -> int:
 
 func _create_subresource_dirs(root_dir: String) -> Dictionary:
 	# Ensure all subresource folders exist under the export root.
-	var dirs := {
+	var directories := {
 		"root": root_dir,
 		"prompt_chains": _join_path(root_dir, "prompt_chains"),
 		"elements": _join_path(root_dir, "elements"),
 		"povs": _join_path(root_dir, "povs"),
+		"puzzle_povs": _join_path(root_dir, "puzzle_povs"),
 		"pov_directions": _join_path(root_dir, "pov_directions")
 	}
 	DirAccess.make_dir_recursive_absolute(root_dir)
-	DirAccess.make_dir_recursive_absolute(dirs["prompt_chains"])
-	DirAccess.make_dir_recursive_absolute(dirs["elements"])
-	DirAccess.make_dir_recursive_absolute(dirs["povs"])
-	DirAccess.make_dir_recursive_absolute(dirs["pov_directions"])
-	return dirs
+	DirAccess.make_dir_recursive_absolute(directories["prompt_chains"])
+	DirAccess.make_dir_recursive_absolute(directories["elements"])
+	DirAccess.make_dir_recursive_absolute(directories["povs"])
+	DirAccess.make_dir_recursive_absolute(directories["puzzle_povs"])
+	DirAccess.make_dir_recursive_absolute(directories["pov_directions"])
+	return directories
 
 func _save_prompt_chain_subresource(prompt_chain: PromptChain, sub_dirs: Dictionary, caches: Dictionary, counters: Dictionary, name_hint: String) -> PromptChain:
 	if prompt_chain == null:
@@ -285,6 +297,38 @@ func _save_pov_direction_subresource(pov_direction: PovDirections, sub_dirs: Dic
 	ResourceSaver.save(pov_direction_copy, path)
 	return load(path) as PovDirections
 
+func _save_puzzle_pov_subresource(pov: PuzzlePov, sub_dirs: Dictionary, caches: Dictionary, counters: Dictionary, name_hint: String) -> PuzzlePov:
+	if pov == null:
+		return null
+	
+	var key := _resource_key(pov)
+	var pov_cache: Dictionary = caches["puzzle_povs"]
+	if pov_cache.has(key):
+		return pov_cache[key]
+	
+	var prompt_chain_name := "%s_prompt_chain" % _sanitize_file_name(pov.name, "puzzle_pov")
+	var saved_prompt_chain := _save_prompt_chain_subresource(pov.prompt_chain, sub_dirs, caches, counters, prompt_chain_name)
+	
+	var pov_copy := PuzzlePov.new()
+	pov_copy.name = pov.name
+	pov_copy.description = pov.description
+	pov_copy.prompt_chain = saved_prompt_chain
+	pov_copy.images = pov.images
+	pov_copy.global_conditions = pov.global_conditions.duplicate(true)
+	pov_copy.back_pov = pov.back_pov
+	pov_copy.symbols = pov.symbols
+	pov_copy.digits = pov.digits
+	pov_copy.combinations = pov.combinations
+	pov_copy.coords = pov.coords
+	
+	var idx := _next_counter(counters, "puzzle_pov")
+	var file_name := "%s_%03d.tres" % [_sanitize_file_name(name_hint, "puzzle_pov"), idx]
+	var path := _join_path(sub_dirs["puzzle_povs"], file_name)
+	ResourceSaver.save(pov_copy, path)
+	var saved_pov := load(path) as PuzzlePov
+	pov_cache[key] = saved_pov
+	return saved_pov
+
 func save_pov_level_sub_resources(dir_path: String) -> void:
 	# Export a PovLevel with all subresources split into their own files.
 	var root_dir := _normalize_dir_path(dir_path)
@@ -296,24 +340,34 @@ func save_pov_level_sub_resources(dir_path: String) -> void:
 	var caches := {
 		"prompt_chains": {},
 		"elements": {},
-		"povs": {}
+		"povs": {},
+		"puzzle_povs": {}
 	}
 	var counters := {
 		"prompt_chain": 0,
 		"element": 0,
 		"pov": 0,
-		"pov_direction": 0
+		"pov_direction": 0,
+		"puzzle_pov": 0
 	}
 
 	var saved_level := PovLevel.new()
 	saved_level.bg_img = source_level.bg_img
 	saved_level.dir_scale = source_level.dir_scale
+	# pegar pov directions
 	for i in range(source_level.pov_directions_array.size()):
 		var direction := source_level.pov_directions_array[i]
 		var pd_name := "pov_direction_%03d" % i
 		var saved_direction := _save_pov_direction_subresource(direction, sub_dirs, caches, counters, pd_name)
 		if saved_direction:
 			saved_level.pov_directions_array.append(saved_direction)
+	# pegar puzzle_povs
+	for i in range(source_level.puzzle_povs.size()):
+		var pov := source_level.puzzle_povs[i]
+		var p_name := "puzzle_pov_%03d" % i
+		var saved_pov := _save_puzzle_pov_subresource(pov, sub_dirs, caches, counters, p_name)
+		if saved_pov:
+			saved_level.puzzle_povs.append(saved_pov)
 
 	var level_path := _join_path(root_dir, "pov_level.tres")
 	ResourceSaver.save(saved_level, level_path)
@@ -333,7 +387,11 @@ func clear_level() -> void:
 	for d in dirs:
 		if is_instance_valid(d):
 			d.queue_free()
+	for pd in p_dirs:
+		if is_instance_valid(pd):
+			pd.queue_free()
 	dirs.clear()
+	p_dirs.clear()
 	for l in lines:
 		if is_instance_valid(l):
 			l.queue_free()
@@ -372,6 +430,9 @@ func scale_pov_widgets(delta_scale: float) -> void:
 	for dir in dirs:
 		dir.scale = Vector2(current_widget_scale, current_widget_scale)
 		dir.update_position_from_coords()
+	for p_dir in p_dirs:
+		p_dir.scale = Vector2(current_widget_scale, current_widget_scale)
+		p_dir.update_position_from_coords()
 	update_lines()
 
 func _copy_shared_dir_values(source: _PovDirectionsWidget, target: _PovDirectionsWidget, copy_transform: bool = true) -> void:
@@ -380,6 +441,13 @@ func _copy_shared_dir_values(source: _PovDirectionsWidget, target: _PovDirection
 	target.bottom_pov_name_widget.load_pov_name(source.bottom_pov_name_widget.get_pov_name())
 	target.right_pov_name_widget.load_pov_name(source.right_pov_name_widget.get_pov_name())
 	target.rotation_slider.set_value_no_signal(source.rotation_slider.value)
+	if copy_transform:
+		target.coords = source.coords
+		target.scale = source.scale
+		target.update_position_from_coords()
+
+func _copy_shared_puzzle_dir_values(source: _PuzzlePovDirectionsWidget, target: _PuzzlePovDirectionsWidget, copy_transform: bool = true) -> void:
+	target.back_pov_name_widget.load_pov_name(source.back_pov_name_widget.get_pov_name())
 	if copy_transform:
 		target.coords = source.coords
 		target.scale = source.scale
@@ -398,6 +466,17 @@ func _collect_named_dir_groups() -> Dictionary:
 		var arr: Array = groups[name]
 		arr.append(dir)
 		groups[name] = arr
+	for p_dir in p_dirs:
+		if !is_instance_valid(p_dir) or p_dir.puzzle_pov == null:
+			continue
+		var name := p_dir.puzzle_pov.name.strip_edges()
+		if name.is_empty():
+			continue
+		if !groups.has(name):
+			groups[name] = []
+		var arr: Array = groups[name]
+		arr.append(p_dir)
+		groups[name] = arr
 	return groups
 
 func _create_pov_directions_widget(coords: Vector2) -> _PovDirectionsWidget:
@@ -413,14 +492,36 @@ func _create_pov_directions_widget(coords: Vector2) -> _PovDirectionsWidget:
 	pdw.moving.connect(_on_dir_widget_moving.bind(pdw))
 	pdw.closed.connect(_on_dir_widget_closed.bind(pdw))
 	pdw.clone_requested.connect(_on_dir_widget_clone_requested.bind(pdw))
+	pdw.changed.connect(_change_saved_indicator.bind(false))
 	pdw.name = "pdw%d" % id
 	bg.add_child(pdw)
 	pdw.position = coords
 	pdw.call_deferred("update_position_from_coords")
-	pdw.changed.connect(_change_saved_indicator.bind(false))
 	dirs.append(pdw)
 	id += 1
 	return pdw
+
+func _create_puzzle_pov_directions_widget(coords: Vector2) -> _PuzzlePovDirectionsWidget:
+	var ppdw : _PuzzlePovDirectionsWidget = PUZZLE_POV_DIRECTIONS_WIDGET.instantiate()
+	ppdw.anchor_left = 0
+	ppdw.anchor_top = 0
+	ppdw.anchor_right = 0
+	ppdw.anchor_bottom = 0
+	ppdw.pivot_offset = Vector2(0.5, 1)
+	ppdw.scale = Vector2(current_widget_scale, current_widget_scale)
+	ppdw.coords = coords
+	ppdw.changed.connect(_on_dir_widget_changed.bind(ppdw))
+	ppdw.moving.connect(_on_dir_widget_moving.bind(ppdw))
+	ppdw.closed.connect(_on_puzzle_dir_widget_closed.bind(ppdw))
+	ppdw.clone_requested.connect(_on_puzzle_dir_widget_clone_requested.bind(ppdw))
+	ppdw.changed.connect(_change_saved_indicator.bind(false))
+	ppdw.name = "ppdw%d" % id
+	bg.add_child(ppdw)
+	ppdw.position = coords
+	ppdw.call_deferred("update_position_from_coords")
+	p_dirs.append(ppdw)
+	id += 1
+	return ppdw
 
 func _collect_all_pov_names() -> Dictionary:
 	var names := {}
@@ -462,6 +563,14 @@ func _clone_pov_resource(source: Pov) -> Pov:
 		return dup as Pov
 	return Pov.new()
 
+func _clone_puzzle_pov_resource(source: Pov) -> Pov:
+	if source == null:
+		return PuzzlePov.new()
+	var dup := source.duplicate(true)
+	if dup is PuzzlePov:
+		return dup as PuzzlePov
+	return PuzzlePov.new()
+
 func _reconcile_dirs_after_change() -> void:
 	# Normalize POV directions: split mismatched names and merge duplicates.
 	if _is_reconciling_dirs:
@@ -490,7 +599,6 @@ func _reconcile_dirs_after_change() -> void:
 				"base_pov": povs[0],
 				"extra_povs": povs.slice(1, povs.size())
 			})
-
 	for req in spawn_requests:
 		var source := req["source"] as _PovDirectionsWidget
 		var base_pov := req["base_pov"] as Pov
@@ -531,13 +639,13 @@ func _reconcile_dirs_after_change() -> void:
 
 	_is_reconciling_dirs = false
 
-func _on_dir_widget_changed(_dir: _PovDirectionsWidget) -> void:
+func _on_dir_widget_changed(_dir) -> void:
 	if _is_reconciling_dirs or _is_loading_level:
 		return
 	_reconcile_dirs_after_change()
 	update_lines()
 
-func _on_dir_widget_moving(_dir: _PovDirectionsWidget) -> void:
+func _on_dir_widget_moving(_dir) -> void:
 	if _is_reconciling_dirs or _is_loading_level:
 		return
 	update_lines()
@@ -547,7 +655,7 @@ func _on_dir_widget_closed(dir: _PovDirectionsWidget) -> void:
 	_is_reconciling_dirs = true
 	if is_instance_valid(dir):
 		var stacked_povs := dir.pov_directions_stack_widget.get_povs()
-		if !stacked_povs.is_empty():
+		if stacked_povs:
 			var replacement := _create_pov_directions_widget(dir.coords)
 			replacement.load_pov(stacked_povs[0])
 			_copy_shared_dir_values(dir, replacement)
@@ -555,6 +663,16 @@ func _on_dir_widget_closed(dir: _PovDirectionsWidget) -> void:
 				replacement.pov_directions_stack_widget.load_pov(stacked_povs[i])
 
 	dirs.erase(dir)
+	_is_reconciling_dirs = previous_reconciling
+	if _is_reconciling_dirs or _is_loading_level:
+		return
+	_reconcile_dirs_after_change()
+	update_lines()
+func _on_puzzle_dir_widget_closed(p_dir: _PuzzlePovDirectionsWidget) -> void:
+	var previous_reconciling := _is_reconciling_dirs
+	_is_reconciling_dirs = true
+	
+	p_dirs.erase(p_dir)
 	_is_reconciling_dirs = previous_reconciling
 	if _is_reconciling_dirs or _is_loading_level:
 		return
@@ -580,6 +698,25 @@ func _on_dir_widget_clone_requested(clicked_pov: Pov, dir: _PovDirectionsWidget)
 	_reconcile_dirs_after_change()
 	update_lines()
 
+func _on_puzzle_dir_widget_clone_requested(clicked_pov: PuzzlePov, p_dir: _PuzzlePovDirectionsWidget) -> void:
+	if _is_reconciling_dirs or _is_loading_level:
+		return
+	if p_dir == null or !is_instance_valid(p_dir):
+		return
+
+	var side_step := (p_dir.size.x * p_dir.scale.x) + 48.0
+	var clone_coords := p_dir.coords + Vector2(side_step, 0)
+	var clone_dir := _create_puzzle_pov_directions_widget(clone_coords)
+	_copy_shared_puzzle_dir_values(p_dir, clone_dir, false)
+
+	var source_pov := clicked_pov
+	if source_pov == null:
+		source_pov = p_dir.pov
+	clone_dir.load_puzzle_pov(_clone_puzzle_pov_resource(source_pov))
+
+	_reconcile_dirs_after_change()
+	update_lines()
+
 func _control_local_to_bg(control: Control, local_point: Vector2) -> Vector2:
 	var canvas_point := control.get_global_transform_with_canvas() * local_point
 	return bg.get_global_transform_with_canvas().affine_inverse() * canvas_point
@@ -593,19 +730,26 @@ func update_lines() -> void:
 	# reutilize lines, only create if necessary
 	var li : int = 0
 	var i : int = 0
+	
 	while i < dirs.size():
 		if li >= lines.size():
 			new_line()
-		
 		var dir : _PovDirectionsWidget = dirs[i]
 		for e in dir.pov.elements:
-			if e.pov_name: # connect from center
-				print(e.pov_name)
+			if e.pov_name: # connect from top 
+				# for pov dirs
 				for d in _get_dirs_with_name(e.pov_name):
-					print("DIR FOUND")
 					var top_dot_center := dir.arrow_widget.dot_top.position + dir.arrow_widget.dot_top.size * 0.5
 					var origin := _control_local_to_bg(dir.arrow_widget, top_dot_center)
 					var destiny := _control_local_to_bg(d.arrow_widget, d.arrow_widget.size * 0.5)
+					for j : float in line_res:
+						set_line_point_pos(li, j, origin.lerp(destiny, j/(line_res-1)))
+					li += 1
+				# for puzzle dirs #PUZZLE POVS ARE ONLY ACCESSABLE THROUGH ELEMENTS
+				for pd in _get_puzzle_dirs_with_name(e.pov_name):
+					var top_dot_center := dir.arrow_widget.dot_top.position + dir.arrow_widget.dot_top.size * 0.5
+					var origin := _control_local_to_bg(dir.arrow_widget, top_dot_center)
+					var destiny := _control_local_to_bg(pd.circle_widget, pd.circle_widget.size * 0.5)
 					for j : float in line_res:
 						set_line_point_pos(li, j, origin.lerp(destiny, j/(line_res-1)), true)
 					li += 1
@@ -633,10 +777,8 @@ func update_lines() -> void:
 				for j : float in line_res:
 					set_line_point_pos(li, j, origin.lerp(destiny, j/(line_res-1)))
 				li += 1
-		# connect pov from elements
-		
-				
 		i += 1
+	
 	while li < lines.size():
 		lines[li].set_point_position(0, Vector2.ZERO)
 		shrink_line(lines[li])
@@ -655,9 +797,6 @@ func new_line() -> Line2D:
 	lines.append(line)
 	return line
 
-func update_dir_names(index: int) -> void:
-	dirs[index].pov_names = get_all_pov_names()
-
 func set_line_point_pos(line_index: int, point_index: int, pos: Vector2, alt: bool = false) -> void:
 	while line_index >= lines.size():
 		new_line()
@@ -667,9 +806,15 @@ func set_line_point_pos(line_index: int, point_index: int, pos: Vector2, alt: bo
 	else:
 		lines[line_index].gradient = LINE_DIRECTION_GRADIENT
 
-var id : int = 0
 func add_pov_directions(coords : Vector2) -> void:
 	_create_pov_directions_widget(coords)
+	if _is_loading_level:
+		return
+	_reconcile_dirs_after_change()
+	update_lines()
+	_change_saved_indicator(false)
+func add_puzzle_pov_directions(coords : Vector2) -> void:
+	_create_puzzle_pov_directions_widget(coords)
 	if _is_loading_level:
 		return
 	_reconcile_dirs_after_change()
@@ -691,6 +836,9 @@ func get_all_pov_names() -> Array[String]:
 	for d : _PovDirectionsWidget in dirs:
 		if d.pov.name not in names:
 			names.append(d.pov.name)
+	for pd : _PuzzlePovDirectionsWidget in p_dirs:
+		if pd.puzzle_pov.name not in names:
+			names.append(pd.puzzle_pov.name)
 	return names
 	
 func _get_dirs_with_name(name: String) -> Array[_PovDirectionsWidget]:
@@ -698,6 +846,13 @@ func _get_dirs_with_name(name: String) -> Array[_PovDirectionsWidget]:
 	for dir in dirs:
 		if dir.pov.name == name:
 			arr.append(dir)
+	return arr
+
+func _get_puzzle_dirs_with_name(name: String) -> Array[_PuzzlePovDirectionsWidget]:
+	var arr : Array[_PuzzlePovDirectionsWidget] = []
+	for p_dir in p_dirs:
+		if p_dir.puzzle_pov.name == name:
+			arr.append(p_dir)
 	return arr
 	
 func _clamp_offset(offset: Vector2) -> Vector2:
@@ -734,16 +889,19 @@ func _on_screen_container_resized() -> void:
 func _on_screen_container_gui_input(event: InputEvent) -> void:
 	# Handle panning, zooming, and POV direction creation.
 	if event is InputEventMouseButton:
-		if event.pressed and Input.is_action_pressed("ui_scroll_pressed"):
+		if event.pressed and Input.is_action_pressed("ui_alt"):
 			is_panning = true
 			last_mouse_pos = event.position
 		elif !event.pressed and is_panning:
 			is_panning = false
 		
-		if event.pressed and event.button_index == MOUSE_BUTTON_RIGHT:
-			add_pov_directions(screen_to_bg_local(event.position))
+		if event.pressed and Input.is_action_pressed("ui_mouse_alt"):
+			if Input.is_action_pressed("ui_shift"):
+				add_puzzle_pov_directions(screen_to_bg_local(event.position))
+			else:
+				add_pov_directions(screen_to_bg_local(event.position))
 		
-		var ctrl_held := Input.is_physical_key_pressed(KEY_CTRL)
+		var ctrl_held := Input.is_action_pressed("ui_control")
 		if event.pressed and event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			if ctrl_held:
 				scale_pov_widgets(widget_scale_step)
@@ -758,7 +916,6 @@ func _on_screen_container_gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and is_panning:
 		move_screen(event.position - last_mouse_pos)
 		last_mouse_pos = event.position
-
 
 func _on_save_button_pressed() -> void:
 	save_file_dialog.popup()

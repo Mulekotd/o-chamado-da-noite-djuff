@@ -3,6 +3,7 @@ class_name _PuzzlePovWidget extends Control
 const POV_IMAGES_WIDGET = preload("uid://b2nqv18l1c3xo")
 
 var pov_images : Array[PovImage] = []
+var coords : Vector2 = Vector2.ZERO
 @export var pov_name_line_edit : LineEdit
 @export var digits_widget : _DigitsWidget
 @export var symbols_widget : _SymbolsWidget
@@ -34,6 +35,8 @@ func load_puzzle_pov(pov: PuzzlePov) -> void:
 	prompt_chain_widget.load_prompt_chain(pov.prompt_chain)
 	# conditions
 	conditions_widget.load_conditions(pov.global_conditions)
+	# coords
+	coords = pov.coords
 
 func parse_puzzle_pov() -> PuzzlePov:
 	var pov := PuzzlePov.new()
@@ -51,6 +54,8 @@ func parse_puzzle_pov() -> PuzzlePov:
 	pov.prompt_chain = prompt_chain_widget.parse_prompt_chain()
 	# conditions
 	pov.global_conditions = conditions_widget.parse_conditions()
+	# coords
+	pov.coords = coords
 	# done
 	return pov
 

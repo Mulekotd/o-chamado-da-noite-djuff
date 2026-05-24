@@ -95,10 +95,9 @@ wrap_mode = 1
 [node name="TabContainer" type="TabContainer" parent="MarginContainer/HBoxContainer/HSplitContainer" unique_id=241532051]
 layout_mode = 2
 size_flags_horizontal = 3
-current_tab = 3
+current_tab = 0
 
 [node name="Pre" type="MarginContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer" unique_id=1916516240]
-visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
@@ -269,6 +268,7 @@ autowrap_mode = 2
 layout_mode = 2
 
 [node name="Sounds" type="PanelContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer" unique_id=1471882346]
+visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_4037s")
 metadata/_tab_index = 3

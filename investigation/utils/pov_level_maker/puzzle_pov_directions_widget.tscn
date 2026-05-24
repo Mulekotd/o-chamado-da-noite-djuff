@@ -121,6 +121,7 @@ placeholder_text = "Pov Atras"
 [node name="CircleWidget" parent="VBoxContainer" unique_id=1883204067 instance=ExtResource("9_13vhp")]
 custom_minimum_size = Vector2(166, 166)
 layout_mode = 2
+mouse_filter = 0
 
 [connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="gui_input" from="VBoxContainer/VBoxContainer/VBoxContainer/Panel" to="." method="_on_upper_panel_gui_input"]
@@ -128,5 +129,7 @@ layout_mode = 2
 [connection signal="item_rect_changed" from="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/PovImageRect" to="." method="_on_pov_image_rect_item_rect_changed"]
 [connection signal="pressed" from="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/PovImageRect/CloseButton" to="." method="_on_close_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/PropertiesContainer/VBoxContainer/PovButton" to="." method="_on_pov_button_pressed"]
+[connection signal="text_changed" from="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/PropertiesContainer/VBoxContainer/BackPovNameWidget/PovNameLineEdit" to="." method="_on_pov_name_line_edit_text_changed"]
+[connection signal="gui_input" from="VBoxContainer/CircleWidget" to="." method="_on_circle_widget_gui_input"]
 
 [editable path="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/PropertiesContainer/VBoxContainer/BackPovNameWidget"]
