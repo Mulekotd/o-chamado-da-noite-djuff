@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://fmeu1ocls847"]
 
-[ext_resource type="Script" uid="uid://i3n6d1ft0muy" path="res://investigation/scenes/sound_manager.gd" id="1_a88hy"]
+[ext_resource type="Script" uid="uid://i3n6d1ft0muy" path="res://investigation/scripts/sound_manager.gd" id="1_a88hy"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_mi61x"]
 random_pitch = 1.122462

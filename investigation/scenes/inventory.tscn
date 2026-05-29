@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://cw8xufv4n3jyu"]
+
+[ext_resource type="Script" uid="uid://coy4w07b6q73" path="res://investigation/scripts/inventory.gd" id="1_6emsh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_60s8g"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jr8ec"]
+content_margin_top = 6.0
+content_margin_bottom = 16.0
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+
+[node name="Inventory" type="Control" unique_id=487811366 node_paths=PackedStringArray("items_container", "inventory_container", "item_name_label")]
+clip_contents = true
+layout_mode = 3
+anchor_right = 0.48828125
+anchor_bottom = 0.6041667
+mouse_filter = 2
+script = ExtResource("1_6emsh")
+items_container = NodePath("InventoryUIContainer/ScrollContainer/ItemsContainer")
+inventory_container = NodePath("InventoryUIContainer")
+item_name_label = NodePath("InventoryUIContainer/ItemNameLabel")
+metadata/_edit_use_anchors_ = true
+
+[node name="InventoryUIContainer" type="PanelContainer" parent="." unique_id=523476704]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.00012207031
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_60s8g")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="InventoryUIContainer" unique_id=1626814479]
+layout_mode = 2
+
+[node name="ItemsContainer" type="GridContainer" parent="InventoryUIContainer/ScrollContainer" unique_id=1887421065]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 3
+
+[node name="ItemNameLabel" type="Label" parent="InventoryUIContainer" unique_id=1543552971]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/normal = SubResource("StyleBoxFlat_jr8ec")
+horizontal_alignment = 1
+vertical_alignment = 1

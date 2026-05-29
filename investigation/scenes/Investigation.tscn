@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://kmy4ol8bdnbn" path="res://investigation/scenes/actions_manager.tscn" id="8_dtwxe"]
 [ext_resource type="PackedScene" uid="uid://f2qd0iww8k1p" path="res://investigation/utils/general/moving_noise_widget.tscn" id="9_1t5j4"]
 [ext_resource type="PackedScene" uid="uid://dse2ma2f5xas5" path="res://investigation/interface/scenes/clock.tscn" id="9_2or41"]
+[ext_resource type="PackedScene" uid="uid://cw8xufv4n3jyu" path="res://investigation/scenes/inventory.tscn" id="9_jik6y"]
 [ext_resource type="PackedScene" uid="uid://fmeu1ocls847" path="res://investigation/scenes/sound_manager.tscn" id="10_50cmr"]
 [ext_resource type="Script" uid="uid://611kuu1dngvi" path="res://investigation/scripts/cursor_loader.gd" id="11_uaftc"]
 
@@ -207,6 +208,24 @@ _data = {
 &"left": SubResource("Animation_74cj5")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hj3xq"]
+content_margin_left = 6.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 6.0
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jik6y"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3tatp"]
+bg_color = Color(0, 0, 0, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ni3wf"]
 content_margin_left = 0.0
 content_margin_top = 0.0
@@ -281,6 +300,14 @@ anchor_right = 0.20605469
 anchor_bottom = 0.98307294
 fade_duration = 0.1
 
+[node name="Inventory" parent="." unique_id=487811366 instance=ExtResource("9_jik6y")]
+layout_mode = 1
+anchor_left = 0.42382813
+anchor_top = 0.03125
+anchor_right = 0.9121094
+anchor_bottom = 0.6354167
+offset_bottom = -31.529999
+
 [node name="Overlay" type="TextureRect" parent="." unique_id=554177332]
 layout_mode = 1
 anchors_preset = 15
@@ -299,12 +326,26 @@ offset_top = -727.0
 offset_right = 494.0
 offset_bottom = -319.0
 clock_size = Vector2(56, 0)
-actions = 4
+actions = 0
 max_actions = 5
 modulate_speed = 2.0
 bob_speed = 1.0
 bob_amplitude = 0.15
 spin_speed = 0.5
+
+[node name="InventoryToggleButton" type="Button" parent="." unique_id=2101909362]
+layout_mode = 0
+offset_left = 954.0
+offset_top = 60.0
+offset_right = 1007.0
+offset_bottom = 97.0
+theme_override_styles/normal = SubResource("StyleBoxFlat_hj3xq")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_jik6y")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3tatp")
+toggle_mode = true
+text = "Itens"
+
+[node name="---------------------------" type="Node" parent="." unique_id=367296959]
 
 [node name="MovingNoiseOverlay" parent="." unique_id=292722013 instance=ExtResource("9_1t5j4")]
 visible = false
@@ -325,5 +366,6 @@ script = ExtResource("11_uaftc")
 metadata/_custom_type_script = "uid://611kuu1dngvi"
 
 [connection signal="mouse_entered" from="PovManager" to="." method="_on_pov_manager_mouse_entered"]
+[connection signal="toggled" from="InventoryToggleButton" to="Inventory" method="toggle_inventory"]
 
 [editable path="MovingNoiseOverlay"]

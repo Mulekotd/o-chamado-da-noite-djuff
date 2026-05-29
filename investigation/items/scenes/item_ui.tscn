@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://xpgrehwl8fw0"]
+
+[ext_resource type="Texture2D" uid="uid://ban6ktyfkm8sd" path="res://investigation/items/test_key/key.png" id="1_0lkf5"]
+[ext_resource type="Script" uid="uid://cigqj4boobtul" path="res://investigation/items/scripts/item_ui.gd" id="1_40k4a"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_40k4a"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+
+[node name="ItemUI" type="PanelContainer" unique_id=187194858]
+custom_minimum_size = Vector2(128, 128)
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_40k4a")
+script = ExtResource("1_40k4a")
+
+[node name="ItemTextureRect" type="TextureRect" parent="." unique_id=1281482531]
+layout_mode = 2
+texture = ExtResource("1_0lkf5")
+expand_mode = 1
+stretch_mode = 5
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]

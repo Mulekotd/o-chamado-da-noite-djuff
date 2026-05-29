@@ -108,3 +108,6 @@ static func get_var_value(key: String) -> int:
 
 static func get_max_actions() -> int:
 	return file._max_actions
+
+static func get_inventory() -> Array[Item]:
+	return file.inventory

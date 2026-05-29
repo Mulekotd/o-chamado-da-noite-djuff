@@ -8,6 +8,7 @@ extends Control
 @onready var actions_manager: ActionsManager = $ActionsManager
 @onready var clock: _Clock = $Clock
 @onready var moving_noise_overlay: _MovingNoiseWidget = $MovingNoiseOverlay
+@onready var inventory: _Inventory = $Inventory
 
 const USED_ACTION_SOUND = preload("uid://bfamn2x4funyi")
 const NO_MORE_ACTIONS_SOUND = preload("uid://c5hv7vps3lut6")
@@ -40,6 +41,8 @@ func _ready() -> void:
 	text_box.chain_added.connect(_append_prompt_chain_sound)
 	text_box.actions_used.connect(_use_actions)
 	text_box.prompt_advanced.connect(_on_prompt_advanced)
+	text_box.items_added.connect(inventory.add_items)
+	text_box.items_removed.connect(inventory.remove_items)
 	
 	clock.modulate = Color(0,0,0,0)
 

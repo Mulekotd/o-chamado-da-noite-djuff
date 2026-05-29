@@ -11,6 +11,8 @@ signal displayed_prompt(chain_id: int, prompt: Prompt)
 signal chain_added(chain_id: int, chain: PromptChain)
 signal actions_used(actions: int)
 signal prompt_advanced()
+signal items_added(item: Array[Item])
+signal items_removed(item: Array[Item])
 
 var prompt_queue : Array[Prompt]
 var stand_by : bool = true :
@@ -200,7 +202,9 @@ func next_prompt(cond: int, can_end_chain: bool = true) -> void:
 		# Only mutate vars for a prompt that was actually advanced by the player.
 		InvestigationVars.update_variables(previous_prompt.vars_to_change)
 		InvestigationVars.append_item(previous_prompt.items_to_give)
+		items_added.emit(previous_prompt.items_to_give)
 		InvestigationVars.remove_item(previous_prompt.items_to_take)
+		items_removed.emit(previous_prompt.items_to_take)
 		
 		if previous_prompt.pos_sound:
 			prompt_sound_requested.emit(previous_prompt.pos_sound)
