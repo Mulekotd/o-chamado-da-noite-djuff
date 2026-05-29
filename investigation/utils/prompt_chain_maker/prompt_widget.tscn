@@ -109,7 +109,7 @@ metadata/_tab_index = 0
 layout_mode = 2
 theme_override_constants/h_separation = 32
 theme_override_constants/v_separation = 32
-columns = 3
+columns = 2
 
 [node name="ConditionsContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pre/GridContainer" unique_id=701184403]
 layout_mode = 2
@@ -170,7 +170,7 @@ metadata/_tab_index = 1
 layout_mode = 2
 theme_override_constants/h_separation = 32
 theme_override_constants/v_separation = 32
-columns = 3
+columns = 2
 
 [node name="VarsToChangeContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pos/GridContainer" unique_id=429128829]
 layout_mode = 2

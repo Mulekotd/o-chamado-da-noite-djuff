@@ -9,10 +9,8 @@ func parse_conditions() -> Dictionary[String, int]:
 	var dict : Dictionary[String, int]
 	for c in get_children():
 		if c.is_in_group("condition_widget"):
-			var title_text : TextEdit = c.get_child(0)
-			var value_text : TextEdit = c.get_child(1)
-			var title : String = title_text.text
-			var value : int = value_text.text.to_int()
+			var title : String = c.get_child(0).text
+			var value : int = c.get_child(1).value
 			dict[title] = value
 	return dict
 
@@ -33,7 +31,7 @@ func clear() -> void:
 func add_condition(title: String, value: int) -> void:
 	var c := CONDITION_WIDGET.instantiate()
 	c.get_child(0).text = title
-	c.get_child(1).text = "%d" % value
+	c.get_child(1).value = value
 	c.add_to_group("condition_widget")
 	add_child(c)
 
