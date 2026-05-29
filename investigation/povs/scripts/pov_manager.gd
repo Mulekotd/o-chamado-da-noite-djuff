@@ -6,6 +6,7 @@ class_name PovManager extends Control
 @onready var right_arrow: TextureRect = $RightFlowContainer/RightArrow
 @onready var bottom_arrow: TextureRect = $BottomFlowContainer/BottomArrow
 @onready var shadow_panel: Panel = $View/ShadowPanel
+@onready var digits_container: DigitsContainer = $View/DigitsContainer
 
 const BOTTOM_ARROW = preload("uid://cm8l3y3l3dioj")
 const LEFT_ARROW = preload("uid://b513u1882j8ph")
@@ -24,7 +25,7 @@ var current_pov : Pov
 var enabled : bool = true :
 	set(x):
 		enabled = x
-		print("set enabled: ", x)
+		#print("enabled = ", x)
 		if enabled:
 			_pan_locked = false
 		update_arrows()
@@ -61,25 +62,35 @@ func _process(_delta: float) -> void:
 	_update_view_pan(_delta)
 
 func change_pov(pov: Pov) -> void:
-	current_pov = pov
-	_on_puzzle_pov = pov is PuzzlePov
-	update_view(current_pov)
-	_save_last_pov(current_pov.name)
-	if _has_any_valid_prompt(current_pov.prompt_chain):
-		# Pause navigation while the POV's prompt chain is displayed.
-		enabled = false
-		print("disabled because prompt chain in ",current_pov.name)
-		await get_tree().create_timer(prompt_wait_time).timeout
-		prompt_chain_called.emit(current_pov.prompt_chain)
-	if current_pov.especial_behaviour:
-		for s in get_parent().get_children():
-			if s.name == current_pov.name + "_behaviour":
-				return
-		# Spawn a runtime behaviour node to allow custom POV logic.
-		var n := Node.new()
-		n.set_script(current_pov.especial_behaviour)
-		n.name = current_pov.name + "_behaviour"
-		add_sibling(n)
+	if pov != current_pov:
+		current_pov = pov
+		
+		_on_puzzle_pov = pov is PuzzlePov
+		if _on_puzzle_pov:
+			digits_container.load_digits(pov)
+		else:
+			digits_container.clear_digits()
+			
+		update_view(current_pov)
+		_save_last_pov(current_pov.name)
+		if _has_any_valid_prompt(current_pov.prompt_chain):
+			# Pause navigation while the POV's prompt chain is displayed.
+			enabled = false
+			await get_tree().create_timer(prompt_wait_time).timeout
+			prompt_chain_called.emit(current_pov.prompt_chain)
+		if current_pov.especial_behaviour:
+			for s in get_parent().get_children():
+				if s.name == current_pov.name + "_behaviour":
+					return
+			# Spawn a runtime behaviour node to allow custom POV logic.
+			var n := Node.new()
+			n.set_script(current_pov.especial_behaviour)
+			n.name = current_pov.name + "_behaviour"
+			add_sibling(n)
+	else:
+		update_view()
+		update_arrows()
+		digits_container.update_enabled()
 	
 func change_pov_by_name(pov_name: String) -> void:
 	change_pov(get_pov(pov_name))
@@ -137,6 +148,9 @@ func _configure_arrow(arrow: TextureRect, arrow_texture: Texture2D, target_pov: 
 	
 	if target_pov and enabled:
 		var p := get_pov(target_pov)
+		#print("target_pov", " = ", target_pov)
+		#print("pov found = ", p)
+		#print("seta = ", "bottom" if arrow_texture == BOTTOM_ARROW else "sei la")
 		if p:
 			arrow.gui_input.connect(_on_arrow_gui_input.bind(p, direction))
 			arrow.texture = arrow_texture
@@ -161,10 +175,13 @@ func get_pov(name: String) -> Pov:
 	var x : float = -1
 	for p in get_all_povs():
 		if p.name == name:
-			x = InvestigationVars.get_conditions_value(p.global_conditions)
-			if x > highest_value:
-				highest_value = x
-				considered_pov = p
+			if p is PuzzlePov:
+				return p
+			else:
+				x = InvestigationVars.get_conditions_value(p.global_conditions)
+				if x > highest_value:
+					highest_value = x
+					considered_pov = p
 	return considered_pov
 
 func _save_last_pov(p_name: String) -> void:
@@ -302,7 +319,6 @@ func _transition_to_pov(pov: Pov, direction: Vector2) -> void:
 	_pan_locked = true
 	var was_enabled := enabled
 	enabled = false
-	print("disabled because pov transition")
 	pov_entered.emit()
 
 	var dir := direction.normalized()
@@ -334,14 +350,15 @@ func _transition_to_pov(pov: Pov, direction: Vector2) -> void:
 
 	_is_transitioning = false
 	_pan_locked = false
+	#print("has valid prompt, will remain disabled" if _has_any_valid_prompt(current_pov.prompt_chain) else "no valid prompt, will enable")
 	if was_enabled and enabled == false and not _has_any_valid_prompt(current_pov.prompt_chain):
 		enabled = true
 	_reset_shadow_panel()
 
 func _has_any_valid_prompt(p_chain : PromptChain) -> bool:
 	for p : Prompt in p_chain.prompts:
-		if InvestigationVars.get_conditions_value(p.global_conditions) != -1:
-			print("true em \"", p.text, "\"")
+		if InvestigationVars.meets_all_conditions(p.global_conditions):
+			#print(p.global_conditions.keys(), " are valid, returning true")
 			return true
 	return false
 
@@ -355,3 +372,10 @@ func _get_transition_offset(direction: Vector2) -> Vector2:
 		absf(view.size.x) * arrow_transition_offset_scale * direction.x,
 		absf(view.size.y) * arrow_transition_offset_scale * direction.y
 	)
+
+func _on_digits_container_combination_struck() -> void:
+	prompt_chain_called.emit(current_pov.prompt_chain)
+	update_view()
+
+func _on_digits_container_digit_changed() -> void:
+	update_view()

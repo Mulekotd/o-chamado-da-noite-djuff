@@ -16,10 +16,14 @@ var prompt_queue : Array[Prompt]
 var stand_by : bool = true :
 	set(x):
 		stand_by = x
-		#InvestigationVars.set_option(-1)
+		if x:
+			InvestigationVars.set_option(-1)
 		stand_by_changed.emit(x)
 var is_writing : bool = false
 var is_mouse_inside : bool = false
+## used to check changes of chains
+var last_chain_id : int = -1
+## used to give ids to prompts
 var chain_number : int = 0
 ## if a prompt has this chain_id, it will be skipped
 var skip_chain_id : int = -1
@@ -78,7 +82,6 @@ func clear_box() -> void:
 	chain_buffer.clear()
 
 func insert_prompt(prompt: Prompt, index: int = -1) -> void:
-	#print(prompt.text," POV: ", prompt.pov)
 	if index == -1:
 		prompt_queue.append(prompt)
 	else:
@@ -86,7 +89,6 @@ func insert_prompt(prompt: Prompt, index: int = -1) -> void:
 
 ## if index = -1, appends to end of queue
 func insert_prompt_chain(prompt_chain: PromptChain, index: int = -1) -> void:
-	InvestigationVars.set_option(-1)
 	_insert_prompt_chain_from_index(prompt_chain, 0, index)
 
 func _insert_prompt_chain_from_index(prompt_chain: PromptChain, start_index: int, index: int = -1) -> void:
@@ -206,7 +208,7 @@ func next_prompt(cond: int, can_end_chain: bool = true) -> void:
 		if previous_prompt.pov:
 			pov_entered.emit(previous_prompt.pov)
 	
-	if (prompt_queue.size()): # if there is a next prompt
+	if prompt_queue: # if there is a next prompt
 		wants_to_advance = false
 		if _is_prompt_valid(prompt_queue[0], cond):
 			main_text.clear()
@@ -214,6 +216,12 @@ func next_prompt(cond: int, can_end_chain: bool = true) -> void:
 			display_prompt()
 			if prompt_queue[0].pre_sound:
 				prompt_sound_requested.emit(prompt_queue[0].pre_sound)
+			# check if this prompt's id is different than the last
+			print("last chain id: %d, new one: %d" % [last_chain_id, prompt_queue[0].chain_id])
+			#if prompt_queue[0].chain_id != last_chain_id:
+				#print("new chain, setting 'options' to -1")
+				#InvestigationVars.set_option(-1)
+			last_chain_id = prompt_queue[0].chain_id
 		else:
 			next_prompt(cond, false)
 	else: 

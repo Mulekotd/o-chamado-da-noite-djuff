@@ -39,7 +39,7 @@ func _ready() -> void:
 	text_box.displayed_prompt.connect(_update_person_display)
 	text_box.chain_added.connect(_append_prompt_chain_sound)
 	text_box.actions_used.connect(_use_actions)
-	text_box.prompt_advanced.connect(pov_manager.update_view)
+	text_box.prompt_advanced.connect(_on_prompt_advanced)
 	
 	clock.modulate = Color(0,0,0,0)
 
@@ -70,7 +70,6 @@ func _use_actions(actions: int) -> void:
 	text_box.enabled = true
 
 func _update_sound_manager_letter_sounds(chain_id: int, prompt: Prompt) -> void:
-	# print("UPDATE SOUND MANAGER LETTER SOUNDS: ", chain_id)
 	# Keep the chain queue aligned with the prompt being displayed.
 	while chain_id_queue[0] != chain_id:
 		chain_id_queue.pop_front()
@@ -129,7 +128,6 @@ func _show_clock() -> void:
 
 func _update_clock() -> void:
 	var factor : float = float(InvestigationVars.get_actions()) / InvestigationVars.get_max_actions()
-	print("FACTOR: ", factor)
 	clock.speed = lerpf(clock_total_speed, 0.0, factor)
 
 func _append_prompt_chain_from_element(e: Element) -> void:
@@ -141,3 +139,9 @@ func _append_prompt_chain_sound(chain_id: int, chain: PromptChain) -> void:
 	# Cache chain meta so letter sounds can be swapped later.
 	chain_id_queue.append(chain_id)
 	prompt_chain_queue.append(chain)
+
+func _on_prompt_advanced() -> void:
+	if pov_manager._on_puzzle_pov:
+		pov_manager.change_pov(pov_manager.current_pov)
+	else:
+		pov_manager.update_view()

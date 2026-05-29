@@ -1,5 +1,14 @@
+@tool
 class_name InvestigationVars extends Resource
 
+@export_tool_button("clear global variables")
+var clear_action = clear_everything
+func clear_everything() -> void:
+	file.vars.clear()
+	file.inventory.clear()
+	file.set_actions(get_max_actions())
+	file.last_pov = ""
+	
 ## vars are int for utility, use 0 and 1 if you want boolean behaviour
 @export var vars : Dictionary[String, int] = {
 	"option": -1,
@@ -21,6 +30,7 @@ static var default_value : int = 0
 
 static var file : InvestigationVars = load("res://investigation/investigation_variables.tres")
 
+
 ## returns int(number-of-conditions-met / number-of-keys-given) * number-of-keys-given - 1
 static func get_conditions_value(conditions: Dictionary[String, int], count_option : bool = true) -> float:
 	if not count_option:
@@ -39,6 +49,9 @@ static func get_conditions_met(conditions: Dictionary[String, int]) -> int:
 			conditions_met += 1
 	return conditions_met
 
+static func meets_all_conditions(conditions: Dictionary[String, int]) -> int:
+	return get_conditions_met(conditions) == conditions.size()
+
 static func check_inventory(items: Array[Item]) -> bool:
 	for i in items:
 		if i not in file.inventory:
@@ -53,8 +66,9 @@ static func update_variables(vars: Dictionary[String, int]) -> void:
 	ResourceSaver.save(file)
 
 static func set_option(value: int) -> void:
-	file.vars["option"] = value
-	ResourceSaver.save(file)
+	if file.vars.get_or_add("option", -1) != value:
+		file.vars["option"] = value
+		ResourceSaver.save(file)
 
 static func append_item(items: Array[Item]) -> void:
 	for item in items:
@@ -71,7 +85,6 @@ static func set_last_pov(p_name: String) -> void:
 	ResourceSaver.save(file)
 
 static func get_last_pov() -> String:
-	# print("FILE.LAST_POV: ", file.last_pov)
 	return file.last_pov
 
 static func set_actions(amount: int) -> void:
@@ -83,13 +96,15 @@ static func get_actions() -> int:
 
 ## add a value to actions, negative or positive
 static func add_actions(amount: int) -> void:
-	print(get_actions() + amount)
 	set_actions(get_actions() + amount)
 
 static func set_max_actions(amount: int) -> void:
 	file._max_actions = max(0, amount)
 	file._actions = min(file._actions, file._max_actions)
 	ResourceSaver.save(file)
+
+static func get_var_value(key: String) -> int:
+	return file.vars.get_or_add(key, default_value)
 
 static func get_max_actions() -> int:
 	return file._max_actions
