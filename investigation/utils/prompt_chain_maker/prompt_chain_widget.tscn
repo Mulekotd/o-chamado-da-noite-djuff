@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://d3dyiv04e6brb"]
 
 [ext_resource type="Script" uid="uid://b3kolf0jkls77" path="res://investigation/utils/prompt_chain_maker/prompt_chain_widget.gd" id="1_brr2x"]
+[ext_resource type="Texture2D" uid="uid://dfhieb8u2m4g5" path="res://investigation/interface/images/prompt_chain_icon.png" id="3_gck0v"]
 [ext_resource type="Theme" uid="uid://cyq5khk20nbm6" path="res://themes/utils_theme.tres" id="999_utils_theme"]
 
 [node name="PromptChainWidget" type="MarginContainer" unique_id=1195115200 node_paths=PackedStringArray("load_file_dialog", "name_label", "edit_button")]
@@ -30,9 +31,15 @@ metadata/_edit_use_anchors_ = true
 
 [node name="NameLabel" type="Label" parent="HBoxContainer" unique_id=849846362]
 layout_mode = 2
+theme_override_font_sizes/font_size = 16
 
 [node name="EditButton" type="Button" parent="HBoxContainer" unique_id=355551648]
+custom_minimum_size = Vector2(148, 48)
 layout_mode = 2
+theme_override_font_sizes/font_size = 16
 text = "Editar/Criar"
+icon = ExtResource("3_gck0v")
+icon_alignment = 2
+expand_icon = true
 
 [connection signal="pressed" from="HBoxContainer/EditButton" to="." method="_on_edit_button_pressed"]
