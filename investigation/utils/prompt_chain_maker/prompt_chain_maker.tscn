@@ -5,7 +5,18 @@
 [ext_resource type="PackedScene" uid="uid://cqon0s8g52b2h" path="res://investigation/utils/prompt_chain_maker/prompt_image_widget.tscn" id="4_pcfx8"]
 [ext_resource type="Theme" uid="uid://cyq5khk20nbm6" path="res://themes/utils_theme.tres" id="999_utils_theme"]
 
-[node name="PromptChainMaker" type="Control" unique_id=750523266]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pcfx8"]
+content_margin_top = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 32
+border_width_right = 32
+border_width_bottom = 4
+border_color = Color(0, 0, 0, 0.5176471)
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+
+[node name="PromptChainMaker" type="Control" unique_id=750523266 node_paths=PackedStringArray("save_file_dialog", "load_file_dialog", "prompts_container", "default_prompt_image_widget", "name_line_edit", "end_of_prompts_indicator", "prompts_scroll_container")]
 z_index = 2
 layout_mode = 3
 anchors_preset = 15
@@ -17,6 +28,13 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("999_utils_theme")
 script = ExtResource("1_5ju4m")
+save_file_dialog = NodePath("SaveFileDialog")
+load_file_dialog = NodePath("LoadFileDialog")
+prompts_container = NodePath("VBoxContainer/VScrollBar/VBoxContainer/PromptsContainer")
+default_prompt_image_widget = NodePath("VBoxContainer/Container/HBoxContainer/ImagemContainer/DefaultPromptImageWidget")
+name_line_edit = NodePath("VBoxContainer/Container/HBoxContainer/NameLineEdit")
+end_of_prompts_indicator = NodePath("VBoxContainer/VScrollBar/VBoxContainer/EndOfPromptsIndicator")
+prompts_scroll_container = NodePath("VBoxContainer/VScrollBar")
 
 [node name="MovingNoiseWidget" parent="." unique_id=292722013 instance=ExtResource("3_pcfx8")]
 layout_mode = 1
@@ -90,9 +108,19 @@ text = "FECHAR"
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="PromptsContainer" type="VBoxContainer" parent="VBoxContainer/VScrollBar" unique_id=270195687]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/VScrollBar" unique_id=1061119338]
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PromptsContainer" type="VBoxContainer" parent="VBoxContainer/VScrollBar/VBoxContainer" unique_id=270195687]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="EndOfPromptsIndicator" type="Panel" parent="VBoxContainer/VScrollBar/VBoxContainer" unique_id=1597857540]
+custom_minimum_size = Vector2(0, 8.05)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pcfx8")
 
 [node name="AddButton" type="Button" parent="VBoxContainer" unique_id=1853169381]
 layout_mode = 2

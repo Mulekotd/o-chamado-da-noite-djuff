@@ -1,21 +1,28 @@
 extends Control
 
 const PROMPT_WIDGET = preload("uid://cjh18gp04aw2o")
-@onready var save_file_dialog: FileDialog = $SaveFileDialog
-@onready var load_file_dialog: FileDialog = $LoadFileDialog
-@onready var prompts_container: VBoxContainer = $VBoxContainer/VScrollBar/PromptsContainer
-@onready var default_prompt_image_widget: _PromptImageWidget = $VBoxContainer/Container/HBoxContainer/ImagemContainer/DefaultPromptImageWidget
-@onready var name_line_edit: LineEdit = $VBoxContainer/Container/HBoxContainer/NameLineEdit
+@export var save_file_dialog: FileDialog
+@export var load_file_dialog: FileDialog
+@export var prompts_container: VBoxContainer
+@export var default_prompt_image_widget: _PromptImageWidget
+@export var name_line_edit: LineEdit
+@export var end_of_prompts_indicator : Control
+@export var prompts_scroll_container : ScrollContainer
+
+var prompt_buffer : Array[Prompt] = []
+
+func _process(delta: float) -> void:
+	if is_end_visible():
+		if prompt_buffer:
+			add_prompt(prompt_buffer.pop_front())
 
 func load_prompt_chain(p_chain: PromptChain) -> void:
 	clear_prompt_chain()
+	prompt_buffer.clear()
 	name_line_edit.clear()
 	name_line_edit.text = p_chain.name
 	default_prompt_image_widget.load_img(p_chain.default_image)
-	for p in p_chain.prompts:
-		await get_tree().process_frame
-		add_prompt(p)
-	_update_prompt_indexes()
+	prompt_buffer = p_chain.prompts.duplicate()
 
 func save_prompt_chain(path: String) -> void:
 	var p_chain := parse_prompt_chain()
@@ -28,6 +35,7 @@ func parse_prompt_chain() -> PromptChain:
 	for w in prompts_container.get_children():
 		if w.is_in_group("prompt_widget"):
 			p_chain.prompts.append(w.parse_prompt())
+	p_chain.prompts.append_array(prompt_buffer)
 	return p_chain
 
 func add_prompt(p: Prompt) -> void:
@@ -71,6 +79,13 @@ func clear_prompt_chain() -> void:
 		if w.is_in_group("prompt_widget"):
 			w.queue_free()
 
+## returns rather the end of the prompt container is visible (i.e. if more should be loaded)
+func is_end_visible() -> bool:
+	if end_of_prompts_indicator.global_position.y <=\
+	prompts_scroll_container.global_position.y + prompts_scroll_container.size.y:
+		return true
+	return false
+
 func _on_save_button_pressed() -> void:
 	save_file_dialog.popup()
 
@@ -87,14 +102,13 @@ func _on_save_file_dialog_file_selected(path: String) -> void:
 	save_prompt_chain(path)
 
 func _on_add_button_pressed() -> void:
-	add_prompt(Prompt.new())
+	prompt_buffer.append(Prompt.new())
 
 signal closed(p_chain: PromptChain)
 func _on_close_button_pressed() -> void:
 	closed.emit(parse_prompt_chain())
 	await get_tree().process_frame
 	queue_free()
-
 
 func _on_cancel_button_pressed() -> void:
 	queue_free()
