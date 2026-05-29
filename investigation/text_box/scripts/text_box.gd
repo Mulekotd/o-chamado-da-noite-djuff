@@ -10,11 +10,13 @@ signal letter_sound_requested(sound: AudioStream)
 signal displayed_prompt(chain_id: int, prompt: Prompt)
 signal chain_added(chain_id: int, chain: PromptChain)
 signal actions_used(actions: int)
+signal prompt_advanced()
 
 var prompt_queue : Array[Prompt]
 var stand_by : bool = true :
 	set(x):
 		stand_by = x
+		#InvestigationVars.set_option(-1)
 		stand_by_changed.emit(x)
 var is_writing : bool = false
 var is_mouse_inside : bool = false
@@ -28,6 +30,8 @@ var chain_buffer : Dictionary[int, PromptChain]
 @export var write_time_max : float = 0.05
 @export var write_time_comma : float = 0.2
 @export var write_time_dot : float = 0.75
+
+var enabled : bool = true
 
 func _ready() -> void:
 	clear_box()
@@ -52,10 +56,16 @@ func _process(_delta: float) -> void:
 	is_mouse_inside))) and prompt_queue.size():
 		if _has_visible_options(prompt_queue[0]) == 0 and !is_writing:
 			next_prompt(-1)
+			await get_tree().process_frame
+			prompt_advanced.emit()
 		else:
 			wants_to_advance = true
 	if stand_by:
 		wants_to_advance = false
+
+func _wait_till_enabled() -> void:
+	while not enabled:
+		await get_tree().process_frame
 
 func clear_buttons() -> void:
 	for n in options_container.get_children():
@@ -108,11 +118,11 @@ func _insert_prompt_chain_from_index(prompt_chain: PromptChain, start_index: int
 			display_prompt()
 
 func display_prompt() -> void:
+	_wait_till_enabled()
 	is_writing = true
 	stand_by = false
 	main_text.clear()
 	var current_prompt := prompt_queue[0]
-	#print("ADVANCED PROMPT")
 	displayed_prompt.emit(prompt_queue[0].chain_id, current_prompt)
 	# Typewriter effect; can be fast-forwarded by player input.
 	for c in prompt_queue[0].text:
@@ -143,9 +153,9 @@ func display_prompt() -> void:
 	var i : int = 0
 	var options := 0
 	for option in prompt_queue[0].options:
-		if InvestigationVars.get_conditions_met(option.conditions) and\
+		if InvestigationVars.get_conditions_value(option.conditions) != -1 and\
 		InvestigationVars.check_inventory(option.necessary_items) and\
-		option.actions <= InvestigationVars.get_actions() if option.actions else true:
+		(option.actions <= InvestigationVars.get_actions() if option.actions else true):
 			var b := TextBoxButton.new()
 			b.text = option.text
 			b.actions = option.actions
@@ -168,6 +178,7 @@ func _insert_chain_to_front(pc: PromptChain, start_index: int) -> void:
 
 signal pov_entered(p: String)
 func next_prompt(cond: int, can_end_chain: bool = true) -> void:
+	_wait_till_enabled()
 	if prompt_queue.is_empty():
 		clear_box()
 		skip_chain_id = -1
@@ -217,7 +228,7 @@ func _on_mouse_exited() -> void:
 
 func _is_prompt_valid(prompt: Prompt, cond: int) -> bool:
 	# Shared prompt gate used by both first-display and next-prompt flows.
-	if InvestigationVars.get_conditions_met(prompt.global_conditions) == 0:
+	if InvestigationVars.get_conditions_value(prompt.global_conditions) == -1:
 		return false
 	if !InvestigationVars.check_inventory(prompt.necessary_items):
 		return false

@@ -7,13 +7,13 @@
 [resource]
 script = ExtResource("3_nj77k")
 vars = Dictionary[String, int]({
-"deu chave": 1,
-"esta_em_casa": 0,
 "luz_da_sala_ligada": 0,
-"option": 4,
-"porta_destrancada": 1,
-"surpreso com a porta": 1
+"option": 0,
+"tv_code_found": 0,
+"tv_code_found_surprised": 1,
+"tv_on": 1
 })
+inventory = Array[ExtResource("1_2u1gg")]([ExtResource("2_p848r"), ExtResource("2_p848r")])
 _actions = 0
-last_pov = "porta"
+last_pov = "sala"
 metadata/_custom_type_script = "uid://47pf0lrk86x5"

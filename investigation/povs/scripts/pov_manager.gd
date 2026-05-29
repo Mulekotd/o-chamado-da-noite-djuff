@@ -24,6 +24,7 @@ var current_pov : Pov
 var enabled : bool = true :
 	set(x):
 		enabled = x
+		print("set enabled: ", x)
 		if enabled:
 			_pan_locked = false
 		update_arrows()
@@ -45,6 +46,7 @@ var enabled : bool = true :
 var _view_base_pos : Vector2
 var _pan_locked : bool = false
 var _is_transitioning : bool = false
+var _on_puzzle_pov : bool = false
 
 func _ready() -> void:
 	_sync_view_base_pos()
@@ -58,15 +60,15 @@ func _notification(what: int) -> void:
 func _process(_delta: float) -> void:
 	_update_view_pan(_delta)
 
-func change_pov(index: int) -> void:
-	pov_index = index
-	current_pov = pov_level.pov_directions_array[index].pov
+func change_pov(pov: Pov) -> void:
+	current_pov = pov
+	_on_puzzle_pov = pov is PuzzlePov
 	update_view(current_pov)
 	_save_last_pov(current_pov.name)
-	if current_pov.prompt_chain.prompts:
-		# print(current_pov.name)
+	if _has_any_valid_prompt(current_pov.prompt_chain):
 		# Pause navigation while the POV's prompt chain is displayed.
 		enabled = false
+		print("disabled because prompt chain in ",current_pov.name)
 		await get_tree().create_timer(prompt_wait_time).timeout
 		prompt_chain_called.emit(current_pov.prompt_chain)
 	if current_pov.especial_behaviour:
@@ -80,28 +82,49 @@ func change_pov(index: int) -> void:
 		add_sibling(n)
 	
 func change_pov_by_name(pov_name: String) -> void:
-	change_pov(get_pov_index(pov_name))
-	
-func update_view(pov: Pov) -> void:
+	change_pov(get_pov(pov_name))
+
+func get_all_povs() -> Array[Pov]:
+	var povs : Array[Pov] = []
+	for dir in pov_level.pov_directions_array:
+		if dir.pov:
+			povs.append(dir.pov)
+	for p in pov_level.puzzle_povs:
+		povs.append(p)
+	return povs
+
+func get_pov_directions(pov: Pov) -> PovDirections:
+	for dir in pov_level.pov_directions_array:
+		if dir.pov == pov:
+			return dir
+	return null
+
+func update_view(pov: Pov = current_pov) -> void:
 	var img : Texture2D
 	var highest := -1
 	var x := -1
 	for pi in pov.images:
 		x = InvestigationVars.get_conditions_value(pi.conditions)
-		#print(pi.conditions, x)
 		if x > highest:
 			highest = x
 			img = pi.texture
 	view.texture = img
 	update_arrows()
+	if _on_puzzle_pov:
+		pass # call function to spawn digits and shit
 
 func update_arrows() -> void:
-	var pov_direction := pov_level.pov_directions_array[pov_index]
-	_configure_arrow(left_arrow, LEFT_ARROW, pov_direction.left, Vector2.LEFT)
-	_configure_arrow(top_arrow, TOP_ARROW, pov_direction.top, Vector2.UP)
-	_configure_arrow(right_arrow, RIGHT_ARROW, pov_direction.right, Vector2.RIGHT)
-	# Bottom arrow backs out, so the slide direction is inverted.
-	_configure_arrow(bottom_arrow, BOTTOM_ARROW, pov_direction.bottom, Vector2.UP)
+	if not _on_puzzle_pov:
+		var dir := get_pov_directions(current_pov)
+		_configure_arrow(left_arrow, LEFT_ARROW, dir.left, Vector2.LEFT)
+		_configure_arrow(top_arrow, TOP_ARROW, dir.top, Vector2.UP)
+		_configure_arrow(right_arrow, RIGHT_ARROW, dir.right, Vector2.RIGHT)
+		_configure_arrow(bottom_arrow, BOTTOM_ARROW, dir.bottom, Vector2.UP) # animation backs out
+	else:
+		_configure_arrow(left_arrow, LEFT_ARROW, "", Vector2.LEFT) # clear
+		_configure_arrow(top_arrow, TOP_ARROW, "", Vector2.UP) # clear
+		_configure_arrow(right_arrow, RIGHT_ARROW, "", Vector2.RIGHT) # clear
+		_configure_arrow(bottom_arrow, BOTTOM_ARROW, current_pov.back_pov, Vector2.UP)
 
 func _configure_arrow(arrow: TextureRect, arrow_texture: Texture2D, target_pov: String, direction: Vector2) -> void:
 	# Avoid duplicate gui_input callbacks when changing POV multiple times.
@@ -113,41 +136,38 @@ func _configure_arrow(arrow: TextureRect, arrow_texture: Texture2D, target_pov: 
 	arrow.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	
 	if target_pov and enabled:
-		var target_index := get_pov_index(target_pov)
-		if target_index != -1:
-			arrow.gui_input.connect(_on_arrow_gui_input.bind(target_index, direction))
+		var p := get_pov(target_pov)
+		if p:
+			arrow.gui_input.connect(_on_arrow_gui_input.bind(p, direction))
 			arrow.texture = arrow_texture
 			arrow.visible = true
 			arrow.mouse_filter = Control.MOUSE_FILTER_STOP
 
-func _on_arrow_gui_input(event: InputEvent, index: int, direction: Vector2) -> void:
+func _on_arrow_gui_input(event: InputEvent, pov: Pov, direction: Vector2) -> void:
 	if event is InputEventMouseButton and\
 	event.button_index == MOUSE_BUTTON_LEFT and\
 	event.pressed and\
 	enabled:
-		await _transition_to_pov(index, direction)
+		await _transition_to_pov(pov, direction)
 
 ## returns the first index of the pov direction in the pov_level that has this pov as it's mains pov and has the highest conditions value
-func get_pov_index(name: String) -> int:
+func get_pov(name: String) -> Pov:
 	var i := 0
 	## highest conditions value yet
 	var highest_value : float = -1
 	## the most suitable pov
-	var considered_pov : int = -1
+	var considered_pov : Pov = null
 	## current conditions value
 	var x : float = -1
-	for dir in pov_level.pov_directions_array:
-		if dir.pov.name == name:
-			x = InvestigationVars.get_conditions_value(dir.pov.global_conditions)
-			# print("NAME: %s, CondVal: %f" % [name, x])
+	for p in get_all_povs():
+		if p.name == name:
+			x = InvestigationVars.get_conditions_value(p.global_conditions)
 			if x > highest_value:
 				highest_value = x
-				considered_pov = i
-		i += 1
+				considered_pov = p
 	return considered_pov
 
 func _save_last_pov(p_name: String) -> void:
-	# print("salvou: ", p_name)
 	InvestigationVars.set_last_pov(p_name)
 
 ## gets the first found element in the relative position [0, 1]. returns null if none found
@@ -172,13 +192,11 @@ func _get_elements_in_pos(pos: Vector2) -> Array[Element]:
 	return elements
 
 func _load_last_pov() -> void:
-	# print("tentando achar: ",InvestigationVars.get_last_pov() )
-	if get_pov_index(InvestigationVars.get_last_pov()) != -1:
-		# print("achou last pov: ", InvestigationVars.get_last_pov())
-		change_pov(get_pov_index(InvestigationVars.get_last_pov()))
+	var p := get_pov(InvestigationVars.get_last_pov())
+	if p:
+		change_pov(p)
 	else:
-		# print("nao achou, carregando default.")
-		change_pov(get_pov_index(pov_level.default_pov))
+		change_pov(get_pov(pov_level.default_pov))
 
 func _update_cursor() -> void:
 	# Cursor feedback changes based on enabled state and hitbox hover.
@@ -219,9 +237,9 @@ func _on_gui_input(_event: InputEvent) -> void:
 			update_view(current_pov)
 		if e.pov_name:
 			_pan_locked = true
-			var target_index := get_pov_index(e.pov_name)
-			if target_index != -1:
-				await _transition_to_pov(target_index, Vector2.ZERO)
+			var target_pov := get_pov(e.pov_name)
+			if target_pov:
+				await _transition_to_pov(target_pov, Vector2.ZERO)
 			else:
 				change_pov_by_name(e.pov_name)
 		else:
@@ -274,16 +292,17 @@ func _get_mouse_relative_to_view() -> Vector2:
 		(mouse_pos.y - view.position.y) / view_size.y
 	)
 
-func _transition_to_pov(index: int, direction: Vector2) -> void:
+func _transition_to_pov(pov: Pov, direction: Vector2) -> void:
 	if _is_transitioning:
 		return
 	if view == null:
-		change_pov(index)
+		change_pov(pov)
 		return
 	_is_transitioning = true
 	_pan_locked = true
 	var was_enabled := enabled
 	enabled = false
+	print("disabled because pov transition")
 	pov_entered.emit()
 
 	var dir := direction.normalized()
@@ -303,7 +322,7 @@ func _transition_to_pov(index: int, direction: Vector2) -> void:
 	view.modulate = Color(0, 0, 0, 1)
 	if shadow_panel:
 		shadow_panel.modulate = Color(0, 0, 0, 1)
-	change_pov(index)
+	change_pov(pov)
 
 	# Slide in and fade back to white for the new POV.
 	tween = create_tween()
@@ -315,9 +334,16 @@ func _transition_to_pov(index: int, direction: Vector2) -> void:
 
 	_is_transitioning = false
 	_pan_locked = false
-	if was_enabled and enabled == false and !current_pov.prompt_chain.prompts:
+	if was_enabled and enabled == false and not _has_any_valid_prompt(current_pov.prompt_chain):
 		enabled = true
 	_reset_shadow_panel()
+
+func _has_any_valid_prompt(p_chain : PromptChain) -> bool:
+	for p : Prompt in p_chain.prompts:
+		if InvestigationVars.get_conditions_value(p.global_conditions) != -1:
+			print("true em \"", p.text, "\"")
+			return true
+	return false
 
 func _reset_shadow_panel() -> void:
 	if shadow_panel:

@@ -2,8 +2,6 @@ class_name InvestigationVars extends Resource
 
 ## vars are int for utility, use 0 and 1 if you want boolean behaviour
 @export var vars : Dictionary[String, int] = {
-	"test_var": 1,
-	"door_unlocked": 0,
 	"option": -1,
 }
 
@@ -24,7 +22,9 @@ static var default_value : int = 0
 static var file : InvestigationVars = load("res://investigation/investigation_variables.tres")
 
 ## returns int(number-of-conditions-met / number-of-keys-given) * number-of-keys-given - 1
-static func get_conditions_value(conditions: Dictionary[String, int]) -> float:
+static func get_conditions_value(conditions: Dictionary[String, int], count_option : bool = true) -> float:
+	if not count_option:
+		conditions.erase("option")
 	var len : int = len(conditions.keys())
 	if len == 0: return 0
 	var conditions_met : int = get_conditions_met(conditions)

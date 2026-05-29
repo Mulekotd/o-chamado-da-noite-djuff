@@ -7,9 +7,12 @@ extends Control
 @onready var eye_sprite_2d: AnimatedSprite2D = $EyeSprite2D
 @onready var actions_manager: ActionsManager = $ActionsManager
 @onready var clock: _Clock = $Clock
+@onready var moving_noise_overlay: _MovingNoiseWidget = $MovingNoiseOverlay
 
 const USED_ACTION_SOUND = preload("uid://bfamn2x4funyi")
 const NO_MORE_ACTIONS_SOUND = preload("uid://c5hv7vps3lut6")
+
+signal done_showing_clock
 
 ## Tracks prompt chains so letter sounds can follow the active chain order.
 var chain_id_queue : Array[int]
@@ -36,6 +39,7 @@ func _ready() -> void:
 	text_box.displayed_prompt.connect(_update_person_display)
 	text_box.chain_added.connect(_append_prompt_chain_sound)
 	text_box.actions_used.connect(_use_actions)
+	text_box.prompt_advanced.connect(pov_manager.update_view)
 	
 	clock.modulate = Color(0,0,0,0)
 
@@ -57,17 +61,21 @@ func _clear_person_display(stand_by: bool) -> void:
 		person_display.clear_img()
 
 func _use_actions(actions: int) -> void:
+	text_box.enabled = false
 	InvestigationVars.add_actions(-actions)
 	actions_manager.actions = InvestigationVars.get_actions()
 	sound_manager.play_poly_sound(USED_ACTION_SOUND)
 	_show_clock()
+	await done_showing_clock
+	text_box.enabled = true
 
 func _update_sound_manager_letter_sounds(chain_id: int, prompt: Prompt) -> void:
 	# print("UPDATE SOUND MANAGER LETTER SOUNDS: ", chain_id)
 	# Keep the chain queue aligned with the prompt being displayed.
 	while chain_id_queue[0] != chain_id:
 		chain_id_queue.pop_front()
-		prompt_chain_queue.pop_front()
+		if prompt_chain_queue:
+			prompt_chain_queue.pop_front()
 	if !chain_id_queue: 
 		return
 	if prompt.letter_sound:
@@ -82,17 +90,25 @@ func _show_clock() -> void:
 	_update_clock()
 	clock.modulate = Color(1,1,1,1)
 	clock.visible = true
+	moving_noise_overlay.modulate = Color(1,1,1,1)
+	moving_noise_overlay.visible = true
 	if (InvestigationVars.get_actions()):
 		await get_tree().create_timer(clock_display_duration).timeout
-		var tween := get_tree().create_tween()
+		var tween : Tween 
 		# turn clock invisible by fade out
+		tween = get_tree().create_tween()
 		tween.tween_property(clock, "modulate", Color(0,0,0,0), clock_fade_duration)
+		# turn moving noise invisible by fade out
+		tween = get_tree().create_tween()
+		tween.tween_property(moving_noise_overlay,  "modulate", Color(0,0,0,0), clock_fade_duration)
+		# done
 		await tween.finished
 	else:
 		await get_tree().create_timer(clock_display_duration).timeout
 		sound_manager.play_poly_sound(NO_MORE_ACTIONS_SOUND)
-		var tween := get_tree().create_tween()
+		var tween : Tween 
 		# slow down clock
+		tween = get_tree().create_tween()
 		tween.tween_property(clock, "speed", 0, 1.4).set_ease(Tween.EASE_IN)
 		await tween.finished
 		# blow clock
@@ -101,9 +117,15 @@ func _show_clock() -> void:
 		# turn clock invisible by fade out
 		tween = get_tree().create_tween()
 		tween.tween_property(clock, "modulate", Color(0,0,1,0), clock_fade_duration)
+		# turn moving noise invisible by fade out
+		tween = get_tree().create_tween()
+		tween.tween_property(moving_noise_overlay,  "modulate", Color(0,0,0,0), clock_fade_duration)
+		# done
 		await tween.finished
 		
 	clock.visible = false
+	moving_noise_overlay.visible = false
+	done_showing_clock.emit()
 
 func _update_clock() -> void:
 	var factor : float = float(InvestigationVars.get_actions()) / InvestigationVars.get_max_actions()
