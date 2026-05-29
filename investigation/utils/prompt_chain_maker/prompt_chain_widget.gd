@@ -7,9 +7,16 @@ const PROMPT_CHAIN_MAKER = preload("uid://sde7emoawly0")
 
 var prompt_chain : PromptChain
 
+func update_button_text() -> void:
+	if prompt_chain.prompts or prompt_chain.name:
+		edit_button.text = "Editar"
+	else:
+		edit_button.text = "Criar"
+
 func load_prompt_chain(p_chain: PromptChain) -> void:
 	prompt_chain = p_chain
 	name_label.text = prompt_chain.name
+	update_button_text()
 
 func load_prompt_chain_file(path: String) -> void:
 	var p_chain := load(path)
