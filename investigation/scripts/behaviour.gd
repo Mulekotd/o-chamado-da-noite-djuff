@@ -9,4 +9,4 @@ func _physics_process(delta: float) -> void:
 	alive_signal()
 
 func alive_signal() -> void:
-	# print("ISSO EH UM BEHAVIOUR")
+	pass# print("ISSO EH UM BEHAVIOUR")

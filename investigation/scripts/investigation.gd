@@ -76,7 +76,7 @@ func _update_sound_manager_letter_sounds(chain_id: int, prompt: Prompt) -> void:
 	# Keep the chain queue aligned with the prompt being displayed.
 	while chain_id_queue[0] != chain_id:
 		chain_id_queue.pop_front()
-		if prompt_chain_queue:
+		if not prompt_chain_queue.is_empty():
 			prompt_chain_queue.pop_front()
 	if !chain_id_queue: 
 		return

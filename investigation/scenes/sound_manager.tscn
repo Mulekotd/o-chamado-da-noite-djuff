@@ -11,8 +11,11 @@ script = ExtResource("1_a88hy")
 
 [node name="PolyAudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1514236591]
 max_polyphony = 10
-bus = &"Investigation"
+bus = &"Sfx"
 
 [node name="LetterAudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1011006246]
 stream = SubResource("AudioStreamRandomizer_mi61x")
-bus = &"Investigation"
+bus = &"Letter Sounds"
+
+[node name="MusicStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=2024365143]
+bus = &"Music"

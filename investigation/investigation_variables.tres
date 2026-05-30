@@ -8,11 +8,18 @@
 script = ExtResource("3_nj77k")
 vars = Dictionary[String, int]({
 "deu chave": 1,
-"luz_da_sala_ligada": 0,
+"luz_da_sala_ligada": 1,
 "option": -1,
-"porta_destrancada": 0
+"porta_destrancada": 1,
+"surpreso com a porta": 1,
+"televisao_puzzle_pp_digit_0": 7,
+"televisao_puzzle_pp_digit_1": 7,
+"televisao_puzzle_pp_digit_2": 6,
+"televisao_puzzle_pp_digit_3": 7,
+"tv_code_found": 1,
+"tv_code_found_surprised": 0,
+"tv_on": 1
 })
-inventory = Array[ExtResource("1_2u1gg")]([ExtResource("2_p848r"), ExtResource("2_p848r"), ExtResource("2_p848r"), ExtResource("2_p848r"), ExtResource("2_p848r"), ExtResource("2_p848r"), ExtResource("2_p848r"), ExtResource("2_p848r"), ExtResource("2_p848r"), ExtResource("2_p848r"), ExtResource("2_p848r"), ExtResource("2_p848r"), ExtResource("2_p848r"), ExtResource("2_p848r"), ExtResource("2_p848r"), ExtResource("2_p848r"), ExtResource("2_p848r"), ExtResource("2_p848r"), ExtResource("2_p848r")])
-_actions = 0
-last_pov = "sala"
+_actions = 1
+last_pov = "porta"
 metadata/_custom_type_script = "uid://47pf0lrk86x5"
