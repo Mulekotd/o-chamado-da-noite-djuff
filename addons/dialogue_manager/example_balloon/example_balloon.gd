@@ -127,7 +127,7 @@ func apply_dialogue_line() -> void:
 
 	progress.hide()
 	is_waiting_for_input = false
-	balloon.focus_mode = Control.FOCUS_ALL
+	balloon.focus_mode = Control.FOCUS_ALL 
 	balloon.grab_focus()
 
 	character_label.visible = not dialogue_line.character.is_empty()
