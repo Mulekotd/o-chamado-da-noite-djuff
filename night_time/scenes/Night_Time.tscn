@@ -220,11 +220,8 @@ z_index = 1
 position = Vector2(512, 383)
 
 [node name="Camera" type="Camera2D" parent="Player" unique_id=651151876]
-zoom = Vector2(1.3, 1.3)
 
 [node name="ItemHud" parent="Player/Camera" unique_id=802371957 instance=ExtResource("1_sk2b0")]
-offset = Vector2(450, 700)
-transform = Transform2D(1, 0, 0, 1, 450, 700)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1358543157]
 scale = Vector2(5, 5)

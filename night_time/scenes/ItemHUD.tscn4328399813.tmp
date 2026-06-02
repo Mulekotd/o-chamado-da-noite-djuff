@@ -9,17 +9,8 @@
 script = ExtResource("1_kknbl")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1365431310]
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 2.0
-offset_top = -68.0
-offset_right = 2.0
-offset_bottom = -6.0
-grow_horizontal = 2
-grow_vertical = 0
-size_flags_vertical = 4
+offset_right = 40.0
+offset_bottom = 40.0
 theme_override_constants/separation = 20
 alignment = 1
 
@@ -30,25 +21,25 @@ expand_mode = 2
 
 [node name="SelectionRing" type="TextureRect" parent="HBoxContainer/Item0" unique_id=2127197594]
 layout_mode = 0
-offset_right = 68.0
-offset_bottom = 62.0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="Item1" type="TextureRect" parent="HBoxContainer" unique_id=404666404]
 layout_mode = 2
 texture = ExtResource("4_matax")
 expand_mode = 2
 
-[node name="SelectionRing" type="TextureRect" parent="HBoxContainer/Item1" unique_id=668796969]
+[node name="SelectionRing" type="TextureRect" parent="HBoxContainer/Item1" unique_id=291376232]
 layout_mode = 0
-offset_right = 68.0
-offset_bottom = 62.0
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="Item2" type="TextureRect" parent="HBoxContainer" unique_id=1556168062]
 layout_mode = 2
 texture = ExtResource("2_kknbl")
 expand_mode = 2
 
-[node name="SelectionRing" type="TextureRect" parent="HBoxContainer/Item2" unique_id=1823570438]
+[node name="SelectionRing" type="TextureRect" parent="HBoxContainer/Item2" unique_id=655578407]
 layout_mode = 0
-offset_right = 68.0
-offset_bottom = 62.0
+offset_right = 40.0
+offset_bottom = 40.0
