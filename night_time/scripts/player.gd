@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+signal item_changed(new_index: int)
+var current_item_index: int = 0
 
 enum MovementStatus {
 	IDLE,
@@ -82,10 +84,16 @@ func handle_input() -> void:
 	if current_action_state != ActionStatus.SHOOTING and current_action_state != ActionStatus.SLICING:
 		if Input.is_key_pressed(KEY_1): # Map to "1" key
 			current_action_state = ActionStatus.HOLDING_GUN
+			current_item_index = 0
+			item_changed.emit(current_item_index)
 		elif Input.is_key_pressed(KEY_2): # Map to "2" key
 			current_action_state = ActionStatus.HOLDING_KNIFE
+			current_item_index = 1
+			item_changed.emit(current_item_index)
 		elif Input.is_key_pressed(KEY_3): # Map to "3" key
 			current_action_state = ActionStatus.IDLE
+			current_item_index = 2
+			item_changed.emit(current_item_index)
 
 	# 3. Handle Combat/Attack Inputs
 	if Input.is_action_just_pressed("shoot"):

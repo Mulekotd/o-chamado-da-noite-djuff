@@ -6,7 +6,6 @@ func _physics_process(delta):
 	position += transform.x * speed * delta
 
 func _on_body_entered(body):
-	print("ON BODY ENTERED")
 	if body.has_method("take_damage"):
 		body.take_damage()
 	
