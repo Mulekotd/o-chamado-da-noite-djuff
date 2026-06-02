@@ -1,5 +1,8 @@
 extends CanvasLayer
 
+# Preload the red circle asset once to save performance
+const RED_CIRCLE_TEXTURE = preload("res://night_time/assets/red_circle.png")
+
 @onready var slots = [
 	$HBoxContainer/Item0,
 	$HBoxContainer/Item1,
@@ -18,11 +21,22 @@ func set_selected_slot(new_index: int) -> void:
 	# Safety check to keep the index within bounds
 	if new_index < 0 or new_index >= slots.size():
 		return 
-		
+
 	for i in range(slots.size()):
+		# Safely grab the SelectionRing node inside the slot
+		var ring_node = slots[i].get_node_or_null("SelectionRing") as TextureRect
+		
 		if i == new_index:
 			slots[i].modulate = ACTIVE_COLOR
 			slots[i].scale = Vector2(1.1, 1.1)
+			
+			# Assign the red circle texture to show it
+			if ring_node:
+				ring_node.texture = RED_CIRCLE_TEXTURE
 		else:
 			slots[i].modulate = INACTIVE_COLOR
 			slots[i].scale = Vector2(1.0, 1.0)
+			
+			# Clear the texture to hide it
+			if ring_node:
+				ring_node.texture = null
