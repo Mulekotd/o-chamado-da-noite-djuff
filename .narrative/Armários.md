@@ -1,3 +1,4 @@
 Opções:
-[[Fuçar armários]]
-[[Gaveta de talheres]]
+[[Armário Direita Cima]]
+[[Armário Esquerda Cima]]
+[[Gavetas]]

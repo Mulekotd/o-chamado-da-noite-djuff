@@ -2,7 +2,7 @@
 ![[Captura de tela 2026-04-22 210601.png|500]]
 
 Opções:
-- [[Fogão]]
-- [[Geladeira]]
-- [[Panelas]]
-- [[Armários]]
+- [[Fogão]] OK
+- [[Geladeira]] OK
+- [[Panelas]] OK
+- [[Armários]] OK

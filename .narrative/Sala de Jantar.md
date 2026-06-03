@@ -4,6 +4,6 @@
 ![[Captura de tela 2026-04-22 210708.png|419]]
 
 Opções:
-[[Planta]]
-[[Mesa]]
-[[Cadeira]]
+[[Planta]] OK
+[[Mesa]] OK
+[[Cadeira]] OK
