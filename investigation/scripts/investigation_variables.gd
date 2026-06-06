@@ -8,6 +8,7 @@ func clear_everything() -> void:
 	file.inventory.clear()
 	file.set_actions(get_max_actions())
 	file.last_pov = ""
+	file.add_actions(-file._actions)
 	
 ## vars are int for utility, use 0 and 1 if you want boolean behaviour
 @export var vars : Dictionary[String, int] = {
@@ -22,6 +23,9 @@ func clear_everything() -> void:
 @export var _max_actions : int = 5
 ## how many actions the player has
 @export var _actions : int = _max_actions
+
+## points that influence how much insight the character has about the investigation
+@export var _investigation_points : int = 0
 
 @export var last_pov : String
 
@@ -111,3 +115,10 @@ static func get_max_actions() -> int:
 
 static func get_inventory() -> Array[Item]:
 	return file.inventory
+
+static func get_investigation_points() -> int:
+	return file._investigation_points
+
+static func add_investigation_points(amount: int) -> void:
+	file._investigation_points = max(0, file._investigation_points + amount)
+	ResourceSaver.save(file)

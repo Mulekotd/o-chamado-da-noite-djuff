@@ -3,8 +3,9 @@ class_name _OptionWidget extends PanelContainer
 @export var text_edit: TextEdit
 @export var conditions_widget: _ConditionsWidget
 @export var necessary_items_widget: _ItemsWidget
-@export var actions_spin_box: SpinBox
 @export var index_label: Label
+@export var actions_spin_box: SpinBox
+@export var investigation_points_spin_box: SpinBox
 
 func get_option() -> Option:
 	var o : Option = Option.new()
@@ -12,6 +13,7 @@ func get_option() -> Option:
 	o.conditions = conditions_widget.parse_conditions()
 	o.necessary_items = necessary_items_widget.items
 	o.actions = actions_spin_box.value
+	o.investigation_points = investigation_points_spin_box.value
 	return o
 
 func load_option(o: Option) -> void:
@@ -19,6 +21,7 @@ func load_option(o: Option) -> void:
 	conditions_widget.add_conditions(o.conditions)
 	necessary_items_widget.add_items(o.necessary_items)
 	actions_spin_box.value = o.actions
+	investigation_points_spin_box.value = o.investigation_points
 
 func set_index(index: int):
 	if index >= 0:

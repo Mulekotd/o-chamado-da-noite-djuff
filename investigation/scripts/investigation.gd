@@ -43,8 +43,11 @@ func _ready() -> void:
 	text_box.prompt_advanced.connect(_on_prompt_advanced)
 	text_box.items_added.connect(inventory.add_items)
 	text_box.items_removed.connect(inventory.remove_items)
+	text_box.investigation_points_added.connect(_add_investigation_points)
 	
 	clock.modulate = Color(0,0,0,0)
+	
+	sound_manager.play_soundtrack(preload("uid://cv1ok2itg5os8"))
 
 var elapsed : int = 0
 var advances : int = 0
@@ -148,3 +151,7 @@ func _on_prompt_advanced() -> void:
 		pov_manager.change_pov(pov_manager.current_pov)
 	else:
 		pov_manager.update_view()
+
+func _add_investigation_points(points: int) -> void:
+	InvestigationVars.add_investigation_points(points)
+	#print("%d investigation poins added." % [points])

@@ -15,7 +15,7 @@ func _ready() -> void:
 	poly_player.play()
 	letter_stream = letter_player.stream
 	
-	play_soundtrack(preload("uid://cv1ok2itg5os8"))
+	#play_soundtrack(preload("uid://cv1ok2itg5os8"))
 
 func load_letter_sounds(sounds: Array) -> void:
 	while letter_stream.streams_count:

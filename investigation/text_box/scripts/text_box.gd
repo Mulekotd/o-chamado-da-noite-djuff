@@ -10,6 +10,7 @@ signal letter_sound_requested(sound: AudioStream)
 signal displayed_prompt(chain_id: int, prompt: Prompt)
 signal chain_added(chain_id: int, chain: PromptChain)
 signal actions_used(actions: int)
+signal investigation_points_added(points: int)
 signal prompt_advanced()
 signal items_added(item: Array[Item])
 signal items_removed(item: Array[Item])
@@ -163,9 +164,11 @@ func display_prompt() -> void:
 			var b := TextBoxButton.new()
 			b.text = option.text
 			b.actions = option.actions
-			if (option.actions):
+			if option.actions:
 				b.text = b.text + " [-%d AÇÃO]" % option.actions
 				b.connect("button_down", actions_used.emit.bind(option.actions))
+			if option.investigation_points:
+				b.connect("button_down", investigation_points_added.emit.bind(option.investigation_points))
 			var name := "button_option_text_%d" % i
 			b.name = name
 			options_container.add_child(b)
@@ -221,7 +224,7 @@ func next_prompt(cond: int, can_end_chain: bool = true) -> void:
 			if prompt_queue[0].pre_sound:
 				prompt_sound_requested.emit(prompt_queue[0].pre_sound)
 			# check if this prompt's id is different than the last
-			print("last chain id: %d, new one: %d" % [last_chain_id, prompt_queue[0].chain_id])
+			#print("last chain id: %d, new one: %d" % [last_chain_id, prompt_queue[0].chain_id])
 			#if prompt_queue[0].chain_id != last_chain_id:
 				#print("new chain, setting 'options' to -1")
 				#InvestigationVars.set_option(-1)

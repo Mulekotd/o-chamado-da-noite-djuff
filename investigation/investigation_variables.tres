@@ -1,25 +1,11 @@
-[gd_resource type="Resource" script_class="InvestigationVars" format=3]
+[gd_resource type="Resource" script_class="InvestigationVars" format=3 uid="uid://btqopcxp8kavd"]
 
-[ext_resource type="Script" path="res://investigation/items/scripts/item_resource.gd" id="1_2u1gg"]
-[ext_resource type="Resource" path="res://investigation/items/test_key/test_key.tres" id="2_p848r"]
-[ext_resource type="Script" path="res://investigation/scripts/investigation_variables.gd" id="3_nj77k"]
+[ext_resource type="Script" uid="uid://dqj183h8d13hn" path="res://investigation/items/scripts/item_resource.gd" id="1_2u1gg"]
+[ext_resource type="Script" uid="uid://47pf0lrk86x5" path="res://investigation/scripts/investigation_variables.gd" id="3_nj77k"]
 
 [resource]
 script = ExtResource("3_nj77k")
-vars = Dictionary[String, int]({
-"deu chave": 1,
-"luz_da_sala_ligada": 1,
-"option": -1,
-"porta_destrancada": 1,
-"surpreso com a porta": 1,
-"televisao_puzzle_pp_digit_0": 7,
-"televisao_puzzle_pp_digit_1": 7,
-"televisao_puzzle_pp_digit_2": 6,
-"televisao_puzzle_pp_digit_3": 7,
-"tv_code_found": 1,
-"tv_code_found_surprised": 0,
-"tv_on": 1
-})
-_actions = 1
-last_pov = "porta"
+vars = Dictionary[String, int]({})
+inventory = Array[ExtResource("1_2u1gg")]([])
+_actions = 5
 metadata/_custom_type_script = "uid://47pf0lrk86x5"

@@ -95,9 +95,10 @@ wrap_mode = 1
 [node name="TabContainer" type="TabContainer" parent="MarginContainer/HBoxContainer/HSplitContainer" unique_id=241532051]
 layout_mode = 2
 size_flags_horizontal = 3
-current_tab = 0
+current_tab = 2
 
 [node name="Pre" type="MarginContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer" unique_id=1916516240]
+visible = false
 layout_mode = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
@@ -250,7 +251,6 @@ horizontal_alignment = 1
 layout_mode = 2
 
 [node name="Opcoes" type="VBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer" unique_id=300089472]
-visible = false
 custom_minimum_size = Vector2(160, 0)
 layout_mode = 2
 size_flags_horizontal = 8

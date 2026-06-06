@@ -40,7 +40,8 @@ func clear_digits() -> void:
 		c.queue_free()
 
 func update_enabled() -> void:
-	enabled = InvestigationVars.get_conditions_value(puzzle_pov.global_conditions) != -1
+	if puzzle_pov:
+		enabled = InvestigationVars.get_conditions_value(puzzle_pov.global_conditions) != -1
 	
 ## return a combination string in the format "0 1 2 3 99"
 func get_current_combination() -> String:
