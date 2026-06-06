@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://dtrbxva2wk8t7"]
+
+[ext_resource type="Texture2D" uid="uid://byxcwmb372yeg" path="res://investigation/images/symbols/no_symbol.png" id="1_1ihjy"]
+[ext_resource type="Texture2D" uid="uid://b4txnkw35ecv5" path="res://investigation/interface/images/symbol_size_handle.png" id="2_1ihjy"]
+[ext_resource type="Script" uid="uid://bknmknr0r27vk" path="res://investigation/utils/pov_level_maker/puzzle/digit_widget.gd" id="2_bx06p"]
+
+[node name="DigitWidget" type="TextureRect" unique_id=964770514 node_paths=PackedStringArray("index_label")]
+offset_right = 32.0
+offset_bottom = 32.0
+texture = ExtResource("1_1ihjy")
+expand_mode = 1
+script = ExtResource("2_bx06p")
+index_label = NodePath("IndexLabel")
+
+[node name="IndexLabel" type="Label" parent="." unique_id=252541355]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 23.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 18
+text = "0"
+horizontal_alignment = 2
+
+[node name="SizeHandle" type="TextureRect" parent="." unique_id=1235054184]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 0
+grow_vertical = 0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 0
+texture = ExtResource("2_1ihjy")
+expand_mode = 5
+stretch_mode = 4
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="gui_input" from="SizeHandle" to="." method="_on_size_handle_gui_input"]

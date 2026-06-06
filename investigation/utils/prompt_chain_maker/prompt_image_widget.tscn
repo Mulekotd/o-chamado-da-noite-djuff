@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://cqon0s8g52b2h"]
+
+[ext_resource type="Texture2D" uid="uid://ceqfsq3141bo0" path="res://investigation/images/detetive/detetive_neutro.png" id="1_obmli"]
+[ext_resource type="Script" uid="uid://8f2qo7snxy3o" path="res://investigation/utils/prompt_chain_maker/prompt_image_widget.gd" id="2_obmli"]
+[ext_resource type="Texture2D" uid="uid://b0x0w4dtint7u" path="res://investigation/interface/images/minus.png" id="3_c6xi1"]
+[ext_resource type="PackedScene" uid="uid://cko8sykqdhkfw" path="res://investigation/utils/general/image_load_file_dialog.tscn" id="4_k42es"]
+
+[node name="PromptImageWidget" type="TextureRect" unique_id=489540816]
+custom_minimum_size = Vector2(128, 0)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_obmli")
+expand_mode = 5
+stretch_mode = 4
+script = ExtResource("2_obmli")
+
+[node name="CloseButton" type="Button" parent="." unique_id=360356737]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+icon = ExtResource("3_c6xi1")
+metadata/_edit_use_anchors_ = true
+
+[node name="ImageLoadFileDialog" parent="." unique_id=520665760 instance=ExtResource("4_k42es")]
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="pressed" from="CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="file_selected" from="ImageLoadFileDialog" to="." method="_on_image_load_file_dialog_file_selected"]

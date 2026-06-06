@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="InvestigationVars" format=3 uid="uid://btqopcxp8kavd"]
+
+[ext_resource type="Script" uid="uid://dqj183h8d13hn" path="res://investigation/items/scripts/item_resource.gd" id="1_2u1gg"]
+[ext_resource type="Script" uid="uid://47pf0lrk86x5" path="res://investigation/scripts/investigation_variables.gd" id="3_nj77k"]
+
+[resource]
+script = ExtResource("3_nj77k")
+vars = Dictionary[String, int]({})
+inventory = Array[ExtResource("1_2u1gg")]([])
+_actions = 5
+metadata/_custom_type_script = "uid://47pf0lrk86x5"

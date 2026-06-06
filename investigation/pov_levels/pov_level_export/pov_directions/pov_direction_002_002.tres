@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="PovDirections" format=3]
+
+[ext_resource type="Resource" path="res://investigation/pov_levels/pov_level_export/povs/pov_direction_002_002.tres" id="1_1j4l7"]
+[ext_resource type="Script" path="res://investigation/povs/scripts/pov_directions.gd" id="2_cc2wm"]
+
+[resource]
+script = ExtResource("2_cc2wm")
+pov = ExtResource("1_1j4l7")
+right = "sala"
+rotation = 0.22
+coords = Vector2(1897.5502, 2480.598)

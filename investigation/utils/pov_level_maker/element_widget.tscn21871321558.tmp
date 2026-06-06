@@ -1,0 +1,139 @@
+[gd_scene format=3 uid="uid://bc2hdvncpbval"]
+
+[ext_resource type="Script" uid="uid://h5g8y4rkiao8" path="res://investigation/utils/pov_level_maker/element_widget.gd" id="1_h56jg"]
+[ext_resource type="PackedScene" uid="uid://c7ijmdu431cqc" path="res://investigation/utils/pov_level_maker/hitbox_preview_widget.tscn" id="2_mbf48"]
+[ext_resource type="PackedScene" uid="uid://dnoms4opqgf4v" path="res://investigation/utils/general/items_widget.tscn" id="3_oqdgp"]
+[ext_resource type="PackedScene" uid="uid://bj378ngyim0ll" path="res://investigation/utils/general/conditions_widget.tscn" id="4_atknv"]
+[ext_resource type="PackedScene" uid="uid://d3dyiv04e6brb" path="res://investigation/utils/general/prompt_chain_widget.tscn" id="5_atknv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h56jg"]
+bg_color = Color(0.09620472, 0.09620475, 0.09620469, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[node name="ElementWidget" type="Control" unique_id=264122867]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_h56jg")
+metadata/_edit_use_anchors_ = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1432779065]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="ScrollContainer" unique_id=1542410797]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_h56jg")
+
+[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer/Panel" unique_id=1471040700]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 38
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/Panel/MarginContainer" unique_id=1804797895]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="HeaderContainer" type="MarginContainer" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer" unique_id=1953830818]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="NameLineEdit" type="LineEdit" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/HeaderContainer" unique_id=2013050727]
+layout_mode = 2
+size_flags_horizontal = 0
+placeholder_text = "Nome do elemento"
+max_length = 48
+expand_to_text_length = true
+
+[node name="CloseButton" type="Button" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/HeaderContainer" unique_id=1751207098]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "FECHAR"
+
+[node name="HitboxPreviewWidget" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer" unique_id=250389957 instance=ExtResource("2_mbf48")]
+custom_minimum_size = Vector2(375.705, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="AtributesContainer" type="VBoxContainer" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer" unique_id=246317049]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer" unique_id=167265216]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/HBoxContainer" unique_id=157897473]
+layout_mode = 2
+text = "Pov para levar: "
+
+[node name="PovLineEdit" type="LineEdit" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/HBoxContainer" unique_id=2081487951]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Digite o nome do pov"
+
+[node name="PovOptionButton" type="OptionButton" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/HBoxContainer" unique_id=562010606]
+layout_mode = 2
+
+[node name="NecessaryItemsContainer" type="VBoxContainer" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer" unique_id=1351772727]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Label" type="Label" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/NecessaryItemsContainer" unique_id=1848356472]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Itens necessarios para o pov"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="NecessaryItemsWidget" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/NecessaryItemsContainer" unique_id=1978747484 instance=ExtResource("3_oqdgp")]
+layout_mode = 2
+
+[node name="ConditionsContainer" type="VBoxContainer" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer" unique_id=1012749603]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Label" type="Label" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/ConditionsContainer" unique_id=698794012]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Condicoes necessarias para o pov"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="ConditionsWidget" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/ConditionsContainer" unique_id=1813019862 instance=ExtResource("4_atknv")]
+layout_mode = 2
+
+[node name="PromptChainContainer" type="HBoxContainer" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer" unique_id=428526028]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/PromptChainContainer" unique_id=1737553936]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Prompt chain: "
+
+[node name="PromptChainWidget" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/PromptChainContainer" unique_id=1938228351 instance=ExtResource("5_atknv")]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[connection signal="gui_input" from="ScrollContainer/Panel/MarginContainer/VBoxContainer/HitboxPreviewWidget" to="." method="_on_hitbox_preview_widget_gui_input"]

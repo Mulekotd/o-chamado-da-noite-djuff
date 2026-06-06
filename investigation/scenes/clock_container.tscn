@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://b7fn23a6vcsgi"]
+
+[ext_resource type="Texture2D" uid="uid://dxy5eor5rqd4y" path="res://investigation/interface/images/empty_clock_circle.png" id="1_eki18"]
+[ext_resource type="Texture2D" uid="uid://fj1b2filxono" path="res://investigation/interface/images/clock.png" id="2_yn7nr"]
+
+[node name="ClockContainer" type="CenterContainer" unique_id=1329390162]
+
+[node name="EmptyCircleRect" type="TextureRect" parent="." unique_id=1375699134]
+layout_mode = 2
+texture = ExtResource("1_eki18")
+expand_mode = 5
+stretch_mode = 5
+
+[node name="ClockRect" type="TextureRect" parent="." unique_id=1480240842]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+texture = ExtResource("2_yn7nr")
+expand_mode = 5
+stretch_mode = 5

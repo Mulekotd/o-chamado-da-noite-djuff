@@ -1,0 +1,364 @@
+[gd_scene format=3 uid="uid://cjh18gp04aw2o"]
+
+[ext_resource type="PackedScene" uid="uid://dnoms4opqgf4v" path="res://investigation/utils/general/items_widget.tscn" id="1_eg3ew"]
+[ext_resource type="Script" uid="uid://bnwttvuex0jaa" path="res://investigation/utils/prompt_chain_maker/prompt_widget.gd" id="1_hnjur"]
+[ext_resource type="PackedScene" uid="uid://bj378ngyim0ll" path="res://investigation/utils/general/conditions_widget.tscn" id="2_52qs4"]
+[ext_resource type="PackedScene" uid="uid://b6aeholp6xcm3" path="res://investigation/utils/prompt_chain_maker/options_widget.tscn" id="3_vn5r7"]
+[ext_resource type="PackedScene" uid="uid://d0nk5v1faci5l" path="res://investigation/utils/pov_level_maker/pov_name_widget.tscn" id="5_r4mer"]
+[ext_resource type="PackedScene" uid="uid://cqon0s8g52b2h" path="res://investigation/utils/prompt_chain_maker/prompt_image_widget.tscn" id="5_tf5ai"]
+[ext_resource type="Texture2D" uid="uid://cm8l3y3l3dioj" path="res://investigation/interface/images/bottom_arrow.png" id="5_wjclg"]
+[ext_resource type="Texture2D" uid="uid://dtdkxktq3g8yr" path="res://investigation/interface/images/top_arrow.png" id="6_lfw2h"]
+[ext_resource type="PackedScene" uid="uid://cfiuj031kfyh3" path="res://investigation/utils/general/behaviour_widget.tscn" id="6_p1lpp"]
+[ext_resource type="PackedScene" uid="uid://cvlccjslejidx" path="res://investigation/utils/general/sound_widget.tscn" id="7_5icfr"]
+[ext_resource type="PackedScene" uid="uid://cfwh3va43jnsl" path="res://investigation/utils/prompt_chain_maker/letter_sounds_widget.tscn" id="10_5icfr"]
+[ext_resource type="Theme" uid="uid://cyq5khk20nbm6" path="res://themes/utils_theme.tres" id="999_utils_theme"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4037s"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0, 0, 0, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rpgga"]
+content_margin_left = 8.0
+content_margin_top = 4.0
+content_margin_right = 8.0
+content_margin_bottom = 4.0
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p1lpp"]
+bg_color = Color(0.41675407, 8.4830447e-07, 2.1658838e-07, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cen2o"]
+bg_color = Color(0.22225624, 1.5792902e-07, 3.008172e-08, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5icfr"]
+bg_color = Color(1, 0, 0, 1)
+
+[node name="PromptWidget" type="MarginContainer" unique_id=151020374]
+custom_minimum_size = Vector2(0, 80)
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.33
+offset_bottom = -175.00002
+grow_horizontal = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("999_utils_theme")
+script = ExtResource("1_hnjur")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=99060808]
+layout_mode = 2
+color = Color(0.047058824, 0.047058824, 0.047058824, 0.30980393)
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=571101295]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 30
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=1553310710]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="HSplitContainer" type="HSplitContainer" parent="MarginContainer/HBoxContainer" unique_id=1268872802]
+layout_mode = 2
+size_flags_horizontal = 3
+split_offsets = PackedInt32Array(356)
+split_offset = 356
+
+[node name="TextContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer" unique_id=691582231]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/HSplitContainer/TextContainer" unique_id=1131979070]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+text = "Texto"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="TextWidget" type="TextEdit" parent="MarginContainer/HBoxContainer/HSplitContainer/TextContainer" unique_id=1609192753]
+custom_minimum_size = Vector2(175, 100)
+layout_mode = 2
+size_flags_vertical = 3
+placeholder_text = "Texto"
+wrap_mode = 1
+
+[node name="TabContainer" type="TabContainer" parent="MarginContainer/HBoxContainer/HSplitContainer" unique_id=241532051]
+layout_mode = 2
+size_flags_horizontal = 3
+current_tab = 2
+
+[node name="Pre" type="MarginContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer" unique_id=1916516240]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+metadata/_tab_index = 0
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pre" unique_id=1186498463]
+layout_mode = 2
+theme_override_constants/h_separation = 32
+theme_override_constants/v_separation = 32
+columns = 2
+
+[node name="ConditionsContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pre/GridContainer" unique_id=701184403]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pre/GridContainer/ConditionsContainer" unique_id=1612863587]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+text = "Condicoes"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="ConditionsWidget" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pre/GridContainer/ConditionsContainer" unique_id=1813019862 instance=ExtResource("2_52qs4")]
+layout_mode = 2
+
+[node name="NecessaryItemsContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pre/GridContainer" unique_id=866713110]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pre/GridContainer/NecessaryItemsContainer" unique_id=2010168285]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+text = "Itens necessarios"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="NecessaryItemsWidget" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pre/GridContainer/NecessaryItemsContainer" unique_id=589692923 instance=ExtResource("1_eg3ew")]
+layout_mode = 2
+
+[node name="PromptImageWidget" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pre/GridContainer" unique_id=489540816 instance=ExtResource("5_tf5ai")]
+layout_mode = 2
+
+[node name="BehaviourContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pre/GridContainer" unique_id=674273464]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pre/GridContainer/BehaviourContainer" unique_id=729301820]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+text = "Comportamento especial"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="BehaviourWidget" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pre/GridContainer/BehaviourContainer" unique_id=513523494 instance=ExtResource("6_p1lpp")]
+layout_mode = 2
+
+[node name="Pos" type="MarginContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer" unique_id=326489978]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+metadata/_tab_index = 1
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pos" unique_id=630316187]
+layout_mode = 2
+theme_override_constants/h_separation = 32
+theme_override_constants/v_separation = 32
+columns = 2
+
+[node name="VarsToChangeContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pos/GridContainer" unique_id=429128829]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pos/GridContainer/VarsToChangeContainer" unique_id=2022840578]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+text = "Vars para mudar"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="ChangeVarsWidget" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pos/GridContainer/VarsToChangeContainer" unique_id=2009519092 instance=ExtResource("2_52qs4")]
+layout_mode = 2
+
+[node name="GiveItemsContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pos/GridContainer" unique_id=1826676483]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pos/GridContainer/GiveItemsContainer" unique_id=1520669969]
+layout_mode = 2
+text = "Itens para dar"
+horizontal_alignment = 1
+
+[node name="GiveItemsWidget" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pos/GridContainer/GiveItemsContainer" unique_id=1978747484 instance=ExtResource("1_eg3ew")]
+layout_mode = 2
+
+[node name="TakeItemsContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pos/GridContainer" unique_id=450291044]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pos/GridContainer/TakeItemsContainer" unique_id=159580589]
+layout_mode = 2
+text = "Itens para remover"
+horizontal_alignment = 1
+
+[node name="TakeItemsWidget" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pos/GridContainer/TakeItemsContainer" unique_id=98264587 instance=ExtResource("1_eg3ew")]
+layout_mode = 2
+
+[node name="EndChainContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pos/GridContainer" unique_id=107193213]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pos/GridContainer/EndChainContainer" unique_id=741048812]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pos/GridContainer/EndChainContainer/HBoxContainer" unique_id=206398779]
+layout_mode = 2
+text = "Ir para prompt :"
+
+[node name="GoToSpinBox" type="SpinBox" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pos/GridContainer/EndChainContainer/HBoxContainer" unique_id=856922251]
+layout_mode = 2
+size_flags_horizontal = 0
+min_value = -1.0
+value = -1.0
+alignment = 1
+
+[node name="EndChainWidget" type="CheckBox" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pos/GridContainer/EndChainContainer" unique_id=80609606]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Sair da cadeia?"
+
+[node name="PovContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pos/GridContainer" unique_id=280504026]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pos/GridContainer/PovContainer" unique_id=1803686655]
+layout_mode = 2
+text = "Pov para ir"
+horizontal_alignment = 1
+
+[node name="PovNameWidget" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pos/GridContainer/PovContainer" unique_id=1471266665 instance=ExtResource("5_r4mer")]
+layout_mode = 2
+
+[node name="Opcoes" type="VBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer" unique_id=300089472]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+alignment = 1
+metadata/_tab_index = 2
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Opcoes" unique_id=1972144797]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+text = "Opcoes"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="OptionsWidget" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Opcoes" unique_id=1903776342 instance=ExtResource("3_vn5r7")]
+layout_mode = 2
+
+[node name="Sounds" type="PanelContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer" unique_id=1471882346]
+visible = false
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4037s")
+metadata/_tab_index = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Sounds" unique_id=406002121]
+custom_minimum_size = Vector2(0, 256)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Sounds/VBoxContainer" unique_id=595673733]
+layout_mode = 2
+alignment = 1
+
+[node name="PreSoundContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Sounds/VBoxContainer/HBoxContainer" unique_id=1614658878]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_rpgga")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Sounds/VBoxContainer/HBoxContainer/PreSoundContainer" unique_id=1686868717]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 19
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Sounds/VBoxContainer/HBoxContainer/PreSoundContainer/HBoxContainer" unique_id=1555212843]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Pre Som"
+
+[node name="SoundWidget" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Sounds/VBoxContainer/HBoxContainer/PreSoundContainer/HBoxContainer" unique_id=1306229763 instance=ExtResource("7_5icfr")]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="PosSoundContainer" type="PanelContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Sounds/VBoxContainer/HBoxContainer" unique_id=1684416152]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_rpgga")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Sounds/VBoxContainer/HBoxContainer/PosSoundContainer" unique_id=1542199482]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 19
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Sounds/VBoxContainer/HBoxContainer/PosSoundContainer/HBoxContainer" unique_id=2036438593]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Pos Som"
+
+[node name="SoundWidget" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Sounds/VBoxContainer/HBoxContainer/PosSoundContainer/HBoxContainer" unique_id=1093930451 instance=ExtResource("7_5icfr")]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="LetterSoundsWidget" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Sounds/VBoxContainer" unique_id=629520457 instance=ExtResource("10_5icfr")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="IndexLabel" type="Label" parent="MarginContainer" unique_id=1029606726]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "0"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1715678283]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+alignment = 2
+
+[node name="MoveDownButton" type="Button" parent="HBoxContainer" unique_id=158408410]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+icon = ExtResource("5_wjclg")
+
+[node name="MoveUpButton" type="Button" parent="HBoxContainer" unique_id=1630432198]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+icon = ExtResource("6_lfw2h")
+
+[node name="RemoveButton" type="Button" parent="HBoxContainer" unique_id=1550368705]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_styles/normal = SubResource("StyleBoxFlat_p1lpp")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_cen2o")
+theme_override_styles/hover = SubResource("StyleBoxFlat_5icfr")
+text = "Remover"
+
+[connection signal="value_changed" from="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pos/GridContainer/EndChainContainer/HBoxContainer/GoToSpinBox" to="." method="_on_spin_box_value_changed"]
+[connection signal="pressed" from="HBoxContainer/MoveDownButton" to="." method="_on_move_down_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/MoveUpButton" to="." method="_on_move_up_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/RemoveButton" to="." method="_on_remove_button_pressed"]

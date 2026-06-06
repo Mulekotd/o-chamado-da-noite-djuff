@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://bvxa3ksyaqai6"]
+
+[ext_resource type="Script" uid="uid://ck0ula7pbtq4l" path="res://investigation/utils/pov_level_maker/pov_directions_stack_widget.gd" id="1_0a623"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n2din"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[node name="PovDirectionsStackWidget" type="MarginContainer" unique_id=1886123741]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -148.0
+offset_right = 260.0
+grow_vertical = 0
+pivot_offset_ratio = Vector2(0.5, 1)
+size_flags_horizontal = 4
+size_flags_vertical = 0
+script = ExtResource("1_0a623")
+
+[node name="Panel" type="PanelContainer" parent="." unique_id=1334596646]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_n2din")
+
+[node name="PovsContainer" type="VBoxContainer" parent="Panel" unique_id=700767289]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0

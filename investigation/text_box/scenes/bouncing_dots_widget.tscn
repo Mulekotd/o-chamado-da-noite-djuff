@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://beife6rlcgvk6"]
+
+[ext_resource type="Script" uid="uid://bi4ufd5spslt7" path="res://investigation/text_box/scenes/bouncing_dots_widget.gd" id="1_n83ae"]
+
+[node name="BouncingDotsWidget" type="HBoxContainer" unique_id=1713922320]
+size_flags_horizontal = 4
+script = ExtResource("1_n83ae")
+speed = 0.2
+range = 5.0
+
+[node name="dot1" type="Label" parent="." unique_id=1753257227]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "."
+
+[node name="dot2" type="Label" parent="." unique_id=820816700]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "."
+
+[node name="dot3" type="Label" parent="." unique_id=1686516285]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "."

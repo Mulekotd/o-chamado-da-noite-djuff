@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Pov" format=3 uid="uid://h4eyvfylfhp6"]
+
+[ext_resource type="Script" uid="uid://bti0kbjeofp0r" path="res://investigation/povs/scripts/pov_resource.gd" id="1_q11mg"]
+[ext_resource type="Script" uid="uid://deej6yes3fmnc" path="res://investigation/povs/scripts/element_resource.gd" id="3_m47io"]
+[ext_resource type="Texture2D" uid="uid://bythk3uhjfayj" path="res://assets/images/player/Player.png" id="4_dachx"]
+
+[resource]
+script = ExtResource("1_q11mg")
+name = "segundo"
+description = "Secundario"
+image = ExtResource("4_dachx")
+metadata/_custom_type_script = "uid://bti0kbjeofp0r"

@@ -1,0 +1,135 @@
+[gd_scene format=3 uid="uid://bdnc5n83lv5b8"]
+
+[ext_resource type="Script" uid="uid://6mvfbrctnsv3" path="res://investigation/utils/pov_level_maker/puzzle_pov_directions_widget.gd" id="1_gdn52"]
+[ext_resource type="Texture2D" uid="uid://dwj11t2nw18l2" path="res://investigation/povs/no_image_pov.png" id="3_0bhq8"]
+[ext_resource type="Texture2D" uid="uid://b0x0w4dtint7u" path="res://investigation/interface/images/minus.png" id="4_rin41"]
+[ext_resource type="PackedScene" uid="uid://d0nk5v1faci5l" path="res://investigation/utils/pov_level_maker/pov_name_widget.tscn" id="6_sijhw"]
+[ext_resource type="PackedScene" uid="uid://bg38qwfjhkdr" path="res://investigation/utils/pov_level_maker/circle_widget.tscn" id="9_13vhp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n2din"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[node name="PuzzlePovDirectionsWidget" type="MarginContainer" unique_id=1886123741 node_paths=PackedStringArray("pov_button", "back_pov_name_widget", "pov_image_rect", "circle_widget", "properies_container")]
+z_index = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -132.0
+offset_top = -656.0
+offset_right = 132.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset_ratio = Vector2(0.5, 1)
+size_flags_horizontal = 4
+size_flags_vertical = 8
+script = ExtResource("1_gdn52")
+pov_button = NodePath("VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/PropertiesContainer/VBoxContainer/PovButton")
+back_pov_name_widget = NodePath("VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/PropertiesContainer/VBoxContainer/BackPovNameWidget")
+pov_image_rect = NodePath("VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/PovImageRect")
+circle_widget = NodePath("VBoxContainer/CircleWidget")
+properies_container = NodePath("VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/PropertiesContainer")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=653843388]
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_constants/separation = 17
+alignment = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer" unique_id=354899350]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+alignment = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/VBoxContainer" unique_id=43171215]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+alignment = 2
+
+[node name="Panel" type="PanelContainer" parent="VBoxContainer/VBoxContainer/VBoxContainer" unique_id=1334596646]
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 8
+theme_override_styles/panel = SubResource("StyleBoxFlat_n2din")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/VBoxContainer/VBoxContainer/Panel" unique_id=570663726]
+layout_mode = 2
+size_flags_vertical = 8
+alignment = 2
+
+[node name="PovImageRect" type="TextureRect" parent="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer" unique_id=165035284]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+size_flags_vertical = 8
+texture = ExtResource("3_0bhq8")
+expand_mode = 5
+stretch_mode = 4
+
+[node name="CloseButton" type="Button" parent="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/PovImageRect" unique_id=934555703]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+icon = ExtResource("4_rin41")
+
+[node name="PropertiesContainer" type="MarginContainer" parent="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer" unique_id=740406919]
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/PropertiesContainer" unique_id=600357961]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="PovButton" type="Button" parent="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/PropertiesContainer/VBoxContainer" unique_id=365774458]
+layout_mode = 2
+text = "Puzzle Pov"
+
+[node name="-----------------" type="ColorRect" parent="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/PropertiesContainer/VBoxContainer" unique_id=1175183986]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/PropertiesContainer/VBoxContainer" unique_id=1416562267]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+text = "Direcoes"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="BackPovNameWidget" parent="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/PropertiesContainer/VBoxContainer" unique_id=1328801281 instance=ExtResource("6_sijhw")]
+layout_mode = 2
+
+[node name="PovNameLineEdit" parent="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/PropertiesContainer/VBoxContainer/BackPovNameWidget" index="0" unique_id=2009480693]
+placeholder_text = "Pov Atras"
+
+[node name="CircleWidget" parent="VBoxContainer" unique_id=1883204067 instance=ExtResource("9_13vhp")]
+custom_minimum_size = Vector2(166, 166)
+layout_mode = 2
+mouse_filter = 0
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="gui_input" from="VBoxContainer/VBoxContainer/VBoxContainer/Panel" to="." method="_on_upper_panel_gui_input"]
+[connection signal="gui_input" from="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/PovImageRect" to="." method="_on_pov_image_rect_gui_input"]
+[connection signal="item_rect_changed" from="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/PovImageRect" to="." method="_on_pov_image_rect_item_rect_changed"]
+[connection signal="pressed" from="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/PovImageRect/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/PropertiesContainer/VBoxContainer/PovButton" to="." method="_on_pov_button_pressed"]
+[connection signal="text_changed" from="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/PropertiesContainer/VBoxContainer/BackPovNameWidget/PovNameLineEdit" to="." method="_on_pov_name_line_edit_text_changed"]
+[connection signal="gui_input" from="VBoxContainer/CircleWidget" to="." method="_on_circle_widget_gui_input"]
+
+[editable path="VBoxContainer/VBoxContainer/VBoxContainer/Panel/VBoxContainer/PropertiesContainer/VBoxContainer/BackPovNameWidget"]

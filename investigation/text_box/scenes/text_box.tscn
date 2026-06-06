@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://dtd12y2eekoi1"]
+
+[ext_resource type="Script" uid="uid://c2714okm11ol2" path="res://investigation/text_box/scripts/text_box.gd" id="1_2ofle"]
+[ext_resource type="PackedScene" uid="uid://beife6rlcgvk6" path="res://investigation/text_box/scenes/bouncing_dots_widget.tscn" id="2_cvo1r"]
+[ext_resource type="StyleBox" uid="uid://82uktsq1bf80" path="res://investigation/text_box/resources/normal_button_style_box.tres" id="3_i4pdj"]
+[ext_resource type="StyleBox" uid="uid://dy40agbwfa2d7" path="res://investigation/text_box/resources/pressed_button_style_box.tres" id="4_y6qbu"]
+[ext_resource type="StyleBox" uid="uid://dldwn0cvgjavo" path="res://investigation/text_box/resources/hover_button_style_box.tres" id="5_4jyfe"]
+
+[node name="TextBox" type="Control" unique_id=1436468660]
+layout_mode = 3
+anchor_right = 0.47000003
+anchor_bottom = 0.372
+offset_left = 375.0
+offset_top = 331.0
+offset_right = 374.99997
+offset_bottom = 330.8
+script = ExtResource("1_2ofle")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=756255727]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Text" type="VBoxContainer" parent="ColorRect" unique_id=247242716]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 24
+alignment = 1
+
+[node name="BouncingDotsWidget" parent="ColorRect/Text" unique_id=1713922320 instance=ExtResource("2_cvo1r")]
+layout_mode = 2
+range = 2.0
+
+[node name="MainText" type="RichTextLabel" parent="ColorRect/Text" unique_id=971175684]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+text = "DO YOU WANT TO DO THIS?"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OptionsContainer" type="HFlowContainer" parent="ColorRect/Text" unique_id=1792612339]
+layout_mode = 2
+theme_override_constants/h_separation = 24
+theme_override_constants/v_separation = 16
+alignment = 1
+
+[node name="Button" type="Button" parent="ColorRect/Text/OptionsContainer" unique_id=464279151]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("3_i4pdj")
+theme_override_styles/pressed = ExtResource("4_y6qbu")
+theme_override_styles/hover = ExtResource("5_4jyfe")
+text = "SIM"
+
+[node name="Button2" type="Button" parent="ColorRect/Text/OptionsContainer" unique_id=962087186]
+layout_mode = 2
+text = "NAO"
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

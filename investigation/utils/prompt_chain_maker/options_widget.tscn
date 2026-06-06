@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://b6aeholp6xcm3"]
+
+[ext_resource type="Script" uid="uid://v26857g6c76s" path="res://investigation/utils/prompt_chain_maker/options_widget.gd" id="1_febti"]
+[ext_resource type="Texture2D" uid="uid://bvti8hnpfr854" path="res://investigation/interface/images/plus.png" id="3_8h32e"]
+[ext_resource type="Texture2D" uid="uid://b0x0w4dtint7u" path="res://investigation/interface/images/minus.png" id="4_ghlab"]
+[ext_resource type="Theme" uid="uid://cyq5khk20nbm6" path="res://themes/utils_theme.tres" id="999_utils_theme"]
+
+[node name="OptionsWidget" type="VBoxContainer" unique_id=1903776342]
+size_flags_horizontal = 3
+theme = ExtResource("999_utils_theme")
+script = ExtResource("1_febti")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=883023596]
+layout_mode = 2
+alignment = 1
+
+[node name="AddButton" type="Button" parent="HBoxContainer" unique_id=1343124917]
+layout_mode = 2
+icon = ExtResource("3_8h32e")
+
+[node name="RemoveButton" type="Button" parent="HBoxContainer" unique_id=709429137]
+layout_mode = 2
+icon = ExtResource("4_ghlab")
+
+[connection signal="pressed" from="HBoxContainer/AddButton" to="." method="_on_add_pressed"]
+[connection signal="pressed" from="HBoxContainer/RemoveButton" to="." method="_on_remove_pressed"]

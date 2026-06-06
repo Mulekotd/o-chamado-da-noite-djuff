@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="PromptChain" format=3 uid="uid://dianj2wkljqsc"]
+
+[ext_resource type="Script" uid="uid://cmgunroik01aj" path="res://investigation/text_box/scripts/prompt_resource.gd" id="1_mgo5h"]
+[ext_resource type="Script" uid="uid://dqj183h8d13hn" path="res://investigation/items/scripts/item_resource.gd" id="2_si3uj"]
+[ext_resource type="Script" uid="uid://cxpiwtdar5o13" path="res://investigation/text_box/scripts/option_resource.gd" id="3_jpt4c"]
+[ext_resource type="Script" uid="uid://djxtkg1leixh" path="res://investigation/text_box/scripts/prompt_chain_resource.gd" id="4_ten1j"]
+
+[sub_resource type="Resource" id="Resource_mgo5h"]
+script = ExtResource("3_jpt4c")
+text = "quero"
+conditions = Dictionary[String, int]({
+"adwa": 3
+})
+
+[sub_resource type="Resource" id="Resource_si3uj"]
+script = ExtResource("1_mgo5h")
+text = "posso come seu caneco"
+options = Array[ExtResource("3_jpt4c")]([SubResource("Resource_mgo5h")])
+
+[resource]
+script = ExtResource("4_ten1j")
+name = "amogus"
+prompts = Array[ExtResource("1_mgo5h")]([SubResource("Resource_si3uj")])

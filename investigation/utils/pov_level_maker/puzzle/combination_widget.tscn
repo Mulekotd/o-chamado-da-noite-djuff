@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://bh3mtqutvq84s"]
+
+[node name="CombinationWidget" type="HBoxContainer" unique_id=666688309]
+custom_minimum_size = Vector2(300, 32.495)
+
+[node name="CombinationTextEdit" type="TextEdit" parent="." unique_id=571926040]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+placeholder_text = "Combinacao"
+scroll_fit_content_width = true
+
+[node name="VarToChangeTextEdit" type="TextEdit" parent="." unique_id=1879586007]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Var para mudar"

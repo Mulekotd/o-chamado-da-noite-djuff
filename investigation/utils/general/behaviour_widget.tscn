@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://cfiuj031kfyh3"]
+
+[ext_resource type="Script" uid="uid://cvepujlp6p6rk" path="res://investigation/utils/general/behaviour_widget.gd" id="1_0dnbc"]
+[ext_resource type="Texture2D" uid="uid://b0x0w4dtint7u" path="res://investigation/interface/images/minus.png" id="2_yoofo"]
+
+[node name="BehaviourWidget" type="MarginContainer" unique_id=513523494]
+offset_right = 146.0
+offset_bottom = 40.0
+script = ExtResource("1_0dnbc")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=719943328]
+layout_mode = 2
+
+[node name="BehaviourButton" type="Button" parent="HBoxContainer" unique_id=16374038]
+layout_mode = 2
+text = "[selecionar comportamento]"
+
+[node name="ResetButton" type="TextureButton" parent="HBoxContainer" unique_id=1528712146]
+layout_mode = 2
+texture_normal = ExtResource("2_yoofo")
+
+[node name="LoadFileDialog" type="FileDialog" parent="." unique_id=869370708]
+title = "Open a File"
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.gd")
+
+[connection signal="pressed" from="HBoxContainer/BehaviourButton" to="." method="_on_script_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/ResetButton" to="." method="_on_reset_button_pressed"]
+[connection signal="file_selected" from="LoadFileDialog" to="." method="_on_load_file_dialog_file_selected"]

@@ -1,0 +1,54 @@
+[gd_resource type="Resource" script_class="PromptChain" format=3]
+
+[ext_resource type="Texture2D" path="res://investigation/images/detetive/detetive_neutro.png" id="1_512e2"]
+[ext_resource type="Script" path="res://investigation/text_box/scripts/prompt_resource.gd" id="2_dqmoi"]
+[ext_resource type="Script" path="res://investigation/items/scripts/item_resource.gd" id="3_e7g4u"]
+[ext_resource type="Script" path="res://investigation/text_box/scripts/option_resource.gd" id="4_nkur4"]
+[ext_resource type="Script" path="res://investigation/text_box/scripts/prompt_chain_resource.gd" id="5_aeo84"]
+
+[sub_resource type="Resource" id="Resource_txrv1"]
+script = ExtResource("4_nkur4")
+text = "Ligar a televisão"
+actions = 1
+
+[sub_resource type="Resource" id="Resource_kd0jx"]
+script = ExtResource("2_dqmoi")
+text = "Uma televisao velha. Parece que eu consigo liga-la na tomada."
+global_conditions = Dictionary[String, int]({
+"tv_on": 0
+})
+options = Array[ExtResource("4_nkur4")]([SubResource("Resource_txrv1")])
+vars_to_change = Dictionary[String, int]({
+"tv_code_found_surprised": 1
+})
+img = ExtResource("1_512e2")
+
+[sub_resource type="Resource" id="Resource_b74ot"]
+script = ExtResource("2_dqmoi")
+text = "Consegui ligar a televisão."
+global_conditions = Dictionary[String, int]({
+"option": 0
+})
+vars_to_change = Dictionary[String, int]({
+"tv_on": 1
+})
+img = ExtResource("1_512e2")
+
+[sub_resource type="Resource" id="Resource_lamga"]
+script = ExtResource("2_dqmoi")
+text = "Wow, o que eh isso?"
+global_conditions = Dictionary[String, int]({
+"tv_code_found": 2,
+"tv_code_found_surprised": 1,
+"tv_on": 1
+})
+vars_to_change = Dictionary[String, int]({
+"tv_code_found_surprised": 0
+})
+img = ExtResource("1_512e2")
+
+[resource]
+script = ExtResource("5_aeo84")
+name = "tv"
+prompts = Array[ExtResource("2_dqmoi")]([SubResource("Resource_kd0jx"), SubResource("Resource_b74ot"), SubResource("Resource_lamga")])
+default_image = ExtResource("1_512e2")

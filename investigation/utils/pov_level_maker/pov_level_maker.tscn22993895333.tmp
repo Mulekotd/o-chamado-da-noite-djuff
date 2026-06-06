@@ -1,0 +1,102 @@
+[gd_scene format=3 uid="uid://b5oqobf7ay1b1"]
+
+[ext_resource type="Script" uid="uid://djug47wdeua1a" path="res://investigation/utils/pov_level_maker/pov_level_maker.gd" id="1_xm7nf"]
+[ext_resource type="Texture2D" uid="uid://c6uq8ruu8dc8f" path="res://investigation/povs/pov_level_bg.jpeg" id="3_mcsh5"]
+[ext_resource type="PackedScene" uid="uid://cx2wlsvbs6c56" path="res://investigation/utils/pov_level_maker/pov_direction_line.tscn" id="5_mehli"]
+[ext_resource type="Theme" uid="uid://cyq5khk20nbm6" path="res://themes/utils_theme.tres" id="999_utils_theme"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mcsh5"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.6, 0.6, 0.6, 0)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="PovLevelMaker" type="Control" unique_id=1959134330 groups=["pov_level_maker", "util_parent_control"]]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("999_utils_theme")
+script = ExtResource("1_xm7nf")
+
+[node name="ScreenContainer" type="Panel" parent="." unique_id=1815308133]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mcsh5")
+
+[node name="TextureRect" type="TextureRect" parent="ScreenContainer" unique_id=283575532]
+custom_minimum_size = Vector2(0, 3000)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1704.7101
+offset_top = -1500.0
+offset_right = 1704.7101
+offset_bottom = 1500.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_mcsh5")
+expand_mode = 3
+stretch_mode = 4
+
+[node name="PovDirectionLine" parent="ScreenContainer/TextureRect" unique_id=1387133965 instance=ExtResource("5_mehli")]
+z_index = 1
+position = Vector2(-0.28979492, -2)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScreenContainer" unique_id=1540156051]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SaveButton" type="Button" parent="ScreenContainer/HBoxContainer" unique_id=843172508]
+layout_mode = 2
+text = "Salvar"
+
+[node name="SaveSubResourcesButton" type="Button" parent="ScreenContainer/HBoxContainer" unique_id=404927200]
+layout_mode = 2
+text = "Salvar sub-resources"
+
+[node name="LoadButton" type="Button" parent="ScreenContainer/HBoxContainer" unique_id=42024235]
+layout_mode = 2
+text = "Abrir"
+
+[node name="LoadFileDialog" type="FileDialog" parent="." unique_id=812549973]
+size = Vector2i(800, 600)
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.tres")
+
+[node name="SaveFileDialog" type="FileDialog" parent="." unique_id=219998563]
+mode = 3
+size = Vector2i(800, 600)
+access = 2
+filters = PackedStringArray("*.tres")
+
+[node name="SaveSubResourcesFileDialog" type="FileDialog" parent="." unique_id=12033043]
+mode = 3
+size = Vector2i(800, 600)
+access = 2
+filters = PackedStringArray("*.tres")
+
+[connection signal="gui_input" from="ScreenContainer" to="." method="_on_screen_container_gui_input"]
+[connection signal="pressed" from="ScreenContainer/HBoxContainer/SaveButton" to="." method="_on_save_button_pressed"]
+[connection signal="pressed" from="ScreenContainer/HBoxContainer/SaveSubResourcesButton" to="." method="_on_save_sub_resources_button_pressed"]
+[connection signal="pressed" from="ScreenContainer/HBoxContainer/LoadButton" to="." method="_on_load_button_pressed"]
+[connection signal="file_selected" from="LoadFileDialog" to="." method="_on_load_file_dialog_file_selected"]
+[connection signal="file_selected" from="SaveFileDialog" to="." method="_on_save_file_dialog_file_selected"]
+[connection signal="dir_selected" from="SaveSubResourcesFileDialog" to="." method="_on_save_sub_resources_file_dialog_dir_selected"]

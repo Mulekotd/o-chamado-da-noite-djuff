@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://d0nk5v1faci5l"]
+
+[ext_resource type="Script" uid="uid://bpf6rbwv6pmi3" path="res://investigation/utils/pov_level_maker/pov_name_widget.gd" id="1_fm8ad"]
+[ext_resource type="Texture2D" uid="uid://cm8l3y3l3dioj" path="res://investigation/interface/images/bottom_arrow.png" id="1_tjhyo"]
+
+[node name="PovNameWidget" type="HBoxContainer" unique_id=1471266665]
+size_flags_horizontal = 3
+script = ExtResource("1_fm8ad")
+
+[node name="PovNameLineEdit" type="LineEdit" parent="." unique_id=2009480693]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Pov name"
+expand_to_text_length = true
+
+[node name="PovNameMenuButton" type="MenuButton" parent="." unique_id=1516919166]
+layout_mode = 2
+icon = ExtResource("1_tjhyo")
+item_count = 1
+popup/item_0/text = "AMOGUS"
+popup/item_0/id = 0
+
+[connection signal="about_to_popup" from="PovNameMenuButton" to="." method="_on_pov_name_menu_button_about_to_popup"]

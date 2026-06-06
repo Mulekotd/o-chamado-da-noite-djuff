@@ -1,0 +1,211 @@
+[gd_scene format=3 uid="uid://bc2hdvncpbval"]
+
+[ext_resource type="Script" uid="uid://h5g8y4rkiao8" path="res://investigation/utils/pov_level_maker/element_widget.gd" id="1_h56jg"]
+[ext_resource type="PackedScene" uid="uid://c7ijmdu431cqc" path="res://investigation/utils/pov_level_maker/hitbox_preview_widget.tscn" id="2_mbf48"]
+[ext_resource type="PackedScene" uid="uid://f2qd0iww8k1p" path="res://investigation/utils/general/moving_noise_widget.tscn" id="3_kus40"]
+[ext_resource type="PackedScene" uid="uid://dnoms4opqgf4v" path="res://investigation/utils/general/items_widget.tscn" id="3_oqdgp"]
+[ext_resource type="PackedScene" uid="uid://bj378ngyim0ll" path="res://investigation/utils/general/conditions_widget.tscn" id="4_atknv"]
+[ext_resource type="PackedScene" uid="uid://d0nk5v1faci5l" path="res://investigation/utils/pov_level_maker/pov_name_widget.tscn" id="4_gradj"]
+[ext_resource type="PackedScene" uid="uid://d3dyiv04e6brb" path="res://investigation/utils/prompt_chain_maker/prompt_chain_widget.tscn" id="5_atknv"]
+[ext_resource type="Theme" uid="uid://cyq5khk20nbm6" path="res://themes/utils_theme.tres" id="999_utils_theme"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1dpax"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[node name="ElementWidget" type="Control" unique_id=264122867 groups=["util_parent_control"]]
+z_index = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("999_utils_theme")
+script = ExtResource("1_h56jg")
+metadata/_edit_use_anchors_ = true
+
+[node name="MovingNoiseWidget" parent="." unique_id=292722013 instance=ExtResource("3_kus40")]
+layout_mode = 1
+
+[node name="BackgroundRect" type="ColorRect" parent="." unique_id=2025292537]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.12, 0.089999996, 0, 0.77254903)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1432779065]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.307
+anchor_top = 0.071
+anchor_right = 0.693
+anchor_bottom = 0.929
+offset_left = 0.13198853
+offset_top = -0.027999878
+offset_right = -0.13201904
+offset_bottom = 0.027954102
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 0
+
+[node name="Panel" type="PanelContainer" parent="ScrollContainer" unique_id=1542410797]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1dpax")
+
+[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer/Panel" unique_id=1471040700]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 38
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/Panel/MarginContainer" unique_id=1804797895]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer" unique_id=879567385]
+layout_mode = 2
+text = "ELEMENTO"
+horizontal_alignment = 1
+
+[node name="HeaderContainer" type="MarginContainer" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer" unique_id=1953830818]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="NameLineEdit" type="LineEdit" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/HeaderContainer" unique_id=2013050727]
+layout_mode = 2
+size_flags_horizontal = 0
+placeholder_text = "Nome do elemento"
+max_length = 48
+expand_to_text_length = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/HeaderContainer" unique_id=1511540600]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="CancelButton" type="Button" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/HeaderContainer/HBoxContainer" unique_id=1930238528]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "cancelar
+"
+
+[node name="CloseButton" type="Button" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/HeaderContainer/HBoxContainer" unique_id=1751207098]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "FECHAR"
+
+[node name="HitboxPreviewWidget" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer" unique_id=250389957 instance=ExtResource("2_mbf48")]
+custom_minimum_size = Vector2(375.705, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="AtributesContainer" type="VBoxContainer" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer" unique_id=246317049]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 21
+
+[node name="-----------------4" type="ColorRect" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer" unique_id=1670065309]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer" unique_id=167265216]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/HBoxContainer" unique_id=157897473]
+layout_mode = 2
+text = "Pov para levar: "
+
+[node name="PovNameWidget" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/HBoxContainer" unique_id=1471266665 instance=ExtResource("4_gradj")]
+layout_mode = 2
+
+[node name="-----------------3" type="ColorRect" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer" unique_id=2147004252]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+
+[node name="NecessaryItemsContainer" type="VBoxContainer" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer" unique_id=1351772727]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Label" type="Label" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/NecessaryItemsContainer" unique_id=1848356472]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+text = "Itens necessarios para o pov"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="NecessaryItemsWidget" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/NecessaryItemsContainer" unique_id=1978747484 instance=ExtResource("3_oqdgp")]
+layout_mode = 2
+theme = null
+
+[node name="-----------------2" type="ColorRect" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer" unique_id=1107779148]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+
+[node name="ConditionsContainer" type="VBoxContainer" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer" unique_id=1012749603]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Label" type="Label" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/ConditionsContainer" unique_id=698794012]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+text = "Condicoes necessarias para o pov"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="ConditionsWidget" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/ConditionsContainer" unique_id=1813019862 instance=ExtResource("4_atknv")]
+layout_mode = 2
+theme = null
+
+[node name="-----------------" type="ColorRect" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer" unique_id=1844027577]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+
+[node name="VarsToChangeContainer" type="VBoxContainer" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer" unique_id=1355431332]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Label" type="Label" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/VarsToChangeContainer" unique_id=319055147]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 2
+text = "Variaveis para mudar"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="VarsToChangeWidget" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/VarsToChangeContainer" unique_id=166329387 instance=ExtResource("4_atknv")]
+layout_mode = 2
+theme = null
+
+[node name="-----------------5" type="ColorRect" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer" unique_id=736546479]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+
+[node name="PromptChainContainer" type="HBoxContainer" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer" unique_id=428526028]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/PromptChainContainer" unique_id=1737553936]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Prompt chain: "
+
+[node name="PromptChainWidget" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/PromptChainContainer" unique_id=1195115200 instance=ExtResource("5_atknv")]
+layout_mode = 2
+
+[connection signal="pressed" from="ScrollContainer/Panel/MarginContainer/VBoxContainer/HeaderContainer/HBoxContainer/CancelButton" to="." method="_on_cancel_button_pressed"]
+[connection signal="pressed" from="ScrollContainer/Panel/MarginContainer/VBoxContainer/HeaderContainer/HBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="gui_input" from="ScrollContainer/Panel/MarginContainer/VBoxContainer/HitboxPreviewWidget" to="." method="_on_hitbox_preview_widget_gui_input"]

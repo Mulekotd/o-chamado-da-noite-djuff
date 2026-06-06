@@ -1,0 +1,170 @@
+[gd_resource type="Resource" script_class="PovLevel" format=3 uid="uid://c06lvdpcxu5l3"]
+
+[ext_resource type="Texture2D" uid="uid://c6uq8ruu8dc8f" path="res://investigation/povs/pov_level_bg.jpeg" id="1_ahayo"]
+[ext_resource type="Script" uid="uid://ffh4hevhqls8" path="res://investigation/povs/scripts/pov_directions.gd" id="2_i1fj6"]
+[ext_resource type="Script" uid="uid://deej6yes3fmnc" path="res://investigation/povs/scripts/element_resource.gd" id="3_xi5ua"]
+[ext_resource type="Script" uid="uid://dqj183h8d13hn" path="res://investigation/items/scripts/item_resource.gd" id="4_i1fj6"]
+[ext_resource type="Script" uid="uid://cmgunroik01aj" path="res://investigation/text_box/scripts/prompt_resource.gd" id="4_wppg2"]
+[ext_resource type="Script" uid="uid://djxtkg1leixh" path="res://investigation/text_box/scripts/prompt_chain_resource.gd" id="5_qvkiw"]
+[ext_resource type="Script" uid="uid://bti0kbjeofp0r" path="res://investigation/povs/scripts/pov_resource.gd" id="6_ho0jg"]
+[ext_resource type="Script" uid="uid://cxpiwtdar5o13" path="res://investigation/text_box/scripts/option_resource.gd" id="6_xi5ua"]
+[ext_resource type="Script" uid="uid://cjbfq0iyvv1rr" path="res://investigation/povs/scripts/pov_level_resource.gd" id="7_g84im"]
+[ext_resource type="Script" uid="uid://ci2buxueqquwj" path="res://investigation/povs/scripts/pov_image_resource.gd" id="8_sx7mx"]
+[ext_resource type="Resource" uid="uid://cqpw454xu78in" path="res://investigation/items/test_key/test_key.tres" id="9_wppg2"]
+[ext_resource type="Script" uid="uid://2mj3tpo0kht6" path="res://investigation/povs/scripts/puzzle_pov_resource.gd" id="11_2k0qv"]
+
+[sub_resource type="Resource" id="Resource_wppg2"]
+script = ExtResource("4_wppg2")
+text = "Oi, tudo bem?"
+
+[sub_resource type="Resource" id="Resource_qvkiw"]
+script = ExtResource("4_wppg2")
+text = "Estava começando a achar que você não iria acordar..."
+
+[sub_resource type="Resource" id="Resource_ho0jg"]
+script = ExtResource("6_xi5ua")
+text = "Nao tenho nada para perguntar."
+
+[sub_resource type="Resource" id="Resource_g84im"]
+script = ExtResource("6_xi5ua")
+text = "Onde estou?"
+conditions = Dictionary[String, int]({
+"respondeu1": 0
+})
+
+[sub_resource type="Resource" id="Resource_1hpal"]
+script = ExtResource("6_xi5ua")
+text = "Quem é você?"
+conditions = Dictionary[String, int]({
+"respondeu2": 0
+})
+
+[sub_resource type="Resource" id="Resource_67b1e"]
+script = ExtResource("4_wppg2")
+text = "Enfim, começe com as perguntas"
+options = Array[ExtResource("6_xi5ua")]([SubResource("Resource_ho0jg"), SubResource("Resource_g84im"), SubResource("Resource_1hpal")])
+
+[sub_resource type="Resource" id="Resource_30e63"]
+script = ExtResource("4_wppg2")
+text = "Tudo bem, então."
+end_chain = true
+
+[sub_resource type="Resource" id="Resource_bs4rw"]
+script = ExtResource("4_wppg2")
+text = "Você está na sua casa, amigo."
+vars_to_change = Dictionary[String, int]({
+"esta_em_casa": 1,
+"respondeu1": 1
+})
+
+[sub_resource type="Resource" id="Resource_s5fsp"]
+script = ExtResource("4_wppg2")
+text = "Que perguntinha besta."
+global_conditions = Dictionary[String, int]({
+"esta_em_casa": 1
+})
+end_chain = true
+vars_to_change = Dictionary[String, int]({
+"": 1
+})
+
+[sub_resource type="Resource" id="Resource_lkpxv"]
+script = ExtResource("4_wppg2")
+text = "Irineu..."
+end_chain = true
+vars_to_change = Dictionary[String, int]({
+"respondeu2": 1
+})
+
+[sub_resource type="Resource" id="Resource_ielqp"]
+script = ExtResource("5_qvkiw")
+name = "homem_sentado"
+prompts = Array[ExtResource("4_wppg2")]([SubResource("Resource_wppg2"), SubResource("Resource_qvkiw"), SubResource("Resource_67b1e"), SubResource("Resource_30e63"), SubResource("Resource_bs4rw"), SubResource("Resource_s5fsp"), SubResource("Resource_lkpxv")])
+
+[sub_resource type="Resource" id="Resource_rg1qi"]
+script = ExtResource("3_xi5ua")
+name = "homem"
+hitbox = Dictionary[String, float]({
+"bottom": 0.9255960893894544,
+"left": 0.2724867926703559,
+"right": 0.4085412101140098,
+"top": 0.4273001691629524
+})
+prompt_chain = SubResource("Resource_ielqp")
+
+[sub_resource type="Resource" id="Resource_ypeyp"]
+script = ExtResource("5_qvkiw")
+
+[sub_resource type="Resource" id="Resource_giaq8"]
+script = ExtResource("6_ho0jg")
+name = "sala"
+description = "sala com um homem sentado"
+prompt_chain = SubResource("Resource_ypeyp")
+elements = Array[ExtResource("3_xi5ua")]([SubResource("Resource_rg1qi")])
+
+[sub_resource type="Resource" id="Resource_qtm1o"]
+script = ExtResource("2_i1fj6")
+pov = SubResource("Resource_giaq8")
+left = "porta"
+rotation = 0.36
+coords = Vector2(1387.4404, 2168.5127)
+
+[sub_resource type="Resource" id="Resource_bvt70"]
+script = ExtResource("6_xi5ua")
+text = "Destrancar"
+necessary_items = Array[ExtResource("4_i1fj6")]([ExtResource("9_wppg2")])
+
+[sub_resource type="Resource" id="Resource_vpqfk"]
+script = ExtResource("4_wppg2")
+text = "Está trancada."
+options = Array[ExtResource("6_xi5ua")]([SubResource("Resource_bvt70")])
+
+[sub_resource type="Resource" id="Resource_dotia"]
+script = ExtResource("4_wppg2")
+text = "Você destrancou a porta."
+vars_to_change = Dictionary[String, int]({
+"porta_destrancada": 1
+})
+
+[sub_resource type="Resource" id="Resource_q2jfu"]
+script = ExtResource("5_qvkiw")
+name = "porta"
+prompts = Array[ExtResource("4_wppg2")]([SubResource("Resource_vpqfk"), SubResource("Resource_dotia")])
+
+[sub_resource type="Resource" id="Resource_w81od"]
+script = ExtResource("3_xi5ua")
+name = "porta"
+hitbox = Dictionary[String, float]({
+"bottom": 1.0,
+"left": 0.29407979571630083,
+"right": 0.7104962061321924,
+"top": 0.0
+})
+pov_name = "sala"
+prompt_chain = SubResource("Resource_q2jfu")
+conditions = Dictionary[String, int]({
+"porta_destrancada": 1
+})
+
+[sub_resource type="Resource" id="Resource_5nsym"]
+script = ExtResource("5_qvkiw")
+
+[sub_resource type="Resource" id="Resource_2wu0b"]
+script = ExtResource("6_ho0jg")
+name = "porta"
+description = "Porta da frente da casa"
+prompt_chain = SubResource("Resource_5nsym")
+elements = Array[ExtResource("3_xi5ua")]([SubResource("Resource_w81od")])
+
+[sub_resource type="Resource" id="Resource_768op"]
+script = ExtResource("2_i1fj6")
+pov = SubResource("Resource_2wu0b")
+right = "sala"
+rotation = 0.21
+coords = Vector2(1897.5502, 2480.598)
+
+[resource]
+script = ExtResource("7_g84im")
+bg_img = ExtResource("1_ahayo")
+pov_directions_array = Array[ExtResource("2_i1fj6")]([SubResource("Resource_qtm1o"), SubResource("Resource_768op")])
+dir_scale = 0.97

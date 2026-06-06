@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://f2qd0iww8k1p"]
+
+[ext_resource type="Texture2D" uid="uid://btl648umtkl7m" path="res://themes/background.tres" id="1_726v5"]
+[ext_resource type="Script" uid="uid://d0apbouygs5uq" path="res://investigation/utils/general/moving_noise_widget.gd" id="2_clw3t"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_clw3t"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ok0tj"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.12970808, 0.08108256, 0.14196941, 0.6)
+border_width_left = 46
+border_width_top = 64
+border_width_right = 64
+border_width_bottom = 64
+border_color = Color(0, 0, 0, 0.7607843)
+border_blend = true
+corner_detail = 5
+
+[node name="MovingNoiseWidget" type="TextureRect" unique_id=292722013]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_726v5")
+script = ExtResource("2_clw3t")
+
+[node name="ColorRect" type="Panel" parent="." unique_id=1938556265]
+material = SubResource("CanvasItemMaterial_clw3t")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ok0tj")
