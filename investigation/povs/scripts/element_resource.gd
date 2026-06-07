@@ -24,3 +24,7 @@ enum cursor_shapes {
 	STEPS,
 }
 @export var cursor_shape : cursor_shapes = cursor_shapes.POINTING_HAND
+## sound to play when this element is interacted with
+@export var sound : AudioStream
+## sound to play when this element takes the player to a pov
+@export var pov_sound : AudioStream

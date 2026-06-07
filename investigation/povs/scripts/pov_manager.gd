@@ -24,6 +24,7 @@ const CURSORS : Dictionary[int, CursorShape] = {
 signal element_clicked(element: Element)
 signal prompt_chain_called(p_chain: PromptChain)
 signal pov_entered()
+signal sound_played(sound: AudioStream)
 
 var pov_index : int
 var current_pov : Pov
@@ -92,6 +93,8 @@ func change_pov(pov: Pov) -> void:
 			n.set_script(current_pov.especial_behaviour)
 			n.name = current_pov.name + "_behaviour"
 			add_sibling(n)
+		if current_pov.sound:
+			sound_played.emit(current_pov.sound)
 	else:
 		update_view()
 		update_arrows()
@@ -126,8 +129,6 @@ func update_view(pov: Pov = current_pov) -> void:
 			img = pi.texture
 	view.texture = img
 	update_arrows()
-	if _on_puzzle_pov:
-		pass # call function to spawn digits and shit
 
 func update_arrows() -> void:
 	if not _on_puzzle_pov:
@@ -258,10 +259,14 @@ func _on_gui_input(_event: InputEvent) -> void:
 		if e.vars_to_change:
 			InvestigationVars.update_variables(e.vars_to_change)
 			update_view(current_pov)
+		if e.sound:
+			sound_played.emit(e.sound)
 		if e.pov_name:
 			_pan_locked = true
 			var target_pov := get_pov(e.pov_name)
 			if target_pov:
+				if e.pov_sound:
+					sound_played.emit(e.pov_sound)
 				await _transition_to_pov(target_pov, Vector2.ZERO)
 			else:
 				change_pov_by_name(e.pov_name)

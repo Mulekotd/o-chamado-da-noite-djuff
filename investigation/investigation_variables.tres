@@ -11,16 +11,8 @@ vars = Dictionary[String, int]({
 "luz_da_sala_ligada": 0,
 "option": -1,
 "porta_destrancada": 1,
-"surpreso com a porta": 1,
-"televisao_puzzle_pp_digit_0": 0,
-"televisao_puzzle_pp_digit_1": 0,
-"televisao_puzzle_pp_digit_2": 0,
-"televisao_puzzle_pp_digit_3": 0,
-"tv_code_found": 0,
-"tv_code_found_surprised": 1,
-"tv_on": 0
+"surpreso com a porta": 1
 })
-_actions = 0
-_investigation_points = 9
+_actions = 4
 last_pov = "sala"
 metadata/_custom_type_script = "uid://47pf0lrk86x5"

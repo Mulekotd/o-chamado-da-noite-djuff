@@ -5,6 +5,7 @@ class_name InvestigationVars extends Resource
 var clear_action = clear_everything
 func clear_everything() -> void:
 	file.vars.clear()
+	file.vars["option"] = -1
 	file.inventory.clear()
 	file.set_actions(get_max_actions())
 	file.last_pov = ""

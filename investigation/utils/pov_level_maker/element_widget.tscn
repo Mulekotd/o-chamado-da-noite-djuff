@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://d0nk5v1faci5l" path="res://investigation/utils/pov_level_maker/pov_name_widget.tscn" id="4_gradj"]
 [ext_resource type="PackedScene" uid="uid://d3dyiv04e6brb" path="res://investigation/utils/prompt_chain_maker/prompt_chain_widget.tscn" id="5_atknv"]
 [ext_resource type="PackedScene" uid="uid://jvp1k1agpi2t" path="res://investigation/utils/pov_level_maker/cursor_selection_widget.tscn" id="9_qq31c"]
+[ext_resource type="PackedScene" uid="uid://cvlccjslejidx" path="res://investigation/utils/general/sound_widget.tscn" id="10_tleei"]
 [ext_resource type="Theme" uid="uid://cyq5khk20nbm6" path="res://themes/utils_theme.tres" id="999_utils_theme"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1dpax"]
@@ -223,6 +224,38 @@ cursor_buttons = {
 2: NodePath("GridContainer/MagnifierCursorButton"),
 3: NodePath("GridContainer/StepsCursorButton")
 }
+
+[node name="-----------------7" type="ColorRect" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer" unique_id=1013781837]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+
+[node name="SoundContainer" type="VBoxContainer" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer" unique_id=1477221153]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/SoundContainer" unique_id=947848902]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Som ao interagir"
+
+[node name="SoundWidget" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/SoundContainer" unique_id=513523494 instance=ExtResource("10_tleei")]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="-----------------8" type="ColorRect" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer" unique_id=802006352]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+
+[node name="PovSoundContainer2" type="VBoxContainer" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer" unique_id=1895580445]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/PovSoundContainer2" unique_id=293324503]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Som ao entrar no Pov"
+
+[node name="PovSoundWidget" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/PovSoundContainer2" unique_id=1111240597 instance=ExtResource("10_tleei")]
+layout_mode = 2
+size_flags_horizontal = 4
 
 [connection signal="pressed" from="ScrollContainer/Panel/MarginContainer/VBoxContainer/HeaderContainer/HBoxContainer/CancelButton" to="." method="_on_cancel_button_pressed"]
 [connection signal="pressed" from="ScrollContainer/Panel/MarginContainer/VBoxContainer/HeaderContainer/HBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]
