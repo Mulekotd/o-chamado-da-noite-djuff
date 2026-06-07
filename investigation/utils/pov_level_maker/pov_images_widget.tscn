@@ -34,14 +34,10 @@ pov_images_container = NodePath("PanelContainer/VBoxContainer/ScrollContainer/Po
 
 [node name="MovingNoiseWidget" parent="." unique_id=292722013 instance=ExtResource("2_p3m7v")]
 layout_mode = 2
-bg_speed = Vector2(0.05, 0.5)
-default_frequency = 0.0049
-fade_in_duration = 0.5
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=417095100]
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_h2nmj")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer" unique_id=1148408654]
