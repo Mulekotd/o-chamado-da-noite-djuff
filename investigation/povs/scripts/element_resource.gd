@@ -16,3 +16,11 @@ class_name Element extends Resource
 @export var conditions: Dictionary[String, int]
 ## variables to change when this element is clicked
 @export var vars_to_change: Dictionary[String, int]
+## shape of the mouse cursor when hovering
+enum cursor_shapes {
+	DEFAULT,
+	POINTING_HAND,
+	MAGNIFIER,
+	STEPS,
+}
+@export var cursor_shape : cursor_shapes = cursor_shapes.POINTING_HAND

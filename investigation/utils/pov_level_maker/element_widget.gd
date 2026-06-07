@@ -7,6 +7,7 @@ class_name _ElementWidget extends Control
 @onready var hitbox_preview_widget: _HitboxPreviewWidget = $ScrollContainer/Panel/MarginContainer/VBoxContainer/HitboxPreviewWidget
 @onready var pov_name_widget: _PovNameWidget = $ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/HBoxContainer/PovNameWidget
 @onready var vars_to_change_widget: _ConditionsWidget = $ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/VarsToChangeContainer/VarsToChangeWidget
+@onready var cursor_selection_widget: _CursorSelectionWidget = $ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/CursorSelectionContainer/CursorSelectionWidget
 
 @export var pov_level : PovLevel
 @export var pov_image : Texture2D
@@ -36,6 +37,7 @@ func load_element(e: Element, pov_names : Array[String] = []) -> void:
 	necessary_items_widget.add_items(e.necessary_items)
 	conditions_widget.add_conditions(e.conditions)
 	vars_to_change_widget.add_conditions(e.vars_to_change)
+	cursor_selection_widget.load_cursor_shape(e.cursor_shape)
 
 func parse_element() -> Element:
 	# Build a new Element resource from the current UI state.
@@ -47,6 +49,7 @@ func parse_element() -> Element:
 	e.necessary_items = necessary_items_widget.items
 	e.conditions = conditions_widget.parse_conditions()
 	e.vars_to_change = vars_to_change_widget.parse_conditions()
+	e.cursor_shape = cursor_selection_widget.parse_cursor_shape()
 	return e
 
 func save_element_file(path: String) -> void:

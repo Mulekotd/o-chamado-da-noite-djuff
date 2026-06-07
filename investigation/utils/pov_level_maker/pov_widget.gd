@@ -8,6 +8,7 @@ class_name _PovWidget extends Control
 @onready var conditions_widget: _ConditionsWidget = $ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/ConditionsContainer/ConditionsWidget
 @onready var pov_image_rect: TextureRect = $ScrollContainer/Panel/MarginContainer/VBoxContainer/PovImageRect
 @onready var image_load_file_dialog: FileDialog = $ImageLoadFileDialog
+@onready var sound_widget: _SoundWidget = $ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/SoundContainer/SoundWidget
 
 const NO_IMAGE_POV = preload("uid://dwj11t2nw18l2")
 const POV_IMAGES_WIDGET = preload("uid://b2nqv18l1c3xo")
@@ -23,6 +24,7 @@ func load_pov(pov: Pov) -> void:
 	conditions_widget.add_conditions(pov.global_conditions)
 	behaviour_widget.load_behaviour(pov.especial_behaviour)
 	pov_images = pov.images
+	sound_widget.load_sound(pov.sound)
 	_load_preview_image()
 
 func parse_pov() -> Pov:
@@ -34,6 +36,7 @@ func parse_pov() -> Pov:
 	pov.elements = elements_widget.elements
 	pov.global_conditions = conditions_widget.parse_conditions()
 	pov.especial_behaviour = behaviour_widget.get_behaviour()
+	pov.sound = sound_widget.get_sound()
 	return pov
 
 func save_pov_file(path: String) -> void:

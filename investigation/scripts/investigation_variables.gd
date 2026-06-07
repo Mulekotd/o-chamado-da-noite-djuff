@@ -8,7 +8,7 @@ func clear_everything() -> void:
 	file.inventory.clear()
 	file.set_actions(get_max_actions())
 	file.last_pov = ""
-	file.add_actions(-file._actions)
+	file.add_investigation_points(-file.get_investigation_points())
 	
 ## vars are int for utility, use 0 and 1 if you want boolean behaviour
 @export var vars : Dictionary[String, int] = {

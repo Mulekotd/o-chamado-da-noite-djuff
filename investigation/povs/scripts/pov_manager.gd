@@ -12,9 +12,14 @@ const BOTTOM_ARROW = preload("uid://cm8l3y3l3dioj")
 const LEFT_ARROW = preload("uid://b513u1882j8ph")
 const RIGHT_ARROW = preload("uid://dlf5uc3tlxr2j")
 const TOP_ARROW = preload("uid://dtdkxktq3g8yr")
-const NORMAL_CURSOR = CURSOR_ARROW
-const DISABLED_CURSOR = CURSOR_FORBIDDEN
-const CLICKABLE_CURSOR = CURSOR_POINTING_HAND
+
+const CURSORS : Dictionary[int, CursorShape] = {
+	-1 : CURSOR_FORBIDDEN,
+	Element.cursor_shapes.DEFAULT : CURSOR_ARROW,
+	Element.cursor_shapes.POINTING_HAND : CURSOR_POINTING_HAND,
+	Element.cursor_shapes.MAGNIFIER : CURSOR_HELP,
+	Element.cursor_shapes.STEPS : CURSOR_MOVE,
+}
 
 signal element_clicked(element: Element)
 signal prompt_chain_called(p_chain: PromptChain)
@@ -219,12 +224,13 @@ func _update_cursor() -> void:
 	# Cursor feedback changes based on enabled state and hitbox hover.
 	var mouse_relative := _get_mouse_relative_to_view()
 	if enabled:
-		if _get_element_in_pos(mouse_relative):
-			_change_cursor(CLICKABLE_CURSOR)
+		var element : Element = _get_element_in_pos(mouse_relative)
+		if element:
+			_change_cursor(CURSORS[element.cursor_shape])
 		else:
-			_change_cursor(NORMAL_CURSOR)
+			_change_cursor(CURSORS[Element.cursor_shapes.DEFAULT])
 	else:
-		_change_cursor(DISABLED_CURSOR)
+		_change_cursor(CURSORS[-1])
 
 func _change_cursor(cursor: int) -> void:
 	if mouse_default_cursor_shape != cursor:

@@ -11,6 +11,7 @@ var coords : Vector2 = Vector2.ZERO
 @export var prompt_chain_widget : _PromptChainWidget
 @export var conditions_widget : _ConditionsWidget
 @export var image_file_dialog : FileDialog
+@export var sound_widget : _SoundWidget
 
 signal closed(PuzzlePov)
 
@@ -37,6 +38,8 @@ func load_puzzle_pov(pov: PuzzlePov) -> void:
 	conditions_widget.load_conditions(pov.global_conditions)
 	# coords
 	coords = pov.coords
+	# sound
+	sound_widget.load_sound(pov.sound)
 
 func parse_puzzle_pov() -> PuzzlePov:
 	var pov := PuzzlePov.new()
@@ -56,6 +59,8 @@ func parse_puzzle_pov() -> PuzzlePov:
 	pov.global_conditions = conditions_widget.parse_conditions()
 	# coords
 	pov.coords = coords
+	# sound
+	pov.sound = sound_widget.get_sound()
 	# done
 	return pov
 
