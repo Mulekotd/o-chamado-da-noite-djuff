@@ -33,9 +33,9 @@ runtime/balloon_path="res://ui/ballons/balloon.tscn"
 
 [display]
 
-window/size/viewport_width=1600
-window/size/viewport_height=900
-window/stretch/mode="viewport"
+window/size/viewport_width=1280
+window/size/viewport_height=960
+window/stretch/mode="canvas_items"
 window/vsync/vsync_mode=0
 
 [editor]

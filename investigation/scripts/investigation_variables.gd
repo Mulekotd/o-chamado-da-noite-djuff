@@ -17,7 +17,6 @@ func clear_everything() -> void:
 }
 
 @export var inventory : Array[Item] = [
-	preload("uid://cqpw454xu78in"),
 ]
 
 ## maximum amount of actions the player can have
