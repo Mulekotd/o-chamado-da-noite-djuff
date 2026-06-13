@@ -208,24 +208,6 @@ _data = {
 &"left": SubResource("Animation_74cj5")
 }
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hj3xq"]
-content_margin_left = 6.0
-content_margin_top = 8.0
-content_margin_right = 8.0
-content_margin_bottom = 6.0
-bg_color = Color(0, 0, 0, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jik6y"]
-bg_color = Color(0, 0, 0, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(1, 1, 1, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3tatp"]
-bg_color = Color(0, 0, 0, 1)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ni3wf"]
 content_margin_left = 0.0
 content_margin_top = 0.0
@@ -321,12 +303,12 @@ expand_mode = 2
 
 [node name="ActionsManager" parent="." unique_id=2116191467 instance=ExtResource("8_dtwxe")]
 layout_mode = 1
-offset_left = 536.0
-offset_top = -880.0
-offset_right = 626.0
-offset_bottom = -367.0
-clock_size = Vector2(90.135, 0)
-actions = 0
+offset_left = 533.0
+offset_top = -891.0
+offset_right = 623.0
+offset_bottom = -378.0
+clock_size = Vector2(80.51, 0)
+actions = 2
 max_actions = 5
 modulate_speed = 2.0
 bob_speed = 1.0
@@ -335,13 +317,10 @@ spin_speed = 0.5
 
 [node name="InventoryToggleButton" type="Button" parent="." unique_id=2101909362]
 layout_mode = 0
-offset_left = 1198.0
-offset_top = 38.0
-offset_right = 1251.0
-offset_bottom = 75.0
-theme_override_styles/normal = SubResource("StyleBoxFlat_hj3xq")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_jik6y")
-theme_override_styles/hover = SubResource("StyleBoxFlat_3tatp")
+offset_left = 1195.0
+offset_top = 71.0
+offset_right = 1254.0
+offset_bottom = 108.0
 toggle_mode = true
 text = "Itens"
 

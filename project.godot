@@ -54,7 +54,12 @@ symbol_widget=""
 
 [gui]
 
+fonts/dynamic_fonts/use_oversampling=false
+theme/default_font_antialiasing=0
+theme/default_font_subpixel_positioning=0
 theme/default_font_multichannel_signed_distance_field=true
+theme/custom="uid://3ifxctuaoc5m"
+theme/custom_font="uid://cpmkdvdd68wp"
 
 [input]
 

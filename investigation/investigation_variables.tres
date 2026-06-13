@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="InvestigationVars" format=3 uid="uid://beg2i2h24mutb"]
+[gd_resource type="Resource" script_class="InvestigationVars" format=3 uid="uid://dejvivv20yd3h"]
 
 [ext_resource type="Script" uid="uid://dqj183h8d13hn" path="res://investigation/items/scripts/item_resource.gd" id="1_2u1gg"]
 [ext_resource type="Script" uid="uid://47pf0lrk86x5" path="res://investigation/scripts/investigation_variables.gd" id="3_nj77k"]
@@ -19,6 +19,6 @@ vars = Dictionary[String, int]({
 "tv_code_found_surprised": 1,
 "tv_on": 1
 })
-_actions = 3
+_actions = 2
 last_pov = "sala"
 metadata/_custom_type_script = "uid://47pf0lrk86x5"
