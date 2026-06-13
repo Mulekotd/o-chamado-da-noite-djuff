@@ -8,5 +8,5 @@ Gritos na Rua das Flores  | Screams on Flower Street
 O Suspeito                | The suspect
 (Re)Acao Sangrenta        | Bloody (Re)Action
 A Casa na Rua das Flores  | The House on Flower Street
-Nao tem Ninguem em casa   | Nobody is Home
+Nao tem Ninguem em casa * | Nobody is Home (ja existe +/-) / There's no one Home
 

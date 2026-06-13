@@ -317,10 +317,10 @@ spin_speed = 0.5
 
 [node name="InventoryToggleButton" type="Button" parent="." unique_id=2101909362]
 layout_mode = 0
-offset_left = 1195.0
-offset_top = 71.0
-offset_right = 1254.0
-offset_bottom = 108.0
+offset_left = 1178.0
+offset_top = 78.0
+offset_right = 1266.0
+offset_bottom = 115.0
 toggle_mode = true
 text = "Itens"
 

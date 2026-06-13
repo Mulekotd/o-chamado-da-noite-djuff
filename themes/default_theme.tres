@@ -5,22 +5,18 @@
 [ext_resource type="StyleBox" uid="uid://c1mq0x8m0ajef" path="res://investigation/text_box/resources/hover_pressed_button_style_box.tres" id="2_cgx72"]
 [ext_resource type="StyleBox" uid="uid://82uktsq1bf80" path="res://investigation/text_box/resources/normal_button_style_box.tres" id="3_08sol"]
 [ext_resource type="StyleBox" uid="uid://dy40agbwfa2d7" path="res://investigation/text_box/resources/pressed_button_style_box.tres" id="4_yxy25"]
-[ext_resource type="Texture2D" uid="uid://benuo27jruygy" path="res://assets/images/UI/checkbox/checked.png" id="5_wfbly"]
-[ext_resource type="Texture2D" uid="uid://cg65gdu7p22i3" path="res://assets/images/UI/checkbox/checked_disabled.png" id="6_8lyrx"]
 [ext_resource type="Texture2D" uid="uid://lo64wrw6ifgt" path="res://assets/images/UI/checkbox/radio_checked.png" id="7_tpasj"]
 [ext_resource type="Texture2D" uid="uid://6rd00nmoe176" path="res://assets/images/UI/checkbox/radio_checked_disabled.png" id="8_uij3o"]
 [ext_resource type="Texture2D" uid="uid://bisdj6q7hg2o" path="res://assets/images/UI/checkbox/radio_unchecked.png" id="9_ip44t"]
 [ext_resource type="Texture2D" uid="uid://mqw6r78y7cx0" path="res://assets/images/UI/checkbox/radio_unchecked_disabled.png" id="10_3nfna"]
-[ext_resource type="Texture2D" uid="uid://c7oxacr074tjc" path="res://assets/images/UI/checkbox/unchecked.png" id="11_glsah"]
-[ext_resource type="Texture2D" uid="uid://y2wvhkli8dor" path="res://assets/images/UI/checkbox/unchecked_disabled.png" id="12_4suh3"]
-[ext_resource type="Texture2D" path="res://assets/images/UI/checked.png" id="13_xjkmo"]
-[ext_resource type="Texture2D" path="res://assets/images/UI/checked_disabled.png" id="14_fsetk"]
-[ext_resource type="Texture2D" path="res://assets/images/UI/checked_disabled_mirrored.png" id="15_64ey7"]
-[ext_resource type="Texture2D" path="res://assets/images/UI/checked_mirrored.png" id="16_q211v"]
-[ext_resource type="Texture2D" path="res://assets/images/UI/unchecked.png" id="17_adkum"]
-[ext_resource type="Texture2D" path="res://assets/images/UI/unchecked_disabled.png" id="18_2wuy7"]
-[ext_resource type="Texture2D" path="res://assets/images/UI/unchecked_disabled_mirrored.png" id="19_lodxj"]
-[ext_resource type="Texture2D" path="res://assets/images/UI/unchecked_mirrored.png" id="20_e7tkf"]
+[ext_resource type="Texture2D" uid="uid://benuo27jruygy" path="res://assets/images/UI/checkbox/checked.png" id="13_xjkmo"]
+[ext_resource type="Texture2D" uid="uid://cg65gdu7p22i3" path="res://assets/images/UI/checkbox/checked_disabled.png" id="14_fsetk"]
+[ext_resource type="Texture2D" uid="uid://buw7genk7xhin" path="res://assets/images/UI/checkbutton/checked_disabled_mirrored.png" id="15_64ey7"]
+[ext_resource type="Texture2D" uid="uid://7vxxnuyxajge" path="res://assets/images/UI/checkbutton/checked_mirrored.png" id="16_q211v"]
+[ext_resource type="Texture2D" uid="uid://c7oxacr074tjc" path="res://assets/images/UI/checkbox/unchecked.png" id="17_adkum"]
+[ext_resource type="Texture2D" uid="uid://y2wvhkli8dor" path="res://assets/images/UI/checkbox/unchecked_disabled.png" id="18_2wuy7"]
+[ext_resource type="Texture2D" uid="uid://dgu46qqilrbnw" path="res://assets/images/UI/checkbutton/unchecked_disabled_mirrored.png" id="19_lodxj"]
+[ext_resource type="Texture2D" uid="uid://u28drhsmwiu2" path="res://assets/images/UI/checkbutton/unchecked_mirrored.png" id="20_e7tkf"]
 [ext_resource type="StyleBox" uid="uid://blr7j4fpwbm6l" path="res://themes/white_style_box_flat.tres" id="21_twh6n"]
 [ext_resource type="Texture2D" uid="uid://cm8l3y3l3dioj" path="res://investigation/interface/images/bottom_arrow.png" id="22_xrlc3"]
 [ext_resource type="Texture2D" uid="uid://dlf5uc3tlxr2j" path="res://investigation/interface/images/right_arrow.png" id="23_08sol"]
@@ -74,14 +70,14 @@ Button/styles/hover = ExtResource("1_5juw1")
 Button/styles/hover_pressed = ExtResource("2_cgx72")
 Button/styles/normal = ExtResource("3_08sol")
 Button/styles/pressed = ExtResource("4_yxy25")
-CheckBox/icons/checked = ExtResource("5_wfbly")
-CheckBox/icons/checked_disabled = ExtResource("6_8lyrx")
+CheckBox/icons/checked = ExtResource("13_xjkmo")
+CheckBox/icons/checked_disabled = ExtResource("14_fsetk")
 CheckBox/icons/radio_checked = ExtResource("7_tpasj")
 CheckBox/icons/radio_checked_disabled = ExtResource("8_uij3o")
 CheckBox/icons/radio_unchecked = ExtResource("9_ip44t")
 CheckBox/icons/radio_unchecked_disabled = ExtResource("10_3nfna")
-CheckBox/icons/unchecked = ExtResource("11_glsah")
-CheckBox/icons/unchecked_disabled = ExtResource("12_4suh3")
+CheckBox/icons/unchecked = ExtResource("17_adkum")
+CheckBox/icons/unchecked_disabled = ExtResource("18_2wuy7")
 CheckButton/icons/checked = ExtResource("13_xjkmo")
 CheckButton/icons/checked_disabled = ExtResource("14_fsetk")
 CheckButton/icons/checked_disabled_mirrored = ExtResource("15_64ey7")
@@ -107,6 +103,6 @@ Tree/colors/font_color = Color(1, 1, 1, 1)
 Tree/icons/arrow = ExtResource("22_xrlc3")
 Tree/icons/arrow_collapsed = ExtResource("23_08sol")
 Tree/icons/arrow_collapsed_mirrored = ExtResource("24_yxy25")
-Tree/icons/checked = ExtResource("5_wfbly")
-Tree/icons/checked_disabled = ExtResource("6_8lyrx")
+Tree/icons/checked = ExtResource("13_xjkmo")
+Tree/icons/checked_disabled = ExtResource("14_fsetk")
 Tree/icons/select_arrow = ExtResource("22_xrlc3")

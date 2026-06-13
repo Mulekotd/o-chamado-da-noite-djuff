@@ -1,0 +1,66 @@
+*telefone toca*
+
+*detetive atende*
+
+-Alô, detetive [nome]?
+
+-Sim chefe, sou eu. O que houve?
+
+-Nosso departamento tem recebido denúncias de gritos vindo de uma casa na Rua das Flores | Voce conhece essa região, não é?
+
+-Sim, conheço sim, é bem perto de onde eu moro. |(Em pensamento) Estranho, nunca ouvi nada vindo de lá...
+
+-Ah, isso facilita as coisas. | Você é o responsável por essa investigação, detetive. Preciso que vá até o local assim que possivel.
+
+-Pode deixar, chefe, já estou a caminho!
+
+*desliga o telefone*
+
+-Hm, um caso aqui no meu bairro... | Estou empolgado, tenho q sair o quanto antes.
+
+*quase saindo pela porta*
+
+-Vai sair de casa é?
+
+-Primeiramente bom dia, irmão. E sim, estou saindo, a cidade precisa de mim.
+
+-Huh, achei que você nem tinha mais esse emprego. | Ah é, bom dia!
+
+-Sempre tive, só não haviam casos para eu investigar... Por um tempo...
+
+-Entendi. Mas tem certeza que é uma boa ideia? | Você tá um lixo, cara. Não sei como consegue ter uma cara tão cansada mesmo dormindo tanto.
+
+-Tá, tá, sei que você sente muito a minha falta, mas eu preciso ir. Até mais.
+
+-Até.
+
+*sai da casa e chega na outra*
+
+-Parece que é essa casa aqui.
+
+*olha para o relogio*
+
+Urgh, eu demorei tanto assim pra achar essa casa? | Não tenho muito tempo, já estou começando a ficar com sono de novo...
+
+*relogios vao para o lado da tela.*
+
+*chega perto da porta*
+
+*vai bater na porta*
+
+*porta abre*
+
+-Huh, a porta está aberta...
+
+*OPCAO: bater na porta mesmo assim*
+
+-*toc toc toc* Ooooi, Tem alguem em casa!?
+
+*ninguem responde*
+
+-A casa está estranhamente silenciosa...
+
+*OPCAO OBRIGATORIA: entrar na casa*
+
+-Bem, não me deixaram muita escolha, né. | Vou entrar.
+

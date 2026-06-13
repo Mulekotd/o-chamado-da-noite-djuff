@@ -1,24 +1,9 @@
-[gd_resource type="Resource" script_class="InvestigationVars" format=3 uid="uid://dejvivv20yd3h"]
+[gd_resource type="Resource" script_class="InvestigationVars" format=3 uid="uid://cnnha2pravvod"]
 
 [ext_resource type="Script" uid="uid://dqj183h8d13hn" path="res://investigation/items/scripts/item_resource.gd" id="1_2u1gg"]
 [ext_resource type="Script" uid="uid://47pf0lrk86x5" path="res://investigation/scripts/investigation_variables.gd" id="3_nj77k"]
 
 [resource]
 script = ExtResource("3_nj77k")
-vars = Dictionary[String, int]({
-"deu chave": 1,
-"luz_da_sala_ligada": 0,
-"option": -1,
-"porta_destrancada": 1,
-"surpreso com a porta": 1,
-"televisao_puzzle_pp_digit_0": 0,
-"televisao_puzzle_pp_digit_1": 0,
-"televisao_puzzle_pp_digit_2": 0,
-"televisao_puzzle_pp_digit_3": 0,
-"tv_code_found": 0,
-"tv_code_found_surprised": 1,
-"tv_on": 1
-})
-_actions = 2
-last_pov = "sala"
+_actions = 5
 metadata/_custom_type_script = "uid://47pf0lrk86x5"
