@@ -1,9 +1,7 @@
 [gd_scene format=3 uid="uid://bqse5lw2xwni0"]
 
 [ext_resource type="Script" uid="uid://c2b64ya5phios" path="res://investigation/povs/scripts/pov_manager.gd" id="1_m80ka"]
-[ext_resource type="Resource" uid="uid://c06lvdpcxu5l3" path="res://investigation/povs/pov_level_test.tres" id="2_i0poh"]
 [ext_resource type="Texture2D" uid="uid://b513u1882j8ph" path="res://investigation/interface/images/left_arrow.png" id="3_i0poh"]
-[ext_resource type="Texture2D" uid="uid://dokahp8nt6kli" path="res://investigation/images/povs/tv_puzzle/tv_off.png" id="3_m2wr2"]
 [ext_resource type="Texture2D" uid="uid://dtdkxktq3g8yr" path="res://investigation/interface/images/top_arrow.png" id="4_8wbnf"]
 [ext_resource type="Script" uid="uid://gdbrka26jljo" path="res://investigation/povs/scripts/digits_container.gd" id="4_fx85t"]
 [ext_resource type="Texture2D" uid="uid://dlf5uc3tlxr2j" path="res://investigation/interface/images/right_arrow.png" id="5_dss2o"]
@@ -28,7 +26,6 @@ offset_bottom = 0.24502563
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_m80ka")
-pov_level = ExtResource("2_i0poh")
 arrow_slide_duration = 0.25
 arrow_fade_duration = 0.075
 arrow_transition_offset_scale = 0.05
@@ -40,7 +37,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_m2wr2")
 expand_mode = 1
 
 [node name="DigitsContainer" type="Control" parent="View" unique_id=341325081]

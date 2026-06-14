@@ -28,7 +28,7 @@ signal sound_played(sound: AudioStream)
 
 var pov_index : int
 var current_pov : Pov
-var enabled : bool = true :
+var enabled : bool = false :
 	set(x):
 		enabled = x
 		#print("enabled = ", x)
@@ -58,7 +58,6 @@ var _on_puzzle_pov : bool = false
 func _ready() -> void:
 	_sync_view_base_pos()
 	_reset_shadow_panel()
-	_load_last_pov()
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_RESIZED:
@@ -66,6 +65,11 @@ func _notification(what: int) -> void:
 
 func _process(_delta: float) -> void:
 	_update_view_pan(_delta)
+
+func load_pov_level(level: PovLevel) -> void:
+	pov_level = level
+	_update_cursor()
+	enabled = true
 
 func change_pov(pov: Pov) -> void:
 	if pov != current_pov:

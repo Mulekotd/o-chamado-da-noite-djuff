@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://1100rxsitcfq" path="res://investigation/scripts/investigation.gd" id="1_h1ggt"]
 [ext_resource type="PackedScene" uid="uid://dtd12y2eekoi1" path="res://investigation/text_box/scenes/text_box.tscn" id="2_1t5j4"]
 [ext_resource type="PackedScene" uid="uid://bqse5lw2xwni0" path="res://investigation/povs/scenes/pov_manager.tscn" id="3_jik6y"]
-[ext_resource type="Resource" uid="uid://dl3qq3hinw5cm" path="res://investigation/pov_levels/pov_lvl.tres" id="4_ni3wf"]
 [ext_resource type="Texture2D" uid="uid://cy7q7mjb03npd" path="res://investigation/interface/images/eye-Sheet.png" id="5_hj3xq"]
 [ext_resource type="PackedScene" uid="uid://ch7gu2n8g0kih" path="res://investigation/scenes/person_display.tscn" id="6_3tatp"]
 [ext_resource type="Texture2D" uid="uid://dg1nq4yoy3kes" path="res://investigation/interface/images/investigation_hud_overlay.png" id="7_hkwvp"]
@@ -258,7 +257,6 @@ offset_left = 0.4719982
 offset_top = 0.4239998
 offset_right = 0.039978027
 offset_bottom = 0.34399414
-pov_level = ExtResource("4_ni3wf")
 
 [node name="EyeSprite2D" type="AnimatedSprite2D" parent="." unique_id=636611070]
 position = Vector2(143, 771)
@@ -308,7 +306,7 @@ offset_top = -891.0
 offset_right = 623.0
 offset_bottom = -378.0
 clock_size = Vector2(80.51, 0)
-actions = 2
+actions = 5
 max_actions = 5
 modulate_speed = 2.0
 bob_speed = 1.0

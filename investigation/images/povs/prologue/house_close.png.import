@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dyuxoe510guke"
-path="res://.godot/imported/lock_pov_test.png-048d6061720c7a513ff54a21c2f9aaa8.ctex"
+uid="uid://bd0gu3m3lomdi"
+path="res://.godot/imported/house_close.png-d7f616c0d6d698037b0883aaf02b7644.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://investigation/images/povs/lock_pov_test.png"
-dest_files=["res://.godot/imported/lock_pov_test.png-048d6061720c7a513ff54a21c2f9aaa8.ctex"]
+source_file="res://investigation/images/povs/prologue/house_close.png"
+dest_files=["res://.godot/imported/house_close.png-d7f616c0d6d698037b0883aaf02b7644.ctex"]
 
 [params]
 

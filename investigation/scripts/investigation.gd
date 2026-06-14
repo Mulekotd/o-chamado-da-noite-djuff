@@ -1,4 +1,4 @@
-extends Control
+class_name _Investigation extends Control
 
 @onready var text_box: TextBox = $TextBox
 @onready var pov_manager: PovManager = $PovManager
