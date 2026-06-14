@@ -301,24 +301,26 @@ expand_mode = 2
 
 [node name="ActionsManager" parent="." unique_id=2116191467 instance=ExtResource("8_dtwxe")]
 layout_mode = 1
-offset_left = 533.0
-offset_top = -891.0
-offset_right = 623.0
-offset_bottom = -378.0
+offset_left = 544.0
+offset_top = -888.0
+offset_right = 634.0
+offset_bottom = -375.0
 clock_size = Vector2(80.51, 0)
 actions = 5
-max_actions = 5
 modulate_speed = 2.0
 bob_speed = 1.0
 bob_amplitude = 0.15
 spin_speed = 0.5
+pos_overwrite = Vector2(0, 0)
+use_pos_overwrite = false
+pos_speed = 2.0
 
 [node name="InventoryToggleButton" type="Button" parent="." unique_id=2101909362]
 layout_mode = 0
-offset_left = 1178.0
-offset_top = 78.0
-offset_right = 1266.0
-offset_bottom = 115.0
+offset_left = 1183.0
+offset_top = 76.0
+offset_right = 1271.0
+offset_bottom = 113.0
 toggle_mode = true
 text = "Itens"
 
