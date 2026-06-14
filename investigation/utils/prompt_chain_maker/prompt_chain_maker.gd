@@ -21,7 +21,7 @@ func load_prompt_chain(p_chain: PromptChain) -> void:
 	prompt_buffer.clear()
 	name_line_edit.clear()
 	name_line_edit.text = p_chain.name
-	default_prompt_image_widget.load_img(p_chain.default_image)
+	default_prompt_image_widget.load_img(p_chain.default_image_path)
 	prompt_buffer = p_chain.prompts.duplicate()
 
 func save_prompt_chain(path: String) -> void:
@@ -31,7 +31,7 @@ func save_prompt_chain(path: String) -> void:
 func parse_prompt_chain() -> PromptChain:
 	var p_chain := PromptChain.new()
 	p_chain.name = name_line_edit.text
-	p_chain.default_image = default_prompt_image_widget.get_img()
+	p_chain.default_image_path = default_prompt_image_widget.get_img()
 	for w in prompts_container.get_children():
 		if w.is_in_group("prompt_widget"):
 			p_chain.prompts.append(w.parse_prompt())

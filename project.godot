@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="O CHAMADO DA NOITE"
-run/main_scene="uid://chs5heeu26nd3"
+run/main_scene="uid://dd40v3jpeddb8"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 
 [audio]

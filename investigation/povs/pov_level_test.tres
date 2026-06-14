@@ -1,6 +1,5 @@
 [gd_resource type="Resource" script_class="PovLevel" format=3 uid="uid://c06lvdpcxu5l3"]
 
-[ext_resource type="Texture2D" uid="uid://c6uq8ruu8dc8f" path="res://investigation/povs/pov_level_bg.jpeg" id="1_ahayo"]
 [ext_resource type="Script" uid="uid://ffh4hevhqls8" path="res://investigation/povs/scripts/pov_directions.gd" id="2_i1fj6"]
 [ext_resource type="Script" uid="uid://deej6yes3fmnc" path="res://investigation/povs/scripts/element_resource.gd" id="3_xi5ua"]
 [ext_resource type="Script" uid="uid://dqj183h8d13hn" path="res://investigation/items/scripts/item_resource.gd" id="4_i1fj6"]
@@ -163,6 +162,6 @@ coords = Vector2(1897.5502, 2480.598)
 
 [resource]
 script = ExtResource("7_g84im")
-bg_img = ExtResource("1_ahayo")
+bg_image_path = "res://investigation/povs/pov_level_bg.jpeg"
 pov_directions_array = Array[ExtResource("2_i1fj6")]([SubResource("Resource_qtm1o"), SubResource("Resource_768op")])
 dir_scale = 0.97

@@ -27,18 +27,27 @@ func update_image() -> void:
 			texture = symbols[i]
 
 ## call this after assigning an apropriate parent to this node
-func load_digit(d_pos: Vector2, d_size: Vector2, imgs: Array[Texture2D], var_to_change: String) -> void:
+func load_digit(d_pos: Vector2, d_size: Vector2, symbol_paths: Array[String], var_to_change: String) -> void:
 	position = d_pos
 	size = d_size
-	symbols = imgs
-	total_symbols = imgs.size()
+	symbols = []
+	for p in symbol_paths:
+		if p:
+			var tex := load(p)
+			if tex is Texture2D:
+				symbols.append(tex)
+			else:
+				symbols.append(null)
+		else:
+			symbols.append(null)
+	total_symbols = symbols.size()
 	global_var = var_to_change
-	curr_value = InvestigationVars.get_var_value(global_var) % total_symbols
+	curr_value = InvestigationVars.get_var_value(global_var) % max(total_symbols, 1)
 	update_image()
 
 func increment_digit(_event) -> void:
 	if Input.is_action_just_pressed("ui_mouse_pressed") and enabled:
-		curr_value = (curr_value + 1) % total_symbols
+		curr_value = (curr_value + 1) % max(total_symbols, 1)
 		update_image()
 		InvestigationVars.update_variables({global_var: curr_value})
 		value_changed.emit()

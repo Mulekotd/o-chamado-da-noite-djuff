@@ -5,43 +5,42 @@ const NO_IMAGE = preload("uid://dwj11t2nw18l2")
 
 @onready var image_load_file_dialog: FileDialog = $ImageLoadFileDialog
 
-@export var default_img : Texture2D = NO_IMAGE
+var image_path : String = ""
+var default_image_path : String = ""
 
-signal changed(img: Texture2D)
+signal changed(img_path: String)
 
 func _ready() -> void:
-	# Initialize with the chain's default image.
-	texture = default_img
+	_load_from_path(default_image_path)
 
-func load_img(img: Texture2D) -> void:
-	if img:
-		print(img)
-		texture = img
-	else:
-		texture = default_img
-	changed.emit(texture)
+func load_img(path: String) -> void:
+	image_path = path
+	_load_from_path(path)
 
-func get_img() -> Texture2D:
-	if texture != NO_IMAGE:
-		return texture
-	else:
-		return null
+func _load_from_path(path: String) -> void:
+	if path:
+		var tex := load(path)
+		if tex is Texture2D:
+			texture = tex
+			return
+	texture = load(default_image_path) if default_image_path else NO_IMAGE
 
-func change_default_img(img: Texture2D) -> void:
-	if img:
-		if texture == default_img:
-			texture = img
-		default_img = img
+func get_img() -> String:
+	return image_path
+
+func change_default_img(path: String) -> void:
+	default_image_path = path
+	if not image_path:
+		_load_from_path(path)
 
 func _on_gui_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("ui_mouse_pressed"):
 		image_load_file_dialog.popup()
 
 func _on_close_button_pressed() -> void:
-	load_img(null)
-	changed.emit(texture)
+	load_img("")
+	changed.emit(image_path)
 
 func _on_image_load_file_dialog_file_selected(path: String) -> void:
-	var img := load(path)
-	if img is Texture2D:
-		load_img(img) 
+	load_img(path)
+	changed.emit(image_path)

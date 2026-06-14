@@ -38,7 +38,7 @@ var enabled : bool = false :
 @export var pov_level : PovLevel
 @export var arrow_hitbox : float = 16
 ## time to wait before showing the prompt_chain if a pov has one
-@export var prompt_wait_time : float = 1
+@export var prompt_wait_time : float = 2
 ## how far the POV image pans based on mouse distance to center
 @export var pan_amount : Vector2 = Vector2(12, 8)
 ## how quickly the POV image lerps to its pan position
@@ -69,6 +69,7 @@ func _process(_delta: float) -> void:
 func load_pov_level(level: PovLevel) -> void:
 	pov_level = level
 	_update_cursor()
+	_load_last_pov()
 	enabled = true
 
 func change_pov(pov: Pov) -> void:
@@ -87,6 +88,7 @@ func change_pov(pov: Pov) -> void:
 			# Pause navigation while the POV's prompt chain is displayed.
 			enabled = false
 			await get_tree().create_timer(prompt_wait_time).timeout
+			print("JOGA A PROMT CHAIN")
 			prompt_chain_called.emit(current_pov.prompt_chain)
 		if current_pov.especial_behaviour:
 			for s in get_parent().get_children():
@@ -130,7 +132,8 @@ func update_view(pov: Pov = current_pov) -> void:
 		x = InvestigationVars.get_conditions_value(pi.conditions)
 		if x > highest:
 			highest = x
-			img = pi.texture
+			if pi.image_path:
+				img = load(pi.image_path)
 	view.texture = img
 	update_arrows()
 

@@ -54,7 +54,7 @@ static func get_conditions_met(conditions: Dictionary[String, int]) -> int:
 	return conditions_met
 
 static func meets_all_conditions(conditions: Dictionary[String, int]) -> int:
-	return get_conditions_met(conditions) == conditions.size()
+	return get_conditions_met(conditions) >= conditions.size()
 
 static func check_inventory(items: Array[Item]) -> bool:
 	for i in items:

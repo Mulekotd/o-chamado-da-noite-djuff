@@ -26,7 +26,7 @@ func load_digits(pp: PuzzlePov) -> void:
 		
 		var d := Digit.new()
 		add_child(d)
-		d.load_digit(d_pos, d_size, pp.symbols, var_to_change)
+		d.load_digit(d_pos, d_size, pp.symbol_paths, var_to_change)
 		d.value_changed.connect(check_combinations)
 		d.value_changed.connect(digit_changed.emit)
 		

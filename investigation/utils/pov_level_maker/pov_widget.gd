@@ -47,10 +47,12 @@ func _load_pov_images(pis: Array[PovImage]) -> void:
 	_load_preview_image()
 
 func _load_preview_image() -> void:
-	if pov_images and pov_images[0].texture:
-		pov_image_rect.texture = pov_images[0].texture
-	else:
-		pov_image_rect.texture = NO_IMAGE_POV
+	if pov_images and pov_images[0].image_path:
+		var tex := load(pov_images[0].image_path)
+		if tex is Texture2D:
+			pov_image_rect.texture = tex
+			return
+	pov_image_rect.texture = NO_IMAGE_POV
 
 signal closed(pov: Pov)
 func _on_close_button_pressed() -> void:
@@ -58,9 +60,9 @@ func _on_close_button_pressed() -> void:
 	queue_free()
 
 func _on_image_load_file_dialog_file_selected(path: String) -> void:
-	# Load and assign a new POV image.
-	var img := Image.load_from_file(path)
-	pov_image_rect.texture = ImageTexture.create_from_image(img)
+	var tex := load(path)
+	if tex is Texture2D:
+		pov_image_rect.texture = tex
 
 func _on_pov_image_rect_gui_input(event: InputEvent) -> void:
 	if !Input.is_action_just_pressed("ui_mouse_pressed"):

@@ -23,6 +23,7 @@ var last_mouse_pos: Vector2 = Vector2.ZERO
 var view_offset: Vector2 = Vector2.ZERO
 var zoom: float = 1.0
 var last_saved_path: String = ""
+var _bg_image_path : String = ""
 @export var zoom_factor : float = 0.04
 @export var min_zoom : float = 0.01
 @export var max_zoom : float = 4
@@ -102,7 +103,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 # Serialize the current editor state into a PovLevel resource.
 func parse_pov_level() -> PovLevel:
 	var pl := PovLevel.new()
-	pl.bg_img = bg.texture
+	pl.bg_image_path = _bg_image_path
 	pl.dir_scale = current_widget_scale
 	pl.default_pov = default_pov_name_widget.get_pov_name()
 	for pdw in dirs:
@@ -119,7 +120,11 @@ func load_pov_level(pl: PovLevel) -> void:
 	current_widget_scale = pl.dir_scale if pl.dir_scale > 0.0 else 1.0
 	clear_level()
 	default_pov_name_widget.load_pov_name(pl.default_pov)
-	bg.texture = pl.bg_img
+	_bg_image_path = pl.bg_image_path
+	if _bg_image_path:
+		var tex := load(_bg_image_path)
+		if tex is Texture2D:
+			bg.texture = tex
 	for pd in pl.pov_directions_array:
 		add_pov_directions(pd.coords)
 		await dirs[-1].load_pov_directions(pd)
@@ -260,7 +265,7 @@ func _save_pov_subresource(pov: Pov, sub_dirs: Dictionary, caches: Dictionary, c
 	pov_copy.name = pov.name
 	pov_copy.description = pov.description
 	pov_copy.prompt_chain = saved_prompt_chain
-	pov_copy.image = pov.image
+	pov_copy.images = pov.images
 	pov_copy.global_conditions = pov.global_conditions.duplicate(true)
 	for element in pov.elements:
 		var element_name := "%s_element" % _sanitize_file_name(element.name, "element")
@@ -316,7 +321,7 @@ func _save_puzzle_pov_subresource(pov: PuzzlePov, sub_dirs: Dictionary, caches: 
 	pov_copy.images = pov.images
 	pov_copy.global_conditions = pov.global_conditions.duplicate(true)
 	pov_copy.back_pov = pov.back_pov
-	pov_copy.symbols = pov.symbols
+	pov_copy.symbol_paths = pov.symbol_paths
 	pov_copy.digits = pov.digits
 	pov_copy.combinations = pov.combinations
 	pov_copy.coords = pov.coords
@@ -352,7 +357,7 @@ func save_pov_level_sub_resources(dir_path: String) -> void:
 	}
 
 	var saved_level := PovLevel.new()
-	saved_level.bg_img = source_level.bg_img
+	saved_level.bg_image_path = source_level.bg_image_path
 	saved_level.dir_scale = source_level.dir_scale
 	# pegar pov directions
 	for i in range(source_level.pov_directions_array.size()):
@@ -949,5 +954,7 @@ func _on_load_image_button_pressed() -> void:
 	load_image_file_dialog.popup()
 
 func _on_image_load_file_dialog_file_selected(path: String) -> void:
-	var img := Image.load_from_file(path)
-	bg.texture = ImageTexture.create_from_image(img)
+	_bg_image_path = path
+	var tex := load(path)
+	if tex is Texture2D:
+		bg.texture = tex

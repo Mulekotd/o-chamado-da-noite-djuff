@@ -2,7 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://chs5heeu26nd3" path="res://investigation/scenes/investigation.tscn" id="1_4m1sv"]
 [ext_resource type="Script" uid="uid://dk6b2tfqg8kcm" path="res://investigation/scripts/prologue.gd" id="1_cog5e"]
-[ext_resource type="Resource" uid="uid://dwe01nkxet0bk" path="res://investigation/pov_levels/prologue_pov_level.tres" id="2_dmmod"]
+[ext_resource type="Resource" path="res://investigation/pov_levels/prologue_pov_level.tres" id="2_dmmod"]
+[ext_resource type="Texture2D" uid="uid://dek0h1xjph8sj" path="res://investigation/images/povs/prologue/phone_centered.png" id="4_d4bjf"]
 
 [node name="Prologue" type="Control" unique_id=906736984 node_paths=PackedStringArray("investigation")]
 layout_mode = 3
@@ -18,3 +19,15 @@ pov_level = ExtResource("2_dmmod")
 [node name="Investigation" parent="." unique_id=1591324732 instance=ExtResource("1_4m1sv")]
 unique_name_in_owner = true
 layout_mode = 1
+
+[node name="TelephoneOverlay" type="TextureRect" parent="." unique_id=1473169637]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_d4bjf")
+expand_mode = 1
+
+[connection signal="gui_input" from="TelephoneOverlay" to="." method="_on_telephone_overlay_gui_input"]
