@@ -14,6 +14,7 @@ offset_left = 375.0
 offset_top = 331.0
 offset_right = 374.99997
 offset_bottom = 330.8
+mouse_default_cursor_shape = 2
 script = ExtResource("1_2ofle")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=756255727]

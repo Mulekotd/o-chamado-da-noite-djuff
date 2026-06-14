@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="InvestigationVars" format=3 uid="uid://dpatjqv06x02t"]
+[gd_resource type="Resource" script_class="InvestigationVars" format=3]
 
-[ext_resource type="Script" uid="uid://dqj183h8d13hn" path="res://investigation/items/scripts/item_resource.gd" id="1_2u1gg"]
-[ext_resource type="Script" uid="uid://47pf0lrk86x5" path="res://investigation/scripts/investigation_variables.gd" id="3_nj77k"]
+[ext_resource type="Script" path="res://investigation/items/scripts/item_resource.gd" id="1_2u1gg"]
+[ext_resource type="Script" path="res://investigation/scripts/investigation_variables.gd" id="3_nj77k"]
 
 [resource]
 script = ExtResource("3_nj77k")
@@ -9,11 +9,14 @@ vars = Dictionary[String, int]({
 "about_to_leave": 1,
 "answered_phone": 1,
 "display_clocks": 1,
+"entered_house": 1,
+"house_door_open": 1,
+"knocked_on_door": 1,
 "left_home": 1,
 "looking_at_watch": 0,
 "option": -1,
 "phone_down": 1
 })
 _actions = 5
-last_pov = "casa longe"
+last_pov = "frente da casa"
 metadata/_custom_type_script = "uid://47pf0lrk86x5"
