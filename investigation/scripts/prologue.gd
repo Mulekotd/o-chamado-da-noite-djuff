@@ -8,12 +8,15 @@ extends Control
 
 var transitioned_to_house : bool = false
 var displayed_clocks : bool = false
+var transitioned_to_day_1 : bool = false
 
 # TODO fazer telefone ficar na tela ate player clicar
 # TODO fazer relogios so aparecerem quando detetive olhar
 # TODO fazer transicao de casa para casa
 
 func _ready() -> void:
+	InvestigationVars.set_last_level("prologue")
+	
 	investigation.pov_manager.prompt_wait_time = 0
 	investigation.pov_manager.load_pov_level(pov_level)
 	investigation.pov_manager.prompt_wait_time = 0.5
@@ -22,9 +25,18 @@ func _ready() -> void:
 	investigation.actions_manager.pos_overwrite = Vector2(480, 480)
 	investigation.actions_manager.use_pos_overwrite = true
 	
+	color_overlay.mouse_filter = Control.MOUSE_FILTER_STOP
+	color_overlay.color = Color.BLACK
+	await get_tree().create_tween().tween_property(
+		color_overlay, "color", Color(0,0,0,0), 1).finished
+	color_overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	
 	# TODO play telephone ringing
 
 func _process(delta: float) -> void:
+	if not transitioned_to_day_1 and InvestigationVars.meets_all_conditions({"entered_house" : 1}):
+		_start_day1()
+	
 	if not transitioned_to_house and InvestigationVars.meets_all_conditions({"left_home" : 1}):
 		transitioned_to_house = true
 		color_overlay.mouse_filter = Control.MOUSE_FILTER_STOP
@@ -40,11 +52,20 @@ func _process(delta: float) -> void:
 		investigation.actions_manager.modulate = Color.WHITE
 		investigation.actions_manager.use_pos_overwrite = false
 
+func _start_day1() -> void:
+	InvestigationVars.set_last_level("day1")
+	color_overlay.mouse_filter = Control.MOUSE_FILTER_STOP
+	color_overlay.color = Color(0,0,0,0)
+	await get_tree().create_tween().tween_property(
+			color_overlay, "color", Color(0,0,0,1), 3).finished
+	get_tree().change_scene_to_packed(preload("uid://jk2netpdpxow"))
+
 func _on_telephone_overlay_gui_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("ui_mouse_pressed"):
 		telephone_overlay.queue_free()
 		investigation.text_box.next_prompt(-1)
 		color_overlay.color = Color.WHITE
 		get_tree().create_tween().tween_property(color_overlay, "color", Color.TRANSPARENT, 1)
+		investigation.sound_manager.play_soundtrack(preload("uid://cv1ok2itg5os8"))
 		# TODO play telephone sound
 		# TODO stop telephone ringing

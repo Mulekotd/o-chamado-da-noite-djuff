@@ -39,3 +39,6 @@ func play_soundtrack(sound: AudioStream) -> void:
 	music_stream_player.stream = sound
 	music_stream_player.bus = "Music"
 	music_stream_player.play()
+
+func stop_soundtrack() -> void:
+	music_stream_player.stop()

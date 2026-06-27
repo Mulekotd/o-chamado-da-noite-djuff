@@ -3,13 +3,14 @@ class_name InvestigationVars extends Resource
 
 @export_tool_button("clear global variables")
 var clear_action = clear_everything
-func clear_everything() -> void:
+static func clear_everything() -> void:
 	file.vars.clear()
 	file.vars["option"] = -1
 	file.inventory.clear()
 	file.set_actions(get_max_actions())
 	file.last_pov = ""
 	file.add_investigation_points(-file.get_investigation_points())
+	ResourceSaver.save(file)
 	
 ## vars are int for utility, use 0 and 1 if you want boolean behaviour
 @export var vars : Dictionary[String, int] = {
@@ -27,13 +28,16 @@ func clear_everything() -> void:
 ## points that influence how much insight the character has about the investigation
 @export var _investigation_points : int = 0
 
-@export var last_pov : String
+## last level the player was in
+@export var last_level: String = ""
+
+## last pov the player was in
+@export var last_pov : String = ""
 
 ## value to assign to a newly created variable
 static var default_value : int = 0
 
-static var file : InvestigationVars = load("res://investigation/investigation_variables.tres")
-
+static var file : InvestigationVars = load("uid://d3xwhb1j1yhn6")
 
 ## returns int(number-of-conditions-met / number-of-keys-given) * number-of-keys-given - 1
 static func get_conditions_value(conditions: Dictionary[String, int], count_option : bool = true) -> float:
@@ -83,6 +87,13 @@ static func remove_item(items: Array[Item]) -> void:
 	for item in items:
 		file.inventory.erase(item)
 	ResourceSaver.save(file)
+
+static func set_last_level(lvl_name: String) -> void:
+	file.last_level = lvl_name
+	ResourceSaver.save(file)
+
+static func get_last_level() -> String:
+	return file.last_level
 
 static func set_last_pov(p_name: String) -> void:
 	file.last_pov = p_name

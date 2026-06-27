@@ -47,8 +47,6 @@ func _ready() -> void:
 	text_box.investigation_points_added.connect(_add_investigation_points)
 	
 	clock.modulate = Color(0,0,0,0)
-	
-	sound_manager.play_soundtrack(preload("uid://cv1ok2itg5os8"))
 
 var elapsed : int = 0
 var advances : int = 0

@@ -198,6 +198,8 @@ func next_prompt(cond: int, can_end_chain: bool = true) -> void:
 	if can_end_chain and (previous_prompt.end_chain or previous_prompt.go_to != -1):
 		skip_chain_id = previous_prompt.chain_id
 		if previous_prompt.go_to != -1 and chain_buffer.has(previous_prompt.chain_id):
+			while prompt_queue and prompt_queue[0].chain_id == previous_prompt.chain_id:
+				prompt_queue.pop_front()
 			_insert_chain_to_front(chain_buffer[previous_prompt.chain_id], previous_prompt.go_to)
 
 	if can_end_chain:
