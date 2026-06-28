@@ -50,8 +50,10 @@ master_slider = NodePath("OptionsAndCredits/Options/GridContainer/MasterSlider")
 music_slider = NodePath("OptionsAndCredits/Options/GridContainer/MusicSlider")
 sfx_slider = NodePath("OptionsAndCredits/Options/GridContainer/SfxSlider")
 dialog_slider = NodePath("OptionsAndCredits/Options/GridContainer/DialogSlider")
+elements_parallax_amount = null
 background_parallax_amount = 0.05
 parallax_speed = 3.0
+fade_out_duration = null
 
 [node name="SoundManager" parent="." unique_id=1253211127 instance=ExtResource("2_8ln24")]
 

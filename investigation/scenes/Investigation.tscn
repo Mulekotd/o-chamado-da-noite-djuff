@@ -253,10 +253,10 @@ anchor_left = 0.022000002
 anchor_top = 0.032
 anchor_right = 0.915
 anchor_bottom = 0.592
-offset_left = 0.4719982
-offset_top = 0.4239998
-offset_right = 0.039978027
-offset_bottom = 0.34399414
+offset_left = 0.43999863
+offset_top = 0.42399788
+offset_right = -0.60009766
+offset_bottom = 0.8239746
 
 [node name="EyeSprite2D" type="AnimatedSprite2D" parent="." unique_id=636611070]
 position = Vector2(143, 771)

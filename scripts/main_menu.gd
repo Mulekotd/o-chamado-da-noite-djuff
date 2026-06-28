@@ -49,7 +49,7 @@ func _ready() -> void:
 	dialog_slider.value = db_to_linear(AudioServer.get_bus_volume_db(dialog_bus_index))
 	
 	sound_manager.play_soundtrack(preload("uid://cv1ok2itg5os8"))
-	sound_manager.load_letter_sounds([preload("uid://ccwxj47tohlth")])
+	sound_manager.load_letter_sounds(LetterSoundsGlobal.default_sound)
 	
 	black_rect.color = Color(0,0,0,0)
 	black_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
