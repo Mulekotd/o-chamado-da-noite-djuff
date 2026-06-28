@@ -7,3 +7,5 @@ Opções:
 [[Planta]] OK
 [[Mesa]] OK
 [[Cadeira]] OK
+
+[[pov images jantar]]

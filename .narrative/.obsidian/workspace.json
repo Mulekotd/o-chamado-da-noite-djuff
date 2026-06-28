@@ -11,10 +11,14 @@
             "id": "389821391ad52eb5",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
+              "type": "markdown",
+              "state": {
+                "file": "Admirar a obra 2.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Admirar a obra 2"
             }
           }
         ]
@@ -40,7 +44,7 @@
                 "autoReveal": false
               },
               "icon": "lucide-folder-closed",
-              "title": "Files"
+              "title": "Explorador de arquivos"
             }
           },
           {
@@ -74,7 +78,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 590.5
+    "width": 200,
+    "collapsed": true
   },
   "right": {
     "id": "cc8e8fab27d0f796",
@@ -167,17 +172,48 @@
   },
   "left-ribbon": {
     "hiddenItems": {
-      "switcher:Open quick switcher": false,
-      "graph:Open graph view": false,
-      "canvas:Create new canvas": false,
-      "daily-notes:Open today's daily note": false,
-      "templates:Insert template": false,
-      "command-palette:Open command palette": false,
-      "bases:Create new base": false
+      "switcher:Abrir a troca rápida": false,
+      "graph:Abrir visualização em gráfico": false,
+      "canvas:Criar novo canvas": false,
+      "daily-notes:Abrir a nota de hoje": false,
+      "templates:Inserir modelo": false,
+      "command-palette:Abrir paleta de comandos": false,
+      "bases:Criar nova base": false
     }
   },
   "active": "389821391ad52eb5",
   "lastOpenFiles": [
+    "Quadro sozinho.md",
+    "Sala de Estar.md",
+    "Quadros juntos.md",
+    "Admirar a obra.md",
+    "código1.md",
+    "Buffet.md",
+    "Abrir portas.md",
+    "código.md",
+    "Lareira.md",
+    "Verificar o fundo.md",
+    "Televisão.md",
+    "Olhar atrás.md",
+    "Tentar ligar.md",
+    "Mexer nas antenas.md",
+    "pov images estar.md",
+    "Dia 1.md",
+    "sala_pov_image.png",
+    "quadros_juntos_pov_image.png",
+    "quadro_sozinho_pov_image.png",
+    "porta_perto_pov_image.png",
+    "porta_longe_pov_image.png",
+    "lareira_pov_image.png",
+    "entrada_pov_image.png",
+    "buffet_pov_image.png",
+    "sofa_pov_image.png",
+    "Sala de Jantar.md",
+    "Cozinha.md",
+    "pov images cozinha.md",
+    "geladeira_pov_image.png",
+    "pov images jantar.md",
+    "Cadeira.md",
     "Verificar quadros.md",
     "Untitled.canvas",
     "2026-05-30.md",

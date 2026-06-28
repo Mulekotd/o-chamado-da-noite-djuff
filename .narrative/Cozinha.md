@@ -6,3 +6,5 @@ Opções:
 - [[Geladeira]] OK
 - [[Panelas]] OK
 - [[Armários]] OK
+
+[[pov images cozinha]]

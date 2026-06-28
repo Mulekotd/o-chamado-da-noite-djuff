@@ -8,3 +8,5 @@ Objetos inteiráveis:
 - [[Quadros juntos]] OK
 - [[Quadro sozinho]] OK
 - [[Buffet]] OK
+
+[[pov images estar]]
