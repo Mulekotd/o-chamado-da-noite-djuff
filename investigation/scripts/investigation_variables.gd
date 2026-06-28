@@ -37,7 +37,7 @@ static func clear_everything() -> void:
 ## value to assign to a newly created variable
 static var default_value : int = 0
 
-static var file : InvestigationVars = load("uid://d3xwhb1j1yhn6")
+static var file : InvestigationVars = load("res://investigation/investigation_variables.tres")
 
 ## returns int(number-of-conditions-met / number-of-keys-given) * number-of-keys-given - 1
 static func get_conditions_value(conditions: Dictionary[String, int], count_option : bool = true) -> float:

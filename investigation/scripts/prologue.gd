@@ -16,13 +16,18 @@ var transitioned_to_day_1 : bool = false
 
 func _ready() -> void:
 	InvestigationVars.set_last_level("prologue")
-	
+		
 	investigation.pov_manager.prompt_wait_time = 0
 	investigation.pov_manager.load_pov_level(pov_level)
 	investigation.pov_manager.prompt_wait_time = 0.5
 	
+	if investigation.pov_manager.current_pov.name != "telefone":
+		telephone_overlay.queue_free()
+	else:
+		pass# TODO play telephone ringing
+	
 	investigation.actions_manager.modulate = Color.TRANSPARENT
-	investigation.actions_manager.pos_overwrite = Vector2(480, 480)
+	investigation.actions_manager.pos_overwrite = Vector2(480, 260)
 	investigation.actions_manager.use_pos_overwrite = true
 	
 	color_overlay.mouse_filter = Control.MOUSE_FILTER_STOP
@@ -30,8 +35,6 @@ func _ready() -> void:
 	await get_tree().create_tween().tween_property(
 		color_overlay, "color", Color(0,0,0,0), 1).finished
 	color_overlay.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	
-	# TODO play telephone ringing
 
 func _process(delta: float) -> void:
 	if not transitioned_to_day_1 and InvestigationVars.meets_all_conditions({"entered_house" : 1}):
