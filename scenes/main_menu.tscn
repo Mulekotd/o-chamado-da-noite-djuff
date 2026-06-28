@@ -112,10 +112,10 @@ layout_mode = 2
 mouse_filter = 2
 
 [node name="Subtitulo" type="Label" parent="MainElements/Title" unique_id=1796499960]
+visible = false
 layout_mode = 2
 theme_override_constants/outline_size = 32
 theme_override_font_sizes/font_size = 50
-text = "O Caso do"
 horizontal_alignment = 1
 
 [node name="Titulo" type="Label" parent="MainElements/Title" unique_id=1979046720]
@@ -123,7 +123,7 @@ custom_minimum_size = Vector2(1083.335, 0)
 layout_mode = 2
 theme_override_constants/outline_size = 48
 theme_override_font_sizes/font_size = 128
-text = "Homem Enfaixado"
+text = "The Devil I Investigate"
 horizontal_alignment = 1
 autowrap_mode = 2
 
