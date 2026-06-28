@@ -10,8 +10,8 @@ class_name _Investigation extends Control
 @onready var moving_noise_overlay: _MovingNoiseWidget = $MovingNoiseOverlay
 @onready var inventory: _Inventory = $Inventory
 
-const USED_ACTION_SOUND = preload("uid://bfamn2x4funyi")
-const NO_MORE_ACTIONS_SOUND = preload("uid://c5hv7vps3lut6")
+const USED_ACTION_SOUND = preload("uid://cfbtnvstp7wxl")
+const NO_MORE_ACTIONS_SOUND = preload("uid://c5bngv3avhepx")
 
 signal done_showing_clock
 

@@ -8,7 +8,6 @@ class_name ActionsManager extends VBoxContainer
 	set(x):
 		actions = min(x, max_actions)
 		actions = max(actions, 0)
-		print(x)
 @export var max_actions : int = 5 :
 	set(x):
 		max_actions = max(x, 0)

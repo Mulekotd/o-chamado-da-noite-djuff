@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://chs5heeu26nd3" path="res://investigation/scenes/investigation.tscn" id="1_4m1sv"]
 [ext_resource type="Script" uid="uid://dk6b2tfqg8kcm" path="res://investigation/scripts/prologue.gd" id="1_cog5e"]
-[ext_resource type="Resource" uid="uid://bi48udfkxdmx7" path="res://investigation/pov_levels/prologue_pov_level.tres" id="2_dmmod"]
+[ext_resource type="Resource" path="res://investigation/pov_levels/prologue_pov_level.tres" id="2_dmmod"]
 [ext_resource type="Texture2D" uid="uid://dek0h1xjph8sj" path="res://investigation/images/povs/prologue/phone_centered.png" id="4_d4bjf"]
 
 [node name="Prologue" type="Control" unique_id=906736984 node_paths=PackedStringArray("investigation")]

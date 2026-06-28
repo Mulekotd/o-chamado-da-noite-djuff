@@ -24,7 +24,8 @@ func _ready() -> void:
 	if investigation.pov_manager.current_pov.name != "telefone":
 		telephone_overlay.queue_free()
 	else:
-		pass# TODO play telephone ringing
+		# phone ringing
+		investigation.sound_manager.play_soundtrack(load("uid://dkjk3u6xy03vu"))
 	
 	investigation.actions_manager.modulate = Color.TRANSPARENT
 	investigation.actions_manager.pos_overwrite = Vector2(480, 260)
@@ -43,8 +44,9 @@ func _process(delta: float) -> void:
 	if not transitioned_to_house and InvestigationVars.meets_all_conditions({"left_home" : 1}):
 		transitioned_to_house = true
 		color_overlay.mouse_filter = Control.MOUSE_FILTER_STOP
-		investigation.pov_manager.change_pov_by_name("casa longe")
 		color_overlay.color = Color.BLACK
+		investigation.pov_manager.change_pov_by_name("casa longe")
+		investigation.sound_manager.play_poly_sound(preload("uid://bu3uh5jn7nbvm"))
 		await get_tree().create_timer(4).timeout
 		await get_tree().create_tween().tween_property(
 			color_overlay, "color", Color(0,0,0,0), 1).finished
@@ -70,5 +72,4 @@ func _on_telephone_overlay_gui_input(event: InputEvent) -> void:
 		color_overlay.color = Color.WHITE
 		get_tree().create_tween().tween_property(color_overlay, "color", Color.TRANSPARENT, 1)
 		investigation.sound_manager.play_soundtrack(preload("uid://cv1ok2itg5os8"))
-		# TODO play telephone sound
-		# TODO stop telephone ringing
+		investigation.sound_manager.play_poly_sound(preload("uid://c6fjv5k6jd2n5"))
