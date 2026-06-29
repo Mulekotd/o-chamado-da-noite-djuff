@@ -2,13 +2,14 @@ Letter sounds:
 	Telefone X
 	Irmao X
 Sfxs:
-	Telefone tocando em loop
-	Telefone de volta no lugar
+	Telefone tocando em loop X
+	Telefone atender X
+	Telefone de volta no lugar X
 	Pegadas melhores
-	Sons de rua - transicao para a casa
-	Toc toc toc
-	Toc toc-
-	Porta abrindo
+	Sons de rua - transicao para a casa X
+	Toc toc toc X
+	Toc toc- X
+	Porta abrindo X
 Musica:
 	Prologo
 	Noite
