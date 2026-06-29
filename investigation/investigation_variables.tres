@@ -1,23 +1,27 @@
-[gd_resource type="Resource" script_class="InvestigationVars" format=3 uid="uid://bmqldl23o6qw8"]
+[gd_resource type="Resource" script_class="InvestigationVars" format=3]
 
-[ext_resource type="Script" uid="uid://dqj183h8d13hn" path="res://investigation/items/scripts/item_resource.gd" id="1_c1mno"]
-[ext_resource type="Script" uid="uid://47pf0lrk86x5" path="res://investigation/scripts/investigation_variables.gd" id="1_y5pc1"]
+[ext_resource type="Script" path="res://investigation/items/scripts/item_resource.gd" id="1_c1mno"]
+[ext_resource type="Script" path="res://investigation/scripts/investigation_variables.gd" id="1_y5pc1"]
 
 [resource]
 script = ExtResource("1_y5pc1")
 vars = Dictionary[String, int]({
 "about_to_leave": 1,
 "answered_phone": 1,
+"conectar_fio": 0,
 "display_clocks": 1,
 "entered_house": 1,
+"estabilizou": 0,
 "house_door_open": 1,
 "knocked_on_door": 1,
 "left_home": 1,
+"ligou": 0,
 "looking_at_watch": 0,
-"option": -1,
-"phone_down": 1
+"option": 0,
+"phone_down": 1,
+"tv_on": 0
 })
-_actions = 5
+_actions = 4
 last_level = "day1"
-last_pov = "frente da casa"
+last_pov = "pov_tv"
 metadata/_custom_type_script = "uid://47pf0lrk86x5"

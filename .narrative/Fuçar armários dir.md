@@ -1,2 +1,2 @@
 Diálogo:
-"Nada"
+"Nada interessante."
