@@ -37,22 +37,22 @@ func load_letter_sounds(lss: Dictionary[String, Array]) -> void:
 		var button : Button = LETTER_SOUND_BUTTON.instantiate()
 		button.text = ls
 		button.button_group = button_group
-		if not button.button_down.is_connected(button_pressed.bind(ls)):
-			button.button_down.connect(button_pressed.bind(ls))
-		button.button_up.connect(button_deselected.bind(ls))
+		if not button.toggled.is_connected(button_toggled.bind(ls)):
+			button.toggled.connect(button_toggled.bind(ls))
 		button_grid.add_child(button)
 
-func button_pressed(text: String) -> void:
-	selected_letter_sound = text
-	play_demo(text)
-
-func button_deselected(ls: String) -> void:
-	await get_tree().process_frame
-	if selected_letter_sound == ls:
-		selected_letter_sound = ""
+func button_toggled(toggle_on: bool, text: String) -> void:
+	if toggle_on:
+		selected_letter_sound = text
+		print("\n-\nbutton pressed, selected_letter_sound : ", selected_letter_sound, "\n-\n")
+		play_demo(text)
+	else:
+		await get_tree().process_frame
+		if selected_letter_sound == text:
+			print("\n-deselected your sound, you stupid-\n")
+			selected_letter_sound = ""
 
 func play_demo(ls: String) -> void:
-	print(letter_sounds)
 	sound_manager.load_letter_sounds(letter_sounds[ls])
 	playing_sound += 1
 	var sound_number := playing_sound
@@ -64,4 +64,5 @@ func play_demo(ls: String) -> void:
 			break
 
 func parse_letter_sound() -> String:
+	print("\n-\nparse_letter_sound, selected_letter_sound : ", selected_letter_sound, "\n-\n")
 	return selected_letter_sound

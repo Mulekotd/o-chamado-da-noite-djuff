@@ -1,0 +1,2 @@
+Opções:
+[[Pegar faca]]

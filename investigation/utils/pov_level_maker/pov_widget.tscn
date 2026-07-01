@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bj378ngyim0ll" path="res://investigation/utils/general/conditions_widget.tscn" id="4_qnhhs"]
 [ext_resource type="PackedScene" uid="uid://4cfakuwt60x0" path="res://investigation/utils/pov_level_maker/elements_widget.tscn" id="5_tijdk"]
 [ext_resource type="PackedScene" uid="uid://cfiuj031kfyh3" path="res://investigation/utils/general/behaviour_widget.tscn" id="7_l743g"]
+[ext_resource type="PackedScene" uid="uid://cvlccjslejidx" path="res://investigation/utils/general/sound_widget.tscn" id="8_tijdk"]
 [ext_resource type="Theme" uid="uid://cyq5khk20nbm6" path="res://themes/utils_theme.tres" id="999_utils_theme"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_42ls8"]
@@ -199,6 +200,22 @@ theme = null
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 
+[node name="SoundContainer" type="VBoxContainer" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer" unique_id=1466588170]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/SoundContainer" unique_id=1456551699]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Som ao entrar"
+
+[node name="SoundWidget" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/SoundContainer" unique_id=513523494 instance=ExtResource("8_tijdk")]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="-----------------6" type="ColorRect" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer" unique_id=1402710774]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+
 [node name="HBoxContainer" type="VBoxContainer" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer" unique_id=1081235391]
 layout_mode = 2
 
@@ -209,7 +226,7 @@ text = "Comportamento Especial"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="BehaviourWidget" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/HBoxContainer" unique_id=513523494 instance=ExtResource("7_l743g")]
+[node name="BehaviourWidget" parent="ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/HBoxContainer" unique_id=1027438343 instance=ExtResource("7_l743g")]
 layout_mode = 2
 size_flags_horizontal = 4
 

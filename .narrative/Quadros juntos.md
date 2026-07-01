@@ -1,0 +1,2 @@
+Opções:
+- [[Admirar a obra]]

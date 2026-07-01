@@ -1,0 +1,90 @@
+[gd_scene format=3 uid="uid://jvp1k1agpi2t"]
+
+[ext_resource type="StyleBox" uid="uid://82uktsq1bf80" path="res://investigation/text_box/resources/normal_button_style_box.tres" id="1_3fe67"]
+[ext_resource type="Script" uid="uid://j40va6tgphj1" path="res://investigation/utils/pov_level_maker/cursor_selection_widget.gd" id="1_c0psx"]
+[ext_resource type="ButtonGroup" uid="uid://b1vtdn43qalek" path="res://investigation/utils/pov_level_maker/cursor_selection_button_group.tres" id="1_g0lif"]
+[ext_resource type="Texture2D" uid="uid://cdkmhigqblvxp" path="res://investigation/images/cursors/cursor_arrow.png" id="2_7imj2"]
+[ext_resource type="Texture2D" uid="uid://dc3gtkxfvfisv" path="res://investigation/images/cursors/cursor_hand.png" id="3_3fe67"]
+[ext_resource type="StyleBox" uid="uid://dldwn0cvgjavo" path="res://investigation/text_box/resources/hover_button_style_box.tres" id="3_t0p60"]
+[ext_resource type="Texture2D" uid="uid://curihdki8n1cf" path="res://investigation/images/cursors/cursor_magnifier.png" id="4_el7hd"]
+[ext_resource type="Texture2D" uid="uid://bugpiicn5hlru" path="res://investigation/images/cursors/cursor_steps.png" id="5_7imj2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t0p60"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c0psx"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5c6eq"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wtku0"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="CursorSelectionWidget" type="MarginContainer" unique_id=1921926077 node_paths=PackedStringArray("cursor_buttons")]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_c0psx")
+cursor_buttons = {
+0: NodePath("GridContainer/DefaultCursorButton"),
+1: NodePath("GridContainer/PointingHandCursorButton"),
+2: NodePath("GridContainer/MagnifierCursorButton"),
+3: NodePath("GridContainer/StepsCursorButton")
+}
+
+[node name="GridContainer" type="GridContainer" parent="." unique_id=396289956]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+columns = 2
+
+[node name="DefaultCursorButton" type="Button" parent="GridContainer" unique_id=1974852784]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = ExtResource("1_3fe67")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_t0p60")
+theme_override_styles/hover = ExtResource("3_t0p60")
+toggle_mode = true
+button_group = ExtResource("1_g0lif")
+icon = ExtResource("2_7imj2")
+icon_alignment = 1
+expand_icon = true
+
+[node name="PointingHandCursorButton" type="Button" parent="GridContainer" unique_id=1612293344]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = ExtResource("1_3fe67")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_c0psx")
+theme_override_styles/hover = ExtResource("3_t0p60")
+toggle_mode = true
+button_group = ExtResource("1_g0lif")
+icon = ExtResource("3_3fe67")
+icon_alignment = 1
+expand_icon = true
+
+[node name="MagnifierCursorButton" type="Button" parent="GridContainer" unique_id=827145233]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = ExtResource("1_3fe67")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_5c6eq")
+theme_override_styles/hover = ExtResource("3_t0p60")
+toggle_mode = true
+button_group = ExtResource("1_g0lif")
+icon = ExtResource("4_el7hd")
+icon_alignment = 1
+expand_icon = true
+
+[node name="StepsCursorButton" type="Button" parent="GridContainer" unique_id=772176570]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/normal = ExtResource("1_3fe67")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_wtku0")
+theme_override_styles/hover = ExtResource("3_t0p60")
+toggle_mode = true
+button_group = ExtResource("1_g0lif")
+icon = ExtResource("5_7imj2")
+icon_alignment = 1
+expand_icon = true

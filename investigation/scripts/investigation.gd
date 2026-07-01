@@ -1,4 +1,4 @@
-extends Control
+class_name _Investigation extends Control
 
 @onready var text_box: TextBox = $TextBox
 @onready var pov_manager: PovManager = $PovManager
@@ -10,8 +10,8 @@ extends Control
 @onready var moving_noise_overlay: _MovingNoiseWidget = $MovingNoiseOverlay
 @onready var inventory: _Inventory = $Inventory
 
-const USED_ACTION_SOUND = preload("uid://bfamn2x4funyi")
-const NO_MORE_ACTIONS_SOUND = preload("uid://c5hv7vps3lut6")
+const USED_ACTION_SOUND = preload("uid://cfbtnvstp7wxl")
+const NO_MORE_ACTIONS_SOUND = preload("uid://c5bngv3avhepx")
 
 signal done_showing_clock
 
@@ -31,6 +31,7 @@ func _ready() -> void:
 	pov_manager.element_clicked.connect(_append_prompt_chain_from_element)
 	pov_manager.prompt_chain_called.connect(text_box.insert_prompt_chain)
 	pov_manager.pov_entered.connect(text_box.clear_box)
+	pov_manager.sound_played.connect(sound_manager.play_poly_sound)
 	text_box.pov_entered.connect(pov_manager.change_pov_by_name)
 	text_box.stand_by_changed.connect(_update_pov_manager_enabled)
 	text_box.stand_by_changed.connect(_clear_person_display)
@@ -43,6 +44,7 @@ func _ready() -> void:
 	text_box.prompt_advanced.connect(_on_prompt_advanced)
 	text_box.items_added.connect(inventory.add_items)
 	text_box.items_removed.connect(inventory.remove_items)
+	text_box.investigation_points_added.connect(_add_investigation_points)
 	
 	clock.modulate = Color(0,0,0,0)
 
@@ -74,7 +76,7 @@ func _use_actions(actions: int) -> void:
 
 func _update_sound_manager_letter_sounds(chain_id: int, prompt: Prompt) -> void:
 	# Keep the chain queue aligned with the prompt being displayed.
-	while chain_id_queue[0] != chain_id:
+	while chain_id_queue and chain_id_queue[0] != chain_id:
 		chain_id_queue.pop_front()
 		if not prompt_chain_queue.is_empty():
 			prompt_chain_queue.pop_front()
@@ -148,3 +150,7 @@ func _on_prompt_advanced() -> void:
 		pov_manager.change_pov(pov_manager.current_pov)
 	else:
 		pov_manager.update_view()
+
+func _add_investigation_points(points: int) -> void:
+	InvestigationVars.add_investigation_points(points)
+	#print("%d investigation poins added." % [points])

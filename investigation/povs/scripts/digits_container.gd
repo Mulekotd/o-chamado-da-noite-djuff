@@ -26,7 +26,7 @@ func load_digits(pp: PuzzlePov) -> void:
 		
 		var d := Digit.new()
 		add_child(d)
-		d.load_digit(d_pos, d_size, pp.symbols, var_to_change)
+		d.load_digit(d_pos, d_size, pp.symbol_paths, var_to_change)
 		d.value_changed.connect(check_combinations)
 		d.value_changed.connect(digit_changed.emit)
 		
@@ -40,7 +40,8 @@ func clear_digits() -> void:
 		c.queue_free()
 
 func update_enabled() -> void:
-	enabled = InvestigationVars.get_conditions_value(puzzle_pov.global_conditions) != -1
+	if puzzle_pov:
+		enabled = InvestigationVars.get_conditions_value(puzzle_pov.global_conditions) != -1
 	
 ## return a combination string in the format "0 1 2 3 99"
 func get_current_combination() -> String:

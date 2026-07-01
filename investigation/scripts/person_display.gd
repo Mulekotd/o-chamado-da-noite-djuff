@@ -14,10 +14,14 @@ func load_img(img: Texture2D) -> void:
 func load_img_from_prompt(prompt: Prompt) -> void:
 	# Prefer the prompt image, otherwise clear the portrait.
 	if !prompt: return
-	if !prompt.img: 
+	if prompt.image_path.is_empty(): 
 		clear_img()
 	else:
-		load_img(prompt.img)
+		var tex := load(prompt.image_path)
+		if tex is Texture2D:
+			load_img(tex)
+		else:
+			clear_img()
 
 func clear_img() -> void:
 	var tween := get_tree().create_tween()

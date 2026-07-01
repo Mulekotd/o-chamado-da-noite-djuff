@@ -1,0 +1,1 @@
+Player guarda a frigideira e nos próximos dias desbloqueia um diálogo importante

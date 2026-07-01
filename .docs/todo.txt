@@ -1,0 +1,18 @@
+Letter sounds:
+	Telefone X
+	Irmao X
+Sfxs:
+	Telefone tocando em loop X
+	Telefone atender X
+	Telefone de volta no lugar X
+	Pegadas melhores
+	Sons de rua - transicao para a casa X
+	Toc toc toc X
+	Toc toc- X
+	Porta abrindo X
+Musica:
+	Prologo
+	Noite
+	Menu Principal
+
+- Fazer todas as aparicoes do detetive nos povs ser azul

@@ -7,6 +7,9 @@ class_name _ElementWidget extends Control
 @onready var hitbox_preview_widget: _HitboxPreviewWidget = $ScrollContainer/Panel/MarginContainer/VBoxContainer/HitboxPreviewWidget
 @onready var pov_name_widget: _PovNameWidget = $ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/HBoxContainer/PovNameWidget
 @onready var vars_to_change_widget: _ConditionsWidget = $ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/VarsToChangeContainer/VarsToChangeWidget
+@onready var cursor_selection_widget: _CursorSelectionWidget = $ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/CursorSelectionContainer/CursorSelectionWidget
+@onready var sound_widget: _SoundWidget = $ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/SoundContainer/SoundWidget
+@onready var pov_sound_widget: _SoundWidget = $ScrollContainer/Panel/MarginContainer/VBoxContainer/AtributesContainer/PovSoundContainer2/PovSoundWidget
 
 @export var pov_level : PovLevel
 @export var pov_image : Texture2D
@@ -36,6 +39,9 @@ func load_element(e: Element, pov_names : Array[String] = []) -> void:
 	necessary_items_widget.add_items(e.necessary_items)
 	conditions_widget.add_conditions(e.conditions)
 	vars_to_change_widget.add_conditions(e.vars_to_change)
+	cursor_selection_widget.load_cursor_shape(e.cursor_shape)
+	sound_widget.load_sound(e.sound)
+	pov_sound_widget.load_sound(e.pov_sound)
 
 func parse_element() -> Element:
 	# Build a new Element resource from the current UI state.
@@ -47,6 +53,9 @@ func parse_element() -> Element:
 	e.necessary_items = necessary_items_widget.items
 	e.conditions = conditions_widget.parse_conditions()
 	e.vars_to_change = vars_to_change_widget.parse_conditions()
+	e.cursor_shape = cursor_selection_widget.parse_cursor_shape()
+	e.sound = sound_widget.get_sound()
+	e.pov_sound = pov_sound_widget.get_sound()
 	return e
 
 func save_element_file(path: String) -> void:

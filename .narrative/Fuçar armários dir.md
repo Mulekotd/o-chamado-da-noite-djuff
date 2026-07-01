@@ -1,0 +1,2 @@
+Diálogo:
+"Nada interessante."

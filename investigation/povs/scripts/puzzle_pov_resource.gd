@@ -28,8 +28,8 @@ interaction and comes back to the beginning when it reaches the end.
 
 ## name of the pov behind this one; Where the player came from.
 @export var back_pov : String = ""
-## array of images representing the symbols of this pov; order matters.
-@export var symbols : Array[Texture2D] = []
+## array of image paths representing the symbols of this pov; order matters.
+@export var symbol_paths : Array[String] = []
 ## array of digits in this pov; each key is a digit position and the value is the digit size, both in relation to the pov image (are normalized).
 @export var digits : Dictionary[Vector2, Vector2] = {}
 ## combinations and their respective var-to-change; Combination should be of format "0 1 2 3".

@@ -36,7 +36,7 @@ func parse_prompt() -> Prompt:
 	p.items_to_take = take_items_widget.items
 	p.vars_to_change = change_vars_widget.parse_conditions()
 	p.pov = pov_name_widget.get_pov_name()
-	p.img = prompt_image_widget.get_img()
+	p.image_path = prompt_image_widget.get_img()
 	p.pre_sound = pre_sound_widget.get_sound()
 	p.pos_sound = pos_sound_widget.get_sound()
 	p.letter_sound = letter_sounds_widget.parse_letter_sound()
@@ -53,15 +53,15 @@ func load_prompt(p: Prompt) -> void:
 	take_items_widget.add_items(p.items_to_take)
 	change_vars_widget.add_conditions(p.vars_to_change)
 	pov_name_widget.load_pov_name(p.pov)
-	prompt_image_widget.load_img(p.img)
+	prompt_image_widget.load_img(p.image_path)
 	pos_sound_widget.load_sound(p.pos_sound)
 	go_to_spin_box.value = p.go_to
 	letter_sounds_widget.load_global_letter_sounds()
 	letter_sounds_widget.select_letter_sound(p.letter_sound)
 
-func change_default_img(img: Texture2D):
+func change_default_img(img_path: String):
 	# Update default image for prompts that do not set one.
-	prompt_image_widget.change_default_img(img)
+	prompt_image_widget.change_default_img(img_path)
 
 func set_max_go_to(max: int) -> void:
 	_max_go_to = max

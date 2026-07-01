@@ -10,8 +10,12 @@ signal clone_requested(clicked_pov: Pov)
 
 func load_pov(p: Pov) -> void:
 	pov = p
-	if p and p.images:
-		texture = p.images[0].texture
+	if p and p.images and p.images[0].image_path:
+		var tex := load(p.images[0].image_path)
+		if tex is Texture2D:
+			texture = tex
+		else:
+			texture = NO_IMAGE_POV
 	else:
 		texture = NO_IMAGE_POV
 	changed.emit()

@@ -35,8 +35,12 @@ func save_puzzle_pov_file(path: String) -> void:
 func load_puzzle_pov(new_pov: PuzzlePov) -> void:
 	# Update the widget visuals and button title from a Pov resource.
 	puzzle_pov = new_pov
-	if puzzle_pov.images and puzzle_pov.images[0].texture:
-		pov_image_rect.texture = puzzle_pov.images[0].texture
+	if puzzle_pov.images and puzzle_pov.images[0].image_path:
+		var tex := load(puzzle_pov.images[0].image_path)
+		if tex is Texture2D:
+			pov_image_rect.texture = tex
+		else:
+			pov_image_rect.texture = NO_IMAGE_POV
 	else:
 		pov_image_rect.texture = NO_IMAGE_POV
 	if puzzle_pov.name:

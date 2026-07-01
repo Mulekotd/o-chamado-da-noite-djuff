@@ -1,0 +1,559 @@
+[gd_resource type="Resource" script_class="PovLevel" format=3 uid="uid://culkjpc1cose3"]
+
+[ext_resource type="Script" uid="uid://ffh4hevhqls8" path="res://investigation/povs/scripts/pov_directions.gd" id="2_8v6mx"]
+[ext_resource type="Script" uid="uid://deej6yes3fmnc" path="res://investigation/povs/scripts/element_resource.gd" id="2_yridt"]
+[ext_resource type="Script" uid="uid://ci2buxueqquwj" path="res://investigation/povs/scripts/pov_image_resource.gd" id="3_0nae8"]
+[ext_resource type="Script" uid="uid://cmgunroik01aj" path="res://investigation/text_box/scripts/prompt_resource.gd" id="4_70j8p"]
+[ext_resource type="Script" uid="uid://cjbfq0iyvv1rr" path="res://investigation/povs/scripts/pov_level_resource.gd" id="4_g17jk"]
+[ext_resource type="Script" uid="uid://djxtkg1leixh" path="res://investigation/text_box/scripts/prompt_chain_resource.gd" id="5_r10in"]
+[ext_resource type="Script" uid="uid://bti0kbjeofp0r" path="res://investigation/povs/scripts/pov_resource.gd" id="6_qboph"]
+[ext_resource type="Script" uid="uid://dqj183h8d13hn" path="res://investigation/items/scripts/item_resource.gd" id="6_v6o0a"]
+[ext_resource type="Script" uid="uid://cxpiwtdar5o13" path="res://investigation/text_box/scripts/option_resource.gd" id="7_45x7e"]
+[ext_resource type="AudioStream" uid="uid://bg6ampuqcmd55" path="res://investigation/sounds/sfxs/telephone_hang_up.wav" id="7_r10in"]
+[ext_resource type="Script" uid="uid://2mj3tpo0kht6" path="res://investigation/povs/scripts/puzzle_pov_resource.gd" id="9_70j8p"]
+[ext_resource type="AudioStream" uid="uid://bhfl2teovl7qh" path="res://investigation/sounds/sfxs/footsteps.wav" id="10_qboph"]
+[ext_resource type="AudioStream" uid="uid://bkf65q5gfdhmm" path="res://investigation/sounds/sfxs/door_open.wav" id="11_cql46"]
+[ext_resource type="AudioStream" uid="uid://dlfmw0wlr133i" path="res://investigation/sounds/sfxs/knock_on_door_interrupted.wav" id="12_dmc51"]
+[ext_resource type="AudioStream" uid="uid://b7gv6vjba7l6a" path="res://investigation/sounds/sfxs/knock_on_door.wav" id="13_hlwc6"]
+
+[sub_resource type="Resource" id="Resource_r10in"]
+script = ExtResource("3_0nae8")
+image_path = "res://investigation/images/povs/prologue/holding_phone.png"
+conditions = Dictionary[String, int]({
+"phone_down": 0
+})
+
+[sub_resource type="Resource" id="Resource_45x7e"]
+script = ExtResource("3_0nae8")
+image_path = "res://investigation/images/povs/prologue/phone.png"
+conditions = Dictionary[String, int]({
+"phone_down": 1
+})
+
+[sub_resource type="Resource" id="Resource_cql46"]
+script = ExtResource("4_70j8p")
+text = "Alô?"
+
+[sub_resource type="Resource" id="Resource_dmc51"]
+script = ExtResource("4_70j8p")
+text = "Alô, detetive [nome]?"
+global_conditions = Dictionary[String, int]({
+"answered_phone": 0
+})
+image_path = "res://investigation/images/npcs/telephone.png"
+letter_sound = "telephone"
+
+[sub_resource type="Resource" id="Resource_hlwc6"]
+script = ExtResource("4_70j8p")
+text = "Sim chefe, sou eu. O que houve?"
+global_conditions = Dictionary[String, int]({
+"answered_phone": 0
+})
+image_path = "res://investigation/images/detetive/detetive_neutro.png"
+
+[sub_resource type="Resource" id="Resource_2m4po"]
+script = ExtResource("4_70j8p")
+text = "Nosso departamento tem recebido denúncias de gritos vindo de uma casa na Rua das Flores"
+global_conditions = Dictionary[String, int]({
+"answered_phone": 0
+})
+image_path = "res://investigation/images/npcs/telephone.png"
+letter_sound = "telephone"
+
+[sub_resource type="Resource" id="Resource_mhgwv"]
+script = ExtResource("4_70j8p")
+text = "Você conhece essa região, não é?"
+global_conditions = Dictionary[String, int]({
+"answered_phone": 0
+})
+image_path = "res://investigation/images/npcs/telephone.png"
+letter_sound = "telephone"
+
+[sub_resource type="Resource" id="Resource_vchy7"]
+script = ExtResource("4_70j8p")
+text = "Sim, conheço sim, é bem perto de onde eu moro."
+global_conditions = Dictionary[String, int]({
+"answered_phone": 0
+})
+image_path = "res://investigation/images/detetive/detetive_neutro.png"
+
+[sub_resource type="Resource" id="Resource_ed68q"]
+script = ExtResource("4_70j8p")
+text = "(Em pensamento) Estranho, nunca ouvi nada vindo de lá..."
+global_conditions = Dictionary[String, int]({
+"answered_phone": 0
+})
+image_path = "res://investigation/images/detetive/detetive_neutro.png"
+
+[sub_resource type="Resource" id="Resource_8j6nl"]
+script = ExtResource("4_70j8p")
+text = "Ah, isso facilita as coisas."
+global_conditions = Dictionary[String, int]({
+"answered_phone": 0
+})
+image_path = "res://investigation/images/npcs/telephone.png"
+letter_sound = "telephone"
+
+[sub_resource type="Resource" id="Resource_qnodh"]
+script = ExtResource("4_70j8p")
+text = "Você é o responsável por essa investigação, detetive. Preciso que vá até o local assim que possivel."
+global_conditions = Dictionary[String, int]({
+"answered_phone": 0
+})
+image_path = "res://investigation/images/npcs/telephone.png"
+letter_sound = "telephone"
+
+[sub_resource type="Resource" id="Resource_p2bnp"]
+script = ExtResource("4_70j8p")
+text = "Pode deixar, chefe, já estou a caminho!"
+global_conditions = Dictionary[String, int]({
+"answered_phone": 0
+})
+vars_to_change = Dictionary[String, int]({
+"phone_down": 1
+})
+image_path = "res://investigation/images/detetive/detetive_neutro.png"
+pos_sound = ExtResource("7_r10in")
+
+[sub_resource type="Resource" id="Resource_cf3gr"]
+script = ExtResource("4_70j8p")
+text = "Hm, um caso aqui no meu bairro..."
+global_conditions = Dictionary[String, int]({
+"answered_phone": 0
+})
+image_path = "res://investigation/images/detetive/detetive_neutro.png"
+
+[sub_resource type="Resource" id="Resource_ck2yc"]
+script = ExtResource("4_70j8p")
+text = "Estou empolgado, tenho que sair o quanto antes."
+global_conditions = Dictionary[String, int]({
+"answered_phone": 0
+})
+end_chain = true
+vars_to_change = Dictionary[String, int]({
+"answered_phone": 1
+})
+image_path = "res://investigation/images/detetive/detetive_neutro.png"
+
+[sub_resource type="Resource" id="Resource_hqwwb"]
+script = ExtResource("5_r10in")
+name = "telefone"
+prompts = Array[ExtResource("4_70j8p")]([SubResource("Resource_cql46"), SubResource("Resource_dmc51"), SubResource("Resource_hlwc6"), SubResource("Resource_2m4po"), SubResource("Resource_mhgwv"), SubResource("Resource_vchy7"), SubResource("Resource_ed68q"), SubResource("Resource_8j6nl"), SubResource("Resource_qnodh"), SubResource("Resource_p2bnp"), SubResource("Resource_cf3gr"), SubResource("Resource_ck2yc")])
+default_image_path = "res://investigation/images/detetive/detetive_neutro.png"
+
+[sub_resource type="Resource" id="Resource_w6yln"]
+script = ExtResource("6_qboph")
+name = "telefone"
+description = "Carinha segurando o telefone falando com o chefe; Telefone de volta no lugar."
+prompt_chain = SubResource("Resource_hqwwb")
+images = Array[ExtResource("3_0nae8")]([SubResource("Resource_r10in"), SubResource("Resource_45x7e")])
+
+[sub_resource type="Resource" id="Resource_h3a8a"]
+script = ExtResource("2_8v6mx")
+pov = SubResource("Resource_w6yln")
+bottom = "telefone longe"
+rotation = 0.51
+coords = Vector2(379.3852, 2301.588)
+
+[sub_resource type="Resource" id="Resource_ykce4"]
+script = ExtResource("5_r10in")
+
+[sub_resource type="Resource" id="Resource_g6hnh"]
+script = ExtResource("2_yridt")
+name = "porta"
+hitbox = Dictionary[String, float]({
+"bottom": 0.9595777298802276,
+"left": 0.3939873417721519,
+"right": 0.6234177215189873,
+"top": 0.02481273336049286
+})
+pov_name = "porta"
+prompt_chain = SubResource("Resource_ykce4")
+vars_to_change = Dictionary[String, int]({
+"about_to_leave": 1
+})
+cursor_shape = 3
+sound = ExtResource("10_qboph")
+
+[sub_resource type="Resource" id="Resource_iur2p"]
+script = ExtResource("3_0nae8")
+image_path = "res://investigation/images/povs/prologue/door_prologue_far.png"
+
+[sub_resource type="Resource" id="Resource_fu57l"]
+script = ExtResource("5_r10in")
+
+[sub_resource type="Resource" id="Resource_oycnb"]
+script = ExtResource("6_qboph")
+name = "porta longe"
+description = "Visao da porta do prologo de longe"
+prompt_chain = SubResource("Resource_fu57l")
+images = Array[ExtResource("3_0nae8")]([SubResource("Resource_iur2p")])
+elements = Array[ExtResource("2_yridt")]([SubResource("Resource_g6hnh")])
+
+[sub_resource type="Resource" id="Resource_uiwif"]
+script = ExtResource("2_8v6mx")
+pov = SubResource("Resource_oycnb")
+left = "telefone longe"
+rotation = 0.75
+coords = Vector2(929.49506, 2171.1472)
+
+[sub_resource type="Resource" id="Resource_cfk80"]
+script = ExtResource("5_r10in")
+
+[sub_resource type="Resource" id="Resource_ncb3c"]
+script = ExtResource("2_yridt")
+name = "telefone"
+pov_name = "telefone"
+prompt_chain = SubResource("Resource_cfk80")
+
+[sub_resource type="Resource" id="Resource_xutfp"]
+script = ExtResource("3_0nae8")
+image_path = "res://investigation/images/povs/prologue/phone_far.png"
+
+[sub_resource type="Resource" id="Resource_qc3md"]
+script = ExtResource("5_r10in")
+
+[sub_resource type="Resource" id="Resource_6hpo5"]
+script = ExtResource("6_qboph")
+name = "telefone longe"
+description = "visao da mesa que esta o telefone
+
+"
+prompt_chain = SubResource("Resource_qc3md")
+images = Array[ExtResource("3_0nae8")]([SubResource("Resource_xutfp")])
+elements = Array[ExtResource("2_yridt")]([SubResource("Resource_ncb3c")])
+
+[sub_resource type="Resource" id="Resource_iiqvl"]
+script = ExtResource("2_8v6mx")
+pov = SubResource("Resource_6hpo5")
+right = "porta longe"
+rotation = 0.5
+coords = Vector2(620.3041, 2300.7808)
+
+[sub_resource type="Resource" id="Resource_l7ruq"]
+script = ExtResource("5_r10in")
+
+[sub_resource type="Resource" id="Resource_jfq6m"]
+script = ExtResource("2_yridt")
+name = "porta"
+hitbox = Dictionary[String, float]({
+"bottom": 1.0,
+"left": 0.29193037974683544,
+"right": 0.7341772151898734,
+"top": 0.0
+})
+prompt_chain = SubResource("Resource_l7ruq")
+vars_to_change = Dictionary[String, int]({
+"left_home": 1
+})
+cursor_shape = 3
+
+[sub_resource type="Resource" id="Resource_7spgv"]
+script = ExtResource("3_0nae8")
+image_path = "res://investigation/images/povs/prologue/door_prologue_close.png"
+
+[sub_resource type="Resource" id="Resource_ymhcy"]
+script = ExtResource("4_70j8p")
+text = "Vai sair de casa é?"
+image_path = "res://investigation/images/npcs/brother.png"
+letter_sound = "brother"
+
+[sub_resource type="Resource" id="Resource_y5wnr"]
+script = ExtResource("4_70j8p")
+text = "Primeiramente bom dia, irmão. E sim, estou saindo, a cidade precisa de mim."
+image_path = "res://investigation/images/detetive/detetive_neutro.png"
+
+[sub_resource type="Resource" id="Resource_g0trr"]
+script = ExtResource("4_70j8p")
+text = "Huh, achei que você nem tinha mais esse emprego."
+image_path = "res://investigation/images/npcs/brother.png"
+letter_sound = "brother"
+
+[sub_resource type="Resource" id="Resource_jlql5"]
+script = ExtResource("4_70j8p")
+text = "Ah é, bom dia!"
+image_path = "res://investigation/images/npcs/brother.png"
+letter_sound = "brother"
+
+[sub_resource type="Resource" id="Resource_w2u2q"]
+script = ExtResource("4_70j8p")
+text = "Sempre tive, só não haviam casos para eu investigar... Por um tempo..."
+image_path = "res://investigation/images/detetive/detetive_neutro.png"
+
+[sub_resource type="Resource" id="Resource_yas2f"]
+script = ExtResource("4_70j8p")
+text = "Entendi. Mas tem certeza que é uma boa ideia?"
+image_path = "res://investigation/images/npcs/brother.png"
+letter_sound = "brother"
+
+[sub_resource type="Resource" id="Resource_sud0i"]
+script = ExtResource("4_70j8p")
+text = "Você tá um lixo, cara. Não sei como consegue ter uma cara tão cansada mesmo dormindo tanto."
+image_path = "res://investigation/images/npcs/brother.png"
+letter_sound = "brother"
+
+[sub_resource type="Resource" id="Resource_lp82x"]
+script = ExtResource("4_70j8p")
+text = "Tá, tá, sei que você sente muito a minha falta, mas eu preciso ir. Até mais."
+image_path = "res://investigation/images/detetive/detetive_neutro.png"
+
+[sub_resource type="Resource" id="Resource_qfnf0"]
+script = ExtResource("4_70j8p")
+text = "Até."
+end_chain = true
+image_path = "res://investigation/images/npcs/brother.png"
+letter_sound = "brother"
+
+[sub_resource type="Resource" id="Resource_x7ojx"]
+script = ExtResource("5_r10in")
+name = "porta prologo"
+prompts = Array[ExtResource("4_70j8p")]([SubResource("Resource_ymhcy"), SubResource("Resource_y5wnr"), SubResource("Resource_g0trr"), SubResource("Resource_jlql5"), SubResource("Resource_w2u2q"), SubResource("Resource_yas2f"), SubResource("Resource_sud0i"), SubResource("Resource_lp82x"), SubResource("Resource_qfnf0")])
+default_image_path = "res://investigation/images/detetive/detetive_neutro.png"
+
+[sub_resource type="Resource" id="Resource_pkk3c"]
+script = ExtResource("6_qboph")
+name = "porta"
+description = "porta do prologo, onde o irmao fala com o detetive."
+prompt_chain = SubResource("Resource_x7ojx")
+images = Array[ExtResource("3_0nae8")]([SubResource("Resource_7spgv")])
+elements = Array[ExtResource("2_yridt")]([SubResource("Resource_jfq6m")])
+
+[sub_resource type="Resource" id="Resource_bpj17"]
+script = ExtResource("2_8v6mx")
+pov = SubResource("Resource_pkk3c")
+rotation = 0.75
+coords = Vector2(855.7703, 1799.9009)
+
+[sub_resource type="Resource" id="Resource_fgdpf"]
+script = ExtResource("5_r10in")
+
+[sub_resource type="Resource" id="Resource_wypbx"]
+script = ExtResource("2_yridt")
+name = "frente da casa"
+hitbox = Dictionary[String, float]({
+"bottom": 0.7538091306827012,
+"left": 0.4125979942611501,
+"right": 0.5482218778586085,
+"top": 0.11917551112608056
+})
+pov_name = "frente da casa"
+prompt_chain = SubResource("Resource_fgdpf")
+cursor_shape = 3
+pov_sound = ExtResource("10_qboph")
+
+[sub_resource type="Resource" id="Resource_s62r1"]
+script = ExtResource("3_0nae8")
+image_path = "res://investigation/images/povs/prologue/house_far.png"
+conditions = Dictionary[String, int]({
+"looking_at_watch": 0
+})
+
+[sub_resource type="Resource" id="Resource_h0qdr"]
+script = ExtResource("3_0nae8")
+image_path = "C:/Users/pirat/Documents/Godot-projects/o-chamado-da-noite-djuff/investigation/images/povs/prologue/watch_closeup.png"
+conditions = Dictionary[String, int]({
+"looking_at_watch": 1
+})
+
+[sub_resource type="Resource" id="Resource_3udg4"]
+script = ExtResource("4_70j8p")
+text = "Parece que é essa casa aqui."
+vars_to_change = Dictionary[String, int]({
+"looking_at_watch": 1
+})
+image_path = "res://investigation/images/detetive/detetive_neutro.png"
+
+[sub_resource type="Resource" id="Resource_6ubqa"]
+script = ExtResource("4_70j8p")
+text = "Urgh, eu demorei tanto assim pra achar essa casa?"
+vars_to_change = Dictionary[String, int]({
+"display_clocks": 1
+})
+image_path = "res://investigation/images/detetive/detetive_neutro.png"
+
+[sub_resource type="Resource" id="Resource_l6oi6"]
+script = ExtResource("4_70j8p")
+text = "Não tenho muito tempo, já estou começando a ficar com sono de novo..."
+end_chain = true
+vars_to_change = Dictionary[String, int]({
+"looking_at_watch": 0
+})
+image_path = "res://investigation/images/detetive/detetive_neutro.png"
+
+[sub_resource type="Resource" id="Resource_shyf4"]
+script = ExtResource("5_r10in")
+name = "casa longe"
+prompts = Array[ExtResource("4_70j8p")]([SubResource("Resource_3udg4"), SubResource("Resource_6ubqa"), SubResource("Resource_l6oi6")])
+default_image_path = "res://investigation/images/detetive/detetive_neutro.png"
+
+[sub_resource type="Resource" id="Resource_j0fpy"]
+script = ExtResource("6_qboph")
+name = "casa longe"
+description = "visao de longe da casa do dia 1"
+prompt_chain = SubResource("Resource_shyf4")
+images = Array[ExtResource("3_0nae8")]([SubResource("Resource_s62r1"), SubResource("Resource_h0qdr")])
+elements = Array[ExtResource("2_yridt")]([SubResource("Resource_wypbx")])
+
+[sub_resource type="Resource" id="Resource_k186c"]
+script = ExtResource("2_8v6mx")
+pov = SubResource("Resource_j0fpy")
+rotation = 0.75
+coords = Vector2(2862.9907, 1972.5657)
+
+[sub_resource type="Resource" id="Resource_mw78w"]
+script = ExtResource("7_45x7e")
+text = "Bater na porta"
+conditions = Dictionary[String, int]({
+"house_door_open": 0
+})
+
+[sub_resource type="Resource" id="Resource_8eec4"]
+script = ExtResource("4_70j8p")
+text = "Então os gritos vem dessa casa..."
+options = Array[ExtResource("7_45x7e")]([SubResource("Resource_mw78w")])
+image_path = "res://investigation/images/detetive/detetive_neutro.png"
+
+[sub_resource type="Resource" id="Resource_v68qh"]
+script = ExtResource("4_70j8p")
+text = "*toc toc-*"
+global_conditions = Dictionary[String, int]({
+"option": 0
+})
+vars_to_change = Dictionary[String, int]({
+"house_door_open": 1
+})
+image_path = "res://investigation/images/detetive/detetive_neutro.png"
+pre_sound = ExtResource("12_dmc51")
+pos_sound = ExtResource("11_cql46")
+
+[sub_resource type="Resource" id="Resource_uugvl"]
+script = ExtResource("4_70j8p")
+text = "Huh, a porta está aberta..."
+global_conditions = Dictionary[String, int]({
+"house_door_open": 1,
+"option": 0
+})
+image_path = "res://investigation/images/detetive/detetive_neutro.png"
+
+[sub_resource type="Resource" id="Resource_2bf5y"]
+script = ExtResource("7_45x7e")
+text = "Bater na porta mesmo assim"
+conditions = Dictionary[String, int]({
+"knocked_on_door": 0
+})
+
+[sub_resource type="Resource" id="Resource_tr1cu"]
+script = ExtResource("7_45x7e")
+text = "Entrar na casa"
+
+[sub_resource type="Resource" id="Resource_rqbkr"]
+script = ExtResource("4_70j8p")
+text = "O que eu deveria fazer?"
+global_conditions = Dictionary[String, int]({
+"house_door_open": 1
+})
+options = Array[ExtResource("7_45x7e")]([SubResource("Resource_2bf5y"), SubResource("Resource_tr1cu")])
+image_path = "res://investigation/images/detetive/detetive_neutro.png"
+
+[sub_resource type="Resource" id="Resource_857pu"]
+script = ExtResource("4_70j8p")
+text = "Ooooi, Tem alguem em casa?"
+global_conditions = Dictionary[String, int]({
+"option": 0
+})
+image_path = "res://investigation/images/detetive/detetive_neutro.png"
+pre_sound = ExtResource("13_hlwc6")
+
+[sub_resource type="Resource" id="Resource_46f5x"]
+script = ExtResource("4_70j8p")
+text = "..."
+global_conditions = Dictionary[String, int]({
+"option": 0
+})
+image_path = "res://investigation/images/detetive/detetive_neutro.png"
+
+[sub_resource type="Resource" id="Resource_giiyl"]
+script = ExtResource("4_70j8p")
+text = "A casa está estranhamente silenciosa."
+global_conditions = Dictionary[String, int]({
+"option": 0
+})
+vars_to_change = Dictionary[String, int]({
+"knocked_on_door": 1
+})
+go_to = 3
+image_path = "res://investigation/images/detetive/detetive_neutro.png"
+
+[sub_resource type="Resource" id="Resource_8or3n"]
+script = ExtResource("4_70j8p")
+text = "Bem, não me deixaram muita escolha, né."
+global_conditions = Dictionary[String, int]({
+"option": 1
+})
+image_path = "res://investigation/images/detetive/detetive_neutro.png"
+
+[sub_resource type="Resource" id="Resource_7h5xi"]
+script = ExtResource("4_70j8p")
+text = "Vou entrar."
+end_chain = true
+vars_to_change = Dictionary[String, int]({
+"entered_house": 1
+})
+image_path = "res://investigation/images/detetive/detetive_neutro.png"
+
+[sub_resource type="Resource" id="Resource_2p762"]
+script = ExtResource("5_r10in")
+name = "porta casa"
+prompts = Array[ExtResource("4_70j8p")]([SubResource("Resource_8eec4"), SubResource("Resource_v68qh"), SubResource("Resource_uugvl"), SubResource("Resource_rqbkr"), SubResource("Resource_857pu"), SubResource("Resource_46f5x"), SubResource("Resource_giiyl"), SubResource("Resource_8or3n"), SubResource("Resource_7h5xi")])
+default_image_path = "res://investigation/images/detetive/detetive_neutro.png"
+
+[sub_resource type="Resource" id="Resource_w0456"]
+script = ExtResource("2_yridt")
+name = "porta"
+hitbox = Dictionary[String, float]({
+"bottom": 1.0,
+"left": 0.40427215189873417,
+"right": 0.6368670886075949,
+"top": 0.0
+})
+prompt_chain = SubResource("Resource_2p762")
+cursor_shape = 2
+
+[sub_resource type="Resource" id="Resource_xqxr3"]
+script = ExtResource("3_0nae8")
+image_path = "res://investigation/images/povs/prologue/house_close.png"
+conditions = Dictionary[String, int]({
+"house_door_open": 0
+})
+
+[sub_resource type="Resource" id="Resource_s2jfh"]
+script = ExtResource("3_0nae8")
+image_path = "res://investigation/images/povs/prologue/house_close_door_open.png"
+conditions = Dictionary[String, int]({
+"house_door_open": 1
+})
+
+[sub_resource type="Resource" id="Resource_f7oio"]
+script = ExtResource("5_r10in")
+
+[sub_resource type="Resource" id="Resource_3h42u"]
+script = ExtResource("6_qboph")
+name = "frente da casa"
+description = "visao de perto da frente da casa do dia 1"
+prompt_chain = SubResource("Resource_f7oio")
+images = Array[ExtResource("3_0nae8")]([SubResource("Resource_xqxr3"), SubResource("Resource_s2jfh")])
+elements = Array[ExtResource("2_yridt")]([SubResource("Resource_w0456")])
+
+[sub_resource type="Resource" id="Resource_x085v"]
+script = ExtResource("2_8v6mx")
+pov = SubResource("Resource_3h42u")
+bottom = "casa longe"
+rotation = 0.75
+coords = Vector2(2858.295, 1297.9579)
+
+[resource]
+script = ExtResource("4_g17jk")
+bg_image_path = "res://investigation/images/povs/pov_level_bgs/prologue_pov_level_background.png"
+pov_directions_array = Array[ExtResource("2_8v6mx")]([SubResource("Resource_h3a8a"), SubResource("Resource_uiwif"), SubResource("Resource_iiqvl"), SubResource("Resource_bpj17"), SubResource("Resource_k186c"), SubResource("Resource_x085v")])
+dir_scale = 0.6000000000000002
+default_pov = "telefone"

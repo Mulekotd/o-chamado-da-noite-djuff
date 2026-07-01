@@ -11,8 +11,8 @@ config_version=5
 [application]
 
 config/name="O CHAMADO DA NOITE"
-run/main_scene="uid://4tcvwh7s3l62"
-config/features=PackedStringArray("4.6", "GL Compatibility")
+run/main_scene="uid://dd40v3jpeddb8"
+config/features=PackedStringArray("4.7", "GL Compatibility")
 
 [audio]
 
@@ -33,9 +33,9 @@ runtime/balloon_path="res://ui/ballons/balloon.tscn"
 
 [display]
 
-window/size/viewport_width=1024
-window/size/viewport_height=768
-window/stretch/mode="viewport"
+window/size/viewport_width=1280
+window/size/viewport_height=960
+window/stretch/mode="canvas_items"
 window/vsync/vsync_mode=0
 
 [editor]
@@ -54,7 +54,12 @@ symbol_widget=""
 
 [gui]
 
+fonts/dynamic_fonts/use_oversampling=false
+theme/default_font_antialiasing=0
+theme/default_font_subpixel_positioning=0
 theme/default_font_multichannel_signed_distance_field=true
+theme/custom="uid://3ifxctuaoc5m"
+theme/custom_font="uid://cpmkdvdd68wp"
 
 [input]
 

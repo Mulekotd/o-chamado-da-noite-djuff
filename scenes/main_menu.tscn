@@ -1,0 +1,404 @@
+[gd_scene format=3 uid="uid://tdvo7j1sx138"]
+
+[ext_resource type="Script" uid="uid://bvdlu7o7av51x" path="res://scripts/main_menu.gd" id="1_bqqt6"]
+[ext_resource type="PackedScene" uid="uid://fmeu1ocls847" path="res://investigation/scenes/sound_manager.tscn" id="2_8ln24"]
+[ext_resource type="Texture2D" uid="uid://dwybis63casti" path="res://investigation/interface/images/main_menu_assassin.png" id="2_wu84c"]
+[ext_resource type="Texture2D" uid="uid://cq6cbluy4kbhr" path="res://investigation/interface/images/main_menu_detective.png" id="3_8ln24"]
+[ext_resource type="PackedScene" uid="uid://f2qd0iww8k1p" path="res://investigation/utils/general/moving_noise_widget.tscn" id="3_rtw2f"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l6cm7"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bqqt6"]
+content_margin_left = 10.0
+content_margin_top = 4.0
+content_margin_right = 10.0
+content_margin_bottom = 4.0
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wu84c"]
+content_margin_top = 32.0
+content_margin_bottom = 32.0
+bg_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 160
+corner_radius_bottom_right = 160
+
+[node name="MainMenu" type="Control" unique_id=1877421865 node_paths=PackedStringArray("sound_manager", "background", "assassin", "detective", "black_rect", "main_elements", "new_game_confirmation", "options_and_credits", "exit_confirmation", "continue_button", "master_slider", "music_slider", "sfx_slider", "dialog_slider")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bqqt6")
+sound_manager = NodePath("SoundManager")
+background = NodePath("Background")
+assassin = NodePath("Assassin")
+detective = NodePath("Detective")
+black_rect = NodePath("BlackRect")
+main_elements = NodePath("MainElements")
+new_game_confirmation = NodePath("NewGameConfirmation")
+options_and_credits = NodePath("OptionsAndCredits")
+exit_confirmation = NodePath("ExitConfirmation")
+continue_button = NodePath("MainElements/MainButtons/ContinueButton")
+master_slider = NodePath("OptionsAndCredits/Options/GridContainer/MasterSlider")
+music_slider = NodePath("OptionsAndCredits/Options/GridContainer/MusicSlider")
+sfx_slider = NodePath("OptionsAndCredits/Options/GridContainer/SfxSlider")
+dialog_slider = NodePath("OptionsAndCredits/Options/GridContainer/DialogSlider")
+background_parallax_amount = 0.05
+parallax_speed = 3.0
+
+[node name="SoundManager" parent="." unique_id=1253211127 instance=ExtResource("2_8ln24")]
+
+[node name="MovingNoiseWidget" parent="." unique_id=292722013 instance=ExtResource("3_rtw2f")]
+layout_mode = 1
+bg_speed = Vector2(0.2, 1)
+
+[node name="Background" type="PanelContainer" parent="." unique_id=875955442]
+modulate = Color(0, 0, 0, 0.84313726)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_l6cm7")
+
+[node name="Assassin" type="TextureRect" parent="." unique_id=879911749]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 960.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+texture = ExtResource("2_wu84c")
+expand_mode = 1
+
+[node name="Detective" type="TextureRect" parent="." unique_id=2042463954]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 960.0
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+texture = ExtResource("3_8ln24")
+expand_mode = 1
+
+[node name="MainElements" type="VBoxContainer" parent="." unique_id=1880678209]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.423
+anchor_top = 0.377
+anchor_right = 0.423
+anchor_bottom = 0.377
+offset_left = -443.44012
+offset_top = -243.91852
+offset_right = 640.5599
+offset_bottom = 480.07828
+pivot_offset_ratio = Vector2(0.5, 0.5)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_constants/separation = 102
+metadata/_edit_use_anchors_ = true
+
+[node name="Title" type="VBoxContainer" parent="MainElements" unique_id=1438360159]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Subtitulo" type="Label" parent="MainElements/Title" unique_id=1796499960]
+visible = false
+layout_mode = 2
+theme_override_constants/outline_size = 32
+theme_override_font_sizes/font_size = 50
+horizontal_alignment = 1
+
+[node name="Titulo" type="Label" parent="MainElements/Title" unique_id=1979046720]
+custom_minimum_size = Vector2(1083.335, 0)
+layout_mode = 2
+theme_override_constants/outline_size = 48
+theme_override_font_sizes/font_size = 128
+text = "The Devil I Investigate"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="MainButtons" type="VBoxContainer" parent="MainElements" unique_id=1674760997]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 68
+
+[node name="ContinueButton" type="Button" parent="MainElements/MainButtons" unique_id=2131634913]
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 1
+theme_override_font_sizes/font_size = 46
+disabled = true
+text = "Continuar"
+
+[node name="NewGameButton" type="Button" parent="MainElements/MainButtons" unique_id=1940740842]
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 1
+theme_override_font_sizes/font_size = 46
+text = "Novo Jogo"
+
+[node name="OptionsButton" type="Button" parent="MainElements/MainButtons" unique_id=375089464]
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 1
+theme_override_font_sizes/font_size = 46
+text = "Opções"
+
+[node name="ExitButton" type="Button" parent="MainElements/MainButtons" unique_id=1352629501]
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 1
+theme_override_font_sizes/font_size = 46
+text = "Sair"
+
+[node name="NewGameConfirmation" type="VBoxContainer" parent="." unique_id=2018073400]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 640.0
+offset_top = -148.5
+offset_right = 1400.0009
+offset_bottom = 148.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 68
+
+[node name="NewGameConfirmationLabel" type="Label" parent="NewGameConfirmation" unique_id=1532224045]
+layout_mode = 2
+theme_override_constants/outline_size = 24
+theme_override_font_sizes/font_size = 50
+text = "Apagar qualquer dado salvo?"
+
+[node name="ConfirmButton" type="Button" parent="NewGameConfirmation" unique_id=590749806]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 1
+theme_override_colors/font_hover_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 46
+theme_override_styles/hover = SubResource("StyleBoxFlat_bqqt6")
+text = "Confirmar"
+
+[node name="ReturnButton" type="Button" parent="NewGameConfirmation" unique_id=1678529938]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 1
+theme_override_font_sizes/font_size = 46
+text = "Voltar"
+
+[node name="OptionsAndCredits" type="HBoxContainer" parent="." unique_id=2128781108]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -1857.0
+offset_top = -324.5
+offset_right = -741.0
+offset_bottom = 324.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 55
+
+[node name="RichTextLabel" type="RichTextLabel" parent="OptionsAndCredits" unique_id=2134714167]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_wu84c")
+bbcode_enabled = true
+text = "Créditos
+
+Arte: Ronaldo Dias
+
+Narrativa: Letícia Barreto
+
+Level Design: Letícia Barreto
+
+-Programação-
+[color=dodgerblue]Point-and-Click:[/color] Ronaldo Dias
+[color=red]Top-Down:[/color] João Pedro Gama, Luiz Paulo
+
+Música: Ronaldo Dias
+
+Sfxs: Ronaldo Dias"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Options" type="VBoxContainer" parent="OptionsAndCredits" unique_id=844082129]
+layout_mode = 2
+theme_override_constants/separation = 87
+
+[node name="OptionsLabel" type="Label" parent="OptionsAndCredits/Options" unique_id=192895083]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/outline_size = 24
+theme_override_font_sizes/font_size = 50
+text = "Opções"
+
+[node name="GridContainer" type="GridContainer" parent="OptionsAndCredits/Options" unique_id=786646585]
+layout_mode = 2
+theme_override_constants/v_separation = 100
+columns = 2
+
+[node name="MasterLabel" type="Label" parent="OptionsAndCredits/Options/GridContainer" unique_id=668375656]
+layout_mode = 2
+theme_override_constants/outline_size = 24
+theme_override_font_sizes/font_size = 50
+text = "Geral"
+
+[node name="MasterSlider" type="HSlider" parent="OptionsAndCredits/Options/GridContainer" unique_id=1180533208]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+mouse_filter = 1
+max_value = 1.0
+step = 0.001
+value = 1.0
+
+[node name="MusicLabel" type="Label" parent="OptionsAndCredits/Options/GridContainer" unique_id=2118341151]
+layout_mode = 2
+theme_override_constants/outline_size = 24
+theme_override_font_sizes/font_size = 50
+text = "Música "
+
+[node name="MusicSlider" type="HSlider" parent="OptionsAndCredits/Options/GridContainer" unique_id=420556433]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+mouse_filter = 1
+max_value = 1.0
+step = 0.001
+value = 1.0
+
+[node name="SfxLabel" type="Label" parent="OptionsAndCredits/Options/GridContainer" unique_id=1377773905]
+layout_mode = 2
+theme_override_constants/outline_size = 24
+theme_override_font_sizes/font_size = 50
+text = "Sfx"
+
+[node name="SfxSlider" type="HSlider" parent="OptionsAndCredits/Options/GridContainer" unique_id=46184188]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+mouse_filter = 1
+max_value = 1.0
+step = 0.001
+value = 1.0
+
+[node name="DialogLabel" type="Label" parent="OptionsAndCredits/Options/GridContainer" unique_id=828925538]
+layout_mode = 2
+theme_override_constants/outline_size = 24
+theme_override_font_sizes/font_size = 50
+text = "Diálogo"
+
+[node name="DialogSlider" type="HSlider" parent="OptionsAndCredits/Options/GridContainer" unique_id=1513939186]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+mouse_filter = 1
+max_value = 1.0
+step = 0.001
+value = 1.0
+
+[node name="ReturnButton" type="Button" parent="OptionsAndCredits/Options" unique_id=872495952]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 1
+theme_override_font_sizes/font_size = 46
+text = "Voltar"
+
+[node name="ExitConfirmation" type="VBoxContainer" parent="." unique_id=180526448]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 640.0
+offset_top = -148.5
+offset_right = 1400.0009
+offset_bottom = 148.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 68
+
+[node name="ExitConfirmationLabel" type="Label" parent="ExitConfirmation" unique_id=1576430997]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/outline_size = 24
+theme_override_font_sizes/font_size = 50
+text = "Sair do jogo?"
+
+[node name="ExitButton" type="Button" parent="ExitConfirmation" unique_id=211783972]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 1
+theme_override_colors/font_hover_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 46
+theme_override_styles/hover = SubResource("StyleBoxFlat_bqqt6")
+text = "Sair"
+
+[node name="ReturnButton" type="Button" parent="ExitConfirmation" unique_id=1320318230]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 1
+theme_override_font_sizes/font_size = 46
+text = "Voltar"
+
+[node name="BlackRect" type="ColorRect" parent="." unique_id=178389158]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
+
+[connection signal="gui_input" from="Background" to="." method="_on_panel_container_gui_input"]
+[connection signal="mouse_entered" from="Background" to="." method="_on_panel_container_mouse_entered"]
+[connection signal="mouse_exited" from="Background" to="." method="_on_panel_container_mouse_exited"]
+[connection signal="pressed" from="MainElements/MainButtons/ContinueButton" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="MainElements/MainButtons/NewGameButton" to="." method="_on_new_game_pressed"]
+[connection signal="pressed" from="MainElements/MainButtons/OptionsButton" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="MainElements/MainButtons/ExitButton" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="NewGameConfirmation/ConfirmButton" to="." method="_on_confirm_button_pressed"]
+[connection signal="pressed" from="NewGameConfirmation/ReturnButton" to="." method="_on_return_button_pressed"]
+[connection signal="value_changed" from="OptionsAndCredits/Options/GridContainer/MasterSlider" to="." method="_on_master_slider_value_changed"]
+[connection signal="value_changed" from="OptionsAndCredits/Options/GridContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="drag_ended" from="OptionsAndCredits/Options/GridContainer/SfxSlider" to="." method="_on_sfx_slider_drag_ended"]
+[connection signal="value_changed" from="OptionsAndCredits/Options/GridContainer/SfxSlider" to="." method="_on_sfx_slider_value_changed"]
+[connection signal="drag_ended" from="OptionsAndCredits/Options/GridContainer/DialogSlider" to="." method="_on_dialog_slider_drag_ended"]
+[connection signal="value_changed" from="OptionsAndCredits/Options/GridContainer/DialogSlider" to="." method="_on_dialog_slider_value_changed"]
+[connection signal="pressed" from="OptionsAndCredits/Options/ReturnButton" to="." method="_on_return_button_pressed"]
+[connection signal="pressed" from="ExitConfirmation/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="ExitConfirmation/ReturnButton" to="." method="_on_return_button_pressed"]

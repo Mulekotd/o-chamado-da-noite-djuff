@@ -11,6 +11,7 @@ var coords : Vector2 = Vector2.ZERO
 @export var prompt_chain_widget : _PromptChainWidget
 @export var conditions_widget : _ConditionsWidget
 @export var image_file_dialog : FileDialog
+@export var sound_widget : _SoundWidget
 
 signal closed(PuzzlePov)
 
@@ -25,10 +26,18 @@ func load_puzzle_pov(pov: PuzzlePov) -> void:
 	pov_images = pov.images
 	# digits
 	_update_preview_image()
-	if pov.symbols:
-		digits_widget.load_digits(pov.digits, pov.symbols[0])
+	if pov.symbol_paths:
+		var first_path := pov.symbol_paths[0]
+		if first_path:
+			var tex := load(first_path)
+			if tex is Texture2D:
+				digits_widget.load_digits(pov.digits, tex)
+			else:
+				digits_widget.load_digits(pov.digits, null)
+		else:
+			digits_widget.load_digits(pov.digits, null)
 	# symbols
-	symbols_widget.load_symbols(pov.symbols)
+	symbols_widget.load_symbols(pov.symbol_paths)
 	# combinations
 	combinations_widget.load_combinations(pov.combinations)
 	# prompt_chain
@@ -37,6 +46,8 @@ func load_puzzle_pov(pov: PuzzlePov) -> void:
 	conditions_widget.load_conditions(pov.global_conditions)
 	# coords
 	coords = pov.coords
+	# sound
+	sound_widget.load_sound(pov.sound)
 
 func parse_puzzle_pov() -> PuzzlePov:
 	var pov := PuzzlePov.new()
@@ -47,7 +58,7 @@ func parse_puzzle_pov() -> PuzzlePov:
 	# digits
 	pov.digits = digits_widget.parse_digits()
 	# symbols
-	pov.symbols = symbols_widget.parse_symbols()
+	pov.symbol_paths = symbols_widget.parse_symbols()
 	# combinations
 	pov.combinations = combinations_widget.parse_combinations()
 	# prompt_chain
@@ -56,22 +67,28 @@ func parse_puzzle_pov() -> PuzzlePov:
 	pov.global_conditions = conditions_widget.parse_conditions()
 	# coords
 	pov.coords = coords
+	# sound
+	pov.sound = sound_widget.get_sound()
 	# done
 	return pov
 
 ## updates the image in the digits
 func _update_digits_demo() -> void:
-	for img : Texture2D in symbols_widget.parse_symbols():
-		if img:
-			digits_widget.set_demo_symbol(img)
-			return
+	for img_path : String in symbols_widget.parse_symbols():
+		if img_path:
+			var tex := load(img_path)
+			if tex is Texture2D:
+				digits_widget.set_demo_symbol(tex)
+				return
 	digits_widget.set_demo_symbol(null)
 
 func _update_preview_image() -> void:
 	for img in pov_images:
-		if img.texture:
-			digits_widget.load_pov_image(img.texture)
-			return
+		if img.image_path:
+			var tex := load(img.image_path)
+			if tex is Texture2D:
+				digits_widget.load_pov_image(tex)
+				return
 	digits_widget.load_pov_image(null)
 
 func _load_pov_images(imgs: Array[PovImage]) -> void:

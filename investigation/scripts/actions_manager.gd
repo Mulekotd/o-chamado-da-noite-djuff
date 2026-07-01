@@ -8,7 +8,6 @@ class_name ActionsManager extends VBoxContainer
 	set(x):
 		actions = min(x, max_actions)
 		actions = max(actions, 0)
-		print(x)
 @export var max_actions : int = 5 :
 	set(x):
 		max_actions = max(x, 0)
@@ -22,6 +21,12 @@ class_name ActionsManager extends VBoxContainer
 @export var bob_amplitude : float = 30
 ## empty circle spin speed
 @export var spin_speed : float = 0.1
+## custom position for all clocks
+@export var pos_overwrite : Vector2 = Vector2.ZERO
+## if clocks should use the pos_overwrite
+@export var use_pos_overwrite : bool = false
+## speed in which the clocks move into position
+@export var pos_speed : float = 2
 var rnd_number : float
 
 const CLOCK = preload("uid://fj1b2filxono")
@@ -57,7 +62,7 @@ func _update_clocks(delta: float) -> void:
 	var i : int = actions
 	var clock_containers := get_children()
 	var time_sec := Time.get_ticks_msec() / 1000.0
-	for clock_container in clock_containers:
+	for clock_container : Control in clock_containers:
 		var clock : TextureRect = clock_container.get_child(1)
 		if i: # available
 			clock.modulate = lerp(clock.modulate, Color(1,1,1,1), modulate_speed * delta)
@@ -69,3 +74,10 @@ func _update_clocks(delta: float) -> void:
 			clock.modulate = lerp(clock.modulate, Color(0,0,1,0), modulate_speed * delta)
 			clock.rotation = lerp(clock.rotation, PI*2 * 2, modulate_speed * delta)
 		clock_container.get_child(0).rotation = clock_container.get_child(0).rotation + spin_speed * delta
+		
+		if use_pos_overwrite:
+			clock_container.get_child(0).global_position = lerp(clock_container.get_child(0).global_position, pos_overwrite, pos_speed * delta)
+			clock_container.get_child(1).global_position = lerp(clock_container.get_child(1).global_position, pos_overwrite, pos_speed * delta)
+		else:
+			clock_container.get_child(0).position = lerp(clock_container.get_child(0).position, Vector2.ZERO, pos_speed * delta)
+			clock_container.get_child(1).position = lerp(clock_container.get_child(1).position, Vector2.ZERO, pos_speed * delta)

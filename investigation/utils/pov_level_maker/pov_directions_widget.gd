@@ -70,8 +70,12 @@ func load_pov_directions(p_dir : PovDirections) -> void:
 func load_pov(new_pov: Pov) -> void:
 	# Update the widget visuals and button title from a Pov resource.
 	pov = new_pov
-	if new_pov.images and new_pov.images[0].texture:
-		pov_image_rect.texture = new_pov.images[0].texture
+	if new_pov.images and new_pov.images[0].image_path:
+		var tex := load(new_pov.images[0].image_path)
+		if tex is Texture2D:
+			pov_image_rect.texture = tex
+		else:
+			pov_image_rect.texture = NO_IMAGE_POV
 	else:
 		pov_image_rect.texture = NO_IMAGE_POV
 	if new_pov.name:

@@ -12,17 +12,23 @@ const BOTTOM_ARROW = preload("uid://cm8l3y3l3dioj")
 const LEFT_ARROW = preload("uid://b513u1882j8ph")
 const RIGHT_ARROW = preload("uid://dlf5uc3tlxr2j")
 const TOP_ARROW = preload("uid://dtdkxktq3g8yr")
-const NORMAL_CURSOR = CURSOR_ARROW
-const DISABLED_CURSOR = CURSOR_FORBIDDEN
-const CLICKABLE_CURSOR = CURSOR_POINTING_HAND
+
+const CURSORS : Dictionary[int, CursorShape] = {
+	-1 : CURSOR_FORBIDDEN,
+	Element.cursor_shapes.DEFAULT : CURSOR_ARROW,
+	Element.cursor_shapes.POINTING_HAND : CURSOR_POINTING_HAND,
+	Element.cursor_shapes.MAGNIFIER : CURSOR_HELP,
+	Element.cursor_shapes.STEPS : CURSOR_MOVE,
+}
 
 signal element_clicked(element: Element)
 signal prompt_chain_called(p_chain: PromptChain)
 signal pov_entered()
+signal sound_played(sound: AudioStream)
 
 var pov_index : int
 var current_pov : Pov
-var enabled : bool = true :
+var enabled : bool = false :
 	set(x):
 		enabled = x
 		#print("enabled = ", x)
@@ -32,7 +38,7 @@ var enabled : bool = true :
 @export var pov_level : PovLevel
 @export var arrow_hitbox : float = 16
 ## time to wait before showing the prompt_chain if a pov has one
-@export var prompt_wait_time : float = 1
+@export var prompt_wait_time : float = 2
 ## how far the POV image pans based on mouse distance to center
 @export var pan_amount : Vector2 = Vector2(12, 8)
 ## how quickly the POV image lerps to its pan position
@@ -52,7 +58,6 @@ var _on_puzzle_pov : bool = false
 func _ready() -> void:
 	_sync_view_base_pos()
 	_reset_shadow_panel()
-	_load_last_pov()
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_RESIZED:
@@ -60,6 +65,12 @@ func _notification(what: int) -> void:
 
 func _process(_delta: float) -> void:
 	_update_view_pan(_delta)
+
+func load_pov_level(level: PovLevel) -> void:
+	pov_level = level
+	_update_cursor()
+	_load_last_pov()
+	enabled = true
 
 func change_pov(pov: Pov) -> void:
 	if pov != current_pov:
@@ -77,6 +88,7 @@ func change_pov(pov: Pov) -> void:
 			# Pause navigation while the POV's prompt chain is displayed.
 			enabled = false
 			await get_tree().create_timer(prompt_wait_time).timeout
+			print("JOGA A PROMT CHAIN")
 			prompt_chain_called.emit(current_pov.prompt_chain)
 		if current_pov.especial_behaviour:
 			for s in get_parent().get_children():
@@ -87,6 +99,8 @@ func change_pov(pov: Pov) -> void:
 			n.set_script(current_pov.especial_behaviour)
 			n.name = current_pov.name + "_behaviour"
 			add_sibling(n)
+		if current_pov.sound:
+			sound_played.emit(current_pov.sound)
 	else:
 		update_view()
 		update_arrows()
@@ -118,11 +132,10 @@ func update_view(pov: Pov = current_pov) -> void:
 		x = InvestigationVars.get_conditions_value(pi.conditions)
 		if x > highest:
 			highest = x
-			img = pi.texture
+			if pi.image_path:
+				img = load(pi.image_path)
 	view.texture = img
 	update_arrows()
-	if _on_puzzle_pov:
-		pass # call function to spawn digits and shit
 
 func update_arrows() -> void:
 	if not _on_puzzle_pov:
@@ -219,12 +232,13 @@ func _update_cursor() -> void:
 	# Cursor feedback changes based on enabled state and hitbox hover.
 	var mouse_relative := _get_mouse_relative_to_view()
 	if enabled:
-		if _get_element_in_pos(mouse_relative):
-			_change_cursor(CLICKABLE_CURSOR)
+		var element : Element = _get_element_in_pos(mouse_relative)
+		if element:
+			_change_cursor(CURSORS[element.cursor_shape])
 		else:
-			_change_cursor(NORMAL_CURSOR)
+			_change_cursor(CURSORS[Element.cursor_shapes.DEFAULT])
 	else:
-		_change_cursor(DISABLED_CURSOR)
+		_change_cursor(CURSORS[-1])
 
 func _change_cursor(cursor: int) -> void:
 	if mouse_default_cursor_shape != cursor:
@@ -252,10 +266,14 @@ func _on_gui_input(_event: InputEvent) -> void:
 		if e.vars_to_change:
 			InvestigationVars.update_variables(e.vars_to_change)
 			update_view(current_pov)
+		if e.sound:
+			sound_played.emit(e.sound)
 		if e.pov_name:
 			_pan_locked = true
 			var target_pov := get_pov(e.pov_name)
 			if target_pov:
+				if e.pov_sound:
+					sound_played.emit(e.pov_sound)
 				await _transition_to_pov(target_pov, Vector2.ZERO)
 			else:
 				change_pov_by_name(e.pov_name)

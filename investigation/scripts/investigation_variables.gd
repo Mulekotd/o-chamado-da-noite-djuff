@@ -3,11 +3,14 @@ class_name InvestigationVars extends Resource
 
 @export_tool_button("clear global variables")
 var clear_action = clear_everything
-func clear_everything() -> void:
+static func clear_everything() -> void:
 	file.vars.clear()
+	file.vars["option"] = -1
 	file.inventory.clear()
 	file.set_actions(get_max_actions())
 	file.last_pov = ""
+	file.add_investigation_points(-file.get_investigation_points())
+	ResourceSaver.save(file)
 	
 ## vars are int for utility, use 0 and 1 if you want boolean behaviour
 @export var vars : Dictionary[String, int] = {
@@ -15,7 +18,6 @@ func clear_everything() -> void:
 }
 
 @export var inventory : Array[Item] = [
-	preload("uid://cqpw454xu78in"),
 ]
 
 ## maximum amount of actions the player can have
@@ -23,13 +25,19 @@ func clear_everything() -> void:
 ## how many actions the player has
 @export var _actions : int = _max_actions
 
-@export var last_pov : String
+## points that influence how much insight the character has about the investigation
+@export var _investigation_points : int = 0
+
+## last level the player was in
+@export var last_level: String = ""
+
+## last pov the player was in
+@export var last_pov : String = ""
 
 ## value to assign to a newly created variable
 static var default_value : int = 0
 
 static var file : InvestigationVars = load("res://investigation/investigation_variables.tres")
-
 
 ## returns int(number-of-conditions-met / number-of-keys-given) * number-of-keys-given - 1
 static func get_conditions_value(conditions: Dictionary[String, int], count_option : bool = true) -> float:
@@ -50,7 +58,7 @@ static func get_conditions_met(conditions: Dictionary[String, int]) -> int:
 	return conditions_met
 
 static func meets_all_conditions(conditions: Dictionary[String, int]) -> int:
-	return get_conditions_met(conditions) == conditions.size()
+	return get_conditions_met(conditions) >= conditions.size()
 
 static func check_inventory(items: Array[Item]) -> bool:
 	for i in items:
@@ -79,6 +87,13 @@ static func remove_item(items: Array[Item]) -> void:
 	for item in items:
 		file.inventory.erase(item)
 	ResourceSaver.save(file)
+
+static func set_last_level(lvl_name: String) -> void:
+	file.last_level = lvl_name
+	ResourceSaver.save(file)
+
+static func get_last_level() -> String:
+	return file.last_level
 
 static func set_last_pov(p_name: String) -> void:
 	file.last_pov = p_name
@@ -111,3 +126,10 @@ static func get_max_actions() -> int:
 
 static func get_inventory() -> Array[Item]:
 	return file.inventory
+
+static func get_investigation_points() -> int:
+	return file._investigation_points
+
+static func add_investigation_points(amount: int) -> void:
+	file._investigation_points = max(0, file._investigation_points + amount)
+	ResourceSaver.save(file)

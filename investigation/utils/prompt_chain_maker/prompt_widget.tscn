@@ -156,6 +156,7 @@ autowrap_mode = 2
 
 [node name="BehaviourWidget" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer/Pre/GridContainer/BehaviourContainer" unique_id=513523494 instance=ExtResource("6_p1lpp")]
 layout_mode = 2
+size_flags_horizontal = 4
 
 [node name="Pos" type="MarginContainer" parent="MarginContainer/HBoxContainer/HSplitContainer/TabContainer" unique_id=326489978]
 visible = false

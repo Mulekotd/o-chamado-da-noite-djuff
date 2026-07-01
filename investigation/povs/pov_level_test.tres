@@ -1,6 +1,5 @@
 [gd_resource type="Resource" script_class="PovLevel" format=3 uid="uid://c06lvdpcxu5l3"]
 
-[ext_resource type="Texture2D" uid="uid://c6uq8ruu8dc8f" path="res://investigation/povs/pov_level_bg.jpeg" id="1_ahayo"]
 [ext_resource type="Script" uid="uid://ffh4hevhqls8" path="res://investigation/povs/scripts/pov_directions.gd" id="2_i1fj6"]
 [ext_resource type="Script" uid="uid://deej6yes3fmnc" path="res://investigation/povs/scripts/element_resource.gd" id="3_xi5ua"]
 [ext_resource type="Script" uid="uid://dqj183h8d13hn" path="res://investigation/items/scripts/item_resource.gd" id="4_i1fj6"]
@@ -10,7 +9,6 @@
 [ext_resource type="Script" uid="uid://cxpiwtdar5o13" path="res://investigation/text_box/scripts/option_resource.gd" id="6_xi5ua"]
 [ext_resource type="Script" uid="uid://cjbfq0iyvv1rr" path="res://investigation/povs/scripts/pov_level_resource.gd" id="7_g84im"]
 [ext_resource type="Script" uid="uid://ci2buxueqquwj" path="res://investigation/povs/scripts/pov_image_resource.gd" id="8_sx7mx"]
-[ext_resource type="Resource" uid="uid://cqpw454xu78in" path="res://investigation/items/test_key/test_key.tres" id="9_wppg2"]
 [ext_resource type="Script" uid="uid://2mj3tpo0kht6" path="res://investigation/povs/scripts/puzzle_pov_resource.gd" id="11_2k0qv"]
 
 [sub_resource type="Resource" id="Resource_wppg2"]
@@ -112,7 +110,6 @@ coords = Vector2(1387.4404, 2168.5127)
 [sub_resource type="Resource" id="Resource_bvt70"]
 script = ExtResource("6_xi5ua")
 text = "Destrancar"
-necessary_items = Array[ExtResource("4_i1fj6")]([ExtResource("9_wppg2")])
 
 [sub_resource type="Resource" id="Resource_vpqfk"]
 script = ExtResource("4_wppg2")
@@ -165,6 +162,6 @@ coords = Vector2(1897.5502, 2480.598)
 
 [resource]
 script = ExtResource("7_g84im")
-bg_img = ExtResource("1_ahayo")
+bg_image_path = "res://investigation/povs/pov_level_bg.jpeg"
 pov_directions_array = Array[ExtResource("2_i1fj6")]([SubResource("Resource_qtm1o"), SubResource("Resource_768op")])
 dir_scale = 0.97

@@ -1,25 +1,27 @@
 [gd_resource type="Resource" script_class="InvestigationVars" format=3]
 
-[ext_resource type="Script" path="res://investigation/items/scripts/item_resource.gd" id="1_2u1gg"]
-[ext_resource type="Resource" path="res://investigation/items/test_key/test_key.tres" id="2_p848r"]
-[ext_resource type="Script" path="res://investigation/scripts/investigation_variables.gd" id="3_nj77k"]
+[ext_resource type="Script" path="res://investigation/items/scripts/item_resource.gd" id="1_c1mno"]
+[ext_resource type="Script" path="res://investigation/scripts/investigation_variables.gd" id="1_y5pc1"]
 
 [resource]
-script = ExtResource("3_nj77k")
+script = ExtResource("1_y5pc1")
 vars = Dictionary[String, int]({
-"deu chave": 1,
-"luz_da_sala_ligada": 1,
-"option": -1,
-"porta_destrancada": 1,
-"surpreso com a porta": 1,
-"televisao_puzzle_pp_digit_0": 7,
-"televisao_puzzle_pp_digit_1": 7,
-"televisao_puzzle_pp_digit_2": 6,
-"televisao_puzzle_pp_digit_3": 7,
-"tv_code_found": 1,
-"tv_code_found_surprised": 0,
-"tv_on": 1
+"about_to_leave": 1,
+"answered_phone": 1,
+"conectar_fio": 0,
+"display_clocks": 1,
+"entered_house": 1,
+"estabilizou": 0,
+"house_door_open": 1,
+"knocked_on_door": 1,
+"left_home": 1,
+"ligou": 0,
+"looking_at_watch": 0,
+"option": 0,
+"phone_down": 1,
+"tv_on": 0
 })
-_actions = 1
-last_pov = "porta"
+_actions = 4
+last_level = "day1"
+last_pov = "pov_tv"
 metadata/_custom_type_script = "uid://47pf0lrk86x5"

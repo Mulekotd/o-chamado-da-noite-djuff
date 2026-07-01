@@ -16,8 +16,8 @@ class_name Prompt extends Resource
 @export var go_to : int = -1
 ## Pov to go to after this prompt
 @export var pov : String
-## this will be the image displayed besides the textbox when this prompt comes up
-@export var img : Texture2D
+## path to the image displayed beside the textbox when this prompt comes up
+@export var image_path : String
 ## audio to play immediately
 @export var pre_sound : AudioStream
 ## audio to after this prompt

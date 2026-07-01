@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bj378ngyim0ll" path="res://investigation/utils/general/conditions_widget.tscn" id="3_5jlhf"]
 [ext_resource type="PackedScene" uid="uid://d3dyiv04e6brb" path="res://investigation/utils/prompt_chain_maker/prompt_chain_widget.tscn" id="4_8roye"]
 [ext_resource type="PackedScene" uid="uid://cko8sykqdhkfw" path="res://investigation/utils/general/image_load_file_dialog.tscn" id="8_ky3bp"]
+[ext_resource type="PackedScene" uid="uid://cvlccjslejidx" path="res://investigation/utils/general/sound_widget.tscn" id="8_yktth"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5jlhf"]
 content_margin_left = 32.0
@@ -21,7 +22,7 @@ border_width_right = 1
 border_width_bottom = 1
 border_color = Color(1, 1, 1, 1)
 
-[node name="PuzzlePovWidget" type="Control" unique_id=31164012 node_paths=PackedStringArray("pov_name_line_edit", "digits_widget", "symbols_widget", "combinations_widget", "prompt_chain_widget", "conditions_widget")]
+[node name="PuzzlePovWidget" type="Control" unique_id=31164012 node_paths=PackedStringArray("pov_name_line_edit", "digits_widget", "symbols_widget", "combinations_widget", "prompt_chain_widget", "conditions_widget", "image_file_dialog", "sound_widget")]
 z_index = 1
 layout_mode = 3
 anchors_preset = 15
@@ -38,6 +39,8 @@ symbols_widget = NodePath("MarginContainer/ScrollContainer/PanelContainer/VBoxCo
 combinations_widget = NodePath("MarginContainer/ScrollContainer/PanelContainer/VBoxContainer/GridContainer/CombinationsWidget")
 prompt_chain_widget = NodePath("MarginContainer/ScrollContainer/PanelContainer/VBoxContainer/GridContainer/PromptChainWidget")
 conditions_widget = NodePath("MarginContainer/ScrollContainer/PanelContainer/VBoxContainer/GridContainer/ConditionsWidget")
+image_file_dialog = NodePath("ImageLoadFileDialog")
+sound_widget = NodePath("MarginContainer/ScrollContainer/PanelContainer/VBoxContainer/GridContainer/SoundWidget")
 
 [node name="MovingNoiseWidget" parent="." unique_id=292722013 instance=ExtResource("1_5jlhf")]
 layout_mode = 1
@@ -146,6 +149,14 @@ text = "Condicoes para interagir: "
 
 [node name="ConditionsWidget" parent="MarginContainer/ScrollContainer/PanelContainer/VBoxContainer/GridContainer" unique_id=1813019862 instance=ExtResource("3_5jlhf")]
 layout_mode = 2
+
+[node name="SoundLabel" type="Label" parent="MarginContainer/ScrollContainer/PanelContainer/VBoxContainer/GridContainer" unique_id=1071446976]
+layout_mode = 2
+text = "Som ao entrar:"
+
+[node name="SoundWidget" parent="MarginContainer/ScrollContainer/PanelContainer/VBoxContainer/GridContainer" unique_id=513523494 instance=ExtResource("8_yktth")]
+layout_mode = 2
+size_flags_horizontal = 4
 
 [node name="ImageLoadFileDialog" parent="." unique_id=520665760 instance=ExtResource("8_ky3bp")]
 
