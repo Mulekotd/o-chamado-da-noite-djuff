@@ -118,14 +118,16 @@ theme_override_constants/outline_size = 32
 theme_override_font_sizes/font_size = 50
 horizontal_alignment = 1
 
-[node name="Titulo" type="Label" parent="MainElements/Title" unique_id=1979046720]
+[node name="Titulo" type="RichTextLabel" parent="MainElements/Title" unique_id=929544605]
 custom_minimum_size = Vector2(1083.335, 0)
 layout_mode = 2
 theme_override_constants/outline_size = 48
-theme_override_font_sizes/font_size = 128
-text = "The Devil I Investigate"
-horizontal_alignment = 1
+theme_override_font_sizes/normal_font_size = 107
+bbcode_enabled = true
+text = "O [color=red]Diabo[/color] que Investigo"
+fit_content = true
 autowrap_mode = 2
+horizontal_alignment = 1
 
 [node name="MainButtons" type="VBoxContainer" parent="MainElements" unique_id=1674760997]
 layout_mode = 2
