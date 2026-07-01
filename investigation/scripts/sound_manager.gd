@@ -16,7 +16,6 @@ func _ready() -> void:
 	#play_soundtrack(preload("uid://cv1ok2itg5os8"))
 
 func load_letter_sounds(sounds: Array) -> void:
-	print("\n-\nload_letter_sounds : ", sounds, "\n-\n")
 	while letter_stream.streams_count:
 		letter_stream.remove_stream(0)
 	if sounds:

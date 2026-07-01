@@ -48,7 +48,7 @@ func _ready() -> void:
 	sfx_slider.value = db_to_linear(AudioServer.get_bus_volume_db(sfx_bus_index))
 	dialog_slider.value = db_to_linear(AudioServer.get_bus_volume_db(dialog_bus_index))
 	
-	sound_manager.play_soundtrack(preload("uid://cv1ok2itg5os8"))
+	sound_manager.play_soundtrack(preload("uid://bw7v0wigbew66"))
 	sound_manager.load_letter_sounds(LetterSoundsGlobal.default_sound)
 	
 	black_rect.color = Color(0,0,0,0)

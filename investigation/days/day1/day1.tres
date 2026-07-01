@@ -1,15 +1,15 @@
-[gd_resource type="Resource" script_class="PovLevel" format=3]
+[gd_resource type="Resource" script_class="PovLevel" format=3 uid="uid://buy2c75big0dx"]
 
-[ext_resource type="Script" path="res://investigation/povs/scripts/pov_directions.gd" id="1_65d63"]
-[ext_resource type="Script" path="res://investigation/povs/scripts/element_resource.gd" id="2_s8j8p"]
-[ext_resource type="Script" path="res://investigation/items/scripts/item_resource.gd" id="3_jcreo"]
-[ext_resource type="Script" path="res://investigation/text_box/scripts/prompt_resource.gd" id="4_cmit4"]
-[ext_resource type="Script" path="res://investigation/text_box/scripts/prompt_chain_resource.gd" id="5_woy06"]
-[ext_resource type="Script" path="res://investigation/povs/scripts/pov_image_resource.gd" id="6_6544q"]
-[ext_resource type="Script" path="res://investigation/povs/scripts/pov_resource.gd" id="7_at5bq"]
-[ext_resource type="Script" path="res://investigation/text_box/scripts/option_resource.gd" id="8_s8j8p"]
-[ext_resource type="Script" path="res://investigation/povs/scripts/puzzle_pov_resource.gd" id="8_yyqoo"]
-[ext_resource type="Script" path="res://investigation/povs/scripts/pov_level_resource.gd" id="9_u3xhr"]
+[ext_resource type="Script" uid="uid://ffh4hevhqls8" path="res://investigation/povs/scripts/pov_directions.gd" id="1_65d63"]
+[ext_resource type="Script" uid="uid://deej6yes3fmnc" path="res://investigation/povs/scripts/element_resource.gd" id="2_s8j8p"]
+[ext_resource type="Script" uid="uid://dqj183h8d13hn" path="res://investigation/items/scripts/item_resource.gd" id="3_jcreo"]
+[ext_resource type="Script" uid="uid://cmgunroik01aj" path="res://investigation/text_box/scripts/prompt_resource.gd" id="4_cmit4"]
+[ext_resource type="Script" uid="uid://djxtkg1leixh" path="res://investigation/text_box/scripts/prompt_chain_resource.gd" id="5_woy06"]
+[ext_resource type="Script" uid="uid://ci2buxueqquwj" path="res://investigation/povs/scripts/pov_image_resource.gd" id="6_6544q"]
+[ext_resource type="Script" uid="uid://bti0kbjeofp0r" path="res://investigation/povs/scripts/pov_resource.gd" id="7_at5bq"]
+[ext_resource type="Script" uid="uid://cxpiwtdar5o13" path="res://investigation/text_box/scripts/option_resource.gd" id="8_s8j8p"]
+[ext_resource type="Script" uid="uid://2mj3tpo0kht6" path="res://investigation/povs/scripts/puzzle_pov_resource.gd" id="8_yyqoo"]
+[ext_resource type="Script" uid="uid://cjbfq0iyvv1rr" path="res://investigation/povs/scripts/pov_level_resource.gd" id="9_u3xhr"]
 
 [sub_resource type="Resource" id="Resource_aa33n"]
 script = ExtResource("5_woy06")
@@ -1274,7 +1274,7 @@ hitbox = Dictionary[String, float]({
 "bottom": 0.984200182016173,
 "left": 0.491711918311783,
 "right": 0.6793250071851513,
-"top": 0.18858712027407898
+"top": 0.18858712027407895
 })
 pov_name = "pov_jantar_corredor"
 prompt_chain = SubResource("Resource_qm7f7")

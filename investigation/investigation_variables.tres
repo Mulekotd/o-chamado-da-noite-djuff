@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="InvestigationVars" format=3]
+[gd_resource type="Resource" script_class="InvestigationVars" format=3 uid="uid://cxkjkw1g1t12"]
 
-[ext_resource type="Script" path="res://investigation/items/scripts/item_resource.gd" id="1_c1mno"]
-[ext_resource type="Script" path="res://investigation/scripts/investigation_variables.gd" id="1_y5pc1"]
+[ext_resource type="Script" uid="uid://dqj183h8d13hn" path="res://investigation/items/scripts/item_resource.gd" id="1_c1mno"]
+[ext_resource type="Script" uid="uid://47pf0lrk86x5" path="res://investigation/scripts/investigation_variables.gd" id="1_y5pc1"]
 
 [resource]
 script = ExtResource("1_y5pc1")
@@ -21,7 +21,7 @@ vars = Dictionary[String, int]({
 "phone_down": 1,
 "tv_on": 0
 })
-_actions = 4
+_actions = 3
 last_level = "day1"
-last_pov = "pov_jantar"
+last_pov = "pov_tv"
 metadata/_custom_type_script = "uid://47pf0lrk86x5"

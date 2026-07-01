@@ -88,7 +88,6 @@ func change_pov(pov: Pov) -> void:
 			# Pause navigation while the POV's prompt chain is displayed.
 			enabled = false
 			await get_tree().create_timer(prompt_wait_time).timeout
-			print("JOGA A PROMT CHAIN")
 			prompt_chain_called.emit(current_pov.prompt_chain)
 		if current_pov.especial_behaviour:
 			for s in get_parent().get_children():

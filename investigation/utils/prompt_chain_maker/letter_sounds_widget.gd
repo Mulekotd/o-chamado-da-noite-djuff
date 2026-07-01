@@ -44,12 +44,10 @@ func load_letter_sounds(lss: Dictionary[String, Array]) -> void:
 func button_toggled(toggle_on: bool, text: String) -> void:
 	if toggle_on:
 		selected_letter_sound = text
-		print("\n-\nbutton pressed, selected_letter_sound : ", selected_letter_sound, "\n-\n")
 		play_demo(text)
 	else:
 		await get_tree().process_frame
 		if selected_letter_sound == text:
-			print("\n-deselected your sound, you stupid-\n")
 			selected_letter_sound = ""
 
 func play_demo(ls: String) -> void:
@@ -64,5 +62,4 @@ func play_demo(ls: String) -> void:
 			break
 
 func parse_letter_sound() -> String:
-	print("\n-\nparse_letter_sound, selected_letter_sound : ", selected_letter_sound, "\n-\n")
 	return selected_letter_sound
