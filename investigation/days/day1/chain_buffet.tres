@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="PromptChain" format=3]
+
+[ext_resource type="Script" path="res://investigation/text_box/scripts/prompt_resource.gd" id="1_tkmvh"]
+[ext_resource type="Script" path="res://investigation/items/scripts/item_resource.gd" id="2_fqa2i"]
+[ext_resource type="Script" path="res://investigation/text_box/scripts/option_resource.gd" id="3_auc3y"]
+[ext_resource type="Script" path="res://investigation/text_box/scripts/prompt_chain_resource.gd" id="4_ald62"]
+
+[sub_resource type="Resource" id="Resource_nphtv"]
+script = ExtResource("3_auc3y")
+text = "Abrir portas"
+
+[sub_resource type="Resource" id="Resource_4k60h"]
+script = ExtResource("3_auc3y")
+text = "Já vi o suficiente"
+
+[sub_resource type="Resource" id="Resource_acaa5"]
+script = ExtResource("1_tkmvh")
+options = Array[ExtResource("3_auc3y")]([SubResource("Resource_nphtv"), SubResource("Resource_4k60h")])
+
+[sub_resource type="Resource" id="Resource_l7bx8"]
+script = ExtResource("1_tkmvh")
+text = "Está trancado..."
+global_conditions = Dictionary[String, int]({
+"option": 0
+})
+image_path = "res://investigation/images/detetive/detetive_neutro.png"
+
+[sub_resource type="Resource" id="Resource_g806r"]
+script = ExtResource("1_tkmvh")
+global_conditions = Dictionary[String, int]({
+"option": 0
+})
+image_path = "res://investigation/images/detetive/detetive_neutro.png"
+
+[resource]
+script = ExtResource("4_ald62")
+name = "chain_buffet"
+prompts = Array[ExtResource("1_tkmvh")]([SubResource("Resource_acaa5"), SubResource("Resource_l7bx8"), SubResource("Resource_g806r")])

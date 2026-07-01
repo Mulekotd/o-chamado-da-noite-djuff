@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://bqwsdy0mcknhj"]
+
+[ext_resource type="Texture2D" uid="uid://dlnkwq2wfkdgr" path="res://investigation/images/itens/faca.png" id="1_41463"]
+[ext_resource type="Script" uid="uid://dqj183h8d13hn" path="res://investigation/items/scripts/item_resource.gd" id="1_dv25r"]
+
+[resource]
+script = ExtResource("1_dv25r")
+id = "faca"
+name = "Faca"
+image = ExtResource("1_41463")
+metadata/_custom_type_script = "uid://dqj183h8d13hn"
