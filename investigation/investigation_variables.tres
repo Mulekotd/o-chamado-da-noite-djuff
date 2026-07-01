@@ -23,5 +23,5 @@ vars = Dictionary[String, int]({
 })
 _actions = 4
 last_level = "day1"
-last_pov = "pov_tv"
+last_pov = "pov_jantar"
 metadata/_custom_type_script = "uid://47pf0lrk86x5"

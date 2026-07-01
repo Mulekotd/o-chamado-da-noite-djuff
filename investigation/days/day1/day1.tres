@@ -14,7 +14,7 @@
 [sub_resource type="Resource" id="Resource_aa33n"]
 script = ExtResource("5_woy06")
 
-[sub_resource type="Resource" id="Resource_3ibl3"]
+[sub_resource type="Resource" id="Resource_es0au"]
 script = ExtResource("2_s8j8p")
 name = "porta"
 hitbox = Dictionary[String, float]({
@@ -25,34 +25,35 @@ hitbox = Dictionary[String, float]({
 })
 pov_name = "pov_door_close"
 prompt_chain = SubResource("Resource_aa33n")
-cursor_shape = 2
+cursor_shape = 3
 
-[sub_resource type="Resource" id="Resource_5mcaw"]
+[sub_resource type="Resource" id="Resource_00rsv"]
 script = ExtResource("6_6544q")
-image_path = "C:/Users/letic/OneDrive/Documentos/GitHub/o-chamado-da-noite-djuff/investigation/images/povs/casa/porta_longe_pov_image.png"
+image_path = "res://investigation/images/povs/casa/porta_longe_pov_image.png"
 
 [sub_resource type="Resource" id="Resource_k5o3j"]
 script = ExtResource("5_woy06")
 
-[sub_resource type="Resource" id="Resource_qucmw"]
+[sub_resource type="Resource" id="Resource_1ppsd"]
 script = ExtResource("7_at5bq")
 name = "pov_door_far"
 description = "Porta da casa"
 prompt_chain = SubResource("Resource_k5o3j")
-images = Array[ExtResource("6_6544q")]([SubResource("Resource_5mcaw")])
-elements = Array[ExtResource("2_s8j8p")]([SubResource("Resource_3ibl3")])
+images = Array[ExtResource("6_6544q")]([SubResource("Resource_00rsv")])
+elements = Array[ExtResource("2_s8j8p")]([SubResource("Resource_es0au")])
 
-[sub_resource type="Resource" id="Resource_u2pvd"]
+[sub_resource type="Resource" id="Resource_dd53l"]
 script = ExtResource("1_65d63")
-pov = SubResource("Resource_qucmw")
-top = "pov_door_close"
+pov = SubResource("Resource_1ppsd")
+left = "pov_cozinha"
+right = "pov_sala_tv"
 bottom = "pov_entrada"
 rotation = 0.23
-coords = Vector2(1932.3815, 2701.023)
+coords = Vector2(1986.8035, 2490.1394)
 
 [sub_resource type="Resource" id="Resource_52k8h"]
 script = ExtResource("6_6544q")
-image_path = "C:/Users/letic/OneDrive/Documentos/GitHub/o-chamado-da-noite-djuff/investigation/images/povs/casa/porta_perto_pov_image.png"
+image_path = "res://investigation/images/povs/casa/porta_perto_pov_image.png"
 
 [sub_resource type="Resource" id="Resource_hdiie"]
 script = ExtResource("5_woy06")
@@ -64,12 +65,12 @@ description = "Porta da casa perto"
 prompt_chain = SubResource("Resource_hdiie")
 images = Array[ExtResource("6_6544q")]([SubResource("Resource_52k8h")])
 
-[sub_resource type="Resource" id="Resource_ibvmv"]
+[sub_resource type="Resource" id="Resource_k8mwf"]
 script = ExtResource("1_65d63")
 pov = SubResource("Resource_ld8un")
-bottom = "pov_door_far"
+bottom = "pov_entrada"
 rotation = 0.25
-coords = Vector2(2266.253, 2887.4998)
+coords = Vector2(2008.4106, 2877.58)
 
 [sub_resource type="Resource" id="Resource_f2288"]
 script = ExtResource("5_woy06")
@@ -87,27 +88,27 @@ pov_name = "pov_escada_e_jantar"
 prompt_chain = SubResource("Resource_f2288")
 cursor_shape = 3
 
-[sub_resource type="Resource" id="Resource_b6twq"]
+[sub_resource type="Resource" id="Resource_cyb8l"]
 script = ExtResource("6_6544q")
-image_path = "C:/Users/letic/OneDrive/Documentos/GitHub/o-chamado-da-noite-djuff/investigation/images/povs/casa/entrada_pov_image.png"
+image_path = "res://investigation/images/povs/casa/entrada_pov_image.png"
 
 [sub_resource type="Resource" id="Resource_ycqao"]
 script = ExtResource("5_woy06")
 
-[sub_resource type="Resource" id="Resource_ejyg8"]
+[sub_resource type="Resource" id="Resource_lfed5"]
 script = ExtResource("7_at5bq")
 name = "pov_entrada"
 description = "Vista da entrada da casa"
 prompt_chain = SubResource("Resource_ycqao")
-images = Array[ExtResource("6_6544q")]([SubResource("Resource_b6twq")])
+images = Array[ExtResource("6_6544q")]([SubResource("Resource_cyb8l")])
 elements = Array[ExtResource("2_s8j8p")]([SubResource("Resource_bo43g")])
 
-[sub_resource type="Resource" id="Resource_pa81x"]
+[sub_resource type="Resource" id="Resource_rsoju"]
 script = ExtResource("1_65d63")
-pov = SubResource("Resource_ejyg8")
-bottom = "pov_door_far"
+pov = SubResource("Resource_lfed5")
+bottom = "pov_door_close"
 rotation = 0.75
-coords = Vector2(1761.1394, 2644.8203)
+coords = Vector2(1852.5981, 2873.562)
 
 [sub_resource type="Resource" id="Resource_v05kq"]
 script = ExtResource("5_woy06")
@@ -128,7 +129,7 @@ cursor_shape = 3
 [sub_resource type="Resource" id="Resource_ki3io"]
 script = ExtResource("5_woy06")
 
-[sub_resource type="Resource" id="Resource_8vlte"]
+[sub_resource type="Resource" id="Resource_7xuc3"]
 script = ExtResource("2_s8j8p")
 name = "corredor"
 hitbox = Dictionary[String, float]({
@@ -137,31 +138,31 @@ hitbox = Dictionary[String, float]({
 "right": 0.40822784810126583,
 "top": 0.1174471023849711
 })
-pov_name = "pov_jantar_corredor"
+pov_name = "pov_corredor_jantar"
 prompt_chain = SubResource("Resource_ki3io")
 cursor_shape = 3
 
 [sub_resource type="Resource" id="Resource_4osqu"]
 script = ExtResource("6_6544q")
-image_path = "C:/Users/letic/OneDrive/Documentos/GitHub/o-chamado-da-noite-djuff/investigation/images/povs/casa/jantar_e_escada_pov_image.png"
+image_path = "res://investigation/images/povs/casa/jantar_e_escada_pov_image.png"
 
 [sub_resource type="Resource" id="Resource_kjnor"]
 script = ExtResource("5_woy06")
 
-[sub_resource type="Resource" id="Resource_e3c0x"]
+[sub_resource type="Resource" id="Resource_vbsy8"]
 script = ExtResource("7_at5bq")
 name = "pov_escada_e_jantar"
 description = "Visão da escada e sala de jantar"
 prompt_chain = SubResource("Resource_kjnor")
 images = Array[ExtResource("6_6544q")]([SubResource("Resource_4osqu")])
-elements = Array[ExtResource("2_s8j8p")]([SubResource("Resource_ymoqq"), SubResource("Resource_8vlte")])
+elements = Array[ExtResource("2_s8j8p")]([SubResource("Resource_ymoqq"), SubResource("Resource_7xuc3")])
 
-[sub_resource type="Resource" id="Resource_5ojpf"]
+[sub_resource type="Resource" id="Resource_vo32f"]
 script = ExtResource("1_65d63")
-pov = SubResource("Resource_e3c0x")
+pov = SubResource("Resource_vbsy8")
 left = "pov_sala_tv"
 right = "pov_cozinha"
-bottom = "pov_entrada"
+bottom = "pov_door_far"
 rotation = 0.75
 coords = Vector2(1979.0828, 1946.3494)
 
@@ -263,14 +264,14 @@ cursor_shape = 2
 
 [sub_resource type="Resource" id="Resource_dhsdm"]
 script = ExtResource("6_6544q")
-image_path = "C:/Users/letic/OneDrive/Documentos/GitHub/o-chamado-da-noite-djuff/investigation/images/povs/casa/sala_pov_image.png"
+image_path = "res://investigation/images/povs/casa/sala_pov_image.png"
 conditions = Dictionary[String, int]({
 "tv_on": 0
 })
 
 [sub_resource type="Resource" id="Resource_2iaoh"]
 script = ExtResource("6_6544q")
-image_path = "C:/Users/letic/OneDrive/Documentos/GitHub/o-chamado-da-noite-djuff/investigation/images/povs/casa/sala_tv_on_pov_image.png"
+image_path = "res://investigation/images/povs/casa/sala_tv_on_pov_image.png"
 conditions = Dictionary[String, int]({
 "tv_on": 1
 })
@@ -286,11 +287,12 @@ prompt_chain = SubResource("Resource_s6wr0")
 images = Array[ExtResource("6_6544q")]([SubResource("Resource_dhsdm"), SubResource("Resource_2iaoh")])
 elements = Array[ExtResource("2_s8j8p")]([SubResource("Resource_yyqoo"), SubResource("Resource_864o7"), SubResource("Resource_h4ry0"), SubResource("Resource_6o3hk"), SubResource("Resource_ddnpg"), SubResource("Resource_dxa7h")])
 
-[sub_resource type="Resource" id="Resource_hp5nr"]
+[sub_resource type="Resource" id="Resource_lf0i4"]
 script = ExtResource("1_65d63")
 pov = SubResource("Resource_a3vyn")
+left = "pov_door_far"
 right = "pov_escada_e_jantar"
-bottom = "pov_entrada"
+bottom = "pov_cozinha"
 rotation = 0.5
 coords = Vector2(1738.98, 2115.6035)
 
@@ -392,12 +394,12 @@ cursor_shape = 2
 
 [sub_resource type="Resource" id="Resource_7bv2v"]
 script = ExtResource("6_6544q")
-image_path = "C:/Users/letic/OneDrive/Documentos/GitHub/o-chamado-da-noite-djuff/investigation/images/povs/casa/cozinha_pov_image.png"
+image_path = "res://investigation/images/povs/casa/cozinha_pov_image.png"
 
 [sub_resource type="Resource" id="Resource_5j76c"]
 script = ExtResource("5_woy06")
 
-[sub_resource type="Resource" id="Resource_eltx7"]
+[sub_resource type="Resource" id="Resource_858lp"]
 script = ExtResource("7_at5bq")
 name = "pov_cozinha"
 description = "Visão da cozinha"
@@ -405,16 +407,17 @@ prompt_chain = SubResource("Resource_5j76c")
 images = Array[ExtResource("6_6544q")]([SubResource("Resource_7bv2v")])
 elements = Array[ExtResource("2_s8j8p")]([SubResource("Resource_qxwnr"), SubResource("Resource_td1dx"), SubResource("Resource_l3afj"), SubResource("Resource_wi5hi"), SubResource("Resource_aa08j"), SubResource("Resource_2tlp0")])
 
-[sub_resource type="Resource" id="Resource_2ld07"]
+[sub_resource type="Resource" id="Resource_ju7y1"]
 script = ExtResource("1_65d63")
-pov = SubResource("Resource_eltx7")
+pov = SubResource("Resource_858lp")
 left = "pov_escada_e_jantar"
-bottom = "pov_entrada"
+right = "pov_door_far"
+bottom = "pov_sala_tv"
 coords = Vector2(2185.026, 2127.82)
 
 [sub_resource type="Resource" id="Resource_agtdp"]
 script = ExtResource("6_6544q")
-image_path = "C:/Users/letic/OneDrive/Documentos/GitHub/o-chamado-da-noite-djuff/investigation/images/povs/casa/sofa_pov_image.png"
+image_path = "res://investigation/images/povs/casa/sofa_pov_image.png"
 
 [sub_resource type="Resource" id="Resource_a2e2k"]
 script = ExtResource("8_s8j8p")
@@ -424,12 +427,12 @@ text = "Verificar afofagem"
 script = ExtResource("4_cmit4")
 options = Array[ExtResource("8_s8j8p")]([SubResource("Resource_a2e2k")])
 go_to = 1
-image_path = "C:/Users/letic/OneDrive/Documentos/GitHub/o-chamado-da-noite-djuff/investigation/images/detetive/detetive_neutro.png"
+image_path = "res://investigation/images/detetive/detetive_neutro.png"
 
 [sub_resource type="Resource" id="Resource_trbe2"]
 script = ExtResource("4_cmit4")
 text = "Urgh... Não parece ter nada aqui além dessas molas de baixa qualidade."
-image_path = "C:/Users/letic/OneDrive/Documentos/GitHub/o-chamado-da-noite-djuff/investigation/images/detetive/detetive_neutro.png"
+image_path = "res://investigation/images/detetive/detetive_neutro.png"
 
 [sub_resource type="Resource" id="Resource_cr1vb"]
 script = ExtResource("5_woy06")
@@ -442,7 +445,7 @@ description = "visão do sofá"
 prompt_chain = SubResource("Resource_cr1vb")
 images = Array[ExtResource("6_6544q")]([SubResource("Resource_agtdp")])
 
-[sub_resource type="Resource" id="Resource_bj6m0"]
+[sub_resource type="Resource" id="Resource_0xu1o"]
 script = ExtResource("1_65d63")
 pov = SubResource("Resource_7ia04")
 bottom = "pov_sala_tv"
@@ -451,14 +454,14 @@ coords = Vector2(1326.0107, 2335.5308)
 
 [sub_resource type="Resource" id="Resource_aodpr"]
 script = ExtResource("6_6544q")
-image_path = "C:/Users/letic/OneDrive/Documentos/GitHub/o-chamado-da-noite-djuff/investigation/images/povs/tv_puzzle/tv_off.png"
+image_path = "res://investigation/images/povs/tv_puzzle/tv_off.png"
 conditions = Dictionary[String, int]({
 "ligou": 0
 })
 
 [sub_resource type="Resource" id="Resource_4sudj"]
 script = ExtResource("6_6544q")
-image_path = "C:/Users/letic/OneDrive/Documentos/GitHub/o-chamado-da-noite-djuff/investigation/images/povs/tv_puzzle/tv_static.png"
+image_path = "res://investigation/images/povs/tv_puzzle/tv_static.png"
 conditions = Dictionary[String, int]({
 "estabilizou": 0,
 "ligou": 1
@@ -466,7 +469,7 @@ conditions = Dictionary[String, int]({
 
 [sub_resource type="Resource" id="Resource_81n8d"]
 script = ExtResource("6_6544q")
-image_path = "C:/Users/letic/OneDrive/Documentos/GitHub/o-chamado-da-noite-djuff/investigation/images/povs/tv_puzzle/tv_image2.png"
+image_path = "res://investigation/images/povs/tv_puzzle/tv_image2.png"
 conditions = Dictionary[String, int]({
 "estabilizou": 1,
 "ligou": 1
@@ -506,7 +509,7 @@ conditions = Dictionary[String, int]({
 script = ExtResource("4_cmit4")
 options = Array[ExtResource("8_s8j8p")]([SubResource("Resource_4paow"), SubResource("Resource_yh8dd"), SubResource("Resource_r2162"), SubResource("Resource_yk4y5")])
 go_to = 1
-image_path = "C:/Users/letic/OneDrive/Documentos/GitHub/o-chamado-da-noite-djuff/investigation/images/detetive/detetive_neutro.png"
+image_path = "res://investigation/images/detetive/detetive_neutro.png"
 
 [sub_resource type="Resource" id="Resource_njia2"]
 script = ExtResource("4_cmit4")
@@ -516,7 +519,7 @@ global_conditions = Dictionary[String, int]({
 "option": 0
 })
 go_to = 1
-image_path = "C:/Users/letic/OneDrive/Documentos/GitHub/o-chamado-da-noite-djuff/investigation/images/detetive/detetive_neutro.png"
+image_path = "res://investigation/images/detetive/detetive_neutro.png"
 
 [sub_resource type="Resource" id="Resource_d87ut"]
 script = ExtResource("4_cmit4")
@@ -529,7 +532,7 @@ vars_to_change = Dictionary[String, int]({
 "ligou": 1
 })
 go_to = 1
-image_path = "C:/Users/letic/OneDrive/Documentos/GitHub/o-chamado-da-noite-djuff/investigation/images/detetive/detetive_neutro.png"
+image_path = "res://investigation/images/detetive/detetive_neutro.png"
 
 [sub_resource type="Resource" id="Resource_k22q1"]
 script = ExtResource("8_s8j8p")
@@ -544,7 +547,7 @@ global_conditions = Dictionary[String, int]({
 "option": 1
 })
 options = Array[ExtResource("8_s8j8p")]([SubResource("Resource_k22q1")])
-image_path = "C:/Users/letic/OneDrive/Documentos/GitHub/o-chamado-da-noite-djuff/investigation/images/detetive/detetive_neutro.png"
+image_path = "res://investigation/images/detetive/detetive_neutro.png"
 
 [sub_resource type="Resource" id="Resource_cfu2o"]
 script = ExtResource("4_cmit4")
@@ -557,7 +560,7 @@ vars_to_change = Dictionary[String, int]({
 "conectar_fio": 1
 })
 go_to = 1
-image_path = "C:/Users/letic/OneDrive/Documentos/GitHub/o-chamado-da-noite-djuff/investigation/images/detetive/detetive_neutro.png"
+image_path = "res://investigation/images/detetive/detetive_neutro.png"
 
 [sub_resource type="Resource" id="Resource_cc3gc"]
 script = ExtResource("4_cmit4")
@@ -568,7 +571,7 @@ global_conditions = Dictionary[String, int]({
 "option": 2
 })
 go_to = 1
-image_path = "C:/Users/letic/OneDrive/Documentos/GitHub/o-chamado-da-noite-djuff/investigation/images/detetive/detetive_neutro.png"
+image_path = "res://investigation/images/detetive/detetive_neutro.png"
 
 [sub_resource type="Resource" id="Resource_kpley"]
 script = ExtResource("4_cmit4")
@@ -581,7 +584,7 @@ global_conditions = Dictionary[String, int]({
 vars_to_change = Dictionary[String, int]({
 "estabilizou": 1
 })
-image_path = "C:/Users/letic/OneDrive/Documentos/GitHub/o-chamado-da-noite-djuff/investigation/images/detetive/detetive_neutro.png"
+image_path = "res://investigation/images/detetive/detetive_neutro.png"
 
 [sub_resource type="Resource" id="Resource_okocr"]
 script = ExtResource("5_woy06")
@@ -595,7 +598,7 @@ description = "visão da televisão"
 prompt_chain = SubResource("Resource_okocr")
 images = Array[ExtResource("6_6544q")]([SubResource("Resource_aodpr"), SubResource("Resource_4sudj"), SubResource("Resource_81n8d")])
 
-[sub_resource type="Resource" id="Resource_0lmrs"]
+[sub_resource type="Resource" id="Resource_c6ahj"]
 script = ExtResource("1_65d63")
 pov = SubResource("Resource_liej7")
 bottom = "pov_sala_tv"
@@ -604,7 +607,7 @@ coords = Vector2(1575.1625, 1893.0162)
 
 [sub_resource type="Resource" id="Resource_mwbej"]
 script = ExtResource("6_6544q")
-image_path = "C:/Users/letic/OneDrive/Documentos/GitHub/o-chamado-da-noite-djuff/investigation/images/povs/casa/lareira_pov_image.png"
+image_path = "res://investigation/images/povs/casa/lareira_pov_image.png"
 
 [sub_resource type="Resource" id="Resource_88hg8"]
 script = ExtResource("8_s8j8p")
@@ -614,12 +617,12 @@ actions = 1
 [sub_resource type="Resource" id="Resource_dli5t"]
 script = ExtResource("4_cmit4")
 options = Array[ExtResource("8_s8j8p")]([SubResource("Resource_88hg8")])
-image_path = "C:/Users/letic/OneDrive/Documentos/GitHub/o-chamado-da-noite-djuff/investigation/images/detetive/detetive_neutro.png"
+image_path = "res://investigation/images/detetive/detetive_neutro.png"
 
 [sub_resource type="Resource" id="Resource_ymjdw"]
 script = ExtResource("4_cmit4")
 text = "Sem fundos falsos aqui."
-image_path = "C:/Users/letic/OneDrive/Documentos/GitHub/o-chamado-da-noite-djuff/investigation/images/detetive/detetive_neutro.png"
+image_path = "res://investigation/images/detetive/detetive_neutro.png"
 
 [sub_resource type="Resource" id="Resource_jdsdg"]
 script = ExtResource("5_woy06")
@@ -633,7 +636,7 @@ description = "Visãoo da lareira"
 prompt_chain = SubResource("Resource_jdsdg")
 images = Array[ExtResource("6_6544q")]([SubResource("Resource_mwbej")])
 
-[sub_resource type="Resource" id="Resource_sfoch"]
+[sub_resource type="Resource" id="Resource_63uic"]
 script = ExtResource("1_65d63")
 pov = SubResource("Resource_0ctnp")
 bottom = "pov_sala_tv"
@@ -656,7 +659,7 @@ prompt_chain = SubResource("Resource_kqhnq")
 
 [sub_resource type="Resource" id="Resource_unm0s"]
 script = ExtResource("6_6544q")
-image_path = "C:/Users/letic/OneDrive/Documentos/GitHub/o-chamado-da-noite-djuff/investigation/images/povs/casa/buffet_pov_image.png"
+image_path = "res://investigation/images/povs/casa/buffet_pov_image.png"
 
 [sub_resource type="Resource" id="Resource_8sxx6"]
 script = ExtResource("8_s8j8p")
@@ -672,14 +675,14 @@ text = "Está trancado..."
 global_conditions = Dictionary[String, int]({
 "option": 0
 })
-image_path = "C:/Users/letic/OneDrive/Documentos/GitHub/o-chamado-da-noite-djuff/investigation/images/detetive/detetive_neutro.png"
+image_path = "res://investigation/images/detetive/detetive_neutro.png"
 
 [sub_resource type="Resource" id="Resource_rbo32"]
 script = ExtResource("4_cmit4")
 global_conditions = Dictionary[String, int]({
 "option": 0
 })
-image_path = "C:/Users/letic/OneDrive/Documentos/GitHub/o-chamado-da-noite-djuff/investigation/images/detetive/detetive_neutro.png"
+image_path = "res://investigation/images/detetive/detetive_neutro.png"
 
 [sub_resource type="Resource" id="Resource_sdcm2"]
 script = ExtResource("5_woy06")
@@ -694,7 +697,7 @@ prompt_chain = SubResource("Resource_sdcm2")
 images = Array[ExtResource("6_6544q")]([SubResource("Resource_unm0s")])
 elements = Array[ExtResource("2_s8j8p")]([SubResource("Resource_7c4it")])
 
-[sub_resource type="Resource" id="Resource_g1eel"]
+[sub_resource type="Resource" id="Resource_hi10k"]
 script = ExtResource("1_65d63")
 pov = SubResource("Resource_ry1dh")
 bottom = "pov_sala_tv"
@@ -703,7 +706,7 @@ coords = Vector2(936.9231, 2068.6653)
 
 [sub_resource type="Resource" id="Resource_6to20"]
 script = ExtResource("6_6544q")
-image_path = "C:/Users/letic/OneDrive/Documentos/GitHub/o-chamado-da-noite-djuff/investigation/images/povs/casa/quadros_juntos_pov_image.png"
+image_path = "res://investigation/images/povs/casa/quadros_juntos_pov_image.png"
 
 [sub_resource type="Resource" id="Resource_or47k"]
 script = ExtResource("8_s8j8p")
@@ -721,7 +724,7 @@ text = "Arte...sempre gostei muito, esses quadros me inspiram a investigar cada 
 global_conditions = Dictionary[String, int]({
 "option": 0
 })
-image_path = "C:/Users/letic/OneDrive/Documentos/GitHub/o-chamado-da-noite-djuff/investigation/images/detetive/detetive_neutro.png"
+image_path = "res://investigation/images/detetive/detetive_neutro.png"
 
 [sub_resource type="Resource" id="Resource_xt35q"]
 script = ExtResource("4_cmit4")
@@ -730,7 +733,7 @@ global_conditions = Dictionary[String, int]({
 "option": 0
 })
 end_chain = true
-image_path = "C:/Users/letic/OneDrive/Documentos/GitHub/o-chamado-da-noite-djuff/investigation/images/detetive/detetive_neutro.png"
+image_path = "res://investigation/images/detetive/detetive_neutro.png"
 
 [sub_resource type="Resource" id="Resource_rk5so"]
 script = ExtResource("5_woy06")
@@ -744,7 +747,7 @@ description = "visao de varios quadros juntos"
 prompt_chain = SubResource("Resource_rk5so")
 images = Array[ExtResource("6_6544q")]([SubResource("Resource_6to20")])
 
-[sub_resource type="Resource" id="Resource_ptinw"]
+[sub_resource type="Resource" id="Resource_fqivj"]
 script = ExtResource("1_65d63")
 pov = SubResource("Resource_cofwg")
 rotation = 0.5
@@ -752,7 +755,7 @@ coords = Vector2(917.9487, 2442.1958)
 
 [sub_resource type="Resource" id="Resource_fegfd"]
 script = ExtResource("6_6544q")
-image_path = "C:/Users/letic/OneDrive/Documentos/GitHub/o-chamado-da-noite-djuff/investigation/images/povs/casa/quadro_sozinho_pov_image.png"
+image_path = "res://investigation/images/povs/casa/quadro_sozinho_pov_image.png"
 
 [sub_resource type="Resource" id="Resource_xdqd0"]
 script = ExtResource("8_s8j8p")
@@ -771,7 +774,7 @@ global_conditions = Dictionary[String, int]({
 "option": 0
 })
 end_chain = true
-image_path = "C:/Users/letic/OneDrive/Documentos/GitHub/o-chamado-da-noite-djuff/investigation/images/detetive/detetive_neutro.png"
+image_path = "res://investigation/images/detetive/detetive_neutro.png"
 
 [sub_resource type="Resource" id="Resource_r6inq"]
 script = ExtResource("5_woy06")
@@ -785,7 +788,7 @@ description = "visão de um quadro grande na sala"
 prompt_chain = SubResource("Resource_r6inq")
 images = Array[ExtResource("6_6544q")]([SubResource("Resource_fegfd")])
 
-[sub_resource type="Resource" id="Resource_ig5l4"]
+[sub_resource type="Resource" id="Resource_s2w45"]
 script = ExtResource("1_65d63")
 pov = SubResource("Resource_d7q7f")
 bottom = "pov_sala_tv"
@@ -794,7 +797,7 @@ coords = Vector2(921.9381, 1711.4729)
 
 [sub_resource type="Resource" id="Resource_xq1ub"]
 script = ExtResource("6_6544q")
-image_path = "C:/Users/letic/OneDrive/Documentos/GitHub/o-chamado-da-noite-djuff/investigation/images/povs/casa/fogao_pov_image.png"
+image_path = "res://investigation/images/povs/casa/fogao_pov_image.png"
 
 [sub_resource type="Resource" id="Resource_dgcbg"]
 script = ExtResource("8_s8j8p")
@@ -804,7 +807,7 @@ actions = 1
 [sub_resource type="Resource" id="Resource_3obip"]
 script = ExtResource("4_cmit4")
 options = Array[ExtResource("8_s8j8p")]([SubResource("Resource_dgcbg")])
-image_path = "C:/Users/letic/OneDrive/Documentos/GitHub/o-chamado-da-noite-djuff/investigation/images/detetive/detetive_neutro.png"
+image_path = "res://investigation/images/detetive/detetive_neutro.png"
 
 [sub_resource type="Resource" id="Resource_wfh8m"]
 script = ExtResource("4_cmit4")
@@ -812,7 +815,7 @@ text = "É um forno."
 global_conditions = Dictionary[String, int]({
 "option": 0
 })
-image_path = "C:/Users/letic/OneDrive/Documentos/GitHub/o-chamado-da-noite-djuff/investigation/images/detetive/detetive_neutro.png"
+image_path = "res://investigation/images/detetive/detetive_neutro.png"
 
 [sub_resource type="Resource" id="Resource_vy8pv"]
 script = ExtResource("5_woy06")
@@ -825,7 +828,7 @@ description = "visao do fogao"
 prompt_chain = SubResource("Resource_vy8pv")
 images = Array[ExtResource("6_6544q")]([SubResource("Resource_xq1ub")])
 
-[sub_resource type="Resource" id="Resource_aayfj"]
+[sub_resource type="Resource" id="Resource_j1bs5"]
 script = ExtResource("1_65d63")
 pov = SubResource("Resource_5a86a")
 bottom = "pov_cozinha"
@@ -833,7 +836,7 @@ coords = Vector2(2729.6255, 2117.9119)
 
 [sub_resource type="Resource" id="Resource_5ru4a"]
 script = ExtResource("6_6544q")
-image_path = "C:/Users/letic/OneDrive/Documentos/GitHub/o-chamado-da-noite-djuff/investigation/images/povs/casa/geladeira_pov_image.png"
+image_path = "res://investigation/images/povs/casa/geladeira_pov_image.png"
 
 [sub_resource type="Resource" id="Resource_3kdfy"]
 script = ExtResource("8_s8j8p")
@@ -851,7 +854,7 @@ text = "A comida não está podre... Acho que é um bom sinal."
 global_conditions = Dictionary[String, int]({
 "option": 0
 })
-image_path = "C:/Users/letic/OneDrive/Documentos/GitHub/o-chamado-da-noite-djuff/investigation/images/detetive/detetive_neutro.png"
+image_path = "res://investigation/images/detetive/detetive_neutro.png"
 
 [sub_resource type="Resource" id="Resource_2dbrv"]
 script = ExtResource("5_woy06")
@@ -864,7 +867,7 @@ description = "visao da geladeira"
 prompt_chain = SubResource("Resource_2dbrv")
 images = Array[ExtResource("6_6544q")]([SubResource("Resource_5ru4a")])
 
-[sub_resource type="Resource" id="Resource_2v0hj"]
+[sub_resource type="Resource" id="Resource_6xcln"]
 script = ExtResource("1_65d63")
 pov = SubResource("Resource_ncdme")
 bottom = "pov_cozinha"
@@ -873,7 +876,7 @@ coords = Vector2(2574.895, 1808.1969)
 
 [sub_resource type="Resource" id="Resource_7lkhh"]
 script = ExtResource("6_6544q")
-image_path = "C:/Users/letic/OneDrive/Documentos/GitHub/o-chamado-da-noite-djuff/investigation/images/povs/casa/armarios_esq_pov_image.png"
+image_path = "res://investigation/images/povs/casa/armarios_esq_pov_image.png"
 
 [sub_resource type="Resource" id="Resource_1ktdt"]
 script = ExtResource("8_s8j8p")
@@ -904,7 +907,7 @@ global_conditions = Dictionary[String, int]({
 vars_to_change = Dictionary[String, int]({
 "descobriu_cadeado": 1
 })
-image_path = "C:/Users/letic/OneDrive/Documentos/GitHub/o-chamado-da-noite-djuff/investigation/images/detetive/detetive_neutro.png"
+image_path = "res://investigation/images/detetive/detetive_neutro.png"
 
 [sub_resource type="Resource" id="Resource_wwgot"]
 script = ExtResource("5_woy06")
@@ -918,7 +921,7 @@ description = "visao dos armarios à esquerda cima"
 prompt_chain = SubResource("Resource_wwgot")
 images = Array[ExtResource("6_6544q")]([SubResource("Resource_7lkhh")])
 
-[sub_resource type="Resource" id="Resource_ycay6"]
+[sub_resource type="Resource" id="Resource_736jg"]
 script = ExtResource("1_65d63")
 pov = SubResource("Resource_47new")
 bottom = "pov_cozinha"
@@ -927,7 +930,7 @@ coords = Vector2(2819.9653, 1826.8995)
 
 [sub_resource type="Resource" id="Resource_vmh4i"]
 script = ExtResource("6_6544q")
-image_path = "C:/Users/letic/OneDrive/Documentos/GitHub/o-chamado-da-noite-djuff/investigation/images/povs/casa/gavetas_pov_image.png"
+image_path = "res://investigation/images/povs/casa/gavetas_pov_image.png"
 
 [sub_resource type="Resource" id="Resource_p1gi4"]
 script = ExtResource("8_s8j8p")
@@ -957,7 +960,7 @@ global_conditions = Dictionary[String, int]({
 "option": 0
 })
 end_chain = true
-image_path = "C:/Users/letic/OneDrive/Documentos/GitHub/o-chamado-da-noite-djuff/investigation/images/detetive/detetive_neutro.png"
+image_path = "res://investigation/images/detetive/detetive_neutro.png"
 
 [sub_resource type="Resource" id="Resource_geb7p"]
 script = ExtResource("5_woy06")
@@ -970,7 +973,7 @@ description = "visão das gavetas da cozinha"
 prompt_chain = SubResource("Resource_geb7p")
 images = Array[ExtResource("6_6544q")]([SubResource("Resource_vmh4i")])
 
-[sub_resource type="Resource" id="Resource_41ccm"]
+[sub_resource type="Resource" id="Resource_vgi0r"]
 script = ExtResource("1_65d63")
 pov = SubResource("Resource_ccnhy")
 bottom = "pov_cozinha"
@@ -979,7 +982,7 @@ coords = Vector2(2983.9543, 1709.9224)
 
 [sub_resource type="Resource" id="Resource_e7dlg"]
 script = ExtResource("6_6544q")
-image_path = "C:/Users/letic/OneDrive/Documentos/GitHub/o-chamado-da-noite-djuff/investigation/images/povs/casa/armarios_dir_pov_image.png"
+image_path = "res://investigation/images/povs/casa/armarios_dir_pov_image.png"
 
 [sub_resource type="Resource" id="Resource_cmwo1"]
 script = ExtResource("8_s8j8p")
@@ -997,7 +1000,7 @@ global_conditions = Dictionary[String, int]({
 "option": 0
 })
 end_chain = true
-image_path = "C:/Users/letic/OneDrive/Documentos/GitHub/o-chamado-da-noite-djuff/investigation/images/detetive/detetive_neutro.png"
+image_path = "res://investigation/images/detetive/detetive_neutro.png"
 
 [sub_resource type="Resource" id="Resource_e4lq5"]
 script = ExtResource("5_woy06")
@@ -1010,7 +1013,7 @@ description = "visao do armario da direita"
 prompt_chain = SubResource("Resource_e4lq5")
 images = Array[ExtResource("6_6544q")]([SubResource("Resource_e7dlg")])
 
-[sub_resource type="Resource" id="Resource_tbbhi"]
+[sub_resource type="Resource" id="Resource_6xwuj"]
 script = ExtResource("1_65d63")
 pov = SubResource("Resource_pvuak")
 bottom = "pov_cozinha"
@@ -1020,11 +1023,11 @@ coords = Vector2(2912.1985, 2491.477)
 [sub_resource type="Resource" id="Resource_knfxy"]
 script = ExtResource("5_woy06")
 
-[sub_resource type="Resource" id="Resource_2mcep"]
+[sub_resource type="Resource" id="Resource_3lg48"]
 script = ExtResource("2_s8j8p")
 name = "jantar"
 hitbox = Dictionary[String, float]({
-"bottom": 0.9359980723103605,
+"bottom": 0.9359980723103604,
 "left": 0.4311708860759494,
 "right": 0.6629746835443038,
 "top": 0.19155459760455368
@@ -1035,29 +1038,29 @@ cursor_shape = 3
 
 [sub_resource type="Resource" id="Resource_x887f"]
 script = ExtResource("6_6544q")
-image_path = "C:/Users/letic/OneDrive/Documentos/GitHub/o-chamado-da-noite-djuff/investigation/images/povs/casa/corredor_jantar_pov_image.png"
+image_path = "res://investigation/images/povs/casa/corredor_jantar_pov_image.png"
 
 [sub_resource type="Resource" id="Resource_kp510"]
 script = ExtResource("5_woy06")
 
-[sub_resource type="Resource" id="Resource_th8eh"]
+[sub_resource type="Resource" id="Resource_uqbaa"]
 script = ExtResource("7_at5bq")
 name = "pov_corredor_jantar"
 description = "visao do corredor em diração a sala de jantar"
 prompt_chain = SubResource("Resource_kp510")
 images = Array[ExtResource("6_6544q")]([SubResource("Resource_x887f")])
-elements = Array[ExtResource("2_s8j8p")]([SubResource("Resource_2mcep")])
+elements = Array[ExtResource("2_s8j8p")]([SubResource("Resource_3lg48")])
 
-[sub_resource type="Resource" id="Resource_4po75"]
+[sub_resource type="Resource" id="Resource_kq80y"]
 script = ExtResource("1_65d63")
-pov = SubResource("Resource_th8eh")
+pov = SubResource("Resource_uqbaa")
 bottom = "pov_escada_e_jantar"
 rotation = 0.73
-coords = Vector2(1969.5197, 1306.9626)
+coords = Vector2(1991.2306, 1531.3046)
 
 [sub_resource type="Resource" id="Resource_jkw0w"]
 script = ExtResource("6_6544q")
-image_path = "C:/Users/letic/OneDrive/Documentos/GitHub/o-chamado-da-noite-djuff/investigation/images/povs/casa/escada_cima_pov_image.png"
+image_path = "res://investigation/images/povs/casa/escada_cima_pov_image.png"
 
 [sub_resource type="Resource" id="Resource_8dfak"]
 script = ExtResource("5_woy06")
@@ -1069,7 +1072,7 @@ description = "visão da escada olhando para cima"
 prompt_chain = SubResource("Resource_8dfak")
 images = Array[ExtResource("6_6544q")]([SubResource("Resource_jkw0w")])
 
-[sub_resource type="Resource" id="Resource_p4c0h"]
+[sub_resource type="Resource" id="Resource_pgqbw"]
 script = ExtResource("1_65d63")
 pov = SubResource("Resource_22amq")
 bottom = "pov_escada_e_jantar"
@@ -1110,7 +1113,7 @@ cursor_shape = 3
 
 [sub_resource type="Resource" id="Resource_mpxd0"]
 script = ExtResource("6_6544q")
-image_path = "C:/Users/letic/OneDrive/Documentos/GitHub/o-chamado-da-noite-djuff/investigation/images/povs/casa/jantar_pov_image.png"
+image_path = "res://investigation/images/povs/casa/jantar_pov_image.png"
 
 [sub_resource type="Resource" id="Resource_1lm7e"]
 script = ExtResource("5_woy06")
@@ -1123,34 +1126,50 @@ prompt_chain = SubResource("Resource_1lm7e")
 images = Array[ExtResource("6_6544q")]([SubResource("Resource_mpxd0")])
 elements = Array[ExtResource("2_s8j8p")]([SubResource("Resource_7hynv"), SubResource("Resource_xsegl")])
 
-[sub_resource type="Resource" id="Resource_5xlkt"]
+[sub_resource type="Resource" id="Resource_m4x7i"]
 script = ExtResource("1_65d63")
 pov = SubResource("Resource_7r3fu")
 left = "pov_jantar_corredor"
-right = "pov_jantar_corredor"
 rotation = 0.61
-coords = Vector2(1758.8032, 957.82556)
+coords = Vector2(1727.8821, 1094.6678)
+
+[sub_resource type="Resource" id="Resource_7fgtn"]
+script = ExtResource("5_woy06")
+
+[sub_resource type="Resource" id="Resource_kn3c8"]
+script = ExtResource("2_s8j8p")
+name = "corredor_sala"
+hitbox = Dictionary[String, float]({
+"bottom": 0.9983157387450096,
+"left": 0.5316455696202531,
+"right": 0.7199367088607594,
+"top": 0.0
+})
+pov_name = "pov_corredor_sala"
+prompt_chain = SubResource("Resource_7fgtn")
+cursor_shape = 3
 
 [sub_resource type="Resource" id="Resource_wbydi"]
 script = ExtResource("6_6544q")
-image_path = "C:/Users/letic/OneDrive/Documentos/GitHub/o-chamado-da-noite-djuff/investigation/images/povs/casa/jantar_corredor_pov_image.png"
+image_path = "res://investigation/images/povs/casa/jantar_corredor_pov_image.png"
 
 [sub_resource type="Resource" id="Resource_ijm66"]
 script = ExtResource("5_woy06")
 
-[sub_resource type="Resource" id="Resource_rlmbr"]
+[sub_resource type="Resource" id="Resource_irnrk"]
 script = ExtResource("7_at5bq")
 name = "pov_jantar_corredor"
 description = "visao do corredor de dentro da sala de jantar"
 prompt_chain = SubResource("Resource_ijm66")
 images = Array[ExtResource("6_6544q")]([SubResource("Resource_wbydi")])
+elements = Array[ExtResource("2_s8j8p")]([SubResource("Resource_kn3c8")])
 
-[sub_resource type="Resource" id="Resource_f78yy"]
+[sub_resource type="Resource" id="Resource_j8unj"]
 script = ExtResource("1_65d63")
-pov = SubResource("Resource_rlmbr")
+pov = SubResource("Resource_irnrk")
 right = "pov_jantar"
 rotation = 0.1
-coords = Vector2(1624.208, 1124.2421)
+coords = Vector2(1863.0239, 1099.8999)
 
 [sub_resource type="Resource" id="Resource_1qqrg"]
 script = ExtResource("5_woy06")
@@ -1170,7 +1189,7 @@ cursor_shape = 3
 
 [sub_resource type="Resource" id="Resource_mj7eq"]
 script = ExtResource("6_6544q")
-image_path = "C:/Users/letic/OneDrive/Documentos/GitHub/o-chamado-da-noite-djuff/investigation/images/povs/casa/corredor_sala_pov_image.png"
+image_path = "res://investigation/images/povs/casa/corredor_sala_pov_image.png"
 
 [sub_resource type="Resource" id="Resource_8lfi4"]
 script = ExtResource("5_woy06")
@@ -1183,16 +1202,16 @@ prompt_chain = SubResource("Resource_8lfi4")
 images = Array[ExtResource("6_6544q")]([SubResource("Resource_mj7eq")])
 elements = Array[ExtResource("2_s8j8p")]([SubResource("Resource_nyaai")])
 
-[sub_resource type="Resource" id="Resource_qcgw3"]
+[sub_resource type="Resource" id="Resource_syoax"]
 script = ExtResource("1_65d63")
 pov = SubResource("Resource_sygee")
 bottom = "pov_corredor_jantar"
 rotation = 0.24
-coords = Vector2(1817.0594, 1521.9985)
+coords = Vector2(1856.5331, 1530.551)
 
 [sub_resource type="Resource" id="Resource_u2aav"]
 script = ExtResource("6_6544q")
-image_path = "C:/Users/letic/OneDrive/Documentos/GitHub/o-chamado-da-noite-djuff/investigation/images/povs/casa/planta_jantar_pov_image.png"
+image_path = "res://investigation/images/povs/casa/planta_jantar_pov_image.png"
 
 [sub_resource type="Resource" id="Resource_h8fy0"]
 script = ExtResource("5_woy06")
@@ -1204,7 +1223,7 @@ description = "visao da planta na sala de jantar"
 prompt_chain = SubResource("Resource_h8fy0")
 images = Array[ExtResource("6_6544q")]([SubResource("Resource_u2aav")])
 
-[sub_resource type="Resource" id="Resource_whdy0"]
+[sub_resource type="Resource" id="Resource_y8trk"]
 script = ExtResource("1_65d63")
 pov = SubResource("Resource_jg33j")
 bottom = "pov_jantar"
@@ -1213,7 +1232,7 @@ coords = Vector2(1478.3252, 1331.7657)
 
 [sub_resource type="Resource" id="Resource_qwgo0"]
 script = ExtResource("6_6544q")
-image_path = "C:/Users/letic/OneDrive/Documentos/GitHub/o-chamado-da-noite-djuff/investigation/images/povs/casa/adiante_jantar_pov_image.png"
+image_path = "res://investigation/images/povs/casa/adiante_jantar_pov_image.png"
 
 [sub_resource type="Resource" id="Resource_kruq1"]
 script = ExtResource("5_woy06")
@@ -1224,20 +1243,72 @@ name = "pov_adiante_jantar"
 prompt_chain = SubResource("Resource_kruq1")
 images = Array[ExtResource("6_6544q")]([SubResource("Resource_qwgo0")])
 
-[sub_resource type="Resource" id="Resource_panpf"]
+[sub_resource type="Resource" id="Resource_5y544"]
 script = ExtResource("1_65d63")
 pov = SubResource("Resource_uygxd")
-bottom = "pov_jantar"
+bottom = "pov_adiante_jantar_tras"
 rotation = 0.59
-coords = Vector2(1101.7266, 1190.7932)
+coords = Vector2(1157.5298, 1309.0967)
+
+[sub_resource type="Resource" id="Resource_2l0n3"]
+script = ExtResource("5_woy06")
+
+[sub_resource type="Resource" id="Resource_2pe6g"]
+script = ExtResource("7_at5bq")
+name = "cadeira"
+prompt_chain = SubResource("Resource_2l0n3")
+
+[sub_resource type="Resource" id="Resource_7vbxo"]
+script = ExtResource("1_65d63")
+pov = SubResource("Resource_2pe6g")
+rotation = 0.65
+coords = Vector2(904.7092, 1061.1107)
+
+[sub_resource type="Resource" id="Resource_qm7f7"]
+script = ExtResource("5_woy06")
+
+[sub_resource type="Resource" id="Resource_17rmo"]
+script = ExtResource("2_s8j8p")
+name = "jantar_corredor"
+hitbox = Dictionary[String, float]({
+"bottom": 0.984200182016173,
+"left": 0.491711918311783,
+"right": 0.6793250071851513,
+"top": 0.18858712027407898
+})
+pov_name = "pov_jantar_corredor"
+prompt_chain = SubResource("Resource_qm7f7")
+cursor_shape = 3
+
+[sub_resource type="Resource" id="Resource_u8uao"]
+script = ExtResource("6_6544q")
+image_path = "res://investigation/images/povs/casa/adiante_jantar_tras_pov_image.png"
+
+[sub_resource type="Resource" id="Resource_xlwno"]
+script = ExtResource("5_woy06")
+
+[sub_resource type="Resource" id="Resource_57b2v"]
+script = ExtResource("7_at5bq")
+name = "pov_adiante_jantar_tras"
+description = "olhando pra tras dentro da sala de jantar"
+prompt_chain = SubResource("Resource_xlwno")
+images = Array[ExtResource("6_6544q")]([SubResource("Resource_u8uao")])
+elements = Array[ExtResource("2_s8j8p")]([SubResource("Resource_17rmo")])
+
+[sub_resource type="Resource" id="Resource_slbt6"]
+script = ExtResource("1_65d63")
+pov = SubResource("Resource_57b2v")
+bottom = "pov_adiante_jantar"
+rotation = 0.08
+coords = Vector2(1027.8099, 1317.5977)
 
 [sub_resource type="Resource" id="Resource_rveub"]
 script = ExtResource("6_6544q")
-image_path = "C:/Users/letic/OneDrive/Documentos/GitHub/o-chamado-da-noite-djuff/investigation/images/povs/tv_puzzle/tv_off.png"
+image_path = "res://investigation/images/povs/tv_puzzle/tv_off.png"
 
 [sub_resource type="Resource" id="Resource_w4mxi"]
 script = ExtResource("6_6544q")
-image_path = "C:/Users/letic/OneDrive/Documentos/GitHub/o-chamado-da-noite-djuff/investigation/images/povs/tv_puzzle/tv_static.png"
+image_path = "res://investigation/images/povs/tv_puzzle/tv_static.png"
 
 [sub_resource type="Resource" id="Resource_66v6t"]
 script = ExtResource("5_woy06")
@@ -1255,6 +1326,7 @@ global_conditions = Dictionary[String, int]({
 
 [resource]
 script = ExtResource("9_u3xhr")
-pov_directions_array = Array[ExtResource("1_65d63")]([SubResource("Resource_u2pvd"), SubResource("Resource_ibvmv"), SubResource("Resource_pa81x"), SubResource("Resource_5ojpf"), SubResource("Resource_hp5nr"), SubResource("Resource_2ld07"), SubResource("Resource_bj6m0"), SubResource("Resource_0lmrs"), SubResource("Resource_sfoch"), SubResource("Resource_g1eel"), SubResource("Resource_ptinw"), SubResource("Resource_ig5l4"), SubResource("Resource_aayfj"), SubResource("Resource_2v0hj"), SubResource("Resource_ycay6"), SubResource("Resource_41ccm"), SubResource("Resource_tbbhi"), SubResource("Resource_4po75"), SubResource("Resource_p4c0h"), SubResource("Resource_5xlkt"), SubResource("Resource_f78yy"), SubResource("Resource_qcgw3"), SubResource("Resource_whdy0"), SubResource("Resource_panpf")])
+pov_directions_array = Array[ExtResource("1_65d63")]([SubResource("Resource_dd53l"), SubResource("Resource_k8mwf"), SubResource("Resource_rsoju"), SubResource("Resource_vo32f"), SubResource("Resource_lf0i4"), SubResource("Resource_ju7y1"), SubResource("Resource_0xu1o"), SubResource("Resource_c6ahj"), SubResource("Resource_63uic"), SubResource("Resource_hi10k"), SubResource("Resource_fqivj"), SubResource("Resource_s2w45"), SubResource("Resource_j1bs5"), SubResource("Resource_6xcln"), SubResource("Resource_736jg"), SubResource("Resource_vgi0r"), SubResource("Resource_6xwuj"), SubResource("Resource_kq80y"), SubResource("Resource_pgqbw"), SubResource("Resource_m4x7i"), SubResource("Resource_j8unj"), SubResource("Resource_syoax"), SubResource("Resource_y8trk"), SubResource("Resource_5y544"), SubResource("Resource_7vbxo"), SubResource("Resource_slbt6")])
 puzzle_povs = Array[ExtResource("8_yyqoo")]([SubResource("Resource_rdtb1")])
-default_pov = "pov_door_far"
+dir_scale = 0.4900000000000001
+default_pov = "pov_entrada"

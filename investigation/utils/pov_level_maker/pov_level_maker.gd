@@ -951,6 +951,8 @@ func _on_save_sub_resources_file_dialog_file_selected(path: String) -> void:
 	save_pov_level_sub_resources(root_dir)
 
 func _on_load_image_button_pressed() -> void:
+	load_image_file_dialog.use_native_dialog = false
+	load_image_file_dialog.force_native = false
 	load_image_file_dialog.popup()
 
 func _on_image_load_file_dialog_file_selected(path: String) -> void:

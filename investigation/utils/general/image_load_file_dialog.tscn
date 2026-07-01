@@ -2,7 +2,9 @@
 
 [node name="ImageLoadFileDialog" type="FileDialog" unique_id=520665760]
 oversampling_override = 1.0
+mode = 2
 title = "Open a File"
+initial_position = 2
+size = Vector2i(800, 600)
 file_mode = 0
-access = 2
 filters = PackedStringArray("*.png", "*.jpg", "*.jpeg", "*.bmp")
