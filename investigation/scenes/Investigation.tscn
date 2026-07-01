@@ -306,7 +306,6 @@ offset_top = -888.0
 offset_right = 634.0
 offset_bottom = -375.0
 clock_size = Vector2(80.51, 0)
-actions = 5
 modulate_speed = 2.0
 bob_speed = 1.0
 bob_amplitude = 0.15

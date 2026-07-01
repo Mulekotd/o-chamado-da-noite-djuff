@@ -206,6 +206,9 @@ func next_prompt(cond: int, can_end_chain: bool = true) -> void:
 		# Apply prompt side-effects when the player advances it.
 		# Only mutate vars for a prompt that was actually advanced by the player.
 		InvestigationVars.update_variables(previous_prompt.vars_to_change)
+		print("texto: ",previous_prompt.text)
+		if previous_prompt.items_to_give:
+			print("item adicionado: ", previous_prompt.items_to_give[0].name)
 		InvestigationVars.append_item(previous_prompt.items_to_give)
 		items_added.emit(previous_prompt.items_to_give)
 		InvestigationVars.remove_item(previous_prompt.items_to_take)
