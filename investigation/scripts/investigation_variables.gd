@@ -37,10 +37,10 @@ static func clear_everything() -> void:
 
 ## volume of different channels
 @export var volumes : Dictionary[String, float] = {
-	"General" : 1,
-	"Music"   : 1,
-	"Sfx"     : 1,
-	"Dialog"  : 1,
+	"master" : 1.0,
+	"music"  : 1.0,
+	"sfx"    : 1.0,
+	"dialogue" : 1.0,
 }
 
 ## value to assign to a newly created variable
@@ -142,3 +142,11 @@ static func get_investigation_points() -> int:
 static func add_investigation_points(amount: int) -> void:
 	file._investigation_points = max(0, file._investigation_points + amount)
 	ResourceSaver.save(file)
+
+static func save_bus_volume(channel: String, amount: float) -> void:
+	file.volumes[channel] = amount
+	ResourceSaver.save(file)
+
+static func load_bus_volume(channel: String) -> float:
+	print(file.volumes)
+	return file.volumes[channel]

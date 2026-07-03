@@ -28,7 +28,7 @@ bg_color = Color(0, 0, 0, 1)
 corner_radius_top_left = 160
 corner_radius_bottom_right = 160
 
-[node name="MainMenu" type="Control" unique_id=1877421865 node_paths=PackedStringArray("sound_manager", "background", "assassin", "detective", "black_rect", "main_elements", "new_game_confirmation", "options_and_credits", "exit_confirmation", "continue_button", "master_slider", "music_slider", "sfx_slider", "dialog_slider")]
+[node name="MainMenu" type="Control" unique_id=1877421865 node_paths=PackedStringArray("sound_manager", "background", "assassin", "detective", "black_rect", "main_elements", "new_game_confirmation", "options_and_credits", "exit_confirmation", "continue_button", "master_slider", "music_slider", "sfx_slider", "dialogue_slider")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -49,7 +49,7 @@ continue_button = NodePath("MainElements/MainButtons/ContinueButton")
 master_slider = NodePath("OptionsAndCredits/Options/GridContainer/MasterSlider")
 music_slider = NodePath("OptionsAndCredits/Options/GridContainer/MusicSlider")
 sfx_slider = NodePath("OptionsAndCredits/Options/GridContainer/SfxSlider")
-dialog_slider = NodePath("OptionsAndCredits/Options/GridContainer/DialogSlider")
+dialogue_slider = NodePath("OptionsAndCredits/Options/GridContainer/DialogueSlider")
 background_parallax_amount = 0.05
 parallax_speed = 3.0
 
@@ -311,13 +311,13 @@ max_value = 1.0
 step = 0.001
 value = 1.0
 
-[node name="DialogLabel" type="Label" parent="OptionsAndCredits/Options/GridContainer" unique_id=828925538]
+[node name="DialogueLabel" type="Label" parent="OptionsAndCredits/Options/GridContainer" unique_id=828925538]
 layout_mode = 2
 theme_override_constants/outline_size = 24
 theme_override_font_sizes/font_size = 50
 text = "Diálogo"
 
-[node name="DialogSlider" type="HSlider" parent="OptionsAndCredits/Options/GridContainer" unique_id=1513939186]
+[node name="DialogueSlider" type="HSlider" parent="OptionsAndCredits/Options/GridContainer" unique_id=1513939186]
 custom_minimum_size = Vector2(256, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -395,12 +395,14 @@ color = Color(0, 0, 0, 0)
 [connection signal="pressed" from="MainElements/MainButtons/ExitButton" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="NewGameConfirmation/ConfirmButton" to="." method="_on_confirm_button_pressed"]
 [connection signal="pressed" from="NewGameConfirmation/ReturnButton" to="." method="_on_return_button_pressed"]
+[connection signal="drag_ended" from="OptionsAndCredits/Options/GridContainer/MasterSlider" to="." method="_on_master_slider_drag_ended"]
 [connection signal="value_changed" from="OptionsAndCredits/Options/GridContainer/MasterSlider" to="." method="_on_master_slider_value_changed"]
+[connection signal="drag_ended" from="OptionsAndCredits/Options/GridContainer/MusicSlider" to="." method="_on_music_slider_drag_ended"]
 [connection signal="value_changed" from="OptionsAndCredits/Options/GridContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
 [connection signal="drag_ended" from="OptionsAndCredits/Options/GridContainer/SfxSlider" to="." method="_on_sfx_slider_drag_ended"]
 [connection signal="value_changed" from="OptionsAndCredits/Options/GridContainer/SfxSlider" to="." method="_on_sfx_slider_value_changed"]
-[connection signal="drag_ended" from="OptionsAndCredits/Options/GridContainer/DialogSlider" to="." method="_on_dialog_slider_drag_ended"]
-[connection signal="value_changed" from="OptionsAndCredits/Options/GridContainer/DialogSlider" to="." method="_on_dialog_slider_value_changed"]
+[connection signal="drag_ended" from="OptionsAndCredits/Options/GridContainer/DialogueSlider" to="." method="_on_dialogue_slider_drag_ended"]
+[connection signal="value_changed" from="OptionsAndCredits/Options/GridContainer/DialogueSlider" to="." method="_on_dialog_slider_value_changed"]
 [connection signal="pressed" from="OptionsAndCredits/Options/ReturnButton" to="." method="_on_return_button_pressed"]
 [connection signal="pressed" from="ExitConfirmation/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="ExitConfirmation/ReturnButton" to="." method="_on_return_button_pressed"]
