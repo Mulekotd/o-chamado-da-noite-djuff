@@ -1,20 +1,20 @@
-[gd_resource type="Resource" script_class="PovLevel" format=3 uid="uid://culkjpc1cose3"]
+[gd_resource type="Resource" script_class="PovLevel" format=3]
 
-[ext_resource type="Script" uid="uid://ffh4hevhqls8" path="res://investigation/povs/scripts/pov_directions.gd" id="2_8v6mx"]
-[ext_resource type="Script" uid="uid://deej6yes3fmnc" path="res://investigation/povs/scripts/element_resource.gd" id="2_yridt"]
-[ext_resource type="Script" uid="uid://ci2buxueqquwj" path="res://investigation/povs/scripts/pov_image_resource.gd" id="3_0nae8"]
-[ext_resource type="Script" uid="uid://cmgunroik01aj" path="res://investigation/text_box/scripts/prompt_resource.gd" id="4_70j8p"]
-[ext_resource type="Script" uid="uid://cjbfq0iyvv1rr" path="res://investigation/povs/scripts/pov_level_resource.gd" id="4_g17jk"]
-[ext_resource type="Script" uid="uid://djxtkg1leixh" path="res://investigation/text_box/scripts/prompt_chain_resource.gd" id="5_r10in"]
-[ext_resource type="Script" uid="uid://bti0kbjeofp0r" path="res://investigation/povs/scripts/pov_resource.gd" id="6_qboph"]
-[ext_resource type="Script" uid="uid://dqj183h8d13hn" path="res://investigation/items/scripts/item_resource.gd" id="6_v6o0a"]
-[ext_resource type="Script" uid="uid://cxpiwtdar5o13" path="res://investigation/text_box/scripts/option_resource.gd" id="7_45x7e"]
-[ext_resource type="AudioStream" uid="uid://bg6ampuqcmd55" path="res://investigation/sounds/sfxs/telephone_hang_up.wav" id="7_r10in"]
-[ext_resource type="Script" uid="uid://2mj3tpo0kht6" path="res://investigation/povs/scripts/puzzle_pov_resource.gd" id="9_70j8p"]
-[ext_resource type="AudioStream" uid="uid://bhfl2teovl7qh" path="res://investigation/sounds/sfxs/footsteps.wav" id="10_qboph"]
-[ext_resource type="AudioStream" uid="uid://bkf65q5gfdhmm" path="res://investigation/sounds/sfxs/door_open.wav" id="11_cql46"]
-[ext_resource type="AudioStream" uid="uid://dlfmw0wlr133i" path="res://investigation/sounds/sfxs/knock_on_door_interrupted.wav" id="12_dmc51"]
-[ext_resource type="AudioStream" uid="uid://b7gv6vjba7l6a" path="res://investigation/sounds/sfxs/knock_on_door.wav" id="13_hlwc6"]
+[ext_resource type="Script" path="res://investigation/povs/scripts/pov_directions.gd" id="2_8v6mx"]
+[ext_resource type="Script" path="res://investigation/povs/scripts/element_resource.gd" id="2_yridt"]
+[ext_resource type="Script" path="res://investigation/povs/scripts/pov_image_resource.gd" id="3_0nae8"]
+[ext_resource type="Script" path="res://investigation/text_box/scripts/prompt_resource.gd" id="4_70j8p"]
+[ext_resource type="Script" path="res://investigation/povs/scripts/pov_level_resource.gd" id="4_g17jk"]
+[ext_resource type="Script" path="res://investigation/text_box/scripts/prompt_chain_resource.gd" id="5_r10in"]
+[ext_resource type="Script" path="res://investigation/povs/scripts/pov_resource.gd" id="6_qboph"]
+[ext_resource type="Script" path="res://investigation/items/scripts/item_resource.gd" id="6_v6o0a"]
+[ext_resource type="Script" path="res://investigation/text_box/scripts/option_resource.gd" id="7_45x7e"]
+[ext_resource type="AudioStream" path="res://investigation/sounds/sfxs/telephone_hang_up.wav" id="7_r10in"]
+[ext_resource type="Script" path="res://investigation/povs/scripts/puzzle_pov_resource.gd" id="9_70j8p"]
+[ext_resource type="AudioStream" path="res://investigation/sounds/sfxs/footsteps.wav" id="10_qboph"]
+[ext_resource type="AudioStream" path="res://investigation/sounds/sfxs/door_open.wav" id="11_cql46"]
+[ext_resource type="AudioStream" path="res://investigation/sounds/sfxs/knock_on_door_interrupted.wav" id="12_dmc51"]
+[ext_resource type="AudioStream" path="res://investigation/sounds/sfxs/knock_on_door.wav" id="13_hlwc6"]
 
 [sub_resource type="Resource" id="Resource_r10in"]
 script = ExtResource("3_0nae8")
@@ -190,7 +190,7 @@ prompt_chain = SubResource("Resource_fu57l")
 images = Array[ExtResource("3_0nae8")]([SubResource("Resource_iur2p")])
 elements = Array[ExtResource("2_yridt")]([SubResource("Resource_g6hnh")])
 
-[sub_resource type="Resource" id="Resource_uiwif"]
+[sub_resource type="Resource" id="Resource_s62r1"]
 script = ExtResource("2_8v6mx")
 pov = SubResource("Resource_oycnb")
 left = "telefone longe"
@@ -223,7 +223,7 @@ prompt_chain = SubResource("Resource_qc3md")
 images = Array[ExtResource("3_0nae8")]([SubResource("Resource_xutfp")])
 elements = Array[ExtResource("2_yridt")]([SubResource("Resource_ncb3c")])
 
-[sub_resource type="Resource" id="Resource_iiqvl"]
+[sub_resource type="Resource" id="Resource_h0qdr"]
 script = ExtResource("2_8v6mx")
 pov = SubResource("Resource_6hpo5")
 right = "porta longe"
@@ -318,7 +318,7 @@ prompt_chain = SubResource("Resource_x7ojx")
 images = Array[ExtResource("3_0nae8")]([SubResource("Resource_7spgv")])
 elements = Array[ExtResource("2_yridt")]([SubResource("Resource_jfq6m")])
 
-[sub_resource type="Resource" id="Resource_bpj17"]
+[sub_resource type="Resource" id="Resource_uiwif"]
 script = ExtResource("2_8v6mx")
 pov = SubResource("Resource_pkk3c")
 rotation = 0.75
@@ -341,16 +341,16 @@ prompt_chain = SubResource("Resource_fgdpf")
 cursor_shape = 3
 pov_sound = ExtResource("10_qboph")
 
-[sub_resource type="Resource" id="Resource_s62r1"]
+[sub_resource type="Resource" id="Resource_iiqvl"]
 script = ExtResource("3_0nae8")
 image_path = "res://investigation/images/povs/prologue/house_far.png"
 conditions = Dictionary[String, int]({
 "looking_at_watch": 0
 })
 
-[sub_resource type="Resource" id="Resource_h0qdr"]
+[sub_resource type="Resource" id="Resource_j0fpy"]
 script = ExtResource("3_0nae8")
-image_path = "C:/Users/pirat/Documents/Godot-projects/o-chamado-da-noite-djuff/investigation/images/povs/prologue/watch_closeup.png"
+image_path = "res://investigation/images/povs/prologue/watch_closeup.png"
 conditions = Dictionary[String, int]({
 "looking_at_watch": 1
 })
@@ -386,17 +386,17 @@ name = "casa longe"
 prompts = Array[ExtResource("4_70j8p")]([SubResource("Resource_3udg4"), SubResource("Resource_6ubqa"), SubResource("Resource_l6oi6")])
 default_image_path = "res://investigation/images/detetive/detetive_neutro.png"
 
-[sub_resource type="Resource" id="Resource_j0fpy"]
+[sub_resource type="Resource" id="Resource_bpj17"]
 script = ExtResource("6_qboph")
 name = "casa longe"
 description = "visao de longe da casa do dia 1"
 prompt_chain = SubResource("Resource_shyf4")
-images = Array[ExtResource("3_0nae8")]([SubResource("Resource_s62r1"), SubResource("Resource_h0qdr")])
+images = Array[ExtResource("3_0nae8")]([SubResource("Resource_iiqvl"), SubResource("Resource_j0fpy")])
 elements = Array[ExtResource("2_yridt")]([SubResource("Resource_wypbx")])
 
 [sub_resource type="Resource" id="Resource_k186c"]
 script = ExtResource("2_8v6mx")
-pov = SubResource("Resource_j0fpy")
+pov = SubResource("Resource_bpj17")
 rotation = 0.75
 coords = Vector2(2862.9907, 1972.5657)
 
@@ -554,6 +554,6 @@ coords = Vector2(2858.295, 1297.9579)
 [resource]
 script = ExtResource("4_g17jk")
 bg_image_path = "res://investigation/images/povs/pov_level_bgs/prologue_pov_level_background.png"
-pov_directions_array = Array[ExtResource("2_8v6mx")]([SubResource("Resource_h3a8a"), SubResource("Resource_uiwif"), SubResource("Resource_iiqvl"), SubResource("Resource_bpj17"), SubResource("Resource_k186c"), SubResource("Resource_x085v")])
+pov_directions_array = Array[ExtResource("2_8v6mx")]([SubResource("Resource_h3a8a"), SubResource("Resource_s62r1"), SubResource("Resource_h0qdr"), SubResource("Resource_uiwif"), SubResource("Resource_k186c"), SubResource("Resource_x085v")])
 dir_scale = 0.6000000000000002
 default_pov = "telefone"
