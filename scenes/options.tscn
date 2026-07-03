@@ -1,0 +1,105 @@
+[gd_scene format=3 uid="uid://bgsk55h23jq64"]
+
+[ext_resource type="Script" uid="uid://sw5b023uekp7" path="res://scripts/options.gd" id="1_c2u1v"]
+
+[node name="Options" type="VBoxContainer" unique_id=1028251657 node_paths=PackedStringArray("master_slider", "music_slider", "sfx_slider", "dialogue_slider")]
+theme_override_constants/separation = 87
+script = ExtResource("1_c2u1v")
+master_slider = NodePath("GridContainer/MasterSlider")
+music_slider = NodePath("GridContainer/MusicSlider")
+sfx_slider = NodePath("GridContainer/SfxSlider")
+dialogue_slider = NodePath("GridContainer/DialogueSlider")
+
+[node name="OptionsLabel" type="Label" parent="." unique_id=1507678229]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/outline_size = 24
+theme_override_font_sizes/font_size = 50
+text = "Opções"
+
+[node name="GridContainer" type="GridContainer" parent="." unique_id=1314710564]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/v_separation = 62
+columns = 2
+
+[node name="MasterLabel" type="Label" parent="GridContainer" unique_id=1501353498]
+layout_mode = 2
+theme_override_constants/outline_size = 24
+theme_override_font_sizes/font_size = 50
+text = "Geral"
+
+[node name="MasterSlider" type="HSlider" parent="GridContainer" unique_id=304825413]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+mouse_filter = 1
+max_value = 1.0
+step = 0.001
+value = 1.0
+
+[node name="MusicLabel" type="Label" parent="GridContainer" unique_id=350205964]
+layout_mode = 2
+theme_override_constants/outline_size = 24
+theme_override_font_sizes/font_size = 50
+text = "Música "
+
+[node name="MusicSlider" type="HSlider" parent="GridContainer" unique_id=714494301]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+mouse_filter = 1
+max_value = 1.0
+step = 0.001
+value = 1.0
+
+[node name="SfxLabel" type="Label" parent="GridContainer" unique_id=1601127705]
+layout_mode = 2
+theme_override_constants/outline_size = 24
+theme_override_font_sizes/font_size = 50
+text = "Sfx"
+
+[node name="SfxSlider" type="HSlider" parent="GridContainer" unique_id=781728905]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+mouse_filter = 1
+max_value = 1.0
+step = 0.001
+value = 1.0
+
+[node name="DialogueLabel" type="Label" parent="GridContainer" unique_id=344348919]
+layout_mode = 2
+theme_override_constants/outline_size = 24
+theme_override_font_sizes/font_size = 50
+text = "Diálogo"
+
+[node name="DialogueSlider" type="HSlider" parent="GridContainer" unique_id=723792153]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+mouse_filter = 1
+max_value = 1.0
+step = 0.001
+value = 1.0
+
+[node name="FullscreenButton" type="CheckButton" parent="." unique_id=841771762]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 50
+text = "Tela Cheia "
+
+[connection signal="drag_ended" from="GridContainer/MasterSlider" to="." method="_on_master_slider_drag_ended"]
+[connection signal="value_changed" from="GridContainer/MasterSlider" to="." method="_on_master_slider_value_changed"]
+[connection signal="drag_ended" from="GridContainer/MusicSlider" to="." method="_on_music_slider_drag_ended"]
+[connection signal="value_changed" from="GridContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="drag_ended" from="GridContainer/SfxSlider" to="." method="_on_sfx_slider_drag_ended"]
+[connection signal="value_changed" from="GridContainer/SfxSlider" to="." method="_on_sfx_slider_value_changed"]
+[connection signal="drag_ended" from="GridContainer/DialogueSlider" to="." method="_on_dialogue_slider_drag_ended"]
+[connection signal="value_changed" from="GridContainer/DialogueSlider" to="." method="_on_dialogue_slider_value_changed"]
+[connection signal="toggled" from="FullscreenButton" to="." method="_on_fullscreen_button_toggled"]

@@ -9,12 +9,16 @@
 [ext_resource type="Texture2D" uid="uid://6rd00nmoe176" path="res://assets/images/UI/checkbox/radio_checked_disabled.png" id="8_uij3o"]
 [ext_resource type="Texture2D" uid="uid://bisdj6q7hg2o" path="res://assets/images/UI/checkbox/radio_unchecked.png" id="9_ip44t"]
 [ext_resource type="Texture2D" uid="uid://mqw6r78y7cx0" path="res://assets/images/UI/checkbox/radio_unchecked_disabled.png" id="10_3nfna"]
+[ext_resource type="Texture2D" uid="uid://cq1p2el07nflm" path="res://assets/images/UI/checkbutton/checked.png" id="13_08sol"]
 [ext_resource type="Texture2D" uid="uid://benuo27jruygy" path="res://assets/images/UI/checkbox/checked.png" id="13_xjkmo"]
 [ext_resource type="Texture2D" uid="uid://cg65gdu7p22i3" path="res://assets/images/UI/checkbox/checked_disabled.png" id="14_fsetk"]
+[ext_resource type="Texture2D" uid="uid://ctkhc1kpd6ig4" path="res://assets/images/UI/checkbutton/checked_disabled.png" id="14_yxy25"]
 [ext_resource type="Texture2D" uid="uid://buw7genk7xhin" path="res://assets/images/UI/checkbutton/checked_disabled_mirrored.png" id="15_64ey7"]
 [ext_resource type="Texture2D" uid="uid://7vxxnuyxajge" path="res://assets/images/UI/checkbutton/checked_mirrored.png" id="16_q211v"]
 [ext_resource type="Texture2D" uid="uid://c7oxacr074tjc" path="res://assets/images/UI/checkbox/unchecked.png" id="17_adkum"]
+[ext_resource type="Texture2D" uid="uid://d33wcy776y4jo" path="res://assets/images/UI/checkbutton/unchecked.png" id="17_wfbly"]
 [ext_resource type="Texture2D" uid="uid://y2wvhkli8dor" path="res://assets/images/UI/checkbox/unchecked_disabled.png" id="18_2wuy7"]
+[ext_resource type="Texture2D" uid="uid://dngqla3prhlib" path="res://assets/images/UI/checkbutton/unchecked_disabled.png" id="18_8lyrx"]
 [ext_resource type="Texture2D" uid="uid://dgu46qqilrbnw" path="res://assets/images/UI/checkbutton/unchecked_disabled_mirrored.png" id="19_lodxj"]
 [ext_resource type="Texture2D" uid="uid://u28drhsmwiu2" path="res://assets/images/UI/checkbutton/unchecked_mirrored.png" id="20_e7tkf"]
 [ext_resource type="StyleBox" uid="uid://blr7j4fpwbm6l" path="res://themes/white_style_box_flat.tres" id="21_twh6n"]
@@ -78,12 +82,12 @@ CheckBox/icons/radio_unchecked = ExtResource("9_ip44t")
 CheckBox/icons/radio_unchecked_disabled = ExtResource("10_3nfna")
 CheckBox/icons/unchecked = ExtResource("17_adkum")
 CheckBox/icons/unchecked_disabled = ExtResource("18_2wuy7")
-CheckButton/icons/checked = ExtResource("13_xjkmo")
-CheckButton/icons/checked_disabled = ExtResource("14_fsetk")
+CheckButton/icons/checked = ExtResource("13_08sol")
+CheckButton/icons/checked_disabled = ExtResource("14_yxy25")
 CheckButton/icons/checked_disabled_mirrored = ExtResource("15_64ey7")
 CheckButton/icons/checked_mirrored = ExtResource("16_q211v")
-CheckButton/icons/unchecked = ExtResource("17_adkum")
-CheckButton/icons/unchecked_disabled = ExtResource("18_2wuy7")
+CheckButton/icons/unchecked = ExtResource("17_wfbly")
+CheckButton/icons/unchecked_disabled = ExtResource("18_8lyrx")
 CheckButton/icons/unchecked_disabled_mirrored = ExtResource("19_lodxj")
 CheckButton/icons/unchecked_mirrored = ExtResource("20_e7tkf")
 HSlider/icons/grabber = ExtResource("8_uij3o")

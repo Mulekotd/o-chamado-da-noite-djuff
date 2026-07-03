@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dwybis63casti" path="res://investigation/interface/images/main_menu_assassin.png" id="2_wu84c"]
 [ext_resource type="Texture2D" uid="uid://cq6cbluy4kbhr" path="res://investigation/interface/images/main_menu_detective.png" id="3_8ln24"]
 [ext_resource type="PackedScene" uid="uid://f2qd0iww8k1p" path="res://investigation/utils/general/moving_noise_widget.tscn" id="3_rtw2f"]
+[ext_resource type="PackedScene" uid="uid://bgsk55h23jq64" path="res://scenes/options.tscn" id="6_oa1go"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l6cm7"]
 bg_color = Color(0, 0, 0, 1)
@@ -28,7 +29,7 @@ bg_color = Color(0, 0, 0, 1)
 corner_radius_top_left = 160
 corner_radius_bottom_right = 160
 
-[node name="MainMenu" type="Control" unique_id=1877421865 node_paths=PackedStringArray("sound_manager", "background", "assassin", "detective", "black_rect", "main_elements", "new_game_confirmation", "options_and_credits", "exit_confirmation", "continue_button", "master_slider", "music_slider", "sfx_slider", "dialogue_slider")]
+[node name="MainMenu" type="Control" unique_id=1877421865 node_paths=PackedStringArray("sound_manager", "background", "assassin", "detective", "black_rect", "main_elements", "new_game_confirmation", "options_and_credits", "exit_confirmation", "continue_button", "options")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -46,10 +47,7 @@ new_game_confirmation = NodePath("NewGameConfirmation")
 options_and_credits = NodePath("OptionsAndCredits")
 exit_confirmation = NodePath("ExitConfirmation")
 continue_button = NodePath("MainElements/MainButtons/ContinueButton")
-master_slider = NodePath("OptionsAndCredits/Options/GridContainer/MasterSlider")
-music_slider = NodePath("OptionsAndCredits/Options/GridContainer/MusicSlider")
-sfx_slider = NodePath("OptionsAndCredits/Options/GridContainer/SfxSlider")
-dialogue_slider = NodePath("OptionsAndCredits/Options/GridContainer/DialogueSlider")
+options = NodePath("OptionsAndCredits/OptionsContainer/Options")
 background_parallax_amount = 0.05
 parallax_speed = 3.0
 
@@ -247,87 +245,14 @@ autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Options" type="VBoxContainer" parent="OptionsAndCredits" unique_id=844082129]
+[node name="OptionsContainer" type="VBoxContainer" parent="OptionsAndCredits" unique_id=1717477151]
 layout_mode = 2
-theme_override_constants/separation = 87
+theme_override_constants/separation = 59
 
-[node name="OptionsLabel" type="Label" parent="OptionsAndCredits/Options" unique_id=192895083]
+[node name="Options" parent="OptionsAndCredits/OptionsContainer" unique_id=1028251657 instance=ExtResource("6_oa1go")]
 layout_mode = 2
-size_flags_horizontal = 4
-theme_override_constants/outline_size = 24
-theme_override_font_sizes/font_size = 50
-text = "Opções"
 
-[node name="GridContainer" type="GridContainer" parent="OptionsAndCredits/Options" unique_id=786646585]
-layout_mode = 2
-theme_override_constants/v_separation = 100
-columns = 2
-
-[node name="MasterLabel" type="Label" parent="OptionsAndCredits/Options/GridContainer" unique_id=668375656]
-layout_mode = 2
-theme_override_constants/outline_size = 24
-theme_override_font_sizes/font_size = 50
-text = "Geral"
-
-[node name="MasterSlider" type="HSlider" parent="OptionsAndCredits/Options/GridContainer" unique_id=1180533208]
-custom_minimum_size = Vector2(256, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-mouse_filter = 1
-max_value = 1.0
-step = 0.001
-value = 1.0
-
-[node name="MusicLabel" type="Label" parent="OptionsAndCredits/Options/GridContainer" unique_id=2118341151]
-layout_mode = 2
-theme_override_constants/outline_size = 24
-theme_override_font_sizes/font_size = 50
-text = "Música "
-
-[node name="MusicSlider" type="HSlider" parent="OptionsAndCredits/Options/GridContainer" unique_id=420556433]
-custom_minimum_size = Vector2(256, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-mouse_filter = 1
-max_value = 1.0
-step = 0.001
-value = 1.0
-
-[node name="SfxLabel" type="Label" parent="OptionsAndCredits/Options/GridContainer" unique_id=1377773905]
-layout_mode = 2
-theme_override_constants/outline_size = 24
-theme_override_font_sizes/font_size = 50
-text = "Sfx"
-
-[node name="SfxSlider" type="HSlider" parent="OptionsAndCredits/Options/GridContainer" unique_id=46184188]
-custom_minimum_size = Vector2(256, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-mouse_filter = 1
-max_value = 1.0
-step = 0.001
-value = 1.0
-
-[node name="DialogueLabel" type="Label" parent="OptionsAndCredits/Options/GridContainer" unique_id=828925538]
-layout_mode = 2
-theme_override_constants/outline_size = 24
-theme_override_font_sizes/font_size = 50
-text = "Diálogo"
-
-[node name="DialogueSlider" type="HSlider" parent="OptionsAndCredits/Options/GridContainer" unique_id=1513939186]
-custom_minimum_size = Vector2(256, 0)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-mouse_filter = 1
-max_value = 1.0
-step = 0.001
-value = 1.0
-
-[node name="ReturnButton" type="Button" parent="OptionsAndCredits/Options" unique_id=872495952]
+[node name="ReturnButton" type="Button" parent="OptionsAndCredits/OptionsContainer" unique_id=412704853]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -395,14 +320,6 @@ color = Color(0, 0, 0, 0)
 [connection signal="pressed" from="MainElements/MainButtons/ExitButton" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="NewGameConfirmation/ConfirmButton" to="." method="_on_confirm_button_pressed"]
 [connection signal="pressed" from="NewGameConfirmation/ReturnButton" to="." method="_on_return_button_pressed"]
-[connection signal="drag_ended" from="OptionsAndCredits/Options/GridContainer/MasterSlider" to="." method="_on_master_slider_drag_ended"]
-[connection signal="value_changed" from="OptionsAndCredits/Options/GridContainer/MasterSlider" to="." method="_on_master_slider_value_changed"]
-[connection signal="drag_ended" from="OptionsAndCredits/Options/GridContainer/MusicSlider" to="." method="_on_music_slider_drag_ended"]
-[connection signal="value_changed" from="OptionsAndCredits/Options/GridContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
-[connection signal="drag_ended" from="OptionsAndCredits/Options/GridContainer/SfxSlider" to="." method="_on_sfx_slider_drag_ended"]
-[connection signal="value_changed" from="OptionsAndCredits/Options/GridContainer/SfxSlider" to="." method="_on_sfx_slider_value_changed"]
-[connection signal="drag_ended" from="OptionsAndCredits/Options/GridContainer/DialogueSlider" to="." method="_on_dialogue_slider_drag_ended"]
-[connection signal="value_changed" from="OptionsAndCredits/Options/GridContainer/DialogueSlider" to="." method="_on_dialog_slider_value_changed"]
-[connection signal="pressed" from="OptionsAndCredits/Options/ReturnButton" to="." method="_on_return_button_pressed"]
+[connection signal="pressed" from="OptionsAndCredits/OptionsContainer/ReturnButton" to="." method="_on_return_button_pressed"]
 [connection signal="pressed" from="ExitConfirmation/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="ExitConfirmation/ReturnButton" to="." method="_on_return_button_pressed"]

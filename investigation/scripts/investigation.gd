@@ -9,6 +9,8 @@ class_name _Investigation extends Control
 @onready var clock: _Clock = $Clock
 @onready var moving_noise_overlay: _MovingNoiseWidget = $MovingNoiseOverlay
 @onready var inventory: _Inventory = $Inventory
+@export var menu: PanelContainer
+@export var main_menu_button: Button
 
 @export var pov_tired_overlay: Panel
 @export var eye_tired_overlay: Panel
@@ -86,6 +88,7 @@ func _physics_process(delta: float) -> void:
 		eye_tired_overlay.modulate = Color(0,0,0,0)
 		pov_tired_overlay.modulate = Color(0,0,0,0)
 	
+	main_menu_button.disabled = not text_box.stand_by
 	
 func _update_person_display(chain_id: int, prompt: Prompt) -> void:
 	person_display.load_img_from_prompt(prompt)
@@ -192,3 +195,14 @@ func _on_prompt_advanced() -> void:
 func _add_investigation_points(points: int) -> void:
 	InvestigationVars.add_investigation_points(points)
 	#print("%d investigation poins added." % [points])
+
+func _on_continue_button_pressed() -> void:
+	menu.visible = false
+	moving_noise_overlay.visible = false
+	
+func _on_menu_button_pressed() -> void:
+	menu.visible = true
+	moving_noise_overlay.visible = true
+
+func _on_main_menu_button_pressed() -> void:
+	get_tree().change_scene_to_packed(load("uid://tdvo7j1sx138"))

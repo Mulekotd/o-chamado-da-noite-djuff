@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" path="res://investigation/items/scripts/item_resource.gd" id="1_c1mno"]
 [ext_resource type="Script" path="res://investigation/scripts/investigation_variables.gd" id="1_y5pc1"]
-[ext_resource type="Resource" path="res://investigation/days/day1/faca.tres" id="2_p848r"]
 
 [resource]
 script = ExtResource("1_y5pc1")
@@ -12,22 +11,21 @@ vars = Dictionary[String, int]({
 "display_clocks": 1,
 "entered_house": 1,
 "house_door_open": 1,
-"knocked_on_door": 0,
+"knocked_on_door": 1,
 "left_home": 1,
 "looking_at_watch": 0,
-"option": 0,
+"option": -1,
 "phone_down": 1,
-"tem_faca": 0,
-"tv_on": 0
+"tem_faca": 0
 })
-inventory = Array[ExtResource("1_c1mno")]([ExtResource("2_p848r"), ExtResource("2_p848r"), ExtResource("2_p848r"), ExtResource("2_p848r"), ExtResource("2_p848r")])
-_actions = 0
+_actions = 3
+_investigation_points = 1
 last_level = "day1"
-last_pov = "pov_gavetas"
+last_pov = "pov_cozinha"
 volumes = Dictionary[String, float]({
-"dialogue": 0.464,
-"master": 0.47,
-"music": 1.0,
-"sfx": 0.272
+"dialogue": 0.384,
+"master": 0.853,
+"music": 0.388,
+"sfx": 0.371
 })
 metadata/_custom_type_script = "uid://47pf0lrk86x5"

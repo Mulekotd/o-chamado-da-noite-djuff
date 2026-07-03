@@ -14,20 +14,12 @@ extends Control
 @export var exit_confirmation: VBoxContainer
 
 @export var continue_button: Button
-@export var master_slider: HSlider
-@export var music_slider: HSlider
-@export var sfx_slider: HSlider
-@export var dialogue_slider: HSlider
+@export var options: _Options
 
 @export var elements_parallax_amount : float = 0.1
 @export var background_parallax_amount : float = 0.1
 @export var parallax_speed : float = 5
 @export var fade_out_duration : float = 3
-
-var master_bus_index : int = AudioServer.get_bus_index("Master")
-var music_bus_index : int = AudioServer.get_bus_index("Music")
-var sfx_bus_index : int = AudioServer.get_bus_index("Sfx")
-var dialogue_bus_index : int = AudioServer.get_bus_index("Letter Sounds")
 
 var mouse_pos : Vector2 = Vector2()
 var mouse_hovering : bool = false
@@ -44,15 +36,8 @@ var tab : tabs = tabs.MAIN
 func _ready() -> void:
 	continue_button.disabled = not InvestigationVars.get_last_level()
 	
-	AudioServer.set_bus_volume_linear(master_bus_index, InvestigationVars.load_bus_volume("master"))
-	AudioServer.set_bus_volume_linear(music_bus_index, InvestigationVars.load_bus_volume("music"))
-	AudioServer.set_bus_volume_linear(sfx_bus_index, InvestigationVars.load_bus_volume("sfx"))
-	AudioServer.set_bus_volume_linear(dialogue_bus_index, InvestigationVars.load_bus_volume("dialogue"))
-	
-	master_slider.value = db_to_linear(AudioServer.get_bus_volume_db(master_bus_index))
-	music_slider.value = db_to_linear(AudioServer.get_bus_volume_db(music_bus_index))
-	sfx_slider.value = db_to_linear(AudioServer.get_bus_volume_db(sfx_bus_index))
-	dialogue_slider.value = db_to_linear(AudioServer.get_bus_volume_db(dialogue_bus_index))
+	options.sfx_requested.connect(sound_manager.play_poly_sound)
+	options.dialogue_requested.connect(sound_manager.play_letter_sound)
 	
 	sound_manager.play_soundtrack(preload("uid://bw7v0wigbew66"))
 	sound_manager.load_letter_sounds(LetterSoundsGlobal.default_sound)
@@ -166,31 +151,3 @@ func _on_exit_button_pressed() -> void:
 	sound_manager.play_poly_sound(preload("uid://drvhdaei27mlf"))
 	await _fade_out(fade_out_duration)
 	get_tree().quit()
-
-func _on_master_slider_value_changed(value: float) -> void:
-	AudioServer.set_bus_volume_linear(master_bus_index, value)
-
-func _on_music_slider_value_changed(value: float) -> void:
-	AudioServer.set_bus_volume_linear(music_bus_index, value)
-
-func _on_sfx_slider_value_changed(value: float) -> void:
-	AudioServer.set_bus_volume_linear(sfx_bus_index, value)
-	
-func _on_dialogue_slider_value_changed(value: float) -> void:
-	AudioServer.set_bus_volume_linear(dialogue_bus_index, value)
-
-func _on_sfx_slider_drag_ended(value_changed: bool) -> void:
-	sound_manager.play_poly_sound(preload("uid://dhrfmjyberbde"))
-	InvestigationVars.save_bus_volume("sfx", sfx_slider.value)
-
-func _on_dialogue_slider_drag_ended(value_changed: bool) -> void:
-	for i in 4:
-		sound_manager.play_letter_sound()
-		await get_tree().create_timer(0.2).timeout
-	InvestigationVars.save_bus_volume("dialogue", dialogue_slider.value)
-
-func _on_master_slider_drag_ended(value_changed: bool) -> void:
-	InvestigationVars.save_bus_volume("master", master_slider.value)
-
-func _on_music_slider_drag_ended(value_changed: bool) -> void:
-	InvestigationVars.save_bus_volume("music", music_slider.value)

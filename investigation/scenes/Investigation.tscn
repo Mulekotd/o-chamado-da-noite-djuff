@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dse2ma2f5xas5" path="res://investigation/interface/scenes/clock.tscn" id="9_2or41"]
 [ext_resource type="PackedScene" uid="uid://cw8xufv4n3jyu" path="res://investigation/scenes/inventory.tscn" id="9_jik6y"]
 [ext_resource type="PackedScene" uid="uid://fmeu1ocls847" path="res://investigation/scenes/sound_manager.tscn" id="10_50cmr"]
+[ext_resource type="PackedScene" uid="uid://bgsk55h23jq64" path="res://scenes/options.tscn" id="10_jik6y"]
 [ext_resource type="Script" uid="uid://611kuu1dngvi" path="res://investigation/scripts/cursor_loader.gd" id="11_uaftc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1t5j4"]
@@ -226,7 +227,28 @@ border_color = Color(0, 0, 0, 0.7607843)
 border_blend = true
 corner_detail = 5
 
-[node name="Investigation" type="Control" unique_id=1591324732 node_paths=PackedStringArray("pov_tired_overlay", "eye_tired_overlay")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4v7s"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 200
+border_width_top = 64
+border_width_right = 200
+border_width_bottom = 64
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hj3xq"]
+content_margin_left = 10.0
+content_margin_top = 4.0
+content_margin_right = 10.0
+content_margin_bottom = 4.0
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0, 0, 1)
+
+[node name="Investigation" type="Control" unique_id=1591324732 node_paths=PackedStringArray("menu", "main_menu_button", "pov_tired_overlay", "eye_tired_overlay")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -234,6 +256,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_h1ggt")
+menu = NodePath("Menu")
+main_menu_button = NodePath("Menu/VBoxContainer/HBoxContainer/MainMenuButton")
 pov_tired_overlay = NodePath("PovManager/ShadowPanel")
 eye_tired_overlay = NodePath("EyeSprite2D/ShadowPanel")
 tired_feedback_speed = 2.0
@@ -362,6 +386,14 @@ offset_bottom = 113.0
 toggle_mode = true
 text = "Itens"
 
+[node name="MenuButton" type="Button" parent="." unique_id=1464116214]
+layout_mode = 0
+offset_left = 1183.0
+offset_top = 25.0
+offset_right = 1271.0
+offset_bottom = 62.0
+text = "Menu"
+
 [node name="---------------------------" type="Node" parent="." unique_id=367296959]
 
 [node name="MovingNoiseOverlay" parent="." unique_id=292722013 instance=ExtResource("9_1t5j4")]
@@ -370,6 +402,43 @@ layout_mode = 1
 
 [node name="ColorRect" parent="MovingNoiseOverlay" index="0" unique_id=1938556265]
 theme_override_styles/panel = SubResource("StyleBoxFlat_ni3wf")
+
+[node name="Menu" type="PanelContainer" parent="." unique_id=209040884]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g4v7s")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu" unique_id=593581089]
+layout_mode = 2
+theme_override_constants/separation = 85
+
+[node name="Options" parent="Menu/VBoxContainer" unique_id=1028251657 instance=ExtResource("10_jik6y")]
+layout_mode = 2
+theme_override_constants/separation = 63
+
+[node name="HBoxContainer" type="GridContainer" parent="Menu/VBoxContainer" unique_id=2000757850]
+layout_mode = 2
+theme_override_constants/h_separation = 194
+columns = 2
+
+[node name="MainMenuButton" type="Button" parent="Menu/VBoxContainer/HBoxContainer" unique_id=875793678]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_hover_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+theme_override_styles/hover = SubResource("StyleBoxFlat_hj3xq")
+text = "Menu Principal"
+
+[node name="ContinueButton" type="Button" parent="Menu/VBoxContainer/HBoxContainer" unique_id=1569525199]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 50
+text = "Continuar"
 
 [node name="Clock" parent="." unique_id=1983170265 instance=ExtResource("9_2or41")]
 visible = false
@@ -384,5 +453,8 @@ metadata/_custom_type_script = "uid://611kuu1dngvi"
 
 [connection signal="mouse_entered" from="PovManager" to="." method="_on_pov_manager_mouse_entered"]
 [connection signal="toggled" from="InventoryToggleButton" to="Inventory" method="toggle_inventory"]
+[connection signal="pressed" from="MenuButton" to="." method="_on_menu_button_pressed"]
+[connection signal="pressed" from="Menu/VBoxContainer/HBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="Menu/VBoxContainer/HBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
 
 [editable path="MovingNoiseOverlay"]

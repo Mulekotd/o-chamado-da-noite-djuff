@@ -1,10 +1,32 @@
 [gd_resource type="AudioBusLayout" format=3 uid="uid://s1g430bnxbvn"]
 
+[sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_ltay7"]
+resource_name = "Compressor"
+threshold = -12.0
+ratio = 3.0
+
 [sub_resource type="AudioEffectLowPassFilter" id="AudioEffectLowPassFilter_iw6ta"]
 resource_name = "LowPassFilter"
 cutoff_hz = 521.0
 
+[sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_ae4o0"]
+resource_name = "Compressor"
+threshold = -12.0
+ratio = 3.0
+
+[sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_iw6ta"]
+resource_name = "Compressor"
+threshold = -12.0
+ratio = 3.0
+
+[sub_resource type="AudioEffectCompressor" id="AudioEffectCompressor_yxxtg"]
+resource_name = "Compressor"
+threshold = -12.0
+ratio = 3.0
+
 [resource]
+bus/0/effect/0/effect = SubResource("AudioEffectCompressor_ltay7")
+bus/0/effect/0/enabled = true
 bus/1/name = &"Music"
 bus/1/solo = false
 bus/1/mute = false
@@ -13,15 +35,21 @@ bus/1/volume_db = 0.0
 bus/1/send = &"Master"
 bus/1/effect/0/effect = SubResource("AudioEffectLowPassFilter_iw6ta")
 bus/1/effect/0/enabled = false
+bus/1/effect/1/effect = SubResource("AudioEffectCompressor_ae4o0")
+bus/1/effect/1/enabled = true
 bus/2/name = &"Sfx"
 bus/2/solo = false
 bus/2/mute = false
 bus/2/bypass_fx = false
 bus/2/volume_db = 0.0
 bus/2/send = &"Master"
+bus/2/effect/0/effect = SubResource("AudioEffectCompressor_iw6ta")
+bus/2/effect/0/enabled = true
 bus/3/name = &"Letter Sounds"
 bus/3/solo = false
 bus/3/mute = false
 bus/3/bypass_fx = false
 bus/3/volume_db = 0.0
 bus/3/send = &"Master"
+bus/3/effect/0/effect = SubResource("AudioEffectCompressor_yxxtg")
+bus/3/effect/0/enabled = true
