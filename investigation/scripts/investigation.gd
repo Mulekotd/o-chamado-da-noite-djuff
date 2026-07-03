@@ -38,6 +38,8 @@ var clock_total_speed : float = 1000
 var clock_display_duration : float = 1
 var clock_fade_duration : float = 1
 
+var played_tired_music : bool = false
+
 func _ready() -> void:
 	# Wire the main investigation flow between POVs, text box, and audio.
 	pov_manager.element_clicked.connect(_append_prompt_chain_from_element)
@@ -77,9 +79,13 @@ func _physics_process(delta: float) -> void:
 		var color := Color(0,0,0, sin(elapsed * tired_feedback_speed)*0.5+0.5)
 		eye_tired_overlay.modulate = color
 		pov_tired_overlay.modulate = color
+		if not played_tired_music:
+			sound_manager.play_soundtrack(preload("uid://bqjvimn4ce7d4"))
+			played_tired_music = true
 	else:
 		eye_tired_overlay.modulate = Color(0,0,0,0)
 		pov_tired_overlay.modulate = Color(0,0,0,0)
+	
 	
 func _update_person_display(chain_id: int, prompt: Prompt) -> void:
 	person_display.load_img_from_prompt(prompt)

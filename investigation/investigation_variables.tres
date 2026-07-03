@@ -15,13 +15,13 @@ vars = Dictionary[String, int]({
 "knocked_on_door": 0,
 "left_home": 1,
 "looking_at_watch": 0,
-"option": -1,
+"option": 0,
 "phone_down": 1,
-"tem_faca": 1,
+"tem_faca": 0,
 "tv_on": 0
 })
-inventory = Array[ExtResource("1_c1mno")]([ExtResource("2_p848r"), ExtResource("2_p848r"), ExtResource("2_p848r")])
+inventory = Array[ExtResource("1_c1mno")]([ExtResource("2_p848r"), ExtResource("2_p848r"), ExtResource("2_p848r"), ExtResource("2_p848r"), ExtResource("2_p848r")])
 _actions = 0
 last_level = "day1"
-last_pov = "pov_sala_tv"
+last_pov = "pov_gavetas"
 metadata/_custom_type_script = "uid://47pf0lrk86x5"
