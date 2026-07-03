@@ -17,10 +17,11 @@ vars = Dictionary[String, int]({
 "looking_at_watch": 0,
 "option": -1,
 "phone_down": 1,
-"tem_faca": 1
+"tem_faca": 1,
+"tv_on": 0
 })
-inventory = Array[ExtResource("1_c1mno")]([ExtResource("2_p848r")])
-_actions = 4
+inventory = Array[ExtResource("1_c1mno")]([ExtResource("2_p848r"), ExtResource("2_p848r"), ExtResource("2_p848r")])
+_actions = 0
 last_level = "day1"
-last_pov = "pov_cozinha"
+last_pov = "pov_sala_tv"
 metadata/_custom_type_script = "uid://47pf0lrk86x5"

@@ -22,6 +22,10 @@ signal done_showing_clock
 @export var tired_feedback: bool = true
 ## how fast the tired feedback flashing is
 @export var tired_feedback_speed: float = 1
+## what the character should say when tired
+@export var tired_text : String = "Estou muito cansado, preciso ir."
+## povs where the player can interact even when tired
+@export var tired_whitelist : Array[String] = []
 
 ## Tracks prompt chains so letter sounds can follow the active chain order.
 var chain_id_queue : Array[int]
@@ -37,7 +41,7 @@ var clock_fade_duration : float = 1
 func _ready() -> void:
 	# Wire the main investigation flow between POVs, text box, and audio.
 	pov_manager.element_clicked.connect(_append_prompt_chain_from_element)
-	pov_manager.prompt_chain_called.connect(text_box.insert_prompt_chain)
+	pov_manager.prompt_chain_called.connect(_append_prompt_chain)
 	pov_manager.pov_entered.connect(text_box.clear_box)
 	pov_manager.sound_played.connect(sound_manager.play_poly_sound)
 	text_box.pov_entered.connect(pov_manager.change_pov_by_name)
@@ -157,7 +161,16 @@ func _update_clock() -> void:
 func _append_prompt_chain_from_element(e: Element) -> void:
 	# Clicking an element can enqueue its prompt chain.
 	if e.prompt_chain:
-		text_box.insert_prompt_chain(e.prompt_chain)
+		_append_prompt_chain(e.prompt_chain)
+
+func _append_prompt_chain(p_chain: PromptChain) -> void:
+	var tired : bool = actions_manager.max_actions > 0 and actions_manager.actions <= 0
+	if tired and pov_manager.current_pov.name not in tired_whitelist:
+		var prompt := Prompt.new()
+		prompt.text = tired_text
+		text_box.insert_prompt(prompt)
+	else:
+		text_box.insert_prompt_chain(p_chain)
 
 func _append_prompt_chain_sound(chain_id: int, chain: PromptChain) -> void:
 	# Cache chain meta so letter sounds can be swapped later.

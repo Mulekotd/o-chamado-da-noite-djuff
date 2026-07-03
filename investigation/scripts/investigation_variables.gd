@@ -1,4 +1,5 @@
 @tool
+## Stores every persistent variable in the game
 class_name InvestigationVars extends Resource
 
 @export_tool_button("clear global variables")
@@ -33,6 +34,14 @@ static func clear_everything() -> void:
 
 ## last pov the player was in
 @export var last_pov : String = ""
+
+## volume of different channels
+@export var volumes : Dictionary[String, float] = {
+	"General" : 1,
+	"Music"   : 1,
+	"Sfx"     : 1,
+	"Dialog"  : 1,
+}
 
 ## value to assign to a newly created variable
 static var default_value : int = 0
