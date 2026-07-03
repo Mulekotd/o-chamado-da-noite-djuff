@@ -10,10 +10,18 @@ class_name _Investigation extends Control
 @onready var moving_noise_overlay: _MovingNoiseWidget = $MovingNoiseOverlay
 @onready var inventory: _Inventory = $Inventory
 
+@export var pov_tired_overlay: Panel
+@export var eye_tired_overlay: Panel
+
 const USED_ACTION_SOUND = preload("uid://cfbtnvstp7wxl")
 const NO_MORE_ACTIONS_SOUND = preload("uid://c5bngv3avhepx")
 
 signal done_showing_clock
+
+## if true, flashes the pov view and eye display black IF actions <= 0 AND max_actions > 0 
+@export var tired_feedback: bool = true
+## how fast the tired feedback flashing is
+@export var tired_feedback_speed: float = 1
 
 ## Tracks prompt chains so letter sounds can follow the active chain order.
 var chain_id_queue : Array[int]
@@ -48,16 +56,27 @@ func _ready() -> void:
 	
 	clock.modulate = Color(0,0,0,0)
 
-var elapsed : int = 0
+var ticks : int = 0
+var elapsed: float = 0
 var advances : int = 0
 func _physics_process(delta: float) -> void:
+	elapsed += delta
+	ticks += 1
 	# move eye in relation to mouse in pov_manager
 	vision_x = lerpf(vision_x, pov_manager.get_local_mouse_position().x / pov_manager.size.x, look_speed)
-	if elapsed % 16 == 0: # only move in certain intervals
+	if ticks % 16 == 0: # only move in certain intervals
 		eye_sprite_2d.frame = int((vision_x) * 13) * 2 + (advances / 2 % 2)
 		advances += 1
-	elapsed += 1
-
+	
+	# sin for black (tired) overlay if tired_feedback == true
+	if tired_feedback and actions_manager.max_actions > 0 and actions_manager.actions <= 0:
+		var color := Color(0,0,0, sin(elapsed * tired_feedback_speed)*0.5+0.5)
+		eye_tired_overlay.modulate = color
+		pov_tired_overlay.modulate = color
+	else:
+		eye_tired_overlay.modulate = Color(0,0,0,0)
+		pov_tired_overlay.modulate = Color(0,0,0,0)
+	
 func _update_person_display(chain_id: int, prompt: Prompt) -> void:
 	person_display.load_img_from_prompt(prompt)
 

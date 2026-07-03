@@ -13,6 +13,15 @@
 [ext_resource type="PackedScene" uid="uid://fmeu1ocls847" path="res://investigation/scenes/sound_manager.tscn" id="10_50cmr"]
 [ext_resource type="Script" uid="uid://611kuu1dngvi" path="res://investigation/scripts/cursor_loader.gd" id="11_uaftc"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1t5j4"]
+bg_color = Color(1, 1, 1, 0)
+border_width_left = 200
+border_width_top = 200
+border_width_right = 200
+border_width_bottom = 200
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_ha276"]
 atlas = ExtResource("5_hj3xq")
 region = Rect2(90, 0, 90, 131)
@@ -217,7 +226,7 @@ border_color = Color(0, 0, 0, 0.7607843)
 border_blend = true
 corner_detail = 5
 
-[node name="Investigation" type="Control" unique_id=1591324732]
+[node name="Investigation" type="Control" unique_id=1591324732 node_paths=PackedStringArray("pov_tired_overlay", "eye_tired_overlay")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -225,6 +234,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_h1ggt")
+pov_tired_overlay = NodePath("PovManager/ShadowPanel")
+eye_tired_overlay = NodePath("EyeSprite2D/ShadowPanel")
 metadata/_edit_use_anchors_ = true
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1512307908]
@@ -258,6 +269,17 @@ offset_top = 0.42399788
 offset_right = -0.60009766
 offset_bottom = 0.8239746
 
+[node name="ShadowPanel" type="Panel" parent="PovManager" unique_id=515587293]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1t5j4")
+
 [node name="EyeSprite2D" type="AnimatedSprite2D" parent="." unique_id=636611070]
 position = Vector2(143, 771)
 scale = Vector2(2.680001, 2.680001)
@@ -271,6 +293,22 @@ parameters/blend_position = 0.0
 [node name="AnimationPlayer" type="AnimationPlayer" parent="EyeSprite2D" unique_id=1322286258]
 libraries/ = SubResource("AnimationLibrary_jynp0")
 autoplay = &"default"
+
+[node name="ShadowPanel" type="Panel" parent="EyeSprite2D" unique_id=916476123]
+modulate = Color(0, 0, 0, 1)
+z_index = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -45.0
+offset_top = -65.5
+offset_right = -45.000053
+offset_bottom = -65.5
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset_ratio = Vector2(0.5, 0.5)
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_1t5j4")
 
 [node name="PersonDisplay" parent="." unique_id=1676715533 instance=ExtResource("6_3tatp")]
 layout_mode = 1
@@ -289,6 +327,7 @@ anchor_bottom = 0.6354167
 offset_bottom = -31.529999
 
 [node name="Overlay" type="TextureRect" parent="." unique_id=554177332]
+z_index = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -300,12 +339,14 @@ texture = ExtResource("7_hkwvp")
 expand_mode = 2
 
 [node name="ActionsManager" parent="." unique_id=2116191467 instance=ExtResource("8_dtwxe")]
+z_index = 1
 layout_mode = 1
 offset_left = 544.0
 offset_top = -888.0
 offset_right = 634.0
 offset_bottom = -375.0
 clock_size = Vector2(80.51, 0)
+actions = 5
 modulate_speed = 2.0
 bob_speed = 1.0
 bob_amplitude = 0.15
@@ -315,6 +356,7 @@ use_pos_overwrite = false
 pos_speed = 2.0
 
 [node name="InventoryToggleButton" type="Button" parent="." unique_id=2101909362]
+z_index = 1
 layout_mode = 0
 offset_left = 1183.0
 offset_top = 76.0
@@ -327,6 +369,7 @@ text = "Itens"
 
 [node name="MovingNoiseOverlay" parent="." unique_id=292722013 instance=ExtResource("9_1t5j4")]
 visible = false
+z_index = 2
 layout_mode = 1
 
 [node name="ColorRect" parent="MovingNoiseOverlay" index="0" unique_id=1938556265]
@@ -334,6 +377,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_ni3wf")
 
 [node name="Clock" parent="." unique_id=1983170265 instance=ExtResource("9_2or41")]
 visible = false
+z_index = 2
 layout_mode = 1
 shake_factor = 0.003
 

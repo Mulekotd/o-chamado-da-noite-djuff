@@ -41,6 +41,7 @@ func parse_prompt() -> Prompt:
 	p.pos_sound = pos_sound_widget.get_sound()
 	p.letter_sound = letter_sounds_widget.parse_letter_sound()
 	p.go_to = go_to
+	print("PARSING:\ntext: ", text_widget.text, "\nidx: ", index_label.text, "\ngo to: ",go_to)
 	return p
 
 func load_prompt(p: Prompt) -> void:
@@ -79,9 +80,11 @@ func _on_move_down_button_pressed() -> void:
 func _on_spin_box_value_changed(value: float) -> void:
 	if value != index_label.text.to_int():
 		go_to = value
+		print("\ntext: ", text_widget.text, "\nidx: ", index_label.text, "\ngo to: ",go_to)
 	else:
 		if value == go_to_spin_box.max_value:
 			go_to_spin_box.value = go_to
 		else:
 			go_to_spin_box.value = value + (value - go_to)
 			go_to = go_to_spin_box.value
+			print("\ntext: ", text_widget.text, "\nidx: ", index_label.text, "\n(skipped) go to: ",go_to)

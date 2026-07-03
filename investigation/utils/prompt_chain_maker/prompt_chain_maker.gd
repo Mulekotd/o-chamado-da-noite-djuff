@@ -46,9 +46,9 @@ func add_prompt(p: Prompt) -> void:
 	w.move_down_requested.connect(_on_prompt_widget_move_down_requested)
 	prompts_container.add_child(w)
 	w.change_default_img(default_prompt_image_widget.get_img())
+	_update_prompt_indexes()
 	w.load_prompt(p)
 	default_prompt_image_widget.changed.connect(w.change_default_img)
-	_update_prompt_indexes()
 
 func _on_prompt_widget_move_up_requested(widget: _PromptWidget) -> void:
 	# Reorder prompt widgets within the chain.
