@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://cbjqd3yadie80"]
+
+[ext_resource type="Script" uid="uid://dqj183h8d13hn" path="res://investigation/items/scripts/item_resource.gd" id="1_0jbm2"]
+[ext_resource type="Texture2D" uid="uid://w46g52uhecwh" path="res://investigation/images/itens/calendario.png" id="1_6qe7r"]
+
+[resource]
+script = ExtResource("1_0jbm2")
+id = "calendario"
+name = "Calendário"
+image = ExtResource("1_6qe7r")
+metadata/_custom_type_script = "uid://dqj183h8d13hn"
