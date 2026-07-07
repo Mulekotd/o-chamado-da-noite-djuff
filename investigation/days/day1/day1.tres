@@ -1821,43 +1821,39 @@ name = "pov_mesa"
 prompt_chain = SubResource("Resource_iqriy")
 images = Array[ExtResource("6_6544q")]([SubResource("Resource_2jre5")])
 
-[sub_resource type="Resource" id="Resource_0e77b"]
+[sub_resource type="Resource" id="Resource_xh0fo"]
 script = ExtResource("1_65d63")
 pov = SubResource("Resource_7ov20")
 bottom = "pov_adiante_jantar"
 rotation = 0.61
 coords = Vector2(1314.3337, 941.4929)
 
-[sub_resource type="Resource" id="Resource_xh0fo"]
+[sub_resource type="Resource" id="Resource_jjs3d"]
 script = ExtResource("6_6544q")
 image_path = "res://investigation/images/povs/tv_puzzle/tv_off.png"
+conditions = Dictionary[String, int]({
+"canal": 0
+})
 
 [sub_resource type="Resource" id="Resource_ak3u4"]
 script = ExtResource("6_6544q")
-image_path = "res://investigation/images/povs/tv_puzzle/tv_static.png"
-
-[sub_resource type="Resource" id="Resource_5et7k"]
-script = ExtResource("6_6544q")
 image_path = "res://investigation/images/povs/tv_puzzle/tv_image2.png"
-conditions = Dictionary[String, int]({
-"canal": 1
-})
-
-[sub_resource type="Resource" id="Resource_0fx0g"]
-script = ExtResource("6_6544q")
-image_path = "res://investigation/images/povs/tv_puzzle/tv_image1.png"
 conditions = Dictionary[String, int]({
 "canal": 2
 })
 
-[sub_resource type="Resource" id="Resource_jjs3d"]
-script = ExtResource("4_cmit4")
-
 [sub_resource type="Resource" id="Resource_22w13"]
-script = ExtResource("5_woy06")
-prompts = Array[ExtResource("4_cmit4")]([SubResource("Resource_jjs3d")])
+script = ExtResource("4_cmit4")
+text = "acertou bb"
+global_conditions = Dictionary[String, int]({
+"canal": 1
+})
 
 [sub_resource type="Resource" id="Resource_maeb3"]
+script = ExtResource("5_woy06")
+prompts = Array[ExtResource("4_cmit4")]([SubResource("Resource_22w13")])
+
+[sub_resource type="Resource" id="Resource_5et7k"]
 script = ExtResource("8_yyqoo")
 back_pov = "pov_sala_tv"
 symbol_paths = Array[String](["res://investigation/images/symbols/tv/tv_symbol0.png", "res://investigation/images/symbols/tv/tv_symbol1.png", "res://investigation/images/symbols/tv/tv_symbol2.png", "res://investigation/images/symbols/tv/tv_symbol3.png", "res://investigation/images/symbols/tv/tv_symbol4.png", "res://investigation/images/symbols/tv/tv_symbol5.png", "res://investigation/images/symbols/tv/tv_symbol6.png", "res://investigation/images/symbols/tv/tv_symbol7.png", "res://investigation/images/symbols/tv/tv_symbol8.png", "res://investigation/images/symbols/tv/tv_symbol9.png"])
@@ -1868,14 +1864,12 @@ Vector2(0.7852941, 0.794964): Vector2(0.027941177, 0.10071942),
 Vector2(0.8147059, 0.794964): Vector2(0.027941177, 0.10071942)
 })
 combinations = Dictionary[String, String]({
-"2012": "canal",
-"2310": "canal",
-"6769": "canal"
+"2310": "canal"
 })
-coords = Vector2(1738.4751, 1713.0204)
+coords = Vector2(1738.475, 1713.0198)
 name = "puzzle_tv"
-prompt_chain = SubResource("Resource_22w13")
-images = Array[ExtResource("6_6544q")]([SubResource("Resource_xh0fo"), SubResource("Resource_ak3u4"), SubResource("Resource_5et7k"), SubResource("Resource_0fx0g")])
+prompt_chain = SubResource("Resource_maeb3")
+images = Array[ExtResource("6_6544q")]([SubResource("Resource_jjs3d"), SubResource("Resource_ak3u4")])
 global_conditions = Dictionary[String, int]({
 "estabilizou": 1
 })
@@ -1908,14 +1902,14 @@ Vector2(0.81911767, 0.65625): Vector2(0.03529412, 0.09375)
 combinations = Dictionary[String, String]({
 "3067": "puzzle_armario"
 })
-coords = Vector2(3137.4634, 1592.843)
+coords = Vector2(3137.4634, 1592.8429)
 name = "puzzle_armario"
 prompt_chain = SubResource("Resource_6nyxs")
 images = Array[ExtResource("6_6544q")]([SubResource("Resource_dbhjc")])
 
 [resource]
 script = ExtResource("9_u3xhr")
-pov_directions_array = Array[ExtResource("1_65d63")]([SubResource("Resource_ejyg8"), SubResource("Resource_2dbrv"), SubResource("Resource_dwujd"), SubResource("Resource_e4lq5"), SubResource("Resource_pvuak"), SubResource("Resource_ycay6"), SubResource("Resource_41ccm"), SubResource("Resource_tbbhi"), SubResource("Resource_2mcep"), SubResource("Resource_450ga"), SubResource("Resource_3eiuw"), SubResource("Resource_mjc7o"), SubResource("Resource_nhltl"), SubResource("Resource_7jlpg"), SubResource("Resource_17d2v"), SubResource("Resource_wy26s"), SubResource("Resource_fyxyn"), SubResource("Resource_0qi0j"), SubResource("Resource_6ss43"), SubResource("Resource_8hw4x"), SubResource("Resource_p01dg"), SubResource("Resource_57npi"), SubResource("Resource_ay6lj"), SubResource("Resource_ffinm"), SubResource("Resource_jms75"), SubResource("Resource_xhw5d"), SubResource("Resource_0e77b")])
-puzzle_povs = Array[ExtResource("8_yyqoo")]([SubResource("Resource_maeb3"), SubResource("Resource_cddge")])
+pov_directions_array = Array[ExtResource("1_65d63")]([SubResource("Resource_ejyg8"), SubResource("Resource_2dbrv"), SubResource("Resource_dwujd"), SubResource("Resource_e4lq5"), SubResource("Resource_pvuak"), SubResource("Resource_ycay6"), SubResource("Resource_41ccm"), SubResource("Resource_tbbhi"), SubResource("Resource_2mcep"), SubResource("Resource_450ga"), SubResource("Resource_3eiuw"), SubResource("Resource_mjc7o"), SubResource("Resource_nhltl"), SubResource("Resource_7jlpg"), SubResource("Resource_17d2v"), SubResource("Resource_wy26s"), SubResource("Resource_fyxyn"), SubResource("Resource_0qi0j"), SubResource("Resource_6ss43"), SubResource("Resource_8hw4x"), SubResource("Resource_p01dg"), SubResource("Resource_57npi"), SubResource("Resource_ay6lj"), SubResource("Resource_ffinm"), SubResource("Resource_jms75"), SubResource("Resource_xhw5d"), SubResource("Resource_xh0fo")])
+puzzle_povs = Array[ExtResource("8_yyqoo")]([SubResource("Resource_5et7k"), SubResource("Resource_cddge")])
 dir_scale = 0.5700000000000001
 default_pov = "pov_entrada"
