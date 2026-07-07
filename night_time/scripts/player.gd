@@ -1,6 +1,12 @@
 extends CharacterBody2D
 
 signal item_changed(new_index: int)
+signal health_changed(current_health: int, max_health: int)
+signal died
+
+@export var max_health: int = 100
+var current_health: int = max_health
+
 var current_item_index: int = 0
 
 enum MovementStatus {
@@ -26,18 +32,21 @@ var current_action_state: ActionStatus = ActionStatus.IDLE
 const SPEED: float = 300.0
 
 @export var bullet_scene: PackedScene
-@export var dialogue_resource: DialogueResource
-@export var dialogue_start: String = "start"
 
 # Node References
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var muzzle: Marker2D = $AnimatedSprite2D/Muzzle
 @onready var legs_sprite: AnimatedSprite2D = $LegsSprite
+@onready var slice_hitbox: Area2D = $AnimatedSprite2D/SliceHitbox
+@onready var interaction_zone: Area2D = $InteractionZone # Add this Area2D to your Player scene
+@onready var health_bar: ProgressBar = $HealthBar # update path as needed
 
 # Tracking Variables
 var last_direction: Vector2 = Vector2.RIGHT
 var input_direction: Vector2 = Vector2.ZERO
 var is_in_dialogue: bool = false
+var slice_has_hit: bool = false  # guards against re-triggering on repeated frame_changed calls
+var interactables_in_range: Array[Node2D] = []
 
 # endregion
 
@@ -45,17 +54,40 @@ var is_in_dialogue: bool = false
 # region Built-in Lifecycle Methods
 
 func _ready() -> void:
-	# Connect dialogue system
-	if DialogueManager:
-		DialogueManager.dialogue_ended.connect(_on_dialogue_ended)
-	
-	# Connect animation finished signal to handle attack loops and locks
 	animated_sprite.animation_finished.connect(_on_action_animation_finished)
+	animated_sprite.frame_changed.connect(_on_animated_sprite_frame_changed)
+	slice_hitbox.monitoring = false
 
+	if interaction_zone:
+		interaction_zone.body_entered.connect(_on_interaction_zone_body_entered)
+		interaction_zone.body_exited.connect(_on_interaction_zone_body_exited)
+
+	# Health setup
+	current_health = max_health
+	health_bar.max_value = max_health
+	health_bar.value = current_health
+
+func start_slice() -> void:
+	slice_has_hit = false
+	slice_hitbox.monitoring = true
+
+
+func _on_animated_sprite_frame_changed() -> void:
+	if animated_sprite.animation != "slicing":
+		return
+	if animated_sprite.frame == 3 and not slice_has_hit:  # 4th frame, 0-indexed
+		slice_has_hit = true
+		_apply_slice_damage()
+
+
+func _apply_slice_damage() -> void:
+	for body in slice_hitbox.get_overlapping_bodies():
+		if body.has_method("take_damage"):
+			body.take_damage()
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_accept") and not is_in_dialogue:
-		trigger_dialogue()
+	if event.is_action_pressed("interact") and not is_in_dialogue:
+		try_interaction()
 
 
 func _physics_process(_delta: float) -> void:
@@ -103,6 +135,8 @@ func handle_input() -> void:
 				shoot_bullet() # Handle projectile spawning instantly
 			ActionStatus.HOLDING_KNIFE:
 				current_action_state = ActionStatus.SLICING
+				start_slice()
+
 
 
 func update_states() -> void:
@@ -152,6 +186,7 @@ func update_rotation() -> void:
 
 func shoot_bullet() -> void:
 	if not bullet_scene:
+		print("no bullet")
 		return
 		
 	var bullet = bullet_scene.instantiate()
@@ -162,19 +197,38 @@ func shoot_bullet() -> void:
 # endregion
 
 
-# region Dialogue Setup
+# region Interaction & Dialogue Setup
 
-func trigger_dialogue() -> void:
-	is_in_dialogue = true
-	velocity = Vector2.ZERO
-	
-	# Clean up movement visual assets instantly
-	legs_sprite.visible = false
-	legs_sprite.stop()
-	legs_sprite.frame = 0
-	
-	animated_sprite.play("idle")
-	DialogueManager.show_dialogue_balloon(dialogue_resource, dialogue_start)
+func try_interaction() -> void:
+	if interactables_in_range.is_empty():
+		return
+		
+	# Find the closest target in range
+	var target = interactables_in_range[0]
+	if interactables_in_range.size() > 1:
+		for body in interactables_in_range:
+			if global_position.distance_to(body.global_position) < global_position.distance_to(target.global_position):
+				target = body
+
+	# Duck typing: Check if the target has an interact method
+	if target.has_method("interact"):
+		# Lock player movement
+		is_in_dialogue = true
+		velocity = Vector2.ZERO
+		
+		# Clean up movement visual assets instantly
+		legs_sprite.visible = false
+		legs_sprite.stop()
+		legs_sprite.frame = 0
+		animated_sprite.play("idle")
+		
+		# Call interact on the target, passing the player reference so it can connect dialog signals back
+		target.interact(self)
+
+
+func end_dialogue() -> void:
+	is_in_dialogue = false
+	current_movement_state = MovementStatus.IDLE
 
 # endregion
 
@@ -225,10 +279,48 @@ func _on_action_animation_finished() -> void:
 			animated_sprite.frame = 1
 			animated_sprite.stop()
 			current_action_state = ActionStatus.HOLDING_KNIFE
+			slice_hitbox.monitoring = false
 
 
-func _on_dialogue_ended(_resource: DialogueResource) -> void:
-	is_in_dialogue = false
-	current_movement_state = MovementStatus.IDLE
+func _on_interaction_zone_body_entered(body: Node2D) -> void:
+	if body.has_method("interact") and not interactables_in_range.has(body):
+		interactables_in_range.append(body)
+
+
+func _on_interaction_zone_body_exited(body: Node2D) -> void:
+	if interactables_in_range.has(body):
+		interactables_in_range.erase(body)
+
+# endregion
+
+# region Health
+
+func take_damage(amount: int = 10) -> void:
+	if current_health <= 0:
+		return # already dead, ignore further hits
+
+	current_health = clampi(current_health - amount, 0, max_health)
+	health_changed.emit(current_health, max_health)
+	_update_health_bar()
+
+	if current_health == 0:
+		die()
+
+
+func heal(amount: int) -> void:
+	current_health = clampi(current_health + amount, 0, max_health)
+	health_changed.emit(current_health, max_health)
+	_update_health_bar()
+
+
+func _update_health_bar() -> void:
+	if health_bar:
+		health_bar.value = current_health
+
+
+func die() -> void:
+	died.emit()
+	# TODO: play death animation, disable input, queue_free(), etc.
+	set_physics_process(false)
 
 # endregion

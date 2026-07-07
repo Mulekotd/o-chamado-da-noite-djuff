@@ -14,7 +14,7 @@ const INACTIVE_COLOR = Color(0.4, 0.4, 0.4, 1)
 
 func _ready() -> void:
 	# Start with the first item selected by default
-	set_selected_slot(0)
+	set_selected_slot(2)
 
 # This function can now be called by any external node
 func set_selected_slot(new_index: int) -> void:

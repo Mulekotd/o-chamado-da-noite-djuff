@@ -279,26 +279,12 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ehukh"]
-size = Vector2(26, 67)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_ehukh"]
-radius = 96.04687
+size = Vector2(39, 67)
 
 [node name="Player" type="CharacterBody2D" unique_id=834294684]
-collision_mask = 2
+collision_mask = 3
 script = ExtResource("1_3vyb7")
 bullet_scene = ExtResource("2_dqkch")
-
-[node name="HealthBar" type="ProgressBar" parent="." unique_id=2076237250]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -43.0
-offset_top = -57.0
-offset_right = 43.0
-offset_bottom = -47.0
-grow_horizontal = 2
-show_percentage = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=637700659]
 scale = Vector2(4, 4)
@@ -308,31 +294,21 @@ shape = SubResource("CapsuleShape2D_sh265")
 z_index = 1
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_0lymq")
-animation = &"slicing"
+animation = &"idle"
 
 [node name="Muzzle" type="Marker2D" parent="AnimatedSprite2D" unique_id=747882398]
 position = Vector2(30, 0)
 scale = Vector2(0.5, 0.5)
-
-[node name="SliceHitbox" type="Area2D" parent="AnimatedSprite2D" unique_id=477703836]
-scale = Vector2(0.5, 0.5)
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/SliceHitbox" unique_id=1986607254]
-position = Vector2(43, -0.5)
-shape = SubResource("RectangleShape2D_ehukh")
 
 [node name="LegsSprite" type="AnimatedSprite2D" parent="." unique_id=254800847]
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_0lymq")
 animation = &"shooting"
 
-[node name="InteractionZone" type="Area2D" parent="." unique_id=1894097911]
-collision_layer = 0
-collision_mask = 2
+[node name="SliceHitbox" type="Area2D" parent="." unique_id=477703836]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionZone" unique_id=1650425613]
-shape = SubResource("CircleShape2D_ehukh")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SliceHitbox" unique_id=1986607254]
+position = Vector2(49.5, -0.5)
+shape = SubResource("RectangleShape2D_ehukh")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_action_animation_finished"]

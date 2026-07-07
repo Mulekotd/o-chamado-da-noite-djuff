@@ -1,0 +1,15 @@
+~ start_npc
+NPC: Hello traveler! This is a peaceful village.
+Player: Good to know. Do you have any quests?
+NPC: Not today, unfortunately.
+=> END
+
+~ start_enemy
+Enemy: Grrr... Why are you talking to me? I'm supposed to kill you!
+- Threaten him
+	Player: Step aside or feel my blade!
+	Enemy: Ha! Show me what you've got!
+- Reason with him
+	Player: We don't have to fight.
+	Enemy: ...Fine, but get out of my sight.
+=> END

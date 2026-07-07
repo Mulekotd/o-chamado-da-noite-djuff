@@ -6,9 +6,9 @@
 [ext_resource type="Script" uid="uid://cmgunroik01aj" path="res://investigation/text_box/scripts/prompt_resource.gd" id="4_70j8p"]
 [ext_resource type="Script" uid="uid://cjbfq0iyvv1rr" path="res://investigation/povs/scripts/pov_level_resource.gd" id="4_g17jk"]
 [ext_resource type="Script" uid="uid://djxtkg1leixh" path="res://investigation/text_box/scripts/prompt_chain_resource.gd" id="5_r10in"]
+[ext_resource type="Script" uid="uid://cxpiwtdar5o13" path="res://investigation/text_box/scripts/option_resource.gd" id="6_c6swq"]
 [ext_resource type="Script" uid="uid://bti0kbjeofp0r" path="res://investigation/povs/scripts/pov_resource.gd" id="6_qboph"]
 [ext_resource type="Script" uid="uid://dqj183h8d13hn" path="res://investigation/items/scripts/item_resource.gd" id="6_v6o0a"]
-[ext_resource type="Script" uid="uid://cxpiwtdar5o13" path="res://investigation/text_box/scripts/option_resource.gd" id="7_45x7e"]
 [ext_resource type="AudioStream" uid="uid://bg6ampuqcmd55" path="res://investigation/sounds/sfxs/telephone_hang_up.wav" id="7_r10in"]
 [ext_resource type="Script" uid="uid://2mj3tpo0kht6" path="res://investigation/povs/scripts/puzzle_pov_resource.gd" id="9_70j8p"]
 [ext_resource type="AudioStream" uid="uid://bhfl2teovl7qh" path="res://investigation/sounds/sfxs/footsteps.wav" id="10_qboph"]
@@ -400,17 +400,9 @@ pov = SubResource("Resource_j0fpy")
 rotation = 0.75
 coords = Vector2(2862.9907, 1972.5657)
 
-[sub_resource type="Resource" id="Resource_mw78w"]
-script = ExtResource("7_45x7e")
-text = "Bater na porta"
-conditions = Dictionary[String, int]({
-"house_door_open": 0
-})
-
 [sub_resource type="Resource" id="Resource_8eec4"]
 script = ExtResource("4_70j8p")
 text = "Então os gritos vem dessa casa..."
-options = Array[ExtResource("7_45x7e")]([SubResource("Resource_mw78w")])
 image_path = "res://investigation/images/detetive/detetive_neutro.png"
 
 [sub_resource type="Resource" id="Resource_v68qh"]
@@ -435,24 +427,12 @@ global_conditions = Dictionary[String, int]({
 })
 image_path = "res://investigation/images/detetive/detetive_neutro.png"
 
-[sub_resource type="Resource" id="Resource_2bf5y"]
-script = ExtResource("7_45x7e")
-text = "Bater na porta mesmo assim"
-conditions = Dictionary[String, int]({
-"knocked_on_door": 0
-})
-
-[sub_resource type="Resource" id="Resource_tr1cu"]
-script = ExtResource("7_45x7e")
-text = "Entrar na casa"
-
 [sub_resource type="Resource" id="Resource_rqbkr"]
 script = ExtResource("4_70j8p")
 text = "O que eu deveria fazer?"
 global_conditions = Dictionary[String, int]({
 "house_door_open": 1
 })
-options = Array[ExtResource("7_45x7e")]([SubResource("Resource_2bf5y"), SubResource("Resource_tr1cu")])
 image_path = "res://investigation/images/detetive/detetive_neutro.png"
 
 [sub_resource type="Resource" id="Resource_857pu"]
