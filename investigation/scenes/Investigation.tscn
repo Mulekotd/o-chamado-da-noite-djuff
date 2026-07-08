@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://bi0rncxfrdq4s"]
+[gd_scene format=3 uid="uid://bqi7u00e1l5go"]
 
 [ext_resource type="Script" uid="uid://1100rxsitcfq" path="res://investigation/scripts/investigation.gd" id="1_h1ggt"]
 [ext_resource type="PackedScene" uid="uid://dtd12y2eekoi1" path="res://investigation/text_box/scenes/text_box.tscn" id="2_1t5j4"]
@@ -367,6 +367,7 @@ offset_left = 544.0
 offset_top = -888.0
 offset_right = 634.0
 offset_bottom = -375.0
+theme_override_constants/separation = 8
 clock_size = Vector2(80.51, 0)
 actions = 5
 modulate_speed = 2.0

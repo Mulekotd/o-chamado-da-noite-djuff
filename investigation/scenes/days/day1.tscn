@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://jk2netpdpxow"]
 
 [ext_resource type="Script" uid="uid://c4kmrwul0bclv" path="res://investigation/scripts/day_1.gd" id="1_3tbab"]
-[ext_resource type="PackedScene" uid="uid://bi0rncxfrdq4s" path="res://investigation/scenes/Investigation.tscn" id="1_mnndv"]
+[ext_resource type="PackedScene" uid="uid://bqi7u00e1l5go" path="res://investigation/scenes/investigation.tscn" id="1_mnndv"]
 
 [node name="Day1" type="Control" unique_id=409807762 node_paths=PackedStringArray("investigation")]
 layout_mode = 3
@@ -16,15 +16,16 @@ investigation = NodePath("Investigation")
 [node name="Investigation" parent="." unique_id=1591324732 instance=ExtResource("1_mnndv")]
 layout_mode = 1
 tired_feedback_speed = 1.0
+tired_whitelist = Array[String](["pov_door_close"])
 
 [node name="PovManager" parent="Investigation" index="2" unique_id=1895825167]
 prompt_wait_time = 0.5
 
 [node name="ActionsManager" parent="Investigation" index="7" unique_id=2116191467]
-actions = 25
+actions = 24
 max_actions = 26
 
-[node name="Clock" parent="Investigation" index="13" unique_id=1983170265]
+[node name="Clock" parent="Investigation" index="11" unique_id=1983170265]
 visible = true
 
 [editable path="Investigation"]
