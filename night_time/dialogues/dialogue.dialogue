@@ -1,7 +1,7 @@
 ~ start_npc
-NPC: Hello traveler! This is a peaceful village.
-Player: Good to know. Do you have any quests?
-NPC: Not today, unfortunately.
+% Nathan: Did you know that cats sleep for 70% of their lives?
+% Nathan: I forgot what I was going to say...
+% Nathan: If you see a monster, you should probably run.
 => END
 
 ~ start_enemy

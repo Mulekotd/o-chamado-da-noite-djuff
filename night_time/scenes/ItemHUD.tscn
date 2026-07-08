@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://byxk885isf4bc" path="res://night_time/assets/hand.png" id="2_kknbl"]
 [ext_resource type="Texture2D" uid="uid://dsyup75cxf318" path="res://night_time/assets/gun.png" id="3_21v8a"]
 [ext_resource type="Texture2D" uid="uid://cggey5y5q87va" path="res://night_time/assets/knife.png" id="4_matax"]
+[ext_resource type="Script" uid="uid://cmur7hc4cy08b" path="res://night_time/scripts/victims_label.gd" id="5_21v8a"]
 
 [node name="ItemHud" type="CanvasLayer" unique_id=802371957]
 script = ExtResource("1_kknbl")
@@ -52,3 +53,12 @@ expand_mode = 2
 layout_mode = 0
 offset_right = 68.0
 offset_bottom = 62.0
+
+[node name="Label" type="Label" parent="." unique_id=1872354026]
+offset_left = 25.0
+offset_top = 23.0
+offset_right = 323.0
+offset_bottom = 47.0
+theme_override_font_sizes/font_size = 36
+text = "AINDA RESTAM X VITIMAS"
+script = ExtResource("5_21v8a")

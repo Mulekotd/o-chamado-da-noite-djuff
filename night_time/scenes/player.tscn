@@ -285,7 +285,7 @@ size = Vector2(26, 67)
 radius = 96.04687
 
 [node name="Player" type="CharacterBody2D" unique_id=834294684]
-collision_mask = 2
+collision_mask = 6
 script = ExtResource("1_3vyb7")
 bullet_scene = ExtResource("2_dqkch")
 

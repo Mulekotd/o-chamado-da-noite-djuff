@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://dfxk4868b52nw"]
+
+[ext_resource type="Script" uid="uid://dhr7fw6dw0rsx" path="res://night_time/scripts/item_hud.gd" id="1_kknbl"]
+[ext_resource type="Texture2D" uid="uid://byxk885isf4bc" path="res://night_time/assets/hand.png" id="2_kknbl"]
+[ext_resource type="Texture2D" uid="uid://dsyup75cxf318" path="res://night_time/assets/gun.png" id="3_21v8a"]
+[ext_resource type="Texture2D" uid="uid://cggey5y5q87va" path="res://night_time/assets/knife.png" id="4_matax"]
+[ext_resource type="Script" uid="uid://cmur7hc4cy08b" path="res://night_time/scripts/victims_label.gd" id="5_21v8a"]
+
+[node name="ItemHud" type="CanvasLayer" unique_id=802371957]
+script = ExtResource("1_kknbl")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1365431310]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = -68.0
+offset_right = 2.0
+offset_bottom = -6.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 4
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Item0" type="TextureRect" parent="HBoxContainer" unique_id=599316397]
+layout_mode = 2
+texture = ExtResource("3_21v8a")
+expand_mode = 2
+
+[node name="SelectionRing" type="TextureRect" parent="HBoxContainer/Item0" unique_id=2127197594]
+layout_mode = 0
+offset_right = 68.0
+offset_bottom = 62.0
+
+[node name="Item1" type="TextureRect" parent="HBoxContainer" unique_id=404666404]
+layout_mode = 2
+texture = ExtResource("4_matax")
+expand_mode = 2
+
+[node name="SelectionRing" type="TextureRect" parent="HBoxContainer/Item1" unique_id=668796969]
+layout_mode = 0
+offset_right = 68.0
+offset_bottom = 62.0
+
+[node name="Item2" type="TextureRect" parent="HBoxContainer" unique_id=1556168062]
+layout_mode = 2
+texture = ExtResource("2_kknbl")
+expand_mode = 2
+
+[node name="SelectionRing" type="TextureRect" parent="HBoxContainer/Item2" unique_id=1823570438]
+layout_mode = 0
+offset_right = 68.0
+offset_bottom = 62.0
+
+[node name="Label" type="Label" parent="." unique_id=1872354026]
+offset_left = 25.0
+offset_top = 23.0
+offset_right = 323.0
+offset_bottom = 47.0
+text = "AINDA RESTAM X VITIMAS"
+script = ExtResource("5_21v8a")

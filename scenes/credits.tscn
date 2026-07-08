@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://cyiq7romclcr1"]
+
+[ext_resource type="Script" uid="uid://djep8hsjh8wh8" path="res://scenes/credits.gd" id="1_0bpdh"]
+
+[node name="Credits" type="Node2D" unique_id=414766564]
+script = ExtResource("1_0bpdh")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1953540811]
+
+[node name="Background" type="ColorRect" parent="CanvasLayer" unique_id=320808656]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+color = Color(0, 0, 0, 1)
+
+[node name="FollowingText" type="Label" parent="CanvasLayer" unique_id=35324578]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -291.5
+offset_top = -205.5
+offset_right = 291.5
+offset_bottom = 205.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "CREDITOS
+
+LUIZ ANDRADE
+LETICIA
+RONALDO
+JOAO PEDRO
+MENDES
+
+VERSÃO ALFA
+
+NOVIDADES EM BREVE!!! 
+
+APERTE ESPAÇO PARA VOLTAR AO MENU PRINCIPAL...
+
+"
