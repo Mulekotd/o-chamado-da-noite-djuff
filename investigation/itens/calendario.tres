@@ -6,6 +6,6 @@
 [resource]
 script = ExtResource("1_0jbm2")
 id = "calendario"
-name = "Calendário"
+name = "23/10/2012"
 image = ExtResource("1_6qe7r")
 metadata/_custom_type_script = "uid://dqj183h8d13hn"

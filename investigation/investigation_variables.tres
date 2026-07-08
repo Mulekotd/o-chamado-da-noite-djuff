@@ -10,6 +10,7 @@ vars = Dictionary[String, int]({
 "answered_phone": 1,
 "canal": 2,
 "conectar_fio": 1,
+"descobriu_cadeado": 1,
 "display_clocks": 1,
 "entered_house": 1,
 "estabilizou": 1,
@@ -21,6 +22,11 @@ vars = Dictionary[String, int]({
 "looking_at_watch": 0,
 "option": -1,
 "phone_down": 1,
+"puzzle_armario": 1,
+"puzzle_armario_pp_digit_0": 0,
+"puzzle_armario_pp_digit_1": 0,
+"puzzle_armario_pp_digit_2": 0,
+"puzzle_armario_pp_digit_3": 0,
 "puzzle_tv_pp_digit_0": 2,
 "puzzle_tv_pp_digit_1": 3,
 "puzzle_tv_pp_digit_2": 1,
@@ -28,9 +34,10 @@ vars = Dictionary[String, int]({
 "tv_on": 0
 })
 _max_actions = 26
-_actions = 25
+_actions = 24
+_investigation_points = 2
 last_level = "day1"
-last_pov = "puzzle_tv"
+last_pov = "pov_cozinha"
 volumes = Dictionary[String, float]({
 "dialogue": 0.634,
 "master": 1.0,

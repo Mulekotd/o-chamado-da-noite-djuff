@@ -1,18 +1,17 @@
-[gd_resource type="Resource" script_class="PovLevel" format=3]
+[gd_resource type="Resource" script_class="PovLevel" format=3 uid="uid://mogloerugntm"]
 
-[ext_resource type="Script" path="res://investigation/povs/scripts/pov_directions.gd" id="1_65d63"]
-[ext_resource type="Script" path="res://investigation/povs/scripts/element_resource.gd" id="2_s8j8p"]
-[ext_resource type="Script" path="res://investigation/items/scripts/item_resource.gd" id="3_jcreo"]
-[ext_resource type="Script" path="res://investigation/text_box/scripts/prompt_resource.gd" id="4_cmit4"]
-[ext_resource type="Script" path="res://investigation/text_box/scripts/prompt_chain_resource.gd" id="5_woy06"]
-[ext_resource type="Script" path="res://investigation/povs/scripts/pov_image_resource.gd" id="6_6544q"]
-[ext_resource type="Script" path="res://investigation/povs/scripts/pov_resource.gd" id="7_at5bq"]
-[ext_resource type="Script" path="res://investigation/text_box/scripts/option_resource.gd" id="8_s8j8p"]
-[ext_resource type="Script" path="res://investigation/povs/scripts/puzzle_pov_resource.gd" id="8_yyqoo"]
-[ext_resource type="Resource" path="res://investigation/itens/chave.tres" id="9_f2288"]
-[ext_resource type="Script" path="res://investigation/povs/scripts/pov_level_resource.gd" id="9_u3xhr"]
-[ext_resource type="Resource" path="res://investigation/itens/faca.tres" id="10_bo43g"]
-[ext_resource type="Resource" path="res://investigation/itens/calendario.tres" id="10_ejyg8"]
+[ext_resource type="Script" uid="uid://ffh4hevhqls8" path="res://investigation/povs/scripts/pov_directions.gd" id="1_65d63"]
+[ext_resource type="Script" uid="uid://deej6yes3fmnc" path="res://investigation/povs/scripts/element_resource.gd" id="2_s8j8p"]
+[ext_resource type="Script" uid="uid://dqj183h8d13hn" path="res://investigation/items/scripts/item_resource.gd" id="3_jcreo"]
+[ext_resource type="Script" uid="uid://cmgunroik01aj" path="res://investigation/text_box/scripts/prompt_resource.gd" id="4_cmit4"]
+[ext_resource type="Script" uid="uid://djxtkg1leixh" path="res://investigation/text_box/scripts/prompt_chain_resource.gd" id="5_woy06"]
+[ext_resource type="Script" uid="uid://ci2buxueqquwj" path="res://investigation/povs/scripts/pov_image_resource.gd" id="6_6544q"]
+[ext_resource type="Script" uid="uid://bti0kbjeofp0r" path="res://investigation/povs/scripts/pov_resource.gd" id="7_at5bq"]
+[ext_resource type="Script" uid="uid://cxpiwtdar5o13" path="res://investigation/text_box/scripts/option_resource.gd" id="8_s8j8p"]
+[ext_resource type="Script" uid="uid://2mj3tpo0kht6" path="res://investigation/povs/scripts/puzzle_pov_resource.gd" id="8_yyqoo"]
+[ext_resource type="Script" uid="uid://cjbfq0iyvv1rr" path="res://investigation/povs/scripts/pov_level_resource.gd" id="9_u3xhr"]
+[ext_resource type="Resource" uid="uid://bqwsdy0mcknhj" path="res://investigation/itens/faca.tres" id="10_bo43g"]
+[ext_resource type="Resource" uid="uid://cbjqd3yadie80" path="res://investigation/itens/calendario.tres" id="10_ejyg8"]
 
 [sub_resource type="Resource" id="Resource_aa33n"]
 script = ExtResource("5_woy06")
@@ -803,7 +802,6 @@ image_path = "res://investigation/images/detetive/detetive_neutro.png"
 [sub_resource type="Resource" id="Resource_p4c0h"]
 script = ExtResource("8_s8j8p")
 text = "Usar chave"
-necessary_items = Array[ExtResource("3_jcreo")]([ExtResource("9_f2288")])
 investigation_points = 2
 
 [sub_resource type="Resource" id="Resource_rlmbr"]
@@ -813,7 +811,6 @@ text = "Já vi o suficiente"
 [sub_resource type="Resource" id="Resource_h8fy0"]
 script = ExtResource("4_cmit4")
 text = "Posso tentar usar aquela chave."
-necessary_items = Array[ExtResource("3_jcreo")]([ExtResource("9_f2288")])
 global_conditions = Dictionary[String, int]({
 "option": 0
 })
@@ -831,7 +828,6 @@ end_chain = true
 [sub_resource type="Resource" id="Resource_7r3fu"]
 script = ExtResource("4_cmit4")
 text = "Um calendário... E tem uma data marcada."
-necessary_items = Array[ExtResource("3_jcreo")]([ExtResource("9_f2288")])
 global_conditions = Dictionary[String, int]({
 "option": 0
 })
@@ -844,12 +840,10 @@ image_path = "res://investigation/images/detetive/detetive_neutro.png"
 [sub_resource type="Resource" id="Resource_5xlkt"]
 script = ExtResource("4_cmit4")
 text = "Será que isso é útil?"
-necessary_items = Array[ExtResource("3_jcreo")]([ExtResource("9_f2288")])
 global_conditions = Dictionary[String, int]({
 "option": 0
 })
 end_chain = true
-items_to_take = Array[ExtResource("3_jcreo")]([ExtResource("9_f2288")])
 
 [sub_resource type="Resource" id="Resource_78hoc"]
 script = ExtResource("5_woy06")
@@ -1805,7 +1799,6 @@ necessary_items = Array[ExtResource("3_jcreo")]([ExtResource("10_bo43g")])
 global_conditions = Dictionary[String, int]({
 "option": 0
 })
-items_to_give = Array[ExtResource("3_jcreo")]([ExtResource("9_f2288")])
 image_path = "res://investigation/images/detetive/detetive_neutro.png"
 
 [sub_resource type="Resource" id="Resource_0x438"]

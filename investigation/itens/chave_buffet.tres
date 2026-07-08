@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://b2h24novi1txc"]
+
+[ext_resource type="Texture2D" uid="uid://dw3kwxddhh2ev" path="res://investigation/images/itens/chave.png" id="1_6vtfi"]
+[ext_resource type="Script" uid="uid://dqj183h8d13hn" path="res://investigation/items/scripts/item_resource.gd" id="2_8sn8k"]
+
+[resource]
+script = ExtResource("2_8sn8k")
+id = "chave_buffet"
+name = "Chave"
+image = ExtResource("1_6vtfi")
+metadata/_custom_type_script = "uid://dqj183h8d13hn"

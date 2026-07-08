@@ -1,9 +1,9 @@
-[gd_resource type="Resource" script_class="PromptChain" format=3]
+[gd_resource type="Resource" script_class="PromptChain" format=3 uid="uid://crv8vmavp2pu3"]
 
-[ext_resource type="Script" path="res://investigation/text_box/scripts/prompt_resource.gd" id="1_tkmvh"]
-[ext_resource type="Script" path="res://investigation/items/scripts/item_resource.gd" id="2_fqa2i"]
-[ext_resource type="Script" path="res://investigation/text_box/scripts/option_resource.gd" id="3_auc3y"]
-[ext_resource type="Script" path="res://investigation/text_box/scripts/prompt_chain_resource.gd" id="4_ald62"]
+[ext_resource type="Script" uid="uid://cmgunroik01aj" path="res://investigation/text_box/scripts/prompt_resource.gd" id="1_tkmvh"]
+[ext_resource type="Script" uid="uid://dqj183h8d13hn" path="res://investigation/items/scripts/item_resource.gd" id="2_fqa2i"]
+[ext_resource type="Script" uid="uid://cxpiwtdar5o13" path="res://investigation/text_box/scripts/option_resource.gd" id="3_auc3y"]
+[ext_resource type="Script" uid="uid://djxtkg1leixh" path="res://investigation/text_box/scripts/prompt_chain_resource.gd" id="4_ald62"]
 
 [sub_resource type="Resource" id="Resource_nphtv"]
 script = ExtResource("3_auc3y")
