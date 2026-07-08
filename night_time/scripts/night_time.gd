@@ -13,6 +13,7 @@ const RELOAD_SOUND = preload("uid://cuvetfkjnlgpn")
 @onready var directional_light_2d: PointLight2D = $Player/DirectionalLight2D
 @onready var sound_manager: _SoundManager = $SoundManager
 @onready var canvas_modulate: CanvasModulate = $CanvasModulate
+@onready var bloods: Node = $Bloods
 
 @export var disco_light_speed : float = 0.1
 
@@ -41,6 +42,10 @@ func _ready() -> void:
 	for npc in get_tree().get_nodes_in_group("npc"):
 		if npc is _Npc:
 			npc.hit.connect(_emit_hit_sound)
+			npc.hit.connect(spawn_blood.bind(npc))
+		if npc is _Enemy:
+			npc.hit.connect(_emit_hit_sound)
+			npc.hit.connect(spawn_blood.bind(npc))
 
 var elapsed_time : float = 0
 func _physics_process(delta: float) -> void:
@@ -81,6 +86,17 @@ func _start_fade_to_black() -> void:
 	var tween: Tween = create_tween()
 	tween.tween_property(fade_screen, "color", Color(0, 0, 0, 1), 1.5) # Fades over 1.5 seconds
 	tween.finished.connect(_on_fade_finished)
+
+## spawna um png de sangue aleatorio na posicao
+func spawn_blood(origin: Node2D) -> void:
+	var number : int = randi_range(1,40)
+	var img : Texture2D = load("res://night_time/assets/images/blood/blood%d%d.png" % [number / 10, number % 10])
+	var blood := Sprite2D.new()
+	bloods.add_child(blood)
+	blood.scale = Vector2.ONE * 4
+	blood.texture = img
+	blood.centered = true
+	blood.global_position = origin.global_position
 
 func _on_fade_finished() -> void:
 	# Change to the new scene once completely black

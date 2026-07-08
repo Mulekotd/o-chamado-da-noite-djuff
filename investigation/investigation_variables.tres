@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="InvestigationVars" format=3]
+[gd_resource type="Resource" script_class="InvestigationVars" format=3 uid="uid://co5ilw2377aax"]
 
-[ext_resource type="Script" path="res://investigation/items/scripts/item_resource.gd" id="1_c1mno"]
-[ext_resource type="Script" path="res://investigation/scripts/investigation_variables.gd" id="1_y5pc1"]
+[ext_resource type="Script" uid="uid://dqj183h8d13hn" path="res://investigation/items/scripts/item_resource.gd" id="1_c1mno"]
+[ext_resource type="Script" uid="uid://47pf0lrk86x5" path="res://investigation/scripts/investigation_variables.gd" id="1_y5pc1"]
 
 [resource]
 script = ExtResource("1_y5pc1")

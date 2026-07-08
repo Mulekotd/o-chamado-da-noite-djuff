@@ -580,6 +580,8 @@ position = Vector2(-3143, 337)
 position = Vector2(-3188, 576)
 rotation = 1.5707964
 
+[node name="Bloods" type="Node" parent="." unique_id=475235024]
+
 [node name="Sofa" type="Sprite2D" parent="." unique_id=1245955653]
 position = Vector2(-1208.747, 316.8916)
 rotation = 1.5707964

@@ -1,4 +1,5 @@
-extends CharacterBody2D
+class_name _Enemy extends CharacterBody2D
+
 @export var bullet_scene: PackedScene
 @export var fire_rate: float = 1.0 ## Time in seconds between shots
 @export var accuracy_variance: float = 15.0 ## Maximum shooting angle deviation in degrees
@@ -14,6 +15,7 @@ extends CharacterBody2D
 @onready var child_animated_sprite: AnimatedSprite2D = $AnimatedSprite2D/AnimatedSprite2D
 
 signal gunshot
+signal hit
 
 var player: Node2D = null
 var time_since_last_shot: float = 0.0
@@ -128,6 +130,7 @@ func interact(player: CharacterBody2D) -> void:
 	player.end_dialogue()
 
 func take_damage(amount: int = 0) -> void:
+	hit.emit()
 	is_dead = true
 	set_physics_process(false)
 	set_process(false)
