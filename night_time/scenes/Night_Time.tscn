@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://himu78p7w0mm" path="res://night_time/assets/sofa.png" id="11_oshhe"]
 [ext_resource type="Texture2D" uid="uid://cdovfan21dhk5" path="res://night_time/assets/toilet.png" id="12_hfnf7"]
 [ext_resource type="PackedScene" uid="uid://fmeu1ocls847" path="res://investigation/scenes/sound_manager.tscn" id="14_84cu8"]
+[ext_resource type="Script" uid="uid://b4q7cag18jg51" path="res://night_time/scripts/reload_menu.gd" id="15_j7tqq"]
 
 [sub_resource type="Gradient" id="Gradient_sux4b"]
 offsets = PackedFloat32Array(0.0056818184, 1)
@@ -848,6 +849,31 @@ color = Color(0.099985994, 0.09998601, 0.099985965, 1)
 [node name="SoundManager" parent="." unique_id=1253211127 instance=ExtResource("14_84cu8")]
 unique_name_in_owner = true
 
+[node name="UICanvas" type="CanvasLayer" parent="." unique_id=1439561541]
+
+[node name="ReloadMenu" type="Control" parent="UICanvas" unique_id=700001229]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+script = ExtResource("15_j7tqq")
+
+[node name="ReloadButton" type="Button" parent="UICanvas/ReloadMenu" unique_id=900673517]
+layout_mode = 0
+offset_right = 20.0
+offset_bottom = 8.0
+text = "TENTAR NOVAMENTE"
+
+[connection signal="died" from="Player" to="UICanvas/ReloadMenu" method="_on_died_emitted"]
 [connection signal="gunshot" from="Player" to="." method="_on_gunshot"]
 [connection signal="hit" from="Player" to="." method="_emit_hit_sound"]
 [connection signal="item_changed" from="Player" to="Player/Camera/ItemHud" method="set_selected_slot"]
