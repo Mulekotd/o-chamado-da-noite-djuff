@@ -1,17 +1,18 @@
-[gd_resource type="Resource" script_class="PovLevel" format=3 uid="uid://mogloerugntm"]
+[gd_resource type="Resource" script_class="PovLevel" format=3]
 
-[ext_resource type="Script" uid="uid://ffh4hevhqls8" path="res://investigation/povs/scripts/pov_directions.gd" id="1_65d63"]
-[ext_resource type="Script" uid="uid://deej6yes3fmnc" path="res://investigation/povs/scripts/element_resource.gd" id="2_s8j8p"]
-[ext_resource type="Script" uid="uid://dqj183h8d13hn" path="res://investigation/items/scripts/item_resource.gd" id="3_jcreo"]
-[ext_resource type="Script" uid="uid://cmgunroik01aj" path="res://investigation/text_box/scripts/prompt_resource.gd" id="4_cmit4"]
-[ext_resource type="Script" uid="uid://djxtkg1leixh" path="res://investigation/text_box/scripts/prompt_chain_resource.gd" id="5_woy06"]
-[ext_resource type="Script" uid="uid://ci2buxueqquwj" path="res://investigation/povs/scripts/pov_image_resource.gd" id="6_6544q"]
-[ext_resource type="Script" uid="uid://bti0kbjeofp0r" path="res://investigation/povs/scripts/pov_resource.gd" id="7_at5bq"]
-[ext_resource type="Script" uid="uid://cxpiwtdar5o13" path="res://investigation/text_box/scripts/option_resource.gd" id="8_s8j8p"]
-[ext_resource type="Script" uid="uid://2mj3tpo0kht6" path="res://investigation/povs/scripts/puzzle_pov_resource.gd" id="8_yyqoo"]
-[ext_resource type="Script" uid="uid://cjbfq0iyvv1rr" path="res://investigation/povs/scripts/pov_level_resource.gd" id="9_u3xhr"]
-[ext_resource type="Resource" uid="uid://bqwsdy0mcknhj" path="res://investigation/itens/faca.tres" id="10_bo43g"]
-[ext_resource type="Resource" uid="uid://cbjqd3yadie80" path="res://investigation/itens/calendario.tres" id="10_ejyg8"]
+[ext_resource type="Script" path="res://investigation/povs/scripts/pov_directions.gd" id="1_65d63"]
+[ext_resource type="Script" path="res://investigation/povs/scripts/element_resource.gd" id="2_s8j8p"]
+[ext_resource type="Script" path="res://investigation/items/scripts/item_resource.gd" id="3_jcreo"]
+[ext_resource type="Script" path="res://investigation/text_box/scripts/prompt_resource.gd" id="4_cmit4"]
+[ext_resource type="Script" path="res://investigation/text_box/scripts/prompt_chain_resource.gd" id="5_woy06"]
+[ext_resource type="Script" path="res://investigation/povs/scripts/pov_image_resource.gd" id="6_6544q"]
+[ext_resource type="Script" path="res://investigation/povs/scripts/pov_resource.gd" id="7_at5bq"]
+[ext_resource type="Script" path="res://investigation/text_box/scripts/option_resource.gd" id="8_s8j8p"]
+[ext_resource type="Script" path="res://investigation/povs/scripts/puzzle_pov_resource.gd" id="8_yyqoo"]
+[ext_resource type="Script" path="res://investigation/povs/scripts/pov_level_resource.gd" id="9_u3xhr"]
+[ext_resource type="Resource" path="res://investigation/itens/faca.tres" id="10_bo43g"]
+[ext_resource type="Resource" path="res://investigation/itens/calendario.tres" id="10_ejyg8"]
+[ext_resource type="Resource" path="res://investigation/itens/chave_quarto.tres" id="12_bo43g"]
 
 [sub_resource type="Resource" id="Resource_aa33n"]
 script = ExtResource("5_woy06")
@@ -44,7 +45,7 @@ prompt_chain = SubResource("Resource_k5o3j")
 images = Array[ExtResource("6_6544q")]([SubResource("Resource_00rsv")])
 elements = Array[ExtResource("2_s8j8p")]([SubResource("Resource_es0au")])
 
-[sub_resource type="Resource" id="Resource_dd53l"]
+[sub_resource type="Resource" id="Resource_ejyg8"]
 script = ExtResource("1_65d63")
 pov = SubResource("Resource_1ppsd")
 left = "pov_cozinha"
@@ -92,7 +93,7 @@ description = "Porta da casa perto"
 prompt_chain = SubResource("Resource_e3c0x")
 images = Array[ExtResource("6_6544q")]([SubResource("Resource_52k8h")])
 
-[sub_resource type="Resource" id="Resource_k8mwf"]
+[sub_resource type="Resource" id="Resource_2dbrv"]
 script = ExtResource("1_65d63")
 pov = SubResource("Resource_5ojpf")
 left = "pov_entrada"
@@ -131,7 +132,7 @@ prompt_chain = SubResource("Resource_ycqao")
 images = Array[ExtResource("6_6544q")]([SubResource("Resource_cyb8l")])
 elements = Array[ExtResource("2_s8j8p")]([SubResource("Resource_bo43g")])
 
-[sub_resource type="Resource" id="Resource_rsoju"]
+[sub_resource type="Resource" id="Resource_ncdme"]
 script = ExtResource("1_65d63")
 pov = SubResource("Resource_lfed5")
 left = "pov_door_close"
@@ -186,7 +187,7 @@ prompt_chain = SubResource("Resource_kjnor")
 images = Array[ExtResource("6_6544q")]([SubResource("Resource_4osqu")])
 elements = Array[ExtResource("2_s8j8p")]([SubResource("Resource_ymoqq"), SubResource("Resource_7xuc3")])
 
-[sub_resource type="Resource" id="Resource_858lp"]
+[sub_resource type="Resource" id="Resource_g1eel"]
 script = ExtResource("1_65d63")
 pov = SubResource("Resource_vbsy8")
 left = "pov_sala_tv"
@@ -316,7 +317,7 @@ prompt_chain = SubResource("Resource_s6wr0")
 images = Array[ExtResource("6_6544q")]([SubResource("Resource_dhsdm"), SubResource("Resource_2iaoh")])
 elements = Array[ExtResource("2_s8j8p")]([SubResource("Resource_yyqoo"), SubResource("Resource_h4ry0"), SubResource("Resource_6o3hk"), SubResource("Resource_ddnpg"), SubResource("Resource_dxa7h"), SubResource("Resource_pa81x")])
 
-[sub_resource type="Resource" id="Resource_vo32f"]
+[sub_resource type="Resource" id="Resource_1ktdt"]
 script = ExtResource("1_65d63")
 pov = SubResource("Resource_sfoch")
 left = "pov_door_far"
@@ -420,7 +421,7 @@ prompt_chain = SubResource("Resource_5j76c")
 images = Array[ExtResource("6_6544q")]([SubResource("Resource_7bv2v")])
 elements = Array[ExtResource("2_s8j8p")]([SubResource("Resource_qxwnr"), SubResource("Resource_td1dx"), SubResource("Resource_wi5hi"), SubResource("Resource_aa08j"), SubResource("Resource_2tlp0")])
 
-[sub_resource type="Resource" id="Resource_lf0i4"]
+[sub_resource type="Resource" id="Resource_7pc2n"]
 script = ExtResource("1_65d63")
 pov = SubResource("Resource_7ia04")
 left = "pov_escada_e_jantar"
@@ -472,21 +473,21 @@ description = "visão do sofá"
 prompt_chain = SubResource("Resource_mdgcf")
 images = Array[ExtResource("6_6544q")]([SubResource("Resource_agtdp")])
 
-[sub_resource type="Resource" id="Resource_ju7y1"]
+[sub_resource type="Resource" id="Resource_vbdwx"]
 script = ExtResource("1_65d63")
 pov = SubResource("Resource_dj3rh")
 bottom = "pov_sala_tv"
 rotation = 0.3
 coords = Vector2(1326.0107, 2335.5308)
 
-[sub_resource type="Resource" id="Resource_aodpr"]
+[sub_resource type="Resource" id="Resource_fml8b"]
 script = ExtResource("6_6544q")
 image_path = "res://investigation/images/povs/tv_puzzle/tv_off.png"
 conditions = Dictionary[String, int]({
 "ligou": 0
 })
 
-[sub_resource type="Resource" id="Resource_4sudj"]
+[sub_resource type="Resource" id="Resource_wwgot"]
 script = ExtResource("6_6544q")
 image_path = "res://investigation/images/povs/tv_puzzle/tv_static.png"
 conditions = Dictionary[String, int]({
@@ -494,36 +495,36 @@ conditions = Dictionary[String, int]({
 "ligou": 1
 })
 
-[sub_resource type="Resource" id="Resource_81n8d"]
+[sub_resource type="Resource" id="Resource_47new"]
 script = ExtResource("6_6544q")
-image_path = "res://investigation/images/povs/tv_puzzle/tv_image2.png"
+image_path = "res://investigation/images/povs/tv_puzzle/tv_off.png"
 conditions = Dictionary[String, int]({
 "estabilizou": 1,
 "ligou": 1
 })
 
-[sub_resource type="Resource" id="Resource_0xu1o"]
+[sub_resource type="Resource" id="Resource_dgcbg"]
 script = ExtResource("8_s8j8p")
 text = "Tentar ligar"
 conditions = Dictionary[String, int]({
 "ligou": 0
 })
 
-[sub_resource type="Resource" id="Resource_736jg"]
+[sub_resource type="Resource" id="Resource_3obip"]
 script = ExtResource("8_s8j8p")
 text = "Olhar atrás"
 conditions = Dictionary[String, int]({
 "conectar_fio": 0
 })
 
-[sub_resource type="Resource" id="Resource_vgi0r"]
+[sub_resource type="Resource" id="Resource_wfh8m"]
 script = ExtResource("8_s8j8p")
 text = "Mexer nas antenas"
 conditions = Dictionary[String, int]({
 "estabilizou": 0
 })
 
-[sub_resource type="Resource" id="Resource_sg5i8"]
+[sub_resource type="Resource" id="Resource_vy8pv"]
 script = ExtResource("8_s8j8p")
 text = "Colocar canal"
 conditions = Dictionary[String, int]({
@@ -532,16 +533,16 @@ conditions = Dictionary[String, int]({
 "ligou": 1
 })
 
-[sub_resource type="Resource" id="Resource_ahda5"]
+[sub_resource type="Resource" id="Resource_5a86a"]
 script = ExtResource("8_s8j8p")
 text = "Já vi o suficiente"
 
-[sub_resource type="Resource" id="Resource_n1vdy"]
+[sub_resource type="Resource" id="Resource_ptinw"]
 script = ExtResource("4_cmit4")
 text = "O que eu devo fazer aqui?"
-options = Array[ExtResource("8_s8j8p")]([SubResource("Resource_0xu1o"), SubResource("Resource_736jg"), SubResource("Resource_vgi0r"), SubResource("Resource_sg5i8"), SubResource("Resource_ahda5")])
+options = Array[ExtResource("8_s8j8p")]([SubResource("Resource_dgcbg"), SubResource("Resource_3obip"), SubResource("Resource_wfh8m"), SubResource("Resource_vy8pv"), SubResource("Resource_5a86a")])
 
-[sub_resource type="Resource" id="Resource_bvxg1"]
+[sub_resource type="Resource" id="Resource_ig5l4"]
 script = ExtResource("4_cmit4")
 text = "Parece que essa porcaria velha não funciona mesmo."
 global_conditions = Dictionary[String, int]({
@@ -552,7 +553,7 @@ go_to = 0
 pov = "pov_tv"
 image_path = "res://investigation/images/detetive/detetive_neutro.png"
 
-[sub_resource type="Resource" id="Resource_c5008"]
+[sub_resource type="Resource" id="Resource_aayfj"]
 script = ExtResource("4_cmit4")
 text = "Caramba não é que a lataria funciona? Só falta o sinal. Talvez se eu mexesse nas antenas..."
 global_conditions = Dictionary[String, int]({
@@ -565,26 +566,26 @@ vars_to_change = Dictionary[String, int]({
 go_to = 0
 image_path = "res://investigation/images/detetive/detetive_neutro.png"
 
-[sub_resource type="Resource" id="Resource_v7mv6"]
+[sub_resource type="Resource" id="Resource_p1gi4"]
 script = ExtResource("8_s8j8p")
 text = "Conectar fio"
 actions = 1
 
-[sub_resource type="Resource" id="Resource_le1g2"]
+[sub_resource type="Resource" id="Resource_5iafs"]
 script = ExtResource("8_s8j8p")
 text = "Voltar"
 
-[sub_resource type="Resource" id="Resource_cln47"]
+[sub_resource type="Resource" id="Resource_d02gb"]
 script = ExtResource("4_cmit4")
 text = "Tem um fio desconectado aqui..."
 global_conditions = Dictionary[String, int]({
 "conectar_fio": 0,
 "option": 1
 })
-options = Array[ExtResource("8_s8j8p")]([SubResource("Resource_v7mv6"), SubResource("Resource_le1g2")])
+options = Array[ExtResource("8_s8j8p")]([SubResource("Resource_p1gi4"), SubResource("Resource_5iafs")])
 image_path = "res://investigation/images/detetive/detetive_neutro.png"
 
-[sub_resource type="Resource" id="Resource_euy6b"]
+[sub_resource type="Resource" id="Resource_dwujd"]
 script = ExtResource("4_cmit4")
 text = "Nada mais a ver aqui."
 global_conditions = Dictionary[String, int]({
@@ -595,7 +596,7 @@ vars_to_change = Dictionary[String, int]({
 "option": 4
 })
 
-[sub_resource type="Resource" id="Resource_jbexy"]
+[sub_resource type="Resource" id="Resource_al0ui"]
 script = ExtResource("4_cmit4")
 text = "-Fio conectado-"
 global_conditions = Dictionary[String, int]({
@@ -608,7 +609,7 @@ vars_to_change = Dictionary[String, int]({
 go_to = 0
 image_path = "res://investigation/images/detetive/detetive_neutro.png"
 
-[sub_resource type="Resource" id="Resource_innuo"]
+[sub_resource type="Resource" id="Resource_geb7p"]
 script = ExtResource("4_cmit4")
 text = "-Não acontece nada-"
 global_conditions = Dictionary[String, int]({
@@ -619,7 +620,7 @@ global_conditions = Dictionary[String, int]({
 go_to = 0
 image_path = "res://investigation/images/detetive/detetive_neutro.png"
 
-[sub_resource type="Resource" id="Resource_y6pjt"]
+[sub_resource type="Resource" id="Resource_ccnhy"]
 script = ExtResource("4_cmit4")
 text = "Boa! Consegui estabilizar o sinal."
 global_conditions = Dictionary[String, int]({
@@ -633,7 +634,7 @@ vars_to_change = Dictionary[String, int]({
 go_to = 0
 image_path = "res://investigation/images/detetive/detetive_neutro.png"
 
-[sub_resource type="Resource" id="Resource_aguid"]
+[sub_resource type="Resource" id="Resource_2v0hj"]
 script = ExtResource("4_cmit4")
 text = "Já vi o suficiente."
 global_conditions = Dictionary[String, int]({
@@ -641,7 +642,7 @@ global_conditions = Dictionary[String, int]({
 })
 end_chain = true
 
-[sub_resource type="Resource" id="Resource_k000f"]
+[sub_resource type="Resource" id="Resource_cmwo1"]
 script = ExtResource("4_cmit4")
 text = "Vamos tentar acessar algum canal..."
 global_conditions = Dictionary[String, int]({
@@ -650,22 +651,22 @@ global_conditions = Dictionary[String, int]({
 end_chain = true
 pov = "puzzle_tv"
 
-[sub_resource type="Resource" id="Resource_rvlnt"]
+[sub_resource type="Resource" id="Resource_puofx"]
 script = ExtResource("5_woy06")
 name = "tv_chain"
-prompts = Array[ExtResource("4_cmit4")]([SubResource("Resource_n1vdy"), SubResource("Resource_bvxg1"), SubResource("Resource_c5008"), SubResource("Resource_cln47"), SubResource("Resource_euy6b"), SubResource("Resource_jbexy"), SubResource("Resource_innuo"), SubResource("Resource_y6pjt"), SubResource("Resource_aguid"), SubResource("Resource_k000f")])
+prompts = Array[ExtResource("4_cmit4")]([SubResource("Resource_ptinw"), SubResource("Resource_ig5l4"), SubResource("Resource_aayfj"), SubResource("Resource_d02gb"), SubResource("Resource_dwujd"), SubResource("Resource_al0ui"), SubResource("Resource_geb7p"), SubResource("Resource_ccnhy"), SubResource("Resource_2v0hj"), SubResource("Resource_cmwo1")])
 default_image_path = "res://investigation/images/detetive/detetive_neutro.png"
 
-[sub_resource type="Resource" id="Resource_v5lwa"]
+[sub_resource type="Resource" id="Resource_lixm4"]
 script = ExtResource("7_at5bq")
 name = "pov_tv"
 description = "visão da televisão"
-prompt_chain = SubResource("Resource_rvlnt")
-images = Array[ExtResource("6_6544q")]([SubResource("Resource_aodpr"), SubResource("Resource_4sudj"), SubResource("Resource_81n8d")])
+prompt_chain = SubResource("Resource_puofx")
+images = Array[ExtResource("6_6544q")]([SubResource("Resource_fml8b"), SubResource("Resource_wwgot"), SubResource("Resource_47new")])
 
-[sub_resource type="Resource" id="Resource_ckh2k"]
+[sub_resource type="Resource" id="Resource_e4lq5"]
 script = ExtResource("1_65d63")
-pov = SubResource("Resource_v5lwa")
+pov = SubResource("Resource_lixm4")
 bottom = "pov_sala_tv"
 rotation = 0.86
 coords = Vector2(1575.1625, 1893.0162)
@@ -717,7 +718,7 @@ description = "Visãoo da lareira"
 prompt_chain = SubResource("Resource_j1bs5")
 images = Array[ExtResource("6_6544q")]([SubResource("Resource_mwbej")])
 
-[sub_resource type="Resource" id="Resource_8npap"]
+[sub_resource type="Resource" id="Resource_pvuak"]
 script = ExtResource("1_65d63")
 pov = SubResource("Resource_6xcln")
 bottom = "pov_sala_tv"
@@ -861,7 +862,7 @@ global_conditions = Dictionary[String, int]({
 "abriu_porta_buffet": 0
 })
 
-[sub_resource type="Resource" id="Resource_ktoiy"]
+[sub_resource type="Resource" id="Resource_lvppm"]
 script = ExtResource("1_65d63")
 pov = SubResource("Resource_5cq5d")
 bottom = "pov_sala_tv"
@@ -924,7 +925,7 @@ description = "visao de varios quadros juntos"
 prompt_chain = SubResource("Resource_57b2v")
 images = Array[ExtResource("6_6544q")]([SubResource("Resource_6to20")])
 
-[sub_resource type="Resource" id="Resource_ebflv"]
+[sub_resource type="Resource" id="Resource_450ga"]
 script = ExtResource("1_65d63")
 pov = SubResource("Resource_slbt6")
 bottom = "pov_sala_tv"
@@ -993,7 +994,7 @@ description = "visão de um quadro grande na sala"
 prompt_chain = SubResource("Resource_5eu7q")
 images = Array[ExtResource("6_6544q")]([SubResource("Resource_fegfd")])
 
-[sub_resource type="Resource" id="Resource_by83b"]
+[sub_resource type="Resource" id="Resource_3eiuw"]
 script = ExtResource("1_65d63")
 pov = SubResource("Resource_4d5yr")
 bottom = "pov_sala_tv"
@@ -1046,7 +1047,7 @@ description = "visao do fogao"
 prompt_chain = SubResource("Resource_63ao8")
 images = Array[ExtResource("6_6544q")]([SubResource("Resource_xq1ub")])
 
-[sub_resource type="Resource" id="Resource_kk8bj"]
+[sub_resource type="Resource" id="Resource_mjc7o"]
 script = ExtResource("1_65d63")
 pov = SubResource("Resource_2gk5t")
 bottom = "pov_cozinha"
@@ -1099,7 +1100,7 @@ description = "visao da geladeira"
 prompt_chain = SubResource("Resource_8ypor")
 images = Array[ExtResource("6_6544q")]([SubResource("Resource_5ru4a")])
 
-[sub_resource type="Resource" id="Resource_ifbkb"]
+[sub_resource type="Resource" id="Resource_nhltl"]
 script = ExtResource("1_65d63")
 pov = SubResource("Resource_x50db")
 bottom = "pov_cozinha"
@@ -1110,32 +1111,31 @@ coords = Vector2(2574.895, 1808.1969)
 script = ExtResource("6_6544q")
 image_path = "res://investigation/images/povs/casa/armarios_esq_pov_image.png"
 
-[sub_resource type="Resource" id="Resource_y6d2a"]
+[sub_resource type="Resource" id="Resource_7jlpg"]
 script = ExtResource("8_s8j8p")
 text = "Fuçar armários"
 conditions = Dictionary[String, int]({
 "descobriu_cadeado": 0
 })
+investigation_points = 1
 
-[sub_resource type="Resource" id="Resource_figt5"]
+[sub_resource type="Resource" id="Resource_lg5sr"]
 script = ExtResource("8_s8j8p")
 text = "Inserir senha"
 conditions = Dictionary[String, int]({
 "descobriu_cadeado": 1
 })
-actions = 1
-investigation_points = 2
 
-[sub_resource type="Resource" id="Resource_a02ol"]
+[sub_resource type="Resource" id="Resource_6ufcp"]
 script = ExtResource("8_s8j8p")
 text = "Já vi o suficiente"
 
-[sub_resource type="Resource" id="Resource_cgf0d"]
+[sub_resource type="Resource" id="Resource_8ku1h"]
 script = ExtResource("4_cmit4")
 text = "O que devo fazer?"
-options = Array[ExtResource("8_s8j8p")]([SubResource("Resource_y6d2a"), SubResource("Resource_figt5"), SubResource("Resource_a02ol")])
+options = Array[ExtResource("8_s8j8p")]([SubResource("Resource_7jlpg"), SubResource("Resource_lg5sr"), SubResource("Resource_6ufcp")])
 
-[sub_resource type="Resource" id="Resource_sq5ur"]
+[sub_resource type="Resource" id="Resource_pr6rb"]
 script = ExtResource("4_cmit4")
 text = "Todos os armários tem coisas normais que você encontraria numa cozinha."
 global_conditions = Dictionary[String, int]({
@@ -1146,7 +1146,7 @@ vars_to_change = Dictionary[String, int]({
 })
 image_path = "res://investigation/images/detetive/detetive_neutro.png"
 
-[sub_resource type="Resource" id="Resource_rt5iy"]
+[sub_resource type="Resource" id="Resource_hts0m"]
 script = ExtResource("4_cmit4")
 text = "Menos um, que está trancado por uma senha de 4 dígitos, como se fosse um cofre."
 global_conditions = Dictionary[String, int]({
@@ -1154,7 +1154,7 @@ global_conditions = Dictionary[String, int]({
 })
 image_path = "res://investigation/images/detetive/detetive_neutro.png"
 
-[sub_resource type="Resource" id="Resource_nx70m"]
+[sub_resource type="Resource" id="Resource_6jknp"]
 script = ExtResource("4_cmit4")
 text = "Preciso descobrir qual a combinação."
 global_conditions = Dictionary[String, int]({
@@ -1163,7 +1163,7 @@ global_conditions = Dictionary[String, int]({
 go_to = 0
 image_path = "res://investigation/images/detetive/detetive_neutro.png"
 
-[sub_resource type="Resource" id="Resource_a72y2"]
+[sub_resource type="Resource" id="Resource_mnjwj"]
 script = ExtResource("4_cmit4")
 text = "Vou sair."
 global_conditions = Dictionary[String, int]({
@@ -1171,7 +1171,7 @@ global_conditions = Dictionary[String, int]({
 })
 end_chain = true
 
-[sub_resource type="Resource" id="Resource_nskry"]
+[sub_resource type="Resource" id="Resource_6thio"]
 script = ExtResource("4_cmit4")
 text = "Qual será a combinação?"
 global_conditions = Dictionary[String, int]({
@@ -1180,22 +1180,22 @@ global_conditions = Dictionary[String, int]({
 end_chain = true
 pov = "puzzle_armario"
 
-[sub_resource type="Resource" id="Resource_slq8v"]
+[sub_resource type="Resource" id="Resource_df1nn"]
 script = ExtResource("5_woy06")
 name = "chain_armario_esq"
-prompts = Array[ExtResource("4_cmit4")]([SubResource("Resource_cgf0d"), SubResource("Resource_sq5ur"), SubResource("Resource_rt5iy"), SubResource("Resource_nx70m"), SubResource("Resource_a72y2"), SubResource("Resource_nskry")])
+prompts = Array[ExtResource("4_cmit4")]([SubResource("Resource_8ku1h"), SubResource("Resource_pr6rb"), SubResource("Resource_hts0m"), SubResource("Resource_6jknp"), SubResource("Resource_mnjwj"), SubResource("Resource_6thio")])
 default_image_path = "res://investigation/images/detetive/detetive_neutro.png"
 
-[sub_resource type="Resource" id="Resource_4me4s"]
+[sub_resource type="Resource" id="Resource_gvwll"]
 script = ExtResource("7_at5bq")
 name = "pov_armario_esquerda_cima"
 description = "visao dos armarios à esquerda cima"
-prompt_chain = SubResource("Resource_slq8v")
+prompt_chain = SubResource("Resource_df1nn")
 images = Array[ExtResource("6_6544q")]([SubResource("Resource_7lkhh")])
 
-[sub_resource type="Resource" id="Resource_cf00f"]
+[sub_resource type="Resource" id="Resource_1n5mn"]
 script = ExtResource("1_65d63")
-pov = SubResource("Resource_4me4s")
+pov = SubResource("Resource_gvwll")
 bottom = "pov_cozinha"
 rotation = 0.88
 coords = Vector2(2819.9653, 1826.8995)
@@ -1204,20 +1204,20 @@ coords = Vector2(2819.9653, 1826.8995)
 script = ExtResource("6_6544q")
 image_path = "res://investigation/images/povs/casa/gavetas_pov_image.png"
 
-[sub_resource type="Resource" id="Resource_01h52"]
+[sub_resource type="Resource" id="Resource_17d2v"]
 script = ExtResource("8_s8j8p")
 text = "Abrir gaveta de talheres"
 
-[sub_resource type="Resource" id="Resource_ugmgx"]
+[sub_resource type="Resource" id="Resource_ar4ib"]
 script = ExtResource("8_s8j8p")
 text = "Voltar"
 
-[sub_resource type="Resource" id="Resource_lkj1h"]
+[sub_resource type="Resource" id="Resource_l7ww8"]
 script = ExtResource("4_cmit4")
 text = "Algumas gavetas."
-options = Array[ExtResource("8_s8j8p")]([SubResource("Resource_01h52"), SubResource("Resource_ugmgx")])
+options = Array[ExtResource("8_s8j8p")]([SubResource("Resource_17d2v"), SubResource("Resource_ar4ib")])
 
-[sub_resource type="Resource" id="Resource_ttact"]
+[sub_resource type="Resource" id="Resource_k4f3a"]
 script = ExtResource("4_cmit4")
 text = "Já vi o suficiente."
 global_conditions = Dictionary[String, int]({
@@ -1225,25 +1225,25 @@ global_conditions = Dictionary[String, int]({
 })
 end_chain = true
 
-[sub_resource type="Resource" id="Resource_yfe71"]
+[sub_resource type="Resource" id="Resource_i3yk0"]
 script = ExtResource("8_s8j8p")
 text = "Pegar faca"
 actions = 1
 
-[sub_resource type="Resource" id="Resource_1uqx2"]
+[sub_resource type="Resource" id="Resource_qgfts"]
 script = ExtResource("8_s8j8p")
 text = "Não pegar"
 
-[sub_resource type="Resource" id="Resource_t3cn7"]
+[sub_resource type="Resource" id="Resource_lvu0v"]
 script = ExtResource("4_cmit4")
 text = "Tem uma faca nessa gaveta..."
 global_conditions = Dictionary[String, int]({
 "option": 0,
 "tem_faca": 0
 })
-options = Array[ExtResource("8_s8j8p")]([SubResource("Resource_yfe71"), SubResource("Resource_1uqx2")])
+options = Array[ExtResource("8_s8j8p")]([SubResource("Resource_i3yk0"), SubResource("Resource_qgfts")])
 
-[sub_resource type="Resource" id="Resource_ac3lh"]
+[sub_resource type="Resource" id="Resource_l1ucf"]
 script = ExtResource("4_cmit4")
 text = "Isso pode ser útil."
 global_conditions = Dictionary[String, int]({
@@ -1256,7 +1256,7 @@ vars_to_change = Dictionary[String, int]({
 })
 image_path = "res://investigation/images/detetive/detetive_neutro.png"
 
-[sub_resource type="Resource" id="Resource_1ekvo"]
+[sub_resource type="Resource" id="Resource_2141x"]
 script = ExtResource("4_cmit4")
 text = "Melhor deixar aí."
 global_conditions = Dictionary[String, int]({
@@ -1264,21 +1264,21 @@ global_conditions = Dictionary[String, int]({
 })
 go_to = 1
 
-[sub_resource type="Resource" id="Resource_it5sx"]
+[sub_resource type="Resource" id="Resource_ghwxm"]
 script = ExtResource("5_woy06")
-prompts = Array[ExtResource("4_cmit4")]([SubResource("Resource_lkj1h"), SubResource("Resource_ttact"), SubResource("Resource_t3cn7"), SubResource("Resource_ac3lh"), SubResource("Resource_1ekvo")])
+prompts = Array[ExtResource("4_cmit4")]([SubResource("Resource_l7ww8"), SubResource("Resource_k4f3a"), SubResource("Resource_lvu0v"), SubResource("Resource_l1ucf"), SubResource("Resource_2141x")])
 default_image_path = "res://investigation/images/detetive/detetive_neutro.png"
 
-[sub_resource type="Resource" id="Resource_fnhjt"]
+[sub_resource type="Resource" id="Resource_mb4uq"]
 script = ExtResource("7_at5bq")
 name = "pov_gavetas"
 description = "visão das gavetas da cozinha"
-prompt_chain = SubResource("Resource_it5sx")
+prompt_chain = SubResource("Resource_ghwxm")
 images = Array[ExtResource("6_6544q")]([SubResource("Resource_vmh4i")])
 
-[sub_resource type="Resource" id="Resource_ohygf"]
+[sub_resource type="Resource" id="Resource_qqb88"]
 script = ExtResource("1_65d63")
-pov = SubResource("Resource_fnhjt")
+pov = SubResource("Resource_mb4uq")
 bottom = "pov_cozinha"
 rotation = 0.84
 coords = Vector2(2983.9543, 1709.9224)
@@ -1330,7 +1330,7 @@ description = "visao do armario da direita"
 prompt_chain = SubResource("Resource_b2xxw")
 images = Array[ExtResource("6_6544q")]([SubResource("Resource_e7dlg")])
 
-[sub_resource type="Resource" id="Resource_24e1c"]
+[sub_resource type="Resource" id="Resource_wy26s"]
 script = ExtResource("1_65d63")
 pov = SubResource("Resource_l2lu8")
 bottom = "pov_cozinha"
@@ -1368,7 +1368,7 @@ prompt_chain = SubResource("Resource_kp510")
 images = Array[ExtResource("6_6544q")]([SubResource("Resource_x887f")])
 elements = Array[ExtResource("2_s8j8p")]([SubResource("Resource_3lg48")])
 
-[sub_resource type="Resource" id="Resource_n3k04"]
+[sub_resource type="Resource" id="Resource_t42jp"]
 script = ExtResource("1_65d63")
 pov = SubResource("Resource_uqbaa")
 left = "pov_corredor_sala"
@@ -1396,7 +1396,7 @@ description = "visão da escada olhando para cima"
 prompt_chain = SubResource("Resource_avt07")
 images = Array[ExtResource("6_6544q")]([SubResource("Resource_jkw0w")])
 
-[sub_resource type="Resource" id="Resource_tdk5y"]
+[sub_resource type="Resource" id="Resource_75ack"]
 script = ExtResource("1_65d63")
 pov = SubResource("Resource_p4505")
 bottom = "pov_escada_e_jantar"
@@ -1450,7 +1450,7 @@ prompt_chain = SubResource("Resource_1lm7e")
 images = Array[ExtResource("6_6544q")]([SubResource("Resource_dso2v")])
 elements = Array[ExtResource("2_s8j8p")]([SubResource("Resource_7hynv"), SubResource("Resource_xsegl")])
 
-[sub_resource type="Resource" id="Resource_gk3dp"]
+[sub_resource type="Resource" id="Resource_atctj"]
 script = ExtResource("1_65d63")
 pov = SubResource("Resource_m0yaf")
 left = "pov_jantar_corredor"
@@ -1488,7 +1488,7 @@ prompt_chain = SubResource("Resource_ijm66")
 images = Array[ExtResource("6_6544q")]([SubResource("Resource_wbydi")])
 elements = Array[ExtResource("2_s8j8p")]([SubResource("Resource_kn3c8")])
 
-[sub_resource type="Resource" id="Resource_mtsnt"]
+[sub_resource type="Resource" id="Resource_kvsp1"]
 script = ExtResource("1_65d63")
 pov = SubResource("Resource_irnrk")
 right = "pov_jantar"
@@ -1526,7 +1526,7 @@ prompt_chain = SubResource("Resource_8lfi4")
 images = Array[ExtResource("6_6544q")]([SubResource("Resource_mj7eq")])
 elements = Array[ExtResource("2_s8j8p")]([SubResource("Resource_nyaai")])
 
-[sub_resource type="Resource" id="Resource_cp3qo"]
+[sub_resource type="Resource" id="Resource_tuuvb"]
 script = ExtResource("1_65d63")
 pov = SubResource("Resource_sygee")
 left = "pov_corredor_jantar"
@@ -1580,7 +1580,7 @@ description = "visao da planta na sala de jantar"
 prompt_chain = SubResource("Resource_7vbxo")
 images = Array[ExtResource("6_6544q")]([SubResource("Resource_u2aav")])
 
-[sub_resource type="Resource" id="Resource_7c2yn"]
+[sub_resource type="Resource" id="Resource_7l57v"]
 script = ExtResource("1_65d63")
 pov = SubResource("Resource_17rmo")
 bottom = "pov_jantar"
@@ -1633,7 +1633,7 @@ prompt_chain = SubResource("Resource_kruq1")
 images = Array[ExtResource("6_6544q")]([SubResource("Resource_0g7sv")])
 elements = Array[ExtResource("2_s8j8p")]([SubResource("Resource_3lmbd"), SubResource("Resource_axf38")])
 
-[sub_resource type="Resource" id="Resource_xxpcc"]
+[sub_resource type="Resource" id="Resource_j6idc"]
 script = ExtResource("1_65d63")
 pov = SubResource("Resource_valrb")
 right = "pov_adiante_jantar_tras"
@@ -1686,7 +1686,7 @@ name = "pov_cadeira"
 prompt_chain = SubResource("Resource_1d60s")
 images = Array[ExtResource("6_6544q")]([SubResource("Resource_vmip8")])
 
-[sub_resource type="Resource" id="Resource_tm6q0"]
+[sub_resource type="Resource" id="Resource_fyxyn"]
 script = ExtResource("1_65d63")
 pov = SubResource("Resource_ys2y1")
 bottom = "pov_adiante_jantar"
@@ -1724,7 +1724,7 @@ prompt_chain = SubResource("Resource_xlwno")
 images = Array[ExtResource("6_6544q")]([SubResource("Resource_u8uao")])
 elements = Array[ExtResource("2_s8j8p")]([SubResource("Resource_73773")])
 
-[sub_resource type="Resource" id="Resource_m8kv5"]
+[sub_resource type="Resource" id="Resource_0qi0j"]
 script = ExtResource("1_65d63")
 pov = SubResource("Resource_ry30n")
 left = "pov_adiante_jantar"
@@ -1822,68 +1822,80 @@ name = "pov_mesa"
 prompt_chain = SubResource("Resource_iqriy")
 images = Array[ExtResource("6_6544q")]([SubResource("Resource_2jre5")])
 
-[sub_resource type="Resource" id="Resource_ooi3k"]
+[sub_resource type="Resource" id="Resource_6ss43"]
 script = ExtResource("1_65d63")
 pov = SubResource("Resource_7ov20")
 bottom = "pov_adiante_jantar"
 rotation = 0.61
 coords = Vector2(1314.3337, 941.4929)
 
-[sub_resource type="Resource" id="Resource_jjs3d"]
+[sub_resource type="Resource" id="Resource_ycay6"]
 script = ExtResource("6_6544q")
 image_path = "res://investigation/images/povs/tv_puzzle/tv_off.png"
 conditions = Dictionary[String, int]({
 "canal": 0
 })
 
-[sub_resource type="Resource" id="Resource_ak3u4"]
+[sub_resource type="Resource" id="Resource_41ccm"]
 script = ExtResource("6_6544q")
-image_path = "res://investigation/images/povs/tv_puzzle/tv_image2.png"
+image_path = "res://investigation/images/povs/tv_puzzle/tv_brother_image.png"
 conditions = Dictionary[String, int]({
-"canal": 2
+"canal": 2,
+"irmao": 0
 })
 
-[sub_resource type="Resource" id="Resource_hb755"]
+[sub_resource type="Resource" id="Resource_tbbhi"]
+script = ExtResource("6_6544q")
+image_path = "res://investigation/images/povs/tv_puzzle/tv_room_image.png"
+conditions = Dictionary[String, int]({
+"canal": 2,
+"irmao": 1
+})
+
+[sub_resource type="Resource" id="Resource_2mcep"]
 script = ExtResource("4_cmit4")
 text = "O-O-O que é isto?!"
 global_conditions = Dictionary[String, int]({
 "canal": 2
 })
 
-[sub_resource type="Resource" id="Resource_mgpmk"]
+[sub_resource type="Resource" id="Resource_f78yy"]
 script = ExtResource("4_cmit4")
 text = "Irmão?? O que ele está fazendo aqui?!"
 global_conditions = Dictionary[String, int]({
 "canal": 2
 })
+vars_to_change = Dictionary[String, int]({
+"irmao": 1
+})
 
-[sub_resource type="Resource" id="Resource_5esuk"]
+[sub_resource type="Resource" id="Resource_qcgw3"]
 script = ExtResource("4_cmit4")
 text = "Ãn? Que estranho, podia jurar que vi meu irmão na televisão por um segundo..."
 global_conditions = Dictionary[String, int]({
 "canal": 2
 })
 
-[sub_resource type="Resource" id="Resource_1ofeg"]
+[sub_resource type="Resource" id="Resource_whdy0"]
 script = ExtResource("4_cmit4")
 text = "Bom, parece que qualquer coisa que tenha acontecido nessa casa tem a ver com esse quarto."
 global_conditions = Dictionary[String, int]({
 "canal": 2
 })
 
-[sub_resource type="Resource" id="Resource_hd43u"]
+[sub_resource type="Resource" id="Resource_qwgo0"]
 script = ExtResource("4_cmit4")
 text = "Mas pelo visto estou com sono demais para isso hoje..."
 global_conditions = Dictionary[String, int]({
 "canal": 7
 })
 
-[sub_resource type="Resource" id="Resource_8oacb"]
+[sub_resource type="Resource" id="Resource_f2x6y"]
 script = ExtResource("5_woy06")
-prompts = Array[ExtResource("4_cmit4")]([SubResource("Resource_hb755"), SubResource("Resource_mgpmk"), SubResource("Resource_5esuk"), SubResource("Resource_1ofeg"), SubResource("Resource_hd43u")])
+prompts = Array[ExtResource("4_cmit4")]([SubResource("Resource_2mcep"), SubResource("Resource_f78yy"), SubResource("Resource_qcgw3"), SubResource("Resource_whdy0"), SubResource("Resource_qwgo0")])
 default_image_path = "res://investigation/images/detetive/detetive_neutro.png"
 
-[sub_resource type="Resource" id="Resource_fssab"]
+[sub_resource type="Resource" id="Resource_8hw4x"]
 script = ExtResource("8_yyqoo")
 back_pov = "pov_sala_tv"
 symbol_paths = Array[String](["res://investigation/images/symbols/tv/tv_symbol0.png", "res://investigation/images/symbols/tv/tv_symbol1.png", "res://investigation/images/symbols/tv/tv_symbol2.png", "res://investigation/images/symbols/tv/tv_symbol3.png", "res://investigation/images/symbols/tv/tv_symbol4.png", "res://investigation/images/symbols/tv/tv_symbol5.png", "res://investigation/images/symbols/tv/tv_symbol6.png", "res://investigation/images/symbols/tv/tv_symbol7.png", "res://investigation/images/symbols/tv/tv_symbol8.png", "res://investigation/images/symbols/tv/tv_symbol9.png"])
@@ -1896,55 +1908,56 @@ Vector2(0.8147059, 0.794964): Vector2(0.027941177, 0.10071942)
 combinations = Dictionary[String, String]({
 "2 3 1 0": "canal"
 })
-coords = Vector2(1738.4749, 1713.0197)
+coords = Vector2(1738.475, 1713.0195)
 name = "puzzle_tv"
-prompt_chain = SubResource("Resource_8oacb")
-images = Array[ExtResource("6_6544q")]([SubResource("Resource_jjs3d"), SubResource("Resource_ak3u4")])
+prompt_chain = SubResource("Resource_f2x6y")
+images = Array[ExtResource("6_6544q")]([SubResource("Resource_ycay6"), SubResource("Resource_41ccm"), SubResource("Resource_tbbhi")])
 global_conditions = Dictionary[String, int]({
 "estabilizou": 1
 })
 
-[sub_resource type="Resource" id="Resource_dbhjc"]
+[sub_resource type="Resource" id="Resource_jsi7j"]
 script = ExtResource("6_6544q")
-image_path = "res://investigation/images/povs/casa/armarios_esq_pov_image.png"
+image_path = "res://investigation/images/povs/casa/lock_closeup_pov_image.png"
 
-[sub_resource type="Resource" id="Resource_skfjn"]
+[sub_resource type="Resource" id="Resource_p01dg"]
 script = ExtResource("4_cmit4")
 text = "Boa, sabia que aquele ano nos quadros estava estranho."
-end_chain = true
-vars_to_change = Dictionary[String, int]({
-"puzzle_armario": 1
+global_conditions = Dictionary[String, int]({
+"puzzle_armario": 2
 })
+end_chain = true
+items_to_give = Array[ExtResource("3_jcreo")]([ExtResource("12_bo43g")])
 
-[sub_resource type="Resource" id="Resource_ypm1e"]
+[sub_resource type="Resource" id="Resource_57npi"]
 script = ExtResource("5_woy06")
-prompts = Array[ExtResource("4_cmit4")]([SubResource("Resource_skfjn")])
+prompts = Array[ExtResource("4_cmit4")]([SubResource("Resource_p01dg")])
 default_image_path = "res://investigation/images/detetive/detetive_neutro.png"
 
-[sub_resource type="Resource" id="Resource_s62tv"]
+[sub_resource type="Resource" id="Resource_glsyh"]
 script = ExtResource("8_yyqoo")
 back_pov = "pov_cozinha"
-symbol_paths = Array[String](["res://investigation/images/symbols/tv/tv_symbol0.png", "res://investigation/images/symbols/tv/tv_symbol1.png", "res://investigation/images/symbols/tv/tv_symbol2.png", "res://investigation/images/symbols/tv/tv_symbol3.png", "res://investigation/images/symbols/tv/tv_symbol4.png", "res://investigation/images/symbols/tv/tv_symbol5.png", "res://investigation/images/symbols/tv/tv_symbol6.png", "res://investigation/images/symbols/tv/tv_symbol7.png", "res://investigation/images/symbols/tv/tv_symbol8.png", "res://investigation/images/symbols/tv/tv_symbol9.png"])
+symbol_paths = Array[String](["res://investigation/images/symbols/lock/lock_symbol0.png", "res://investigation/images/symbols/lock/lock_symbol1.png", "res://investigation/images/symbols/lock/lock_symbol2.png", "res://investigation/images/symbols/lock/lock_symbol3.png", "res://investigation/images/symbols/lock/lock_symbol4.png", "res://investigation/images/symbols/lock/lock_symbol5.png", "res://investigation/images/symbols/lock/lock_symbol6.png", "res://investigation/images/symbols/lock/lock_symbol7.png", "res://investigation/images/symbols/lock/lock_symbol8.png", "res://investigation/images/symbols/lock/lock_symbol9.png"])
 digits = Dictionary[Vector2, Vector2]({
-Vector2(0.6911765, 0.659375): Vector2(0.03382353, 0.084375),
-Vector2(0.73088235, 0.659375): Vector2(0.032352943, 0.090625),
-Vector2(0.77205884, 0.659375): Vector2(0.036764707, 0.090625),
-Vector2(0.81911767, 0.65625): Vector2(0.03529412, 0.09375)
+Vector2(0.43823528, 0.609375): Vector2(0.03382353, 0.09375),
+Vector2(0.4764706, 0.6125): Vector2(0.032352943, 0.090625),
+Vector2(0.5147059, 0.6125): Vector2(0.036764707, 0.090625),
+Vector2(0.55588233, 0.6125): Vector2(0.03529412, 0.09375)
 })
 combinations = Dictionary[String, String]({
 "3 0 6 7": "puzzle_armario"
 })
-coords = Vector2(3137.4636, 1592.8427)
+coords = Vector2(3137.4634, 1592.8425)
 name = "puzzle_armario"
-prompt_chain = SubResource("Resource_ypm1e")
-images = Array[ExtResource("6_6544q")]([SubResource("Resource_dbhjc")])
+prompt_chain = SubResource("Resource_57npi")
+images = Array[ExtResource("6_6544q")]([SubResource("Resource_jsi7j")])
 global_conditions = Dictionary[String, int]({
 "puzzle_armario": 0
 })
 
 [resource]
 script = ExtResource("9_u3xhr")
-pov_directions_array = Array[ExtResource("1_65d63")]([SubResource("Resource_dd53l"), SubResource("Resource_k8mwf"), SubResource("Resource_rsoju"), SubResource("Resource_858lp"), SubResource("Resource_vo32f"), SubResource("Resource_lf0i4"), SubResource("Resource_ju7y1"), SubResource("Resource_ckh2k"), SubResource("Resource_8npap"), SubResource("Resource_ktoiy"), SubResource("Resource_ebflv"), SubResource("Resource_by83b"), SubResource("Resource_kk8bj"), SubResource("Resource_ifbkb"), SubResource("Resource_cf00f"), SubResource("Resource_ohygf"), SubResource("Resource_24e1c"), SubResource("Resource_n3k04"), SubResource("Resource_tdk5y"), SubResource("Resource_gk3dp"), SubResource("Resource_mtsnt"), SubResource("Resource_cp3qo"), SubResource("Resource_7c2yn"), SubResource("Resource_xxpcc"), SubResource("Resource_tm6q0"), SubResource("Resource_m8kv5"), SubResource("Resource_ooi3k")])
-puzzle_povs = Array[ExtResource("8_yyqoo")]([SubResource("Resource_fssab"), SubResource("Resource_s62tv")])
+pov_directions_array = Array[ExtResource("1_65d63")]([SubResource("Resource_ejyg8"), SubResource("Resource_2dbrv"), SubResource("Resource_ncdme"), SubResource("Resource_g1eel"), SubResource("Resource_1ktdt"), SubResource("Resource_7pc2n"), SubResource("Resource_vbdwx"), SubResource("Resource_e4lq5"), SubResource("Resource_pvuak"), SubResource("Resource_lvppm"), SubResource("Resource_450ga"), SubResource("Resource_3eiuw"), SubResource("Resource_mjc7o"), SubResource("Resource_nhltl"), SubResource("Resource_1n5mn"), SubResource("Resource_qqb88"), SubResource("Resource_wy26s"), SubResource("Resource_t42jp"), SubResource("Resource_75ack"), SubResource("Resource_atctj"), SubResource("Resource_kvsp1"), SubResource("Resource_tuuvb"), SubResource("Resource_7l57v"), SubResource("Resource_j6idc"), SubResource("Resource_fyxyn"), SubResource("Resource_0qi0j"), SubResource("Resource_6ss43")])
+puzzle_povs = Array[ExtResource("8_yyqoo")]([SubResource("Resource_8hw4x"), SubResource("Resource_glsyh")])
 dir_scale = 0.5700000000000001
 default_pov = "pov_entrada"

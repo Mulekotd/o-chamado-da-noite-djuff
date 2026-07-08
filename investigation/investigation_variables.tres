@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="InvestigationVars" format=3 uid="uid://cfqah0eciu7u3"]
+[gd_resource type="Resource" script_class="InvestigationVars" format=3]
 
-[ext_resource type="Script" uid="uid://dqj183h8d13hn" path="res://investigation/items/scripts/item_resource.gd" id="1_c1mno"]
-[ext_resource type="Script" uid="uid://47pf0lrk86x5" path="res://investigation/scripts/investigation_variables.gd" id="1_y5pc1"]
+[ext_resource type="Script" path="res://investigation/items/scripts/item_resource.gd" id="1_c1mno"]
+[ext_resource type="Script" path="res://investigation/scripts/investigation_variables.gd" id="1_y5pc1"]
 
 [resource]
 script = ExtResource("1_y5pc1")
@@ -16,6 +16,7 @@ vars = Dictionary[String, int]({
 "estabilizou": 1,
 "exited_level": 1,
 "house_door_open": 1,
+"irmao": 1,
 "knocked_on_door": 0,
 "left_home": 1,
 "ligou": 1,
@@ -31,12 +32,13 @@ vars = Dictionary[String, int]({
 "puzzle_tv_pp_digit_1": 3,
 "puzzle_tv_pp_digit_2": 1,
 "puzzle_tv_pp_digit_3": 0,
+"tem_faca": 0,
 "tv_on": 0
 })
-_actions = 5
-_investigation_points = 5
+_actions = 3
+_investigation_points = 9
 last_level = "day1"
-last_pov = "pov_sala_tv"
+last_pov = "puzzle_armario"
 volumes = Dictionary[String, float]({
 "dialogue": 0.634,
 "master": 1.0,
