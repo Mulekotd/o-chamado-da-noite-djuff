@@ -13,6 +13,7 @@ extends CharacterBody2D
 @onready var muzzle: Marker2D = $AnimatedSprite2D/Muzzle
 @onready var child_animated_sprite: AnimatedSprite2D = $AnimatedSprite2D/AnimatedSprite2D
 
+signal gunshot
 
 var player: Node2D = null
 var time_since_last_shot: float = 0.0
@@ -105,6 +106,7 @@ func shoot() -> void:
 	if "collision_mask" in bullet:
 		bullet.collision_mask = 7
 	_flash_shoot_frame()
+	gunshot.emit()
 
 ## Briefly shows frame 1 of the "shooting" animation, then returns to frame 0.
 func _flash_shoot_frame() -> void:

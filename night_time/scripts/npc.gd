@@ -1,4 +1,4 @@
-extends CharacterBody2D
+class_name _Npc extends CharacterBody2D
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var child_animated_sprite: AnimatedSprite2D = $AnimatedSprite2D/AnimatedSprite2D
@@ -12,6 +12,8 @@ extends CharacterBody2D
 @export var patrol_distance: float = 50.0
 @export var min_patrol_duration: float = 1.5
 @export var max_patrol_duration: float = 3.0
+
+signal hit
 
 var is_dead: bool = false
 
@@ -88,6 +90,7 @@ func _stop_patrol() -> void:
 ## Handles incoming damage to the character.
 ## By default, this will immediately destroy the node.
 func take_damage(amount: int = 0) -> void:
+	hit.emit()
 	is_dead = true
 	set_physics_process(false)
 	set_process(false)

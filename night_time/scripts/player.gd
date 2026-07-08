@@ -3,6 +3,10 @@ extends CharacterBody2D
 signal item_changed(new_index: int)
 signal health_changed(current_health: int, max_health: int)
 signal died
+signal gunshot
+signal hit
+signal knife
+
 
 @export var max_health: int = 100
 var current_health: int = max_health
@@ -70,7 +74,6 @@ func _ready() -> void:
 func start_slice() -> void:
 	slice_has_hit = false
 	slice_hitbox.monitoring = true
-
 
 func _on_animated_sprite_frame_changed() -> void:
 	if animated_sprite.animation != "slicing":
@@ -193,6 +196,7 @@ func shoot_bullet() -> void:
 	bullet.global_position = muzzle.global_position
 	bullet.global_rotation = muzzle.global_rotation
 	get_tree().current_scene.add_child(bullet)
+	gunshot.emit()
 
 # endregion
 
