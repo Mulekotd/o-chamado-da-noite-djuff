@@ -1,15 +1,12 @@
 ~ start_npc
-% Nathan: Did you know that cats sleep for 70% of their lives?
-% Nathan: I forgot what I was going to say...
-% Nathan: If you see a monster, you should probably run.
+% Fulano: Irmão, não to afim de conversar... Pode se retirar por favor?
+% Fulano: Posso ajudar?
+% Ciclano: To sem troco hoje, passa amanhã
 => END
 
 ~ start_enemy
-Enemy: Grrr... Why are you talking to me? I'm supposed to kill you!
-- Threaten him
-	Player: Step aside or feel my blade!
-	Enemy: Ha! Show me what you've got!
-- Reason with him
-	Player: We don't have to fight.
-	Enemy: ...Fine, but get out of my sight.
+% Segurança: Eu hein...
+% Segurança: Ehh, Boa noite?
+% Segurança: Ta querendo arrumar treta?
+% Segurança: É cada uma.
 => END
