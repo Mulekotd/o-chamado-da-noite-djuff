@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://dw45x11hrhcuh"
-path="res://.godot/imported/knife.wav-fc750551c5a339df49519d9803b415bf.sample"
+path="res://.godot/imported/knife.wav-de5de7a51890a2f4c0bf3a7655e15ae1.sample"
 
 [deps]
 
-source_file="res://assets/sounds/knife.wav"
-dest_files=["res://.godot/imported/knife.wav-fc750551c5a339df49519d9803b415bf.sample"]
+source_file="res://night_time/assets/sounds/knife.wav"
+dest_files=["res://.godot/imported/knife.wav-de5de7a51890a2f4c0bf3a7655e15ae1.sample"]
 
 [params]
 

@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://dyfy6atai2r1h"
-path="res://.godot/imported/hit2.wav-652716a24070061dc7f21b9c0d1a2122.sample"
+path="res://.godot/imported/hit2.wav-6253199ef05b1dbcddb99b7de962b8f9.sample"
 
 [deps]
 
-source_file="res://assets/sounds/hit2.wav"
-dest_files=["res://.godot/imported/hit2.wav-652716a24070061dc7f21b9c0d1a2122.sample"]
+source_file="res://night_time/assets/sounds/hit2.wav"
+dest_files=["res://.godot/imported/hit2.wav-6253199ef05b1dbcddb99b7de962b8f9.sample"]
 
 [params]
 

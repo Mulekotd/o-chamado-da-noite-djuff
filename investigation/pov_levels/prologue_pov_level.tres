@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="PovLevel" format=3 uid="uid://bomld2exgjhor"]
+[gd_resource type="Resource" script_class="PovLevel" format=3 uid="uid://culkjpc1cose3"]
 
 [ext_resource type="Script" uid="uid://ffh4hevhqls8" path="res://investigation/povs/scripts/pov_directions.gd" id="2_8v6mx"]
 [ext_resource type="Script" uid="uid://deej6yes3fmnc" path="res://investigation/povs/scripts/element_resource.gd" id="2_yridt"]

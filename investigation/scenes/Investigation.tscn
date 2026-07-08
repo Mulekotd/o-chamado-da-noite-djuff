@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://bqi7u00e1l5go"]
+[gd_scene format=3 uid="uid://y273dhjxl377"]
 
 [ext_resource type="Script" uid="uid://1100rxsitcfq" path="res://investigation/scripts/investigation.gd" id="1_h1ggt"]
 [ext_resource type="PackedScene" uid="uid://dtd12y2eekoi1" path="res://investigation/text_box/scenes/text_box.tscn" id="2_1t5j4"]

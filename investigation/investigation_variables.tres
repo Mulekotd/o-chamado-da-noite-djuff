@@ -33,7 +33,7 @@ vars = Dictionary[String, int]({
 "puzzle_tv_pp_digit_3": 0,
 "tv_on": 0
 })
-_actions = 0
+_actions = 5
 _investigation_points = 5
 last_level = "day1"
 last_pov = "pov_sala_tv"

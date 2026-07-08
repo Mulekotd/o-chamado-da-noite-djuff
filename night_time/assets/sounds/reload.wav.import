@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://cuvetfkjnlgpn"
-path="res://.godot/imported/reload.wav-db64036aa9786fa7de57db51ff507cae.sample"
+path="res://.godot/imported/reload.wav-e94e8be63746ece8c54c9e8a55e8e6e8.sample"
 
 [deps]
 
-source_file="res://assets/sounds/reload.wav"
-dest_files=["res://.godot/imported/reload.wav-db64036aa9786fa7de57db51ff507cae.sample"]
+source_file="res://night_time/assets/sounds/reload.wav"
+dest_files=["res://.godot/imported/reload.wav-e94e8be63746ece8c54c9e8a55e8e6e8.sample"]
 
 [params]
 
