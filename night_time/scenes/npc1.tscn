@@ -52,7 +52,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_j5i4o")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 10.0
 }, {
@@ -60,7 +60,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_83cv7")
 }],
-"loop": true,
+"loop": 1,
 "name": &"die",
 "speed": 5.0
 }, {
@@ -89,12 +89,13 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_hjbo5")
 }],
-"loop": true,
+"loop": 1,
 "name": &"running",
 "speed": 10.0
 }]
 
 [node name="NPC" type="CharacterBody2D" unique_id=114235902 groups=["npc"]]
+light_mask = 3
 collision_layer = 2
 collision_mask = 6
 script = ExtResource("1_yqjob")
@@ -105,6 +106,7 @@ position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_yqjob")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1088293937]
+light_mask = 3
 z_index = 1
 rotation = 1.5707964
 scale = Vector2(2, 2)
@@ -113,6 +115,7 @@ animation = &"running"
 autoplay = "default"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="AnimatedSprite2D" unique_id=1050801154]
+light_mask = 3
 z_index = -1
 sprite_frames = SubResource("SpriteFrames_cxaw7")
 animation = &"running"

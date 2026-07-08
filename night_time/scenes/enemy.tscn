@@ -26,7 +26,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_cpvfn")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 5.0
 }, {
@@ -34,7 +34,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_gnnoe")
 }],
-"loop": true,
+"loop": 1,
 "name": &"die",
 "speed": 5.0
 }, {
@@ -45,7 +45,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ov6v5")
 }],
-"loop": true,
+"loop": 1,
 "name": &"shooting",
 "speed": 5.0
 }]
@@ -109,7 +109,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_1wmx5")
 }],
-"loop": true,
+"loop": 1,
 "name": &"running",
 "speed": 10.0
 }]
@@ -118,6 +118,7 @@ animations = [{
 size = Vector2(2.5625, 3.75)
 
 [node name="Enemy" type="CharacterBody2D" unique_id=834294684 groups=["npc"]]
+light_mask = 3
 collision_layer = 2
 collision_mask = 4
 script = ExtResource("1_c8htl")
@@ -125,6 +126,7 @@ bullet_scene = ExtResource("2_cpvfn")
 fire_rate = 3.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=815869380]
+light_mask = 3
 z_index = 1
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_qrfnd")
@@ -135,6 +137,7 @@ position = Vector2(24, 0)
 scale = Vector2(0.5, 0.5)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="AnimatedSprite2D" unique_id=63826157]
+light_mask = 3
 z_index = -1
 sprite_frames = SubResource("SpriteFrames_srjh6")
 animation = &"running"

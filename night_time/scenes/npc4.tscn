@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://b2e2fags6vidy"]
 
 [ext_resource type="Script" uid="uid://cgoqy78uuonjq" path="res://night_time/scripts/npc.gd" id="1_damjb"]
-[ext_resource type="Resource" uid="uid://ct3s3cwn2d5rr" path="res://night_time/dialogues/dialogue.dialogue" id="2_kif3f"]
 [ext_resource type="Texture2D" uid="uid://g1f1yvnjdmmm" path="res://night_time/assets/npc4.png" id="3_78mk2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yqjob"]
@@ -53,7 +52,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_damjb")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 10.0
 }, {
@@ -61,7 +60,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_kif3f")
 }],
-"loop": true,
+"loop": 1,
 "name": &"die",
 "speed": 5.0
 }, {
@@ -90,7 +89,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_arqf6")
 }],
-"loop": true,
+"loop": 1,
 "name": &"running",
 "speed": 10.0
 }]
@@ -99,7 +98,6 @@ animations = [{
 collision_layer = 2
 collision_mask = 4
 script = ExtResource("1_damjb")
-dialogue_resource = ExtResource("2_kif3f")
 dialogue_start = "start_npc"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=719703762]
@@ -107,12 +105,14 @@ position = Vector2(0.5, 0)
 shape = SubResource("RectangleShape2D_yqjob")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1088293937]
+light_mask = 3
 z_index = 1
 rotation = 1.5707964
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_cxaw7")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="AnimatedSprite2D" unique_id=1050801154]
+light_mask = 3
 z_index = -1
 sprite_frames = SubResource("SpriteFrames_cxaw7")
 animation = &"running"

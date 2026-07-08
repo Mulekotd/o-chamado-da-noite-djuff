@@ -4,6 +4,9 @@ extends Node2D
 
 @onready var timer: Timer = $Timer
 @onready var fade_screen: ColorRect = $CanvasLayer/FadeScreen
+@onready var directional_light_2d: PointLight2D = $Player/DirectionalLight2D
+
+@export var disco_light_speed : float = 0.1
 
 var is_fading: bool = false
 
@@ -17,6 +20,13 @@ func _ready() -> void:
 	timer.autostart = true
 	timer.timeout.connect(_on_timer_timeout)
 	timer.start()
+
+var elapsed_time : float = 0
+func _physics_process(delta: float) -> void:
+	elapsed_time += delta
+	
+	var hue := sin(elapsed_time * disco_light_speed)*0.5+0.5
+	directional_light_2d.color = Color.from_hsv(hue, 1, 1)
 
 func _on_timer_timeout() -> void:
 	# If we are already transitioning, don't check anymore

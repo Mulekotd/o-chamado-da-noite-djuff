@@ -139,7 +139,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_5qw71")
 }],
-"loop": true,
+"loop": 1,
 "name": &"dead",
 "speed": 5.0
 }, {
@@ -147,7 +147,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_i5aty")
 }],
-"loop": false,
+"loop": 0,
 "name": &"holding_gun",
 "speed": 5.0
 }, {
@@ -155,7 +155,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_rxgdo")
 }],
-"loop": false,
+"loop": 0,
 "name": &"holding_knife",
 "speed": 5.0
 }, {
@@ -163,7 +163,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_uo72n")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 5.0
 }, {
@@ -207,7 +207,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_yqyat")
 }],
-"loop": true,
+"loop": 1,
 "name": &"reloading",
 "speed": 10.0
 }, {
@@ -236,7 +236,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_50jo8")
 }],
-"loop": true,
+"loop": 1,
 "name": &"running",
 "speed": 10.0
 }, {
@@ -247,7 +247,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_74287")
 }],
-"loop": false,
+"loop": 0,
 "name": &"shooting",
 "speed": 15.0
 }, {
@@ -273,7 +273,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ey2sx")
 }],
-"loop": false,
+"loop": 0,
 "name": &"slicing",
 "speed": 15.0
 }]
@@ -305,6 +305,7 @@ scale = Vector2(4, 4)
 shape = SubResource("CapsuleShape2D_sh265")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=815869380]
+light_mask = 3
 z_index = 1
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_0lymq")
@@ -324,6 +325,7 @@ position = Vector2(43, -0.5)
 shape = SubResource("RectangleShape2D_ehukh")
 
 [node name="LegsSprite" type="AnimatedSprite2D" parent="." unique_id=254800847]
+light_mask = 3
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_0lymq")
 animation = &"shooting"
