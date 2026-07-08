@@ -199,7 +199,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_3s8kg")
 }],
-"loop": 1,
+"loop": true,
 "name": &"default",
 "speed": 5.0
 }]
@@ -369,7 +369,7 @@ offset_right = 634.0
 offset_bottom = -375.0
 theme_override_constants/separation = 8
 clock_size = Vector2(80.51, 0)
-actions = 5
+actions = 4
 modulate_speed = 2.0
 bob_speed = 1.0
 bob_amplitude = 0.15
@@ -398,7 +398,6 @@ text = "Menu"
 [node name="---------------------------" type="Node" parent="." unique_id=367296959]
 
 [node name="MovingNoiseOverlay" parent="." unique_id=292722013 instance=ExtResource("9_1t5j4")]
-visible = false
 layout_mode = 1
 
 [node name="ColorRect" parent="MovingNoiseOverlay" index="0" unique_id=1938556265]
@@ -442,7 +441,6 @@ theme_override_font_sizes/font_size = 50
 text = "Continuar"
 
 [node name="Clock" parent="." unique_id=1983170265 instance=ExtResource("9_2or41")]
-visible = false
 layout_mode = 1
 shake_factor = 0.003
 

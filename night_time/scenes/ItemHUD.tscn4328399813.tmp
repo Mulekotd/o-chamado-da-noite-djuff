@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://dfxk4868b52nw"]
+
+[ext_resource type="Script" uid="uid://dhr7fw6dw0rsx" path="res://night_time/scripts/item_hud.gd" id="1_kknbl"]
+[ext_resource type="Texture2D" uid="uid://byxk885isf4bc" path="res://night_time/assets/hand.png" id="2_kknbl"]
+[ext_resource type="Texture2D" uid="uid://dsyup75cxf318" path="res://night_time/assets/gun.png" id="3_21v8a"]
+[ext_resource type="Texture2D" uid="uid://cggey5y5q87va" path="res://night_time/assets/knife.png" id="4_matax"]
+
+[node name="ItemHud" type="CanvasLayer" unique_id=802371957]
+script = ExtResource("1_kknbl")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1365431310]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Item0" type="TextureRect" parent="HBoxContainer" unique_id=599316397]
+layout_mode = 2
+texture = ExtResource("3_21v8a")
+expand_mode = 2
+
+[node name="SelectionRing" type="TextureRect" parent="HBoxContainer/Item0" unique_id=2127197594]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Item1" type="TextureRect" parent="HBoxContainer" unique_id=404666404]
+layout_mode = 2
+texture = ExtResource("4_matax")
+expand_mode = 2
+
+[node name="SelectionRing" type="TextureRect" parent="HBoxContainer/Item1" unique_id=291376232]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Item2" type="TextureRect" parent="HBoxContainer" unique_id=1556168062]
+layout_mode = 2
+texture = ExtResource("2_kknbl")
+expand_mode = 2
+
+[node name="SelectionRing" type="TextureRect" parent="HBoxContainer/Item2" unique_id=655578407]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0

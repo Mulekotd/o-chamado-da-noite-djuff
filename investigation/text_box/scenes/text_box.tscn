@@ -43,7 +43,6 @@ layout_mode = 2
 range = 2.0
 
 [node name="MainText" type="RichTextLabel" parent="ColorRect/Text" unique_id=971175684]
-visible = false
 layout_mode = 2
 mouse_filter = 2
 text = "DO YOU WANT TO DO THIS?"
