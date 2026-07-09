@@ -480,6 +480,7 @@ color = Color(0, 0, 0, 1)
 [node name="Player" parent="." unique_id=1471235634 groups=["player"] instance=ExtResource("1_rhge3")]
 z_index = 1
 position = Vector2(605, 1586)
+max_health = 150
 
 [node name="DirectionalLight2D" type="PointLight2D" parent="Player" unique_id=294522482]
 scale = Vector2(0.99999994, 0.99999994)
@@ -900,16 +901,27 @@ size_flags_vertical = 4
 script = ExtResource("15_j7tqq")
 
 [node name="ReloadButton" type="Button" parent="UICanvas/ReloadMenu" unique_id=900673517]
-layout_mode = 0
-offset_right = 20.0
-offset_bottom = 8.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -118.0
+offset_top = -16.0
+offset_right = 118.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "TENTAR NOVAMENTE"
 
 [connection signal="died" from="Player" to="UICanvas/ReloadMenu" method="_on_died_emitted"]
+[connection signal="empty_gun" from="Player" to="." method="_on_empty_gun"]
 [connection signal="gunshot" from="Player" to="." method="_on_gunshot"]
 [connection signal="hit" from="Player" to="." method="_emit_hit_sound"]
 [connection signal="item_changed" from="Player" to="Player/Camera/ItemHud" method="set_selected_slot"]
 [connection signal="knife" from="Player" to="." method="_on_player_knife"]
+[connection signal="reloading" from="Player" to="." method="_on_player_reloading"]
 [connection signal="gunshot" from="NPCs/Enemy" to="." method="_on_gunshot"]
 [connection signal="gunshot" from="NPCs/Enemy2" to="." method="_on_gunshot"]
 [connection signal="gunshot" from="NPCs/Enemy3" to="." method="_on_gunshot"]
@@ -926,3 +938,5 @@ text = "TENTAR NOVAMENTE"
 [connection signal="gunshot" from="NPCs/Enemy14" to="." method="_on_gunshot"]
 [connection signal="gunshot" from="NPCs/Enemy15" to="." method="_on_gunshot"]
 [connection signal="gunshot" from="NPCs/Enemy16" to="." method="_on_gunshot"]
+
+[editable path="Player/Camera/ItemHud"]

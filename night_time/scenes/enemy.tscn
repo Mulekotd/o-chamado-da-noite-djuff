@@ -26,7 +26,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_cpvfn")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 5.0
 }, {
@@ -34,7 +34,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_gnnoe")
 }],
-"loop": true,
+"loop": 1,
 "name": &"die",
 "speed": 5.0
 }, {
@@ -45,7 +45,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ov6v5")
 }],
-"loop": true,
+"loop": 1,
 "name": &"shooting",
 "speed": 5.0
 }]
@@ -109,7 +109,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_1wmx5")
 }],
-"loop": true,
+"loop": 1,
 "name": &"running",
 "speed": 10.0
 }]
@@ -155,7 +155,6 @@ collision_mask = 7
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1878248648]
 path_desired_distance = 1.0
 simplify_epsilon = 4.145
-debug_enabled = true
 debug_use_custom = true
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_action_animation_finished"]

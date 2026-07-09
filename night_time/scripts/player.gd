@@ -1,15 +1,23 @@
-extends CharacterBody2D
+class_name _Player extends CharacterBody2D
 
 signal item_changed(new_index: int)
 signal health_changed(current_health: int, max_health: int)
 signal died
 signal gunshot
+signal empty_gun
+signal reloading
+signal ammo_changed(current_ammo: int, max_ammo: int)
+signal reserve_ammo_changed(current_reserve: int)
 signal hit
 signal knife
 
 
 @export var max_health: int = 100
 var current_health: int = max_health
+
+@export var magazine_size: int = 6
+var current_ammo: int = magazine_size
+@export var reserve_ammo: int = 30
 
 var current_item_index: int = 0
 
@@ -21,6 +29,7 @@ enum MovementStatus {
 enum ActionStatus {
 	IDLE,
 	HOLDING_GUN,
+	RELOADING,
 	HOLDING_KNIFE,
 	SHOOTING,
 	SLICING
@@ -28,6 +37,10 @@ enum ActionStatus {
 
 var current_movement_state: MovementStatus = MovementStatus.IDLE
 var current_action_state: ActionStatus = ActionStatus.IDLE
+var weapon_drawn: bool : get = _is_weapon_drawn
+
+func _is_weapon_drawn() -> bool:
+	return current_action_state != ActionStatus.IDLE
 
 # endregion
 
@@ -44,6 +57,7 @@ const SPEED: float = 300.0
 @onready var slice_hitbox: Area2D = $AnimatedSprite2D/SliceHitbox
 @onready var interaction_zone: Area2D = $InteractionZone # Add this Area2D to your Player scene
 @onready var health_bar: ProgressBar = $HealthBar # update path as needed
+@onready var chat_label: Label = $ChatLabel
 
 # Tracking Variables
 var last_direction: Vector2 = Vector2.RIGHT
@@ -100,7 +114,13 @@ func _physics_process(_delta: float) -> void:
 	update_rotation()
 	update_animation()
 	move_and_slide()
-
+	
+	print(weapon_drawn)
+	if interactables_in_range and not weapon_drawn:
+		chat_label.visible = true
+	else:
+		chat_label.visible = false
+	
 # endregion
 
 
@@ -116,26 +136,35 @@ func handle_input() -> void:
 	input_direction = Input.get_vector("left", "right", "up", "down")
 	
 	# 2. Handle Weapon Selection (Only allowed if not actively attacking)
-	if current_action_state != ActionStatus.SHOOTING and current_action_state != ActionStatus.SLICING:
+	if current_action_state != ActionStatus.SHOOTING and current_action_state != ActionStatus.SLICING and current_action_state != ActionStatus.RELOADING:
 		if Input.is_key_pressed(KEY_1): # Map to "1" key
 			current_action_state = ActionStatus.HOLDING_GUN
 			current_item_index = 0
 			item_changed.emit(current_item_index)
 		elif Input.is_key_pressed(KEY_2): # Map to "2" key
+			weapon_drawn = true
 			current_action_state = ActionStatus.HOLDING_KNIFE
 			current_item_index = 1
 			item_changed.emit(current_item_index)
 		elif Input.is_key_pressed(KEY_3): # Map to "3" key
+			weapon_drawn = true
 			current_action_state = ActionStatus.IDLE
 			current_item_index = 2
 			item_changed.emit(current_item_index)
 
-	# 3. Handle Combat/Attack Inputs
+	# 3. Handle Reload
+	if Input.is_action_just_pressed("reload") and current_action_state == ActionStatus.HOLDING_GUN:
+		reload()
+
+	# 4. Handle Combat/Attack Inputs
 	if Input.is_action_just_pressed("shoot"):
 		match current_action_state:
 			ActionStatus.HOLDING_GUN:
+				if current_ammo <= 0:
+					empty_gun.emit()
+					return
 				current_action_state = ActionStatus.SHOOTING
-				shoot_bullet() # Handle projectile spawning instantly
+				shoot_bullet()
 			ActionStatus.HOLDING_KNIFE:
 				current_action_state = ActionStatus.SLICING
 				start_slice()
@@ -191,7 +220,12 @@ func shoot_bullet() -> void:
 	if not bullet_scene:
 		print("no bullet")
 		return
-		
+	if current_ammo <= 0:
+		return
+
+	current_ammo -= 1
+	ammo_changed.emit(current_ammo, magazine_size)
+
 	var bullet = bullet_scene.instantiate()
 	bullet.global_position = muzzle.global_position
 	bullet.global_rotation = muzzle.global_rotation
@@ -216,7 +250,8 @@ func try_interaction() -> void:
 
 	# Duck typing: Check if the target has an interact method
 	if target.has_method("interact"):
-		# Lock player movement
+		if "is_scared" in target and target.is_scared:
+			return
 		is_in_dialogue = true
 		velocity = Vector2.ZERO
 		
@@ -263,6 +298,8 @@ func update_animation() -> void:
 			animated_sprite.play("holding_knife")
 		ActionStatus.SHOOTING:
 			animated_sprite.play("shooting")
+		ActionStatus.RELOADING:
+			animated_sprite.play("reloading")
 		ActionStatus.SLICING:
 			animated_sprite.play("slicing")
 
@@ -271,11 +308,28 @@ func update_animation() -> void:
 
 # region Signal Connections
 
+func reload() -> void:
+	if current_ammo >= magazine_size or reserve_ammo <= 0:
+		return
+	var needed = magazine_size - current_ammo
+	var taken = mini(needed, reserve_ammo)
+	current_ammo += taken
+	reserve_ammo -= taken
+	current_action_state = ActionStatus.RELOADING
+	reloading.emit()
+	ammo_changed.emit(current_ammo, magazine_size)
+	reserve_ammo_changed.emit(reserve_ammo)
+
 func _on_action_animation_finished() -> void:
 	# Evaluates the active animation name when an animation finishes playing
 	match animated_sprite.animation:
 		"shooting":
 			animated_sprite.frame = 0
+			animated_sprite.stop()
+			current_action_state = ActionStatus.HOLDING_GUN
+		
+		"reloading":
+			animated_sprite.frame = 1
 			animated_sprite.stop()
 			current_action_state = ActionStatus.HOLDING_GUN
 			

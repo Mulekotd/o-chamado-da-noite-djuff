@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://tdvo7j1sx138"]
 
-[ext_resource type="Script" uid="uid://bvdlu7o7av51x" path="res://scripts/main_menu.gd" id="1_bqqt6"]
+[ext_resource type="Script" uid="uid://bvdlu7o7av51x" path="res://night_time/scripts/main_menu.gd" id="1_bqqt6"]
 [ext_resource type="PackedScene" uid="uid://fmeu1ocls847" path="res://investigation/scenes/sound_manager.tscn" id="2_8ln24"]
 [ext_resource type="Texture2D" uid="uid://dwybis63casti" path="res://investigation/interface/images/main_menu_assassin.png" id="2_wu84c"]
 [ext_resource type="Texture2D" uid="uid://cq6cbluy4kbhr" path="res://investigation/interface/images/main_menu_detective.png" id="3_8ln24"]
@@ -234,14 +234,13 @@ Level Design: Letícia Barreto
 
 -Programação-
 [color=dodgerblue]Point-and-Click:[/color] Ronaldo Dias
-[color=red]Top-Down:[/color] João Pedro Gama, Luiz Paulo
+[color=red]Top-Down:[/color] João Pedro Gama, Luiz Paulo, Ronaldo Dias
 
 Música: Ronaldo Dias
 
 Sfxs: Ronaldo Dias"
-fit_content = true
 scroll_active = false
-autowrap_mode = 0
+autowrap_mode = 2
 horizontal_alignment = 1
 vertical_alignment = 1
 

@@ -163,6 +163,36 @@ func _show_clock() -> void:
 	moving_noise_overlay.visible = false
 	done_showing_clock.emit()
 
+func show_reversed_clock() -> void:
+	_update_clock()
+	clock.modulate = Color(1,1,1,1)
+	clock.visible = true
+	moving_noise_overlay.modulate = Color(1,1,1,1)
+	moving_noise_overlay.visible = true
+	clock.elapsed = 100000
+	
+	# play reversed clock sound
+	sound_manager.play_poly_sound(preload("uid://dmv3n576rjsmf"))
+	
+	var tween : Tween 
+	# reverse the time of clock to zero
+	var old_speed := clock.speed
+	clock.speed = 0
+	tween = get_tree().create_tween().set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
+	await tween.tween_property(clock, "elapsed", 0, 3.5).finished
+	# blow clock
+	clock.blow_static_clock(0.75,3)
+	await get_tree().create_timer(clock_display_duration).timeout
+	# turn clock invisible by fade out
+	tween = get_tree().create_tween()
+	tween.tween_property(clock,  "modulate", Color(0,0,0,0), clock_fade_duration)
+	# turn moving noise black by fade out
+	tween = get_tree().create_tween()
+	tween.tween_property(moving_noise_overlay,  "modulate", Color(0,0,0,1), clock_fade_duration)
+	# done
+	await tween.finished
+	clock.speed = old_speed
+
 func _update_clock() -> void:
 	var factor : float = float(InvestigationVars.get_actions()) / InvestigationVars.get_max_actions()
 	clock.speed = lerpf(clock_total_speed, 0.0, factor)

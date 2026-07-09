@@ -16,6 +16,7 @@ class_name _Npc extends CharacterBody2D
 signal hit
 
 var is_dead: bool = false
+var is_scared: bool = false
 
 ## Once fleeing starts, it keeps running regardless of player state.
 var _is_fleeing: bool = false
@@ -33,8 +34,9 @@ func _physics_process(_delta: float) -> void:
 	if not player:
 		return
 	if not _is_fleeing:
-		if player.current_action_state != player.ActionStatus.IDLE:
+		if player.weapon_drawn:
 			_is_fleeing = true
+			is_scared = true
 			_stop_patrol()
 
 	if _is_fleeing:

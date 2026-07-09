@@ -34,6 +34,21 @@ layout_mode = 0
 offset_right = 68.0
 offset_bottom = 62.0
 
+[node name="AmmoLabel" type="Label" parent="HBoxContainer/Item0" unique_id=1836650397]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.32258064
+anchor_top = 0.14516129
+anchor_right = 0.32258064
+anchor_bottom = 0.14516129
+offset_left = -68.0
+offset_top = -24.0
+grow_horizontal = 0
+grow_vertical = 0
+pivot_offset_ratio = Vector2(1, 1)
+text = "00/00"
+metadata/_edit_use_anchors_ = true
+
 [node name="Item1" type="TextureRect" parent="HBoxContainer" unique_id=404666404]
 layout_mode = 2
 texture = ExtResource("4_matax")
