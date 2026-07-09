@@ -638,9 +638,11 @@ collision_mask = 6
 [node name="NPC17" parent="NPCs" unique_id=1981906325 instance=ExtResource("8_u8lq6")]
 position = Vector2(-2326, 480)
 rotation = -0.0026749987
+collision_mask = 6
 
 [node name="NPC18" parent="NPCs" unique_id=449752984 instance=ExtResource("9_egg03")]
 position = Vector2(-2114, 416)
+collision_mask = 6
 
 [node name="NPC19" parent="NPCs" unique_id=1813924697 instance=ExtResource("3_1niwo")]
 position = Vector2(-75, 698)
@@ -649,61 +651,77 @@ rotation = -0.17197004
 [node name="NPC20" parent="NPCs" unique_id=1951638818 instance=ExtResource("8_u8lq6")]
 position = Vector2(509, 700)
 rotation = -0.37171745
+collision_mask = 6
 
 [node name="NPC21" parent="NPCs" unique_id=1448625542 instance=ExtResource("9_egg03")]
 position = Vector2(-145, 573)
 rotation = -1.2567697
+collision_mask = 6
 
 [node name="NPC22" parent="NPCs" unique_id=821450901 instance=ExtResource("10_u3bll")]
 position = Vector2(-46, 371)
 rotation = 0.95712835
+collision_mask = 6
 
 [node name="NPC23" parent="NPCs" unique_id=1626644183 instance=ExtResource("9_egg03")]
 position = Vector2(188, 815)
 rotation = 0.43069312
+collision_mask = 6
 
 [node name="NPC24" parent="NPCs" unique_id=197886758 instance=ExtResource("8_u8lq6")]
 position = Vector2(-23, 850)
 rotation = 0.77894473
+collision_mask = 6
 
 [node name="NPC25" parent="NPCs" unique_id=1954599727 instance=ExtResource("8_u8lq6")]
 position = Vector2(65, 579)
 rotation = 2.1519318
+collision_mask = 6
 
 [node name="NPC26" parent="NPCs" unique_id=1224781259 instance=ExtResource("9_egg03")]
 position = Vector2(461, 367)
+collision_mask = 6
 
 [node name="NPC27" parent="NPCs" unique_id=904832858 instance=ExtResource("10_u3bll")]
 position = Vector2(737, 706)
 rotation = 0.32650855
+collision_mask = 6
 
 [node name="NPC28" parent="NPCs" unique_id=2097366873 instance=ExtResource("9_egg03")]
 position = Vector2(636, 610)
 rotation = -0.5317879
+collision_mask = 6
 
 [node name="NPC29" parent="NPCs" unique_id=1934108298 instance=ExtResource("8_u8lq6")]
 position = Vector2(587, 351)
+collision_mask = 6
 
 [node name="NPC30" parent="NPCs" unique_id=633537546 instance=ExtResource("8_u8lq6")]
 position = Vector2(654, 158)
 rotation = 0.39201325
+collision_mask = 6
 
 [node name="NPC31" parent="NPCs" unique_id=937478497 instance=ExtResource("9_egg03")]
 position = Vector2(882, 164)
+collision_mask = 6
 
 [node name="NPC32" parent="NPCs" unique_id=1448448203 instance=ExtResource("9_egg03")]
 position = Vector2(874, 620)
 rotation = -0.33773905
+collision_mask = 6
 
 [node name="NPC33" parent="NPCs" unique_id=1669977173 instance=ExtResource("8_u8lq6")]
 position = Vector2(412, 807)
+collision_mask = 6
 
 [node name="NPC34" parent="NPCs" unique_id=1653925071 instance=ExtResource("9_egg03")]
 position = Vector2(833, 848)
+collision_mask = 6
 
 [node name="NPC35" parent="NPCs" unique_id=1602014191 instance=ExtResource("8_u8lq6")]
 position = Vector2(188, 930)
 rotation = 0.7041551
+collision_mask = 6
 
 [node name="NPC37" parent="NPCs" unique_id=859896860 instance=ExtResource("3_1niwo")]
 position = Vector2(-223, 837)
@@ -716,25 +734,31 @@ scale = Vector2(0.99999994, 0.99999994)
 
 [node name="NPC38" parent="NPCs" unique_id=471015260 instance=ExtResource("10_u3bll")]
 position = Vector2(-91, 959)
+collision_mask = 6
 
 [node name="NPC39" parent="NPCs" unique_id=789644525 instance=ExtResource("10_u3bll")]
 position = Vector2(260, 513)
 rotation = 1.7784889
+collision_mask = 6
 
 [node name="NPC40" parent="NPCs" unique_id=1368112425 instance=ExtResource("9_egg03")]
 position = Vector2(467, 519)
+collision_mask = 6
 
 [node name="NPC41" parent="NPCs" unique_id=2043357874 instance=ExtResource("8_u8lq6")]
 position = Vector2(313, 714)
 rotation = -0.4185524
+collision_mask = 6
 
 [node name="NPC42" parent="NPCs" unique_id=448098875 instance=ExtResource("10_u3bll")]
 position = Vector2(609, 790)
 rotation = 0.86986053
+collision_mask = 6
 
 [node name="NPC43" parent="NPCs" unique_id=301619053 instance=ExtResource("8_u8lq6")]
 position = Vector2(153, 626)
 rotation = 1.9597063
+collision_mask = 6
 
 [node name="NPC44" parent="NPCs" unique_id=1155492524 instance=ExtResource("3_1niwo")]
 position = Vector2(289, 373)
@@ -743,37 +767,45 @@ rotation = 0.13169712
 [node name="NPC45" parent="NPCs" unique_id=589923451 instance=ExtResource("9_egg03")]
 position = Vector2(704, 433)
 rotation = 1.6851683
+collision_mask = 6
 
 [node name="NPC46" parent="NPCs" unique_id=713415585 instance=ExtResource("10_u3bll")]
 position = Vector2(-48, 470)
 rotation = -0.24027099
+collision_mask = 6
 
 [node name="NPC47" parent="NPCs" unique_id=833438408 instance=ExtResource("8_u8lq6")]
 position = Vector2(-212, 386)
 rotation = 0.11897018
+collision_mask = 6
 
 [node name="NPC48" parent="NPCs" unique_id=197208820 instance=ExtResource("9_egg03")]
 position = Vector2(-241, 667)
 rotation = -0.09519763
+collision_mask = 6
 
 [node name="NPC49" parent="NPCs" unique_id=1812173238 instance=ExtResource("8_u8lq6")]
 position = Vector2(611, 258)
 rotation = -0.2918126
+collision_mask = 6
 
 [node name="NPC50" parent="NPCs" unique_id=197242785 instance=ExtResource("8_u8lq6")]
 position = Vector2(732, 564)
+collision_mask = 6
 
 [node name="NPC51" parent="NPCs" unique_id=93563902 instance=ExtResource("3_1niwo")]
 position = Vector2(281, 829)
 rotation = -0.946444
 
 [node name="NPC52" parent="NPCs" unique_id=782270286 instance=ExtResource("9_egg03")]
-position = Vector2(51, 398)
+position = Vector2(32.000004, 418.00003)
 rotation = 0.03809745
+collision_mask = 6
 
 [node name="NPC53" parent="NPCs" unique_id=1286474275 instance=ExtResource("10_u3bll")]
 position = Vector2(870, 731)
 rotation = 0.8340615
+collision_mask = 6
 
 [node name="Bloods" type="Node" parent="." unique_id=475235024]
 
