@@ -6,16 +6,31 @@
 [resource]
 script = ExtResource("1_y5pc1")
 vars = Dictionary[String, int]({
+"abriu_porta_buffet": 0,
+"acertou_canal": 0,
+"canal": 0,
+"conectar_fio": 1,
+"estabilizou": 1,
+"exited_level": 0,
+"give_puzzle_points": 0,
+"ligou": 1,
 "option": -1,
-"phone_down": 0
+"phone_down": 0,
+"puzzle_tv_pp_digit_0": 6,
+"puzzle_tv_pp_digit_1": 7,
+"puzzle_tv_pp_digit_2": 6,
+"puzzle_tv_pp_digit_3": 7,
+"sem_irmao": 0,
+"tv_on": 0
 })
-_actions = 6
+_actions = 0
+_investigation_points = 3
 last_level = "prologue"
-last_pov = "telefone"
+last_pov = "puzzle_tv"
 volumes = Dictionary[String, float]({
 "dialogue": 0.0,
 "master": 1.0,
-"music": 0.536,
-"sfx": 0.049
+"music": 0.0,
+"sfx": 0.0
 })
 metadata/_custom_type_script = "uid://47pf0lrk86x5"
