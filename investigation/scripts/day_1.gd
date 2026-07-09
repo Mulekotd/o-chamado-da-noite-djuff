@@ -22,4 +22,5 @@ func _physics_process(delta: float) -> void:
 		exited_level = true
 		investigation.sound_manager.stop_soundtrack()
 		await investigation.show_reversed_clock()
-		get_tree().change_scene_to_packed(preload("uid://4tcvwh7s3l62"))
+		print("saiu")
+		get_tree().change_scene_to_file("res://night_time/scenes/Night_Time.tscn")

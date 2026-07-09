@@ -1004,7 +1004,6 @@ text = "TENTAR NOVAMENTE"
 [connection signal="item_changed" from="Player" to="Player/Camera/ItemHud" method="set_selected_slot"]
 [connection signal="knife" from="Player" to="." method="_on_player_knife"]
 [connection signal="reloading" from="Player" to="." method="_on_player_reloading"]
-[connection signal="pressed" from="Player/Camera/MenuLayer/Menu/VBoxContainer/HBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
 [connection signal="pressed" from="Player/Camera/MenuLayer/Menu/VBoxContainer/HBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
 [connection signal="gunshot" from="NPCs/Enemy" to="." method="_on_gunshot"]
 [connection signal="gunshot" from="NPCs/Enemy2" to="." method="_on_gunshot"]

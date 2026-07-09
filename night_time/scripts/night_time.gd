@@ -17,6 +17,9 @@ const EMPTY_GUN_SOUND = preload("uid://pt8p2arse2p4")
 @onready var camera: Camera2D = $Player/Camera
 @onready var ammo_label: Label = $Player/Camera/ItemHud/HBoxContainer/Item0/AmmoLabel
 @onready var player: _Player = $Player
+@onready var noise_overlay: _MovingNoiseWidget = $Player/Camera/MenuLayer/MovingNoiseOverlay
+@onready var pause_menu: PanelContainer = $Player/Camera/MenuLayer/Menu
+
 
 @export var disco_light_speed : float = 0.1
 
@@ -130,3 +133,19 @@ func _on_empty_gun() -> void:
 
 func _on_player_reloading() -> void:
 	sound_manager.play_poly_sound(RELOAD_SOUND)
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel"):
+		var paused := not get_tree().paused
+		get_tree().paused = paused
+		noise_overlay.visible = paused
+		pause_menu.visible = paused
+
+func _on_continue_button_pressed() -> void:
+	get_tree().paused = false
+	noise_overlay.visible = false
+	pause_menu.visible = false
+
+func _on_main_menu_button_pressed() -> void:
+	get_tree().paused = false
+	get_tree().change_scene_to_packed(preload("uid://tdvo7j1sx138"))

@@ -19,6 +19,7 @@ const USED_ACTION_SOUND = preload("uid://cfbtnvstp7wxl")
 const NO_MORE_ACTIONS_SOUND = preload("uid://c5bngv3avhepx")
 
 signal done_showing_clock
+signal exited_level
 
 ## if true, flashes the pov view and eye display black IF actions <= 0 AND max_actions > 0 
 @export var tired_feedback: bool = true

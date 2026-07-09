@@ -27,37 +27,6 @@ gradient = SubResource("Gradient_sux4b")
 width = 2000
 height = 2000
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8k6gn"]
-content_margin_left = 0.0
-content_margin_top = 0.0
-content_margin_right = 0.0
-content_margin_bottom = 0.0
-bg_color = Color(0, 0.003921569, 0.047058824, 0.8745098)
-border_color = Color(0, 0, 0, 0.7607843)
-border_blend = true
-corner_detail = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_38k4a"]
-bg_color = Color(0, 0, 0, 0)
-border_width_left = 200
-border_width_top = 64
-border_width_right = 200
-border_width_bottom = 64
-border_color = Color(0, 0, 0, 1)
-border_blend = true
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_81srr"]
-content_margin_left = 10.0
-content_margin_top = 4.0
-content_margin_right = 10.0
-content_margin_bottom = 4.0
-bg_color = Color(0, 0, 0, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
-border_color = Color(1, 0, 0, 1)
-
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_84cu8"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
@@ -493,6 +462,37 @@ physics_layer_0/collision_mask = 0
 navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_1niwo")
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8k6gn"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0, 0.003921569, 0.047058824, 0.8745098)
+border_color = Color(0, 0, 0, 0.7607843)
+border_blend = true
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_38k4a"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 200
+border_width_top = 64
+border_width_right = 200
+border_width_bottom = 64
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_81srr"]
+content_margin_left = 10.0
+content_margin_top = 4.0
+content_margin_right = 10.0
+content_margin_bottom = 4.0
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(1, 0, 0, 1)
+
 [node name="NightTime" type="Node2D" unique_id=1883835967]
 script = ExtResource("1_sux4b")
 
@@ -538,55 +538,6 @@ player = NodePath("..")
 
 [node name="ItemHud" parent="Player/Camera" unique_id=802371957 node_paths=PackedStringArray("player") instance=ExtResource("1_sk2b0")]
 player = NodePath("../..")
-
-[node name="MenuLayer" type="CanvasLayer" parent="Player/Camera" unique_id=1295698268]
-layer = 3
-
-[node name="MovingNoiseOverlay" parent="Player/Camera/MenuLayer" unique_id=292722013 instance=ExtResource("16_cv0gm")]
-process_mode = 3
-visible = false
-z_index = 4
-
-[node name="ColorRect" parent="Player/Camera/MenuLayer/MovingNoiseOverlay" index="0" unique_id=1938556265]
-theme_override_styles/panel = SubResource("StyleBoxFlat_8k6gn")
-
-[node name="Menu" type="PanelContainer" parent="Player/Camera/MenuLayer" unique_id=1167114879]
-process_mode = 3
-visible = false
-z_index = 4
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_38k4a")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Player/Camera/MenuLayer/Menu" unique_id=1772571063]
-layout_mode = 2
-theme_override_constants/separation = 85
-
-[node name="Options" parent="Player/Camera/MenuLayer/Menu/VBoxContainer" unique_id=1028251657 instance=ExtResource("17_b4n2h")]
-layout_mode = 2
-theme_override_constants/separation = 63
-
-[node name="HBoxContainer" type="GridContainer" parent="Player/Camera/MenuLayer/Menu/VBoxContainer" unique_id=1522021318]
-layout_mode = 2
-theme_override_constants/h_separation = 194
-columns = 2
-
-[node name="MainMenuButton" type="Button" parent="Player/Camera/MenuLayer/Menu/VBoxContainer/HBoxContainer" unique_id=1495757940]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_colors/font_hover_color = Color(1, 0, 0, 1)
-theme_override_font_sizes/font_size = 50
-theme_override_styles/hover = SubResource("StyleBoxFlat_81srr")
-text = "Menu Principal"
-
-[node name="ContinueButton" type="Button" parent="Player/Camera/MenuLayer/Menu/VBoxContainer/HBoxContainer" unique_id=1467874932]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 50
-text = "Continuar"
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1358543157]
 position = Vector2(-368.99994, 335)
@@ -997,6 +948,48 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "TENTAR NOVAMENTE"
 
+[node name="MovingNoiseOverlay" parent="." unique_id=292722013 instance=ExtResource("16_cv0gm")]
+visible = false
+
+[node name="ColorRect" parent="MovingNoiseOverlay" index="0" unique_id=1938556265]
+theme_override_styles/panel = SubResource("StyleBoxFlat_8k6gn")
+
+[node name="Menu" type="PanelContainer" parent="." unique_id=1167114879]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_38k4a")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Menu" unique_id=1772571063]
+layout_mode = 2
+theme_override_constants/separation = 85
+
+[node name="Options" parent="Menu/VBoxContainer" unique_id=1028251657 instance=ExtResource("17_b4n2h")]
+layout_mode = 2
+theme_override_constants/separation = 63
+
+[node name="HBoxContainer" type="GridContainer" parent="Menu/VBoxContainer" unique_id=1522021318]
+layout_mode = 2
+theme_override_constants/h_separation = 194
+columns = 2
+
+[node name="MainMenuButton" type="Button" parent="Menu/VBoxContainer/HBoxContainer" unique_id=1495757940]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_hover_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 50
+theme_override_styles/hover = SubResource("StyleBoxFlat_81srr")
+text = "Menu Principal"
+
+[node name="ContinueButton" type="Button" parent="Menu/VBoxContainer/HBoxContainer" unique_id=1467874932]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 50
+text = "Continuar"
+
 [connection signal="died" from="Player" to="UICanvas/ReloadMenu" method="_on_died_emitted"]
 [connection signal="empty_gun" from="Player" to="." method="_on_empty_gun"]
 [connection signal="gunshot" from="Player" to="." method="_on_gunshot"]
@@ -1004,8 +997,6 @@ text = "TENTAR NOVAMENTE"
 [connection signal="item_changed" from="Player" to="Player/Camera/ItemHud" method="set_selected_slot"]
 [connection signal="knife" from="Player" to="." method="_on_player_knife"]
 [connection signal="reloading" from="Player" to="." method="_on_player_reloading"]
-[connection signal="pressed" from="Player/Camera/MenuLayer/Menu/VBoxContainer/HBoxContainer/MainMenuButton" to="." method="_on_main_menu_button_pressed"]
-[connection signal="pressed" from="Player/Camera/MenuLayer/Menu/VBoxContainer/HBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
 [connection signal="gunshot" from="NPCs/Enemy" to="." method="_on_gunshot"]
 [connection signal="gunshot" from="NPCs/Enemy2" to="." method="_on_gunshot"]
 [connection signal="gunshot" from="NPCs/Enemy3" to="." method="_on_gunshot"]
@@ -1022,6 +1013,7 @@ text = "TENTAR NOVAMENTE"
 [connection signal="gunshot" from="NPCs/Enemy14" to="." method="_on_gunshot"]
 [connection signal="gunshot" from="NPCs/Enemy15" to="." method="_on_gunshot"]
 [connection signal="gunshot" from="NPCs/Enemy16" to="." method="_on_gunshot"]
+[connection signal="pressed" from="Menu/VBoxContainer/HBoxContainer/ContinueButton" to="." method="_on_continue_button_pressed"]
 
 [editable path="Player/Camera/ItemHud"]
-[editable path="Player/Camera/MenuLayer/MovingNoiseOverlay"]
+[editable path="MovingNoiseOverlay"]
