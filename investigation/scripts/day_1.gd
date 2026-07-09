@@ -9,4 +9,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if InvestigationVars.meets_all_conditions({"give_puzzle_points": 1}):
+		investigation._add_investigation_points(4)
+		print("pontos:", InvestigationVars.get_investigation_points())
+		InvestigationVars.update_variables({"give_puzzle_points": 0})

@@ -1,12 +1,16 @@
-[gd_resource type="Resource" script_class="InvestigationVars" format=3 uid="uid://co5ilw2377aax"]
+[gd_resource type="Resource" script_class="InvestigationVars" format=3]
 
-[ext_resource type="Script" uid="uid://dqj183h8d13hn" path="res://investigation/items/scripts/item_resource.gd" id="1_c1mno"]
-[ext_resource type="Script" uid="uid://47pf0lrk86x5" path="res://investigation/scripts/investigation_variables.gd" id="1_y5pc1"]
+[ext_resource type="Script" path="res://investigation/items/scripts/item_resource.gd" id="1_c1mno"]
+[ext_resource type="Script" path="res://investigation/scripts/investigation_variables.gd" id="1_y5pc1"]
+[ext_resource type="Resource" path="res://investigation/itens/faca.tres" id="2_p848r"]
+[ext_resource type="Resource" path="res://investigation/itens/calendario.tres" id="4_2d5jq"]
 
 [resource]
 script = ExtResource("1_y5pc1")
 vars = Dictionary[String, int]({
 "about_to_leave": 1,
+"abriu_porta_buffet": 1,
+"acertou_canal": 1,
 "answered_phone": 1,
 "canal": 2,
 "conectar_fio": 1,
@@ -15,6 +19,8 @@ vars = Dictionary[String, int]({
 "entered_house": 1,
 "estabilizou": 1,
 "exited_level": 1,
+"give__puzzle_points": 0,
+"give_puzzle_points": 0,
 "house_door_open": 1,
 "irmao": 1,
 "knocked_on_door": 0,
@@ -32,13 +38,15 @@ vars = Dictionary[String, int]({
 "puzzle_tv_pp_digit_1": 3,
 "puzzle_tv_pp_digit_2": 1,
 "puzzle_tv_pp_digit_3": 0,
-"tem_faca": 0,
+"sem_irmao": 1,
+"tem_faca": 1,
 "tv_on": 0
 })
-_actions = 3
-_investigation_points = 9
+inventory = Array[ExtResource("1_c1mno")]([ExtResource("2_p848r"), ExtResource("4_2d5jq")])
+_actions = 1
+_investigation_points = 17
 last_level = "day1"
-last_pov = "puzzle_armario"
+last_pov = "pov_sala_tv"
 volumes = Dictionary[String, float]({
 "dialogue": 0.634,
 "master": 1.0,
