@@ -1,15 +1,21 @@
-[gd_resource type="Resource" script_class="InvestigationVars" format=3 uid="uid://dnvru6u8sf0se"]
+[gd_resource type="Resource" script_class="InvestigationVars" format=3]
 
-[ext_resource type="Script" uid="uid://dqj183h8d13hn" path="res://investigation/items/scripts/item_resource.gd" id="1_c1mno"]
-[ext_resource type="Script" uid="uid://47pf0lrk86x5" path="res://investigation/scripts/investigation_variables.gd" id="1_y5pc1"]
+[ext_resource type="Script" path="res://investigation/items/scripts/item_resource.gd" id="1_c1mno"]
+[ext_resource type="Script" path="res://investigation/scripts/investigation_variables.gd" id="1_y5pc1"]
 
 [resource]
 script = ExtResource("1_y5pc1")
+vars = Dictionary[String, int]({
+"option": -1,
+"phone_down": 0
+})
 _actions = 6
+last_level = "prologue"
+last_pov = "telefone"
 volumes = Dictionary[String, float]({
-"dialogue": 0.63,
+"dialogue": 0.0,
 "master": 1.0,
 "music": 0.536,
-"sfx": 0.492
+"sfx": 0.049
 })
 metadata/_custom_type_script = "uid://47pf0lrk86x5"

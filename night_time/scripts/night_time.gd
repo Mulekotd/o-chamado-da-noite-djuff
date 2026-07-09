@@ -28,6 +28,8 @@ var is_fading: bool = false
 @onready var default_light_strength : float = 1
 
 func _ready() -> void:
+	Input.set_custom_mouse_cursor(preload("uid://cf4e4q7y621cy"), Input.CURSOR_ARROW)
+
 	_fade_to_transparent()
 	
 	# Configure and start the 5-second timer dynamically if not set in editor
