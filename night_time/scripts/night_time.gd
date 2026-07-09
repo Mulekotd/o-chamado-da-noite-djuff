@@ -6,7 +6,7 @@ const KNIFE_SOUND = preload("uid://dw45x11hrhcuh")
 const RELOAD_SOUND = preload("uid://cuvetfkjnlgpn")
 
 
-@export_file("*.tscn") var next_scene_path: String = "res://scenes/main_menu.tscn"
+@export_file("*.tscn") var next_scene_path: String = "res://scenes/credits.tscn"
 
 @onready var timer: Timer = $Timer
 @onready var fade_screen: ColorRect = $CanvasLayer/FadeScreen

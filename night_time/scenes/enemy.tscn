@@ -26,7 +26,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_cpvfn")
 }],
-"loop": 1,
+"loop": true,
 "name": &"default",
 "speed": 5.0
 }, {
@@ -34,7 +34,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_gnnoe")
 }],
-"loop": 1,
+"loop": true,
 "name": &"die",
 "speed": 5.0
 }, {
@@ -45,7 +45,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ov6v5")
 }],
-"loop": 1,
+"loop": true,
 "name": &"shooting",
 "speed": 5.0
 }]
@@ -109,18 +109,19 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_1wmx5")
 }],
-"loop": 1,
+"loop": true,
 "name": &"running",
 "speed": 10.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_c8htl"]
-size = Vector2(2.5625, 3.75)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_c8htl"]
+radius = 1.03125
+height = 3.75
 
 [node name="Enemy" type="CharacterBody2D" unique_id=834294684 groups=["npc"]]
 light_mask = 3
 collision_layer = 2
-collision_mask = 4
+collision_mask = 6
 script = ExtResource("1_c8htl")
 bullet_scene = ExtResource("2_cpvfn")
 fire_rate = 3.0
@@ -146,6 +147,15 @@ frame_progress = 0.31492084
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2116585889]
 position = Vector2(-0.5, 0)
 scale = Vector2(16, 16)
-shape = SubResource("RectangleShape2D_c8htl")
+shape = SubResource("CapsuleShape2D_c8htl")
+
+[node name="RayCast2D" type="RayCast2D" parent="." unique_id=1940028475]
+collision_mask = 7
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1878248648]
+path_desired_distance = 1.0
+simplify_epsilon = 4.145
+debug_enabled = true
+debug_use_custom = true
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_action_animation_finished"]

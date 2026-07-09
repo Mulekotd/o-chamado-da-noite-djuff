@@ -139,7 +139,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_5qw71")
 }],
-"loop": 1,
+"loop": true,
 "name": &"dead",
 "speed": 5.0
 }, {
@@ -147,7 +147,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_i5aty")
 }],
-"loop": 0,
+"loop": false,
 "name": &"holding_gun",
 "speed": 5.0
 }, {
@@ -155,7 +155,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_rxgdo")
 }],
-"loop": 0,
+"loop": false,
 "name": &"holding_knife",
 "speed": 5.0
 }, {
@@ -163,7 +163,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_uo72n")
 }],
-"loop": 1,
+"loop": true,
 "name": &"idle",
 "speed": 5.0
 }, {
@@ -207,7 +207,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_yqyat")
 }],
-"loop": 1,
+"loop": true,
 "name": &"reloading",
 "speed": 10.0
 }, {
@@ -236,7 +236,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_50jo8")
 }],
-"loop": 1,
+"loop": true,
 "name": &"running",
 "speed": 10.0
 }, {
@@ -247,7 +247,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_74287")
 }],
-"loop": 0,
+"loop": false,
 "name": &"shooting",
 "speed": 15.0
 }, {
@@ -273,7 +273,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ey2sx")
 }],
-"loop": 0,
+"loop": false,
 "name": &"slicing",
 "speed": 15.0
 }]

@@ -299,7 +299,7 @@ func _on_interaction_zone_body_exited(body: Node2D) -> void:
 
 # region Health
 
-func take_damage(amount: int = 10) -> void:
+func take_damage(amount: int = 25) -> void:
 	if current_health <= 0:
 		return # already dead, ignore further hits
 
@@ -324,7 +324,8 @@ func _update_health_bar() -> void:
 
 func die() -> void:
 	died.emit()
-	# TODO: play death animation, disable input, queue_free(), etc.
+	animated_sprite.play("dead")
+	legs_sprite.visible = false
 	set_physics_process(false)
 
 # endregion
