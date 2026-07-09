@@ -7,6 +7,7 @@ extends Node2D
 
 # Adjust this to change how quickly or smoothly the text moves (lower = smoother/slower)
 @export var follow_speed: float = 5.0
+var scene_to_load = preload("res://scenes/main_menu.tscn")
 
 # Store the default center position of the text
 var target_center: Vector2
@@ -16,6 +17,9 @@ func _ready() -> void:
 	target_center = label.global_position
 
 func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("ui_accept"):
+		get_tree().change_scene_to_packed(scene_to_load)
+
 	var mouse_pos = get_global_mouse_position()
 	
 	# Calculate the direction from the screen center toward the mouse
