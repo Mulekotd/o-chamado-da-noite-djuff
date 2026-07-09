@@ -21,5 +21,9 @@ tired_whitelist = Array[String](["pov_door_close"])
 [node name="PovManager" parent="Investigation" index="2" unique_id=1895825167]
 prompt_wait_time = 0.5
 
+[node name="ActionsManager" parent="Investigation" index="7" unique_id=2116191467]
+actions = 5
+max_actions = 5
+
 [editable path="Investigation"]
 [editable path="Investigation/MovingNoiseOverlay"]

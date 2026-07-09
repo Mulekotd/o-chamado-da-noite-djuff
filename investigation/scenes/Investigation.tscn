@@ -363,13 +363,14 @@ expand_mode = 2
 
 [node name="ActionsManager" parent="." unique_id=2116191467 instance=ExtResource("8_dtwxe")]
 layout_mode = 1
-offset_left = 544.0
-offset_top = -888.0
-offset_right = 634.0
-offset_bottom = -375.0
+offset_left = 549.0
+offset_top = -887.0
+offset_right = 639.0
+offset_bottom = -374.0
 theme_override_constants/separation = 8
-clock_size = Vector2(80.51, 0)
-actions = 5
+clock_size = Vector2(65.33, 0)
+actions = 6
+max_actions = 6
 modulate_speed = 2.0
 bob_speed = 1.0
 bob_amplitude = 0.15

@@ -1,26 +1,11 @@
-[gd_resource type="Resource" script_class="InvestigationVars" format=3]
+[gd_resource type="Resource" script_class="InvestigationVars" format=3 uid="uid://dnvru6u8sf0se"]
 
-[ext_resource type="Script" path="res://investigation/items/scripts/item_resource.gd" id="1_c1mno"]
-[ext_resource type="Script" path="res://investigation/scripts/investigation_variables.gd" id="1_y5pc1"]
+[ext_resource type="Script" uid="uid://dqj183h8d13hn" path="res://investigation/items/scripts/item_resource.gd" id="1_c1mno"]
+[ext_resource type="Script" uid="uid://47pf0lrk86x5" path="res://investigation/scripts/investigation_variables.gd" id="1_y5pc1"]
 
 [resource]
 script = ExtResource("1_y5pc1")
-vars = Dictionary[String, int]({
-"about_to_leave": 1,
-"answered_phone": 1,
-"display_clocks": 1,
-"entered_house": 1,
-"exited_level": 1,
-"give_puzzle_points": 0,
-"house_door_open": 0,
-"left_home": 1,
-"looking_at_watch": 0,
-"option": -1,
-"phone_down": 1
-})
-_actions = 5
-last_level = "day1"
-last_pov = "pov_door_close"
+_actions = 6
 volumes = Dictionary[String, float]({
 "dialogue": 0.63,
 "master": 1.0,

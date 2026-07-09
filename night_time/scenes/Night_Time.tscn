@@ -513,7 +513,7 @@ color = Color(0, 0, 0, 1)
 [node name="Player" parent="." unique_id=1471235634 groups=["player"] instance=ExtResource("1_rhge3")]
 z_index = 1
 position = Vector2(605, 1586)
-max_health = 150
+max_health = 200
 
 [node name="DirectionalLight2D" type="PointLight2D" parent="Player" unique_id=294522482]
 scale = Vector2(0.99999994, 0.99999994)

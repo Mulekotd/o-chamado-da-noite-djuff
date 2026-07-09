@@ -63,7 +63,7 @@ func _start_day1() -> void:
 	color_overlay.color = Color(0,0,0,0)
 	await get_tree().create_tween().tween_property(
 			color_overlay, "color", Color(0,0,0,1), 3).finished
-	get_tree().change_scene_to_packed(preload("uid://jk2netpdpxow"))
+	get_tree().change_scene_to_packed(preload("res://investigation/scenes/days/day1.tscn"))
 
 func _on_telephone_overlay_gui_input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("ui_mouse_pressed"):

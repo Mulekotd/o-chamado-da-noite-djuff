@@ -22,7 +22,7 @@ static func clear_everything() -> void:
 ]
 
 ## maximum amount of actions the player can have
-@export var _max_actions : int = 5
+@export var _max_actions : int = 6
 ## how many actions the player has
 @export var _actions : int = _max_actions
 
