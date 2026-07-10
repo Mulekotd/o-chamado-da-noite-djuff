@@ -1009,7 +1009,6 @@ grow_vertical = 2
 color = Color(1, 1, 1, 0)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=299232737]
-visible = false
 color = Color(0.099985994, 0.09998601, 0.099985965, 1)
 
 [node name="SoundManager" parent="." unique_id=1253211127 instance=ExtResource("14_84cu8")]
